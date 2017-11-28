@@ -65,12 +65,16 @@ Office.initialize = function(reason){
     };
 
     // incrementValue is an example of a streaming function.
-    function incrementValue(increment, setResult){    
+    function incrementValue(increment, caller){    
     	var result = 0;
-        setInterval(function(){
+        var timer = setInterval(function(){
             result += increment;
-            setResult(result);
+            caller.setResult(result);
         }, 1000);
+
+        caller.onCanceled = function(){
+            clearInterval(timer);
+        }
     }
     Excel.Script.CustomFunctions["CONTOSO"]["INCREMENTVALUE"] = {
         call: incrementValue,
@@ -101,12 +105,12 @@ Office.initialize = function(reason){
             refreshTemperature(thermometerID);
         }, 1000);
     }
-    function streamTemperature(thermometerID, setResult){    
+    function streamTemperature(thermometerID, caller){    
         if(!savedTemperatures[thermometerID]){
             refreshTemperature(thermometerID);
         }
         function getNextTemperature(){
-            setResult(savedTemperatures[thermometerID]);
+            caller.setResult(savedTemperatures[thermometerID]);
             setTimeout(getNextTemperature, 1000);
         }
         getNextTemperature();
@@ -191,8 +195,8 @@ Office.initialize = function(reason){
         debug.push([myText]);
         debugUpdate(debug);
     }
-    function myDebug(setResult){
-        debugUpdate = setResult;
+    function myDebug(caller){
+        debugUpdate = caller.setResult;
     }
    
 }; 
