@@ -92,7 +92,7 @@ Office.initialize = function(reason){
                 valueDimensionality: Excel.CustomFunctionDimensionality.scalar,
             },
         ],
-        options: { batch: false,  stream: true }
+        options: { batch: false,  stream: true, cancelable: true }
     };
     
     // The refreshTemperature and streamTemperature functions use global variables to save & read state, while streaming data.
