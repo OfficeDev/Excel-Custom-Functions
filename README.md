@@ -8,7 +8,7 @@ Custom functions (similar to user-defined functions, or UDFs) are JavaScript fun
 * [To use the project](#to-use-the-project)
 * [Making changes](#making-changes)
 * [Debugging](#debugging)
-* [Intellisense for the JSON file in Visual Studio Code](#intellisense-for-the-json-file-in-visual-studio-code)
+* [IntelliSense for the JSON file in Visual Studio Code](#intelliSense-for-the-json-file-in-visual-studio-code)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
 
@@ -55,7 +55,7 @@ For intelliSense to help you edit the JSON file, follow these steps:
     {	
         "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",	
     ```	
-3. Press **Ctrl+Space** and intellisense will prompt you with a list of all items that are valid at the cursor point. For example, if you pressed **Ctrl+Space** immediately after the `"$schema"` line, you are prompted to enter `functions`, which is the only key that is valid at that point. Select it and the `"functions": []` array is entered. If the cursor is between the `[]`, then you are prompted to enter an empty object as a member of the array. If the cursor is in the object, then you are prompted with a list of the keys that are valid in the object.
+3. Press **Ctrl+Space** and intelliSense will prompt you with a list of all items that are valid at the cursor point. For example, if you pressed **Ctrl+Space** immediately after the `"$schema"` line, you are prompted to enter `functions`, which is the only key that is valid at that point. Select it and the `"functions": []` array is entered. If the cursor is between the `[]`, then you are prompted to enter an empty object as a member of the array. If the cursor is in the object, then you are prompted with a list of the keys that are valid in the object.
 
 ## Feedback
 
