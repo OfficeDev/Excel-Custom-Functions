@@ -45,8 +45,8 @@ Debugging is only available for asynchronous functions on Excel for Windows curr
 2. Trigger an asynchronous function in Excel (like `CONTOSO.ADD42ASYNC`). This step ensures that the asynchronous function process is loaded invisibly and ready for debugging.
 3. Attach a debugger to the hidden iexplore.exe script process (you could use the [Windows F12 debugger](https://docs.microsoft.com/en-us/office/dev/add-ins/testing/debug-add-ins-using-f12-developer-tools-on-windows-10) or Visual Studio).
 
-## Intellisense for the JSON file in Visual Studio Code	
-For intellisense to help you edit the JSON file, follow these steps:
+## IntelliSense for the JSON file in Visual Studio Code	
+For intelliSense to help you edit the JSON file, follow these steps:
 
 1. Open the JSON file (it has a .json extension) in Visual Studio Code.	
 2. If you are starting a new file from scratch, add the following to the top of the file:	
