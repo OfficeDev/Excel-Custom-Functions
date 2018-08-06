@@ -8,7 +8,7 @@ Custom functions (similar to user-defined functions, or UDFs) are JavaScript fun
 * [To use the project](#to-use-the-project)
 * [Making changes](#making-changes)
 * [Debugging](#debugging)
-* [IntelliSense for the JSON file in Visual Studio Code](#intelliSense-for-the-json-file-in-visual-studio-code)
+* [IntelliSense for the JSON file in Visual Studio Code](#intellisense-for-the-json-file-in-visual-studio-code)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
 
