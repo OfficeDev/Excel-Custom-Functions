@@ -34,6 +34,30 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 7. If you make changes to the sample add-in, copy the updated files to your website, and then close and reopen Excel. If your functions are not available in Excel, re-insert the add-in using **Insert** > **My Add-ins**.
 8. Follow @OfficeDev on Twitter for updates and send feedback to <excelcustomfunctions@microsoft.com>.
 
+## Making changes
+If you make changes to the sample functions code (in the JS file), close and reopen Excel to test them.
+
+If you change the functions metadata (in the JSON file), close Excel and delete your cache folder `Users/<user>/AppData/Local/Microsoft/Office/16.0/Wef/CustomFunctions`. Then re-insert the add-in using **Insert** > **My Add-ins**.
+
+## Debugging
+Debugging is only available for asynchronous functions on Excel for Windows currently. To debug:
+
+1. Enable script debugging in Internet Explorer (IE > Options > Advanced).
+2. Trigger an asynchronous function in Excel (like `CONTOSO.ADD42ASYNC`). This step ensures that the asynchronous function process is loaded invisibly and ready for debugging.
+3. Attach a debugger to the hidden iexplore.exe script process (you could use the [Windows F12 debugger](https://docs.microsoft.com/en-us/office/dev/add-ins/testing/debug-add-ins-using-f12-developer-tools-on-windows-10) or Visual Studio).
+
+## IntelliSense for the JSON file in Visual Studio Code	
+For intelliSense to help you edit the JSON file, follow these steps:
+
+1. Open the JSON file (it has a .json extension) in Visual Studio Code.	
+2. If you are starting a new file from scratch, add the following to the top of the file:	
+	
+     ```js	
+    {	
+        "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",	
+    ```	
+3. Press **Ctrl+Space** and intelliSense will prompt you with a list of all items that are valid at the cursor point. For example, if you pressed **Ctrl+Space** immediately after the `"$schema"` line, you are prompted to enter `functions`, which is the only key that is valid at that point. Select it and the `"functions": []` array is entered. If the cursor is between the `[]`, then you are prompted to enter an empty object as a member of the array. If the cursor is in the object, then you are prompted with a list of the keys that are valid in the object.
+
 ## Questions and comments
 
 We'd love to get your feedback about this sample. You can send your feedback to us in the *Issues* section of this repository.
