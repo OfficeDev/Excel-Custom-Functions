@@ -6,6 +6,9 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 * [Change History](#change-history)
 * [Prerequisites](#prerequisites)
 * [To use the project](#to-use-the-project)
+* [Making changes](#making-changes)
+* [Debugging](#debugging)
+* [IntelliSense for the JSON file in Visual Studio Code](#intellisense-for-the-json-file-in-visual-studio-code)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
 
