@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "react",
+    "outDir": "lib",
+    "declaration": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "types": [
+      "es6-collections",
+      "es6-promise"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib",
+    "lib-amd"
+  ]
+}

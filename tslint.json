@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "typedef": [false],
+    "jsx-no-lambda": false,
+    "jsx-alignment": false,
+    "max-line-length": false,
+    "function-name": false,
+    "jsx-wrap-multiline": false
+  }
+}

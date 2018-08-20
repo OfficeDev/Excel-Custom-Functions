@@ -4,17 +4,17 @@
  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
  xsi:type="TaskPaneApp">
-	<Id>b12101b4-2706-4128-98b2-d8a1842131a3</Id>
-	<Version>1.0.0.0</Version>
+	<Id>b1f3032f-e56c-42d0-9729-791007a78928</Id>
+	<Version>1.0.0.6</Version>
 	<ProviderName>Contoso</ProviderName>
 	<DefaultLocale>en-US</DefaultLocale>
-	<DisplayName DefaultValue="Custom Functions Sample" />
-	<Description DefaultValue="Samples to test custom functions" />
+	<DisplayName DefaultValue="sandbox-excel-functions" />
+	<Description DefaultValue="Excel functions written in JavaScript" />
 	<Hosts>
 		<Host Name="Workbook" />
 	</Hosts>
 	<DefaultSettings>
-		<SourceLocation DefaultValue="http://127.0.0.1:8080/customfunctions.html"/>
+		<SourceLocation DefaultValue="https://localhost:8080/functions.html"/>
 	</DefaultSettings>
 	<Permissions>ReadWriteDocument</Permissions>
 	<VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
@@ -38,12 +38,12 @@
 		</Hosts>
 		<Resources>
 			<bt:Urls>
-				<bt:Url id="JSON-URL" DefaultValue="http://127.0.0.1:8080/customfunctions.json" />
-				<bt:Url id="JS-URL" DefaultValue="http://127.0.0.1:8080/customfunctions.js" />
-				<bt:Url id="HTML-URL" DefaultValue="http://127.0.0.1:8080/customfunctions.html" />
+				<bt:Url id="JSON-URL" DefaultValue="https://localhost:8080/functions.json" />
+				<bt:Url id="JS-URL" DefaultValue="https://localhost:8080/lib/index.win32.bundle" />
+				<bt:Url id="HTML-URL" DefaultValue="https://localhost:8080/functions.html" />
 			</bt:Urls>
 			<bt:ShortStrings>
-				<bt:String id="namespace" DefaultValue="CONTOSO" />
+				<bt:String id="namespace" DefaultValue="CUSTOM" />
 			</bt:ShortStrings>
 		</Resources>
 	</VersionOverrides>
