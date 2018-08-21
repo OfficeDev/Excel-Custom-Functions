@@ -8,7 +8,7 @@
 	<Version>1.0.0.0</Version>
 	<ProviderName>Contoso</ProviderName>
 	<DefaultLocale>en-US</DefaultLocale>
-	<DisplayName DefaultValue="<%= projectDisplayName %>" />
+	<DisplayName DefaultValue="Excel Custom Functions" />
 	<Description DefaultValue="Samples to test custom functions" />
 	<Hosts>
 		<Host Name="Workbook" />
