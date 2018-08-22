@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         customfunctions: ["./src/customfunctions.js"],
-        customfunctionsjson: ["./config/customfunctions.json"],
+        customfunctionsjson: ["./config/customfunctions.json"]
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.html', '.js', 'json']
