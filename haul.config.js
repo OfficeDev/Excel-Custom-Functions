@@ -1,6 +1,6 @@
 const resources = require('./scripts/haul-resources');
 const haulConfigOptions = {
-    "entryFile": "./functions.ts"
+    "entryFile": "./src/index.ts"
 }
 
 export default resources.createHaulConfig(haulConfigOptions);

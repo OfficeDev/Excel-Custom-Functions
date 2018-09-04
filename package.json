@@ -16,8 +16,8 @@
     "packager": "node ./scripts/start-native.js",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
     "watch": "node ./scripts/watch.js",
-    "enable-debugging": "reg import UDFDebuggingOn.reg && reg import UDFDebuggingBundlePath.reg",
-    "disable-debugging": "reg import UDFDebuggingOff.reg",
+    "enable-debugging": "node ./scripts/enable-debugging.js",
+    "disable-debugging": "node ./scripts/disable-debugging.js",
     "tsc": "tsc -p tsconfig.json"
   },
   "dependencies": {
@@ -53,7 +53,7 @@
   ],
   "nativeBundles": [
     {
-      "entryFile": "./src/functions.ts",
+      "assetsDest": "dist/win32/ship",
       "platform": "win32",
       "platformBundleEnabled": true
     }
