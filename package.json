@@ -4,7 +4,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "npm run enable-debugging && start npm run dev-server && start npm run packager && npm run sideload",
+    "start": "start npm run dev-server && start npm run packager && npm run sideload",
     "start-web": "start npm run dev-server && start npm run packager",
     "build": "node ./scripts/build.js",
     "buildfast": "node ./scripts/buildfast.js",
@@ -18,7 +18,8 @@
     "watch": "node ./scripts/watch.js",
     "enable-debugging": "node ./scripts/enable-debugging.js",
     "disable-debugging": "node ./scripts/disable-debugging.js",
-    "tsc": "tsc -p tsconfig.json"
+    "tsc": "tsc -p tsconfig.json",
+    "webpack": "webpack -p && webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 3000 --hot --inline"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -28,11 +29,17 @@
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/flux": "^3.1.0",
+    "@types/jquery": "^2.0.39",
+    "@types/office-js": "^0.0.37",
     "@types/react": "15.0.38",
     "@types/react-dom": "^15.5.0",
     "@types/react-native": "~0.55.1",
+    "file-loader": "^1.1.11",
     "haul": "^1.0.0-rc.5",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
+    "office-addin-validator": "^1.0.1",
     "office-toolbox": "^0.1.0",
     "react-native": "^0.56.0",
     "react-native-windows": "^0.55.0-rc.0",
@@ -40,6 +47,10 @@
     "tslint": "^5.9.1",
     "tslint-react": "^3.6.0",
     "typescript": "^2.7.2",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-command": "^0.4.1",
+    "webpack-dev-server": "^3.1.1",
     "ws": "^6.0.0"
   },
   "disabledTasks": [
@@ -53,9 +64,9 @@
   ],
   "nativeBundles": [
     {
-      "assetsDest": "dist/win32/ship",
       "platform": "win32",
-      "platformBundleEnabled": true
+      "platformBundleEnabled": true,
+      "dev": false
     }
   ]
 }
