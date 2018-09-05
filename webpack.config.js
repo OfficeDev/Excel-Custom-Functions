@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist/win32/ship'),
     filename: 'index.win32.bundle'
   },    
   resolve: {
@@ -28,7 +28,7 @@ module: {
     ]
 },
 devServer: {
-    port: 3000,
+    port: 8081,
     hot: true,
     inline: true,
     headers: {
