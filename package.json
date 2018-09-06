@@ -20,7 +20,7 @@
     "disable-debugging": "node ./scripts/disable-debugging.js",
     "tsc": "tsc -p tsconfig.json",
     "start-webpack": "start npm run webpack && npm run sideload",
-    "webpack": "start npm run dev-server && webpack -p && webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 3000 --hot --inline"
+    "webpack": "start npm run dev-server && webpack -p --mode development --watch && webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hot --inline"
   },
   "dependencies": {
     "chalk": "2.4.1",
