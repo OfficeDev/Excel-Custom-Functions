@@ -12,15 +12,15 @@
     "buildmin": "node ./scripts/buildmin.js",
     "bundle-win32": "node ./scripts/build.js native-bundle win32 dev",
     "clean": "node ./scripts/clean.js",
-    "dev-server": "http-server --cors --ssl --cert ./certs/server.crt --key ./certs/server.key",
     "packager": "node ./scripts/start-native.js",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
     "watch": "node ./scripts/watch.js",
     "enable-debugging": "node ./scripts/enable-debugging.js",
     "disable-debugging": "node ./scripts/disable-debugging.js",
     "tsc": "tsc -p tsconfig.json",
-    "start-webpack": "start npm run webpack && npm run sideload",
-    "webpack": "start npm run dev-server && webpack -p --mode development --watch && webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hot --inline"
+    "start-webpack": "start npm run webpack && start npm run webpack-dev-server && npm run sideload",
+    "webpack-dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly --inline",
+    "webpack": "webpack -p --mode development --watch"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -36,6 +36,7 @@
     "@types/react-dom": "^15.5.0",
     "@types/react-native": "~0.55.1",
     "file-loader": "^1.1.11",
+    "clean-webpack-plugin": "^0.1.19",
     "haul": "^1.0.0-rc.5",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

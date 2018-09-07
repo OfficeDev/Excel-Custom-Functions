@@ -1,4 +1,7 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.ts',
@@ -9,6 +12,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.html', '.js', 'json']
 },
+devtool: 'source-map',    
 module: {
     rules: [
         {
@@ -27,9 +31,16 @@ module: {
         }
     ]
 },
+plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      title: 'Hot Module Replacement'
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ],
 devServer: {
     port: 8081,
-    hot: true,
+    hotOnly: true,
     inline: true,
     headers: {
         "Access-Control-Allow-Origin": "*"
