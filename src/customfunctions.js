@@ -5,7 +5,7 @@
 // The following function is an example of an asynchronous function:
 function ADD42ASYNC(num1, num2) {
 	// waits 1 second before returning the result
-	return new OfficeExtension.Promise(function(resolve) {
+	return new Promise(function(resolve) {
 		setTimeout(function() {
 			resolve(num1 + num2 + 42);
 		}, 1000);
