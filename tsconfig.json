@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "outDir": "dist/win32/ship",
+      "target": "es2015"
+    },
+    "files": [
+        "./src/customfunctions.ts"
+      ]
+    }
