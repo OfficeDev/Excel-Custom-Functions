@@ -1,9 +1,12 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: {
-        customfunctions: ["./src/customfunctions.js"],
-        customfunctionsjson: ["./config/customfunctions.json"]
+    entry: './src/customfunctions.ts',
+    output: {
+        path: path.resolve(__dirname, 'dist/win32/ship'),
+        filename: 'index.win32.bundle'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.html', '.js', 'json']
@@ -26,18 +29,8 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            chunks: ['customfunctions']
-        }),
-        new HtmlWebpackPlugin({
-            template: './index.html',
-            chunks: ['customfunctionsjson']
-        })
-    ],
     devServer: {
-        port: 3000,
+        port: 8081,
         hot: true,
         inline: true,
         headers: {
