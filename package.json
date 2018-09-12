@@ -1,14 +1,14 @@
 {
-  "name": "excel-functions",
-  "version": "0.0.2",
+  "name": "excel-custom-functions",
+  "version": "2.0.0",
   "main": "./src/customfunctions.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "webpack -p --mode production",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
-    "start": "start npm run webpack && start npm run dev-server && npm run sideload",
+    "start": "start npm run dev-server && start npm run watch && npm run sideload",
     "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly",
-    "webpack": "webpack -p --mode development --watch"
+    "watch": "webpack -p --mode development --watch"
   },
   "devDependencies": {
     "file-loader": "^1.1.11",
@@ -16,7 +16,6 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
-    "office-addin-validator": "^1.0.1",
     "office-toolbox": "^0.1.0",
     "ts-loader": "^4.4.2",
     "typescript": "^2.7.2",
