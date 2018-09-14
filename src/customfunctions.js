@@ -1,14 +1,13 @@
-﻿declare var CustomFunctionMappings;
-
-function add(first: number, second: number): number {
+﻿
+function add(first, second){
   return first + second;
 }
 
-function addAsync(first: number, second: number): Promise<number> {
+function addAsync(first, second){
   return Promise.resolve(add(first, second));
 }
 
-function increment(incrementBy: number, callback) {
+function increment(incrementBy, callback) {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;

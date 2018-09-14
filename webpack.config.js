@@ -1,33 +1,15 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/customfunctions.ts',
+    mode: 'development',
+    entry: './src/customfunctions.js',
     output: {
         path: path.resolve(__dirname, 'dist/win32/ship'),
         filename: 'index.win32.bundle'
     },
+    devtool: "source-map",
     resolve: {
-        extensions: ['.ts', '.tsx', '.html', '.js', 'json']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: 'ts-loader'
-            },
-            {
-                test: /\.html$/,
-                exclude: /node_modules/,
-                use: 'html-loader'
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                use: 'file-loader'
-            }
-        ]
+        extensions: ['.js', 'json']
     },
     devServer: {
         port: 8081,
