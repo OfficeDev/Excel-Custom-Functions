@@ -8,6 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist/win32/ship'),
         filename: 'index.win32.bundle'
     },
+    devtool: 'source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.html', '.js', 'json']
     },
