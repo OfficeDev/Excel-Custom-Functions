@@ -4,23 +4,14 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start npm run dev-server && start npm run packager && npm run sideload",
-    "start-web": "start npm run dev-server && start npm run packager",
-    "build": "node ./scripts/build.js",
-    "buildfast": "node ./scripts/buildfast.js",
-    "buildfull": "node ./scripts/buildfull.js",
-    "buildmin": "node ./scripts/buildmin.js",
-    "bundle-win32": "node ./scripts/build.js native-bundle win32 dev",
-    "clean": "node ./scripts/clean.js",
+    "start": "start npm run http-server && start npm run packager && start npm run watch && npm run sideload",
+    "start-web": "start npm run dev-server && start npm run watch",
+    "build": "webpack -p --mode production",
+    "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly",
+    "http-server": "http-server --cors --ssl --cert ./certs/server.crt --key ./certs/server.key",
     "packager": "node ./scripts/start-native.js",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
-    "watch": "node ./scripts/watch.js",
-    "enable-debugging": "node ./scripts/enable-debugging.js",
-    "disable-debugging": "node ./scripts/disable-debugging.js",
-    "tsc": "tsc -p tsconfig.json",
-    "start-webpack": "start npm run webpack && start npm run webpack-dev-server && npm run sideload",
-    "webpack-dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly --inline",
-    "webpack": "webpack -p --mode development --watch"
+    "watch": "webpack -p --mode development --watch"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -28,6 +19,7 @@
   },
   "devDependencies": {
     "@types/es6-collections": "^0.5.29",
+    "babel-preset-react-native": "^4.0.1",
     "@types/es6-promise": "0.0.32",
     "@types/flux": "^3.1.0",
     "@types/jquery": "^2.0.39",
@@ -37,6 +29,7 @@
     "@types/react-native": "~0.55.1",
     "file-loader": "^1.1.11",
     "clean-webpack-plugin": "^0.1.19",
+    "office-addin-node-debugger": "^0.1.0",
     "haul": "^1.0.0-rc.5",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
@@ -63,12 +56,5 @@
     "ts",
     "webpack",
     "tslint"
-  ],
-  "nativeBundles": [
-    {
-      "platform": "win32",
-      "platformBundleEnabled": true,
-      "dev": false
-    }
   ]
 }

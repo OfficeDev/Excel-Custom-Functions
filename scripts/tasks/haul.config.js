@@ -1,2 +1,2 @@
-const resources = require('../haul-resources');
-export default resources.createHaulConfig();
+// const resources = require('../haul-resources');
+// export default resources.createHaulConfig();
