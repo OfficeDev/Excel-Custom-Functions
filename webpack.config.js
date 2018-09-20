@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/customfunctions.ts',
+    entry: {
+        customfunctions: './src/customfunctions.ts',
+    },
     output: {
         path: path.resolve(__dirname, 'dist/win32/ship'),
         filename: 'index.win32.bundle'
@@ -30,6 +32,13 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            chunks: ['customfunctions'],
+            filename: "dist/indexxx.html"
+        })
+    ],
     devServer: {
         port: 8081,
         hot: true,

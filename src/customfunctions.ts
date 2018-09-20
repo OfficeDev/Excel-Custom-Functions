@@ -1,14 +1,21 @@
-﻿declare var CustomFunctionMappings;
+﻿debugger;
 
 function add(first: number, second: number): number {
   return first + second;
 }
 
-function addAsync(first: number, second: number): Promise<number> {
-  return Promise.resolve(add(first, second));
+async function addAsync(first: number, second: number): Promise<number> {
+  // waits one second, then adds the two numbers
+  await pause(1000);
+  return first + second;
+
+  // helper
+  function pause(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }
 
-function increment(incrementBy: number, callback) {
+function increment(incrementBy: number, callback: CustomFunctions.StreamingHandler<number>): void {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
