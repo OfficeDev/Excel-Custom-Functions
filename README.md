@@ -20,7 +20,7 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 
 ## Prerequisites
 
-* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/en-us/office-insider) program. You must have Office build number 8711 or later.
+* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/en-us/office-insider) program. You must have Office build number 10827 or later.
 
 ## To use the project
 
@@ -32,10 +32,9 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 4. After Excel launches, you will need to register the custom-functions add-in to work around a bug:
     a. On the upper-left-hand side of Excel, there is a small hexagon icon with a dropdown arrow. The icon is to right of the Save icon.
     b. Click on this dropdown arrow and then click on the Custom Functions Sample add-in to register it.
-5. Test a custom function by entering `=CONTOSO.ADD42(num)` in a cell.
-6. Try the other functions in the sample: `=CONTOSO.ADD42ASYNC(num, num)`, `CONTOSO.ISPRIME(num)`, `CONTOSO.NTHPRIME(num)`, `CONTOSO.GETDAY()`, `CONTOSO.INCREMENTVALUE(increment)`, and `CONTOSO.SECONDHIGHEST(range)`.
+5. Test a custom function by entering `=CONTOSO.ADD(num1, num2)` in a cell.
+6. Try the other functions in the sample: `=CONTOSO.ADDASYNC(num1, num2)`, `CONTOSO.INCREMENTVALUE(increment)`.
 7. If you make changes to the sample add-in, copy the updated files to your website, and then close and reopen Excel. If your functions are not available in Excel, re-insert the add-in using **Insert** > **My Add-ins**.
-8. Follow @OfficeDev on Twitter for updates and send feedback to <excelcustomfunctions@microsoft.com>.
 
 ## Making changes
 If you make changes to the sample functions code (in the JS file), close and reopen Excel to test them.

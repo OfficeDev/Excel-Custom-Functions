@@ -1,35 +1,23 @@
 {
   "name": "excel-custom-functions",
-  "version": "1.0.0",
-  "description": "Create Excel functions using JavaScript.",
-  "main": "customfunctions.js",
+  "version": "2.0.0",
+  "main": "./src/customfunctions.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 3000 --hot --inline",
-    "sideload": "office-toolbox sideload -m manifest.xml -a Excel",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "start npm run dev-server && start npm run watch && npm run sideload",
+    "start-web": "start npm run dev-server && start npm run watch",
+    "build": "webpack -p --mode production",
+    "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly",
+    "sideload": "office-toolbox sideload -m manifest.xml -a excel",
+    "watch": "webpack -p --mode development --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OfficeDev/Excel-Custom-Functions.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OfficeDev/Excel-Custom-Functions/issues"
-  },
-  "homepage": "https://github.com/OfficeDev/Excel-Custom-Functions#readme",
   "devDependencies": {
-    "typescript": "^2.8.1",
-    "office-toolbox": "^0.1.0",
-    "@types/office-js": "^0.0.37",
-    "@types/jquery": "^2.0.39",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.0.7",
-    "office-addin-validator": "^1.0.1",
-    "ts-loader": "^4.1.0",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12",
+    "office-addin-node-debugger": "^0.1.0",
+    "office-toolbox": "^0.1.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-command": "^0.4.1",
     "webpack-dev-server": "^3.1.1"
   }
 }
