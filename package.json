@@ -4,14 +4,15 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start npm run http-server && start npm run packager && start npm run watch && npm run sideload",
+    "start": "start npm run haul && start npm run dev-server && start npm run watch && npm run sideload",
     "start-web": "start npm run dev-server && start npm run watch",
     "build": "webpack -p --mode production",
-    "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8081 --hotOnly",
+    "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8080 --hotOnly",
     "http-server": "http-server --cors --ssl --cert ./certs/server.crt --key ./certs/server.key",
     "packager": "node ./scripts/start-native.js",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
-    "watch": "webpack -p --mode development --watch"
+    "watch": "webpack -p --mode development --watch",
+    "haul": "haul start --config haul.config.js"
   },
   "dependencies": {
     "chalk": "2.4.1",
@@ -36,8 +37,8 @@
     "http-server": "^0.11.1",
     "office-addin-validator": "^1.0.1",
     "office-toolbox": "^0.1.0",
+    "react": "^16.5.2",
     "react-native": "^0.56.0",
-    "react-native-windows": "^0.55.0-rc.0",
     "ts-loader": "^4.4.2",
     "tslint": "^5.9.1",
     "tslint-react": "^3.6.0",
