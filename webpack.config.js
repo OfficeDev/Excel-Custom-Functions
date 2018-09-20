@@ -30,13 +30,7 @@ module.exports = {
         ]
     },
     devServer: {
-        port: 8081,
-        proxy: {
-            '/socket.io': {
-                target: 'http://localhost:8081',
-                ws: true
-            }
-        },
+        port: 8080,
         hot: true,
         inline: true,
         headers: {

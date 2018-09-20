@@ -1,6 +1,39 @@
-const resources = require('./scripts/haul-resources');
-const haulConfigOptions = {
-    "entryFile": "./src/index.ts"
-}
+const path = require('path');
 
-export default resources.createHaulConfig(haulConfigOptions);
+module.exports = {
+    entry: './src/customfunctions.ts',
+    output: {
+      path: path.resolve(__dirname, 'dist/win32/ship'),
+      filename: 'index.win32.bundle'
+  },
+  resolve: {
+      extensions: ['.ts', '.tsx', '.html', '.js', 'json']
+  },
+  module: {
+    rules: [
+        {
+            test: /\.tsx?$/,
+            exclude: /node_modules/,
+            use: 'ts-loader'
+        },
+        {
+            test: /\.html$/,
+            exclude: /node_modules/,
+            use: 'html-loader'
+        },
+        {
+            test: /\.(png|jpg|jpeg|gif)$/,
+            use: 'file-loader'
+        }
+    ]
+},
+  devServer: {
+        port: 8081,
+        hot: false,
+        publicPath: 'http://localhost:8081/dist/win32/ship',
+        inline: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        }
+    }
+  };
