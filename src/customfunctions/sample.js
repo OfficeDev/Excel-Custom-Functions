@@ -3,20 +3,20 @@
 //    global "CustomFunctionMappings" variable, which maps them to
 //    the JSON metadata and makes them available to the end-users.
 
-export function add(first: number, second: number): number {
+export function add(first, second){
   return first + second;
 }
 
-export async function addAsync(first: number, second: number): Promise<number> {
+export async function addAsync(first, second) {
   // Waits one second, then adds the two numbers
   await pause(1000);
   return first + second;
 }
 
 export function increment(
-  incrementBy: number,
-  callback: CustomFunctions.StreamingHandler<number>
-): void {
+  incrementBy,
+  callback
+) {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
@@ -29,6 +29,6 @@ export function increment(
 }
 
 // Helper function
-function pause(ms: number): Promise<void> {
+function pause(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
