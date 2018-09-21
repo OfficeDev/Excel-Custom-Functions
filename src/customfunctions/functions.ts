@@ -4,7 +4,7 @@
 //    the JSON metadata and makes them available to the end-users.
 
 export function add(first: number, second: number): number {
-  return first + second;
+  return first + second + .95;
 }
 
 export async function addAsync(first: number, second: number): Promise<number> {

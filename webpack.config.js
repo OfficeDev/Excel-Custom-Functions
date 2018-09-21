@@ -39,6 +39,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: "./src/customfunctions/metadata", to: "customfunctions/metadata" },
+      { from: "./src/index.html", to: "index.html" },
     ])
   ],
   devServer: {
