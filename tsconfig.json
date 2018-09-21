@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-      "outDir": "dist/win32/ship",
-      "target": "es2015"
-    },
-    "files": [
-        "./src/customfunctions.ts"
-      ]
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["dom", "es2015"],
+    "outDir": "./dist/generated",
+    "strict": true
+  }
+}
