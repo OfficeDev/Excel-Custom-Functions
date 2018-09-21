@@ -4,10 +4,6 @@ function add(first: number, second: number): number {
   return first + second;
 }
 
-function addAsync(first: number, second: number): Promise<number> {
-  return Promise.resolve(add(first, second));
-}
-
 function increment(incrementBy: number, callback) {
   let result = 0;
   const timer = setInterval(() => {
@@ -20,6 +16,5 @@ function increment(incrementBy: number, callback) {
   };
 }
 
-CustomFunctionMappings.add = add;
-CustomFunctionMappings.addAsync = addAsync;
+CustomFunctionMappings.ADD = add;
 CustomFunctionMappings.INCREMENT = increment;
