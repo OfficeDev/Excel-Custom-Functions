@@ -11,5 +11,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Temporary file created for sideloading
-BookWithTaskpane.xlsx

@@ -3,7 +3,6 @@
     "target": "es5",
     "module": "commonjs",
     "lib": ["dom", "es2015"],
-    "outDir": "./dist/generated",
     "strict": true
   }
 }

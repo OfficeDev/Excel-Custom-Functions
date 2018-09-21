@@ -14,7 +14,7 @@
 		<Host Name="Workbook" />
 	</Hosts>
 	<DefaultSettings>
-		<SourceLocation DefaultValue="https://localhost:8081/index.html"/>
+		<SourceLocation DefaultValue="https://localhost:8081/about.html"/>
 	</DefaultSettings>
 	<Permissions>ReadWriteDocument</Permissions>
 	<VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
@@ -39,8 +39,8 @@
 		<Resources>
 			<bt:Urls>
 				<bt:Url id="JSON-URL" DefaultValue="https://localhost:8081/customfunctions/metadata/functions.json" />
-				<bt:Url id="JS-URL" DefaultValue="https://localhost:8081/customfunctions/win32/ship/index.win32.bundle" />
-				<bt:Url id="HTML-URL" DefaultValue="https://localhost:8081/customfunctions/" />
+				<bt:Url id="JS-URL" DefaultValue="https://localhost:8081/customfunctions/functions.bundle.js" />
+				<bt:Url id="HTML-URL" DefaultValue="https://localhost:8081/customfunctions/functions.html" />
 			</bt:Urls>
 			<bt:ShortStrings>
 				<bt:String id="namespace" DefaultValue="CONTOSO" />
