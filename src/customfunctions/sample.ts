@@ -1,5 +1,5 @@
 ﻿// The functions that we want to expose are declared and exported
-//    in this file.  Then, in index.ts, they are are added to the
+//    in this file.  Then, in functions.ts, they are are added to the
 //    global "CustomFunctionMappings" variable, which maps them to
 //    the JSON metadata and makes them available to the end-users.
 
