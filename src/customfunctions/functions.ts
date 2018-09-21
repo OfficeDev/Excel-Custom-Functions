@@ -1,7 +1,5 @@
-import { add, addAsync, increment } from "./sample";
+import * as MyFunctions from "./sample";
 
-CustomFunctionMappings = {
-  ADD: add,
-  ADDASYNC: addAsync,
-  INCREMENT: increment
-};
+// To expose the functions to Excel, we need to set the
+//    CustomFunctionsMapping variable with the set of functions
+CustomFunctionMappings = MyFunctions;

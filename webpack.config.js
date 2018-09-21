@@ -2,7 +2,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
-    "customfunctions/functions": "./src/customfunctions/functions.ts"
+    "customfunctions": "./src/customfunctions/functions.ts"
   },
   output: {
     filename: '[name].bundle.js',
@@ -23,9 +23,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: "./src/customfunctions/metadata", to: "customfunctions/metadata" },
-      { from: "./src/customfunctions/functions.html", to: "customfunctions/functions.html" },
-      { from: "./src/about.html", to: "about.html" },
+      { from: "./public", to: "" },
+      { from: "./src/customfunctions/functions.json", to: "customfunctions/functions.json" },
     ])
   ],
   devServer: {
