@@ -6,7 +6,7 @@
   "scripts": {
     "start": "start npm run dev-server && start npm run watch && npm run sideload",
     "start-web": "start npm run dev-server && start npm run watch",
-    "build": "webpack --mode development && webpack --mode development --config webpack.win32.config.js",
+    "build": "webpack --mode development && webpack --mode development --config webpack.config.native.js",
     "dev-server": "webpack-dev-server --content-base dist/ --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --hot --inline",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
     "watch": "webpack --mode development --watch"

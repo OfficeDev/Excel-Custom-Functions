@@ -3,7 +3,7 @@ module.exports = {
     "customfunctions": "./src/customfunctions/functions.ts"
   },
   output: {
-    filename: '[name].bundle.win32.js',
+    filename: '[name].bundle.native.js',
     path: __dirname + '/dist'
   },
   devtool: "source-map",

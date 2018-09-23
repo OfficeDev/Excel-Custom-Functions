@@ -39,7 +39,7 @@
 		<Resources>
 			<bt:Urls>
 				<bt:Url id="JSON-URL" DefaultValue="https://localhost:8081/customfunctions/functions.json" />
-				<bt:Url id="JS-URL" DefaultValue="https://localhost:8081/customfunctions.bundle.win32.js" />
+				<bt:Url id="JS-URL" DefaultValue="https://localhost:8081/customfunctions.bundle.native.js" />
 				<bt:Url id="HTML-URL" DefaultValue="https://localhost:8081/customfunctions.html" />
 			</bt:Urls>
 			<bt:ShortStrings>
