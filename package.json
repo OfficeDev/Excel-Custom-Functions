@@ -1,15 +1,17 @@
 {
   "name": "excel-custom-functions",
   "version": "1.0.0",
-  "main": "./src/customfunctions.ts",
-  "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "start npm run dev-server && start npm run watch && npm run sideload",
-    "start-web": "start npm run dev-server && start npm run watch",
-    "build": "webpack --mode development && webpack --mode development --config webpack.config.native.js",
-    "dev-server": "webpack-dev-server --content-base dist/ --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --hot --inline",
-    "sideload": "office-toolbox sideload -m manifest.xml -a excel",
-    "watch": "webpack --mode development --watch"
+    "start": "start npm run dev-server && npm run watch && npm run sideload",
+    "start-web": "start npm run dev-server && npm run watch",
+    "build": "npm run build:shared && npm run build:native",
+    "build:shared": "webpack --mode production --config webpack.config.shared.js",
+    "build:native": "webpack --mode production --config webpack.config.native.js",
+    "dev-server": "webpack-dev-server --config webpack.config.shared.js --content-base dist/ --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --hot --inline",
+    "watch": "start npm run watch:shared && start npm run watch:native",
+    "watch:shared": "webpack --mode development --config webpack.config.shared.js --watch",
+    "watch:native": "webpack --mode development --config webpack.config.native.js --watch",
+    "sideload": "office-toolbox sideload -m manifest.xml -a excel"
   },
   "devDependencies": {
     "@types/custom-functions-runtime": "^1.4.0",

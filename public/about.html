@@ -6,32 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Expires" content="0" />
     <title>Welcome</title>
-    <script src="https://officedev.github.io/custom-functions/lib/office.js"></script>
-    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.0/css/fabric.min.css">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.0/css/fabric.min.css">
+
+    <script src="https://officedev.github.io/custom-functions/lib/office.js"></script>
     <script>
-        Office.onReady(function() { /* nothing to initialize */ })
+        Office.onReady(function () { /* nothing to initialize */ })
     </script>
 </head>
 
 <body class="ms-Fabric">
-    <p>
-        You can use this sample to try Custom Functions.
-        Note that this file is only for the instructions; the file used by the <i>runner</i> of the Custom Functions is inside of the "customfunctions/index.html" folder.
-    </p>
-    <p>
-        Try something like:
-    </p>
-    <ul>
-        <li>=CONTOSO.ADD(3, 4)</li>
-        <li>=CONTOSO.ADD(A1, A2)</li>
-        <li>=CONTOSO.ADDASYNC(100, 200)</li>
-        <li>=CONTOSO.INCREMENT(5)</li>
-    </ul>
-    <p>
-        For more info see
-        <a href=https://aka.ms/customfunctions>https://aka.ms/customfunctions</a>.
-    </p>
+    <div style="padding: 15px 25px; box-sizing: border-box">
+        <p>
+            You can use this sample to try Custom Functions. Note that this file is only for the instructions when sideloading the add-in on Windows.
+        </p>
+        <p>
+            Note: If this is your first time sideloading this add-in, or if the functions don't appear in the Excel auto-completion list,
+            re-insert the add-in using "Insert" > "My Add-ins".
+        </p>
+        <p>
+            Then, try something like the following:
+        </p>
+        <ul>
+            <li>=CONTOSO.ADD(3, 4)</li>
+            <li>=CONTOSO.ADD(A1, A2)</li>
+            <li>=CONTOSO.ADDASYNC(100, 200)</li>
+            <li>=CONTOSO.INCREMENT(5)</li>
+        </ul>
+        <p>
+            For more info see
+            <a href=https://aka.ms/customfunctions>https://aka.ms/customfunctions</a>.
+        </p>
+    </div>
 </body>
 
 </html>
