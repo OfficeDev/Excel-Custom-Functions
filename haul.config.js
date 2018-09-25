@@ -48,7 +48,7 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: { index: [`./dist/${platform}/${devOrShip}/index.${platform}.bundle`] }
+        entry: { index: [`./dist/${platform}/${devOrShip}/index.${platform}.bundle.js`] }
       });
       let config = factory({
         ...options,
@@ -61,6 +61,7 @@ function createHaulConfig() {
 
       // Haul config adds a bunch of polyfills we dont need, since they are provided by the platform bundles.
       config.entry.index.splice(0, config.entry.index.length - 1);
+
       // Add bootstrapper into entry
       const pbBootstrapperPath = join(__dirname, 'platform-bundle-bootstrapper.js');
       config.entry.index.unshift(pbBootstrapperPath);

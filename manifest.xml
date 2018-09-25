@@ -39,7 +39,7 @@
 		<Resources>
 			<bt:Urls>
 				<bt:Url id="JSON-URL" DefaultValue="https://localhost:8080/config/customfunctions.json" />
-				<bt:Url id="JS-URL" DefaultValue="https://localhost:8080/dist/win32/ship/index.win32.bundle" />
+				<bt:Url id="JS-URL" DefaultValue="https://localhost:8080/dist/win32/ship/index.win32.bundle.js" />
 				<bt:Url id="HTML-URL" DefaultValue="https://localhost:8080/index.html" />
 			</bt:Urls>
 			<bt:ShortStrings>

@@ -5,7 +5,7 @@ module.exports = {
     entry: './src/customfunctions.js',
     output: {
         path: path.resolve(__dirname, 'dist/win32/ship'),
-        filename: 'index.win32.bundle'
+        filename: 'index.win32.bundle.js'
     },
     devtool: "source-map",
     resolve: {
