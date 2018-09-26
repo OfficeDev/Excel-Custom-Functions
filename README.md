@@ -69,7 +69,7 @@ Questions about Microsoft Office 365 development in general should be posted to 
 ## Additional resources
 
 * [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview)
-* [Custom functions best practices] (https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
+* [Custom functions best practices](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
 * [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime). 
 * [Office add-in documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
