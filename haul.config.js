@@ -48,7 +48,7 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: { index: [`./dist/${platform}/${devOrShip}/index.${platform}.bundle.js`] }
+        entry: { index: [`./src/customfunctions.js`] }
       });
       let config = factory({
         ...options,
