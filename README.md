@@ -1,6 +1,6 @@
 # Custom functions in Excel (Preview)
 
-Learn how to use custom functions in Excel (similar to user-defined functions, or UDFs). Custom functions are JavaScript functions that you can add to Excel, and then use them like any native Excel function (for example =Sum). This sample accompanies the [Custom Functions Overview](https://docs.microsoft.com/en-us/office/dev/add-ins/excel/custom-functions-overview) topic.
+Learn how to use custom functions in Excel (similar to user-defined functions, or UDFs). Custom functions are JavaScript functions that you can add to Excel, and then use them like any native Excel function (for example =Sum). This sample accompanies the [Custom Functions Overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview) topic.
 
 ## Table of Contents
 * [Change History](#change-history)
@@ -68,8 +68,10 @@ Questions about Microsoft Office 365 development in general should be posted to 
 
 ## Additional resources
 
-* [Custom Functions Overview](https://docs.microsoft.com/en-us/office/dev/add-ins/excel/custom-functions-overview)
-* [Office add-in documentation](https://docs.microsoft.com/en-us/office/dev/add-ins/overview/office-add-ins)
+* [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview)
+* [Custom functions best practices] (https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
+* [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime). 
+* [Office add-in documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
