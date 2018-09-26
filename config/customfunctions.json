@@ -3,7 +3,7 @@
     {
       "name": "add",
       "description": "Add two numbers",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -26,7 +26,7 @@
     {
       "name": "addAsync",
       "description": "Add two numbers (async)",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -49,7 +49,7 @@
     {
         "name": "INCREMENT",
         "description": "Periodically increment a value",
-        "helpUrl": "http://dev.office.com",
+        "helpUrl": "http://www.contoso.com/help",
         "result": {
             "type": "number",
             "dimensionality": "scalar"
