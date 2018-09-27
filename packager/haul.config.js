@@ -12,11 +12,7 @@ function createHaulConfig() {
       uwp: 'UWP'
     },
     webpack: options => {
-      const { platform, dev, bundle } = options;
-      //const devOrShip = dev ? 'dev' : 'ship';
-      const devOrShip = 'ship';
-      //  resolve each source to an entry file
-
+      const { platform, bundle } = options;
       const providesModuleNodeModules = [];
 
       if (bundle) {
@@ -39,10 +35,7 @@ function createHaulConfig() {
         require.resolve('./platform-bundle-initcore-placeholder.js')
       );
 
-      //
-      //  webpack configuration
-      //
-
+      //  webpack configuration        
       const factory = createWebpackConfig({
         ...options,
         entry: { index: [`./src/customfunctions.js`] },
@@ -54,9 +47,6 @@ function createHaulConfig() {
         providesModuleNodeModules
       });
 
-      // redirect react-native includes to our fork of react-native
-      // config.resolve.alias['react-native'] = '@office-iss/react-native';
-
       // Haul config adds a bunch of polyfills we dont need, since they are provided by the platform bundles.
       config.entry.index.splice(0, config.entry.index.length - 1);
 
@@ -64,10 +54,7 @@ function createHaulConfig() {
       const pbBootstrapperPath = join(__dirname, 'platform-bundle-bootstrapper.js');
       config.entry.index.unshift(pbBootstrapperPath);
 
-      //
-      //  webpack: module rules
-      //
-
+      // webpack: module rules
       const babelLoaderRule = config.module.rules[1];
       if (!babelLoaderRule.use[0].loader.includes('babel-loader')) {
         throw new Error('Failed to find babel-loader rule in the webpack configuration');
@@ -81,7 +68,7 @@ function createHaulConfig() {
       config.module.rules.splice(1, 1); // Remove asset-loader, since it should have been done already
 
       // Setup platform file resolution
-      config.resolve.extensions = ['bundle', 'jsbundle', 'js'];
+      config.resolve.extensions = ['bundle', 'jsbundle', 'js', 'ts'];
 
       config.output.filename = outputFilename;
 
