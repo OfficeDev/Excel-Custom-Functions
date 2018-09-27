@@ -5,15 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Excel Desktop",
             "type": "node",
             "request": "launch",
-            "name": "Custom Functions Web Debugging",
-            "program": "${workspaceFolder}/node_modules/office-addin-node-debugger/lib/debugger.js",
+            "program": "${workspaceFolder}/node_modules/office-addin-debugging/lib/debugging.js",
+            "args": ["start", "manifest.xml", "--source-bundle-url-path", "index.win32", "--dev-server", "npm run dev-server", "--packager", "npm run packager"],
             "env": {
               "Path": "${workspaceFolder}/node_modules/.bin;${env:Path};"
             },
             "autoAttachChildProcesses": true,
             "sourceMaps": true
-        }
+          }
     ]
 }
