@@ -5,7 +5,7 @@
   "scripts": {
     "start": "start npm run packager && start npm run dev-server && start npm run watch && npm run sideload",
     "start-web": "start npm run dev-server && start npm run watch",
-    "build": "webpack -p --mode development",
+    "build": "webpack -p --mode production",
     "dev-server": "webpack-dev-server --mode development --https --key ./certs/server.key --cert ./certs/server.crt --cacert ./certs/ca.crt --port 8080 --hotOnly",
     "enable-debugging": "office-addin-dev-settings enable-debugging manifest.xml && office-addin-dev-settings set-source-bundle-url manifest.xml --path index.win32",
     "packager": "haul start --config ./haul.config.js",

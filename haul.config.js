@@ -23,10 +23,6 @@ function createHaulConfig() {
         throw new Error('This config is only used to serve up a bundle file, not as a complete build solution');
       }
 
-      //
-      //  output bundle
-      //
-
       //  configure webpack to produce bundle files with the same name as each entry file.
       //  choose the appropriate bundle file extension, based on the platform.
       const outputFilename = `index.${platform}.bundle`;
@@ -85,21 +81,12 @@ function createHaulConfig() {
       config.module.rules.splice(1, 1); // Remove asset-loader, since it should have been done already
 
       // Setup platform file resolution
-      config.resolve.extensions = ['bundle', 'jsbundle'];
+      config.resolve.extensions = ['bundle', 'jsbundle', 'js'];
 
       config.output.filename = outputFilename;
 
       // Remove the case sensitive checks for now -- haul adds this as the first plugin
       config.plugins.shift();
-
-      /*
-      const jsonWithRegEx = (_key, value) => {
-        if (value instanceof RegExp) return value.toString();
-        return value;
-      };
-      console.log(JSON.stringify(config, jsonWithRegEx, 2));
-      console.log(JSON.stringify(options, jsonWithRegEx, 2));
-      */
 
       return config;
     }

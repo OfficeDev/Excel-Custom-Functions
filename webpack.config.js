@@ -7,7 +7,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist/win32/ship'),
         filename: 'index.win32.bundle.js'
     },
-    devtool: "inline-source-map",
+    devtool: "source-map",
     resolve: {
         extensions: ['.js', 'json']
     },
