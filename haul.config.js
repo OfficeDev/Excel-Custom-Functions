@@ -1,5 +1,6 @@
 const { createWebpackConfig } = require('haul');
-import { join, relative } from 'path';
+import { join, relative, resolve } from 'path';
+const webpack = require('webpack');
 
 function createHaulConfig() {
   return {
@@ -48,7 +49,8 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: { index: [`./src/customfunctions.js`] }
+        entry: { index: [`./src/customfunctions.js`] },
+        devtool: "inline-source-map"
       });
       let config = factory({
         ...options,
