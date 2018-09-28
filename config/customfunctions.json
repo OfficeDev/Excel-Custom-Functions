@@ -5,7 +5,7 @@
       "id": "ADD",
       "name": "ADD",
       "description": "Add two numbers",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -29,7 +29,7 @@
       "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
           "type": "number",
           "dimensionality": "scalar"
