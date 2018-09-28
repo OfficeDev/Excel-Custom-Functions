@@ -4,11 +4,11 @@
  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
  xsi:type="TaskPaneApp">
-	<Id>ca968be6-628b-4f14-ba3c-3e614effa9bd</Id>
+	  <Id><%= projectId %></Id>
 	<Version>1.0.0.0</Version>
 	<ProviderName>Contoso</ProviderName>
 	<DefaultLocale>en-US</DefaultLocale>
-	<DisplayName DefaultValue="Excel Custom Functions" />
+	 <DisplayName DefaultValue="<%= projectDisplayName %>" />
 	<Description DefaultValue="Samples to test custom functions" />
 	<Hosts>
 		<Host Name="Workbook" />
