@@ -20,7 +20,7 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 
 ## Prerequisites
 
-* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/en-us/office-insider) program. You must have Office build number 8711 or later.
+* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/office-insider) program. You must have Office build number 10827 or later.
 
 ## To use the project
 
@@ -35,7 +35,6 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 5. Test a custom function by entering `=CONTOSO.ADD(num1, num2)` in a cell.
 6. Try the other functions in the sample: `=CONTOSO.ADDASYNC(num1, num2)`, `CONTOSO.INCREMENTVALUE(increment)`.
 7. If you make changes to the sample add-in, copy the updated files to your website, and then close and reopen Excel. If your functions are not available in Excel, re-insert the add-in using **Insert** > **My Add-ins**.
-8. Follow @OfficeDev on Twitter for updates and send feedback to <excelcustomfunctions@microsoft.com>.
 
 ## Making changes
 If you make changes to the sample functions code (in the JS file), close and reopen Excel to test them.
@@ -43,11 +42,11 @@ If you make changes to the sample functions code (in the JS file), close and reo
 If you change the functions metadata (in the JSON file), close Excel and delete your cache folder `Users/<user>/AppData/Local/Microsoft/Office/16.0/Wef/CustomFunctions`. Then re-insert the add-in using **Insert** > **My Add-ins**.
 
 ## Debugging
-Debugging is only available for asynchronous functions on Excel for Windows currently. To debug:
+Currently, the best method for debugging Excel custom functions is to first [sideload](https://docs.microsoft.com/office/dev/add-ins/testing/sideload-office-add-ins-for-testing) your add-in within **Excel Online**. Then you can debug your custom functions by using the [F12 debugging tool native to your browser](https://docs.microsoft.com/office/dev/add-ins/testing/debug-add-ins-in-office-online). Use `console.log` statements within your custom functions code to send output to the console in real time.
 
-1. Enable script debugging in Internet Explorer (IE > Options > Advanced).
-2. Trigger an asynchronous function in Excel (like `CONTOSO.ADD42ASYNC`). This step ensures that the asynchronous function process is loaded invisibly and ready for debugging.
-3. Attach a debugger to the hidden iexplore.exe script process (you could use the [Windows F12 debugger](https://docs.microsoft.com/en-us/office/dev/add-ins/testing/debug-add-ins-using-f12-developer-tools-on-windows-10) or Visual Studio).
+If your add-in fails to register, [verify that SSL certificates are correctly configured](https://github.com/OfficeDev/generator-office/blob/master/src/docs/ssl.md) for the web server that's hosting your add-in application.
+
+If you are testing your add-in in Office 2016 desktop you can enable [runtime logging](https://docs.microsoft.com/office/dev/add-ins/testing/troubleshoot-manifest#use-runtime-logging-to-debug-your-add-in) to debug issues with your add-in's XML manifest file as well as several installation and runtime conditions.
 
 ## IntelliSense for the JSON file in Visual Studio Code	
 For intelliSense to help you edit the JSON file, follow these steps:
@@ -69,8 +68,10 @@ Questions about Microsoft Office 365 development in general should be posted to 
 
 ## Additional resources
 
-* [Custom Functions Overview](https://docs.microsoft.com/en-us/office/dev/add-ins/excel/custom-functions-overview)
-* [Office add-in documentation](https://docs.microsoft.com/en-us/office/dev/add-ins/overview/office-add-ins)
+* [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview)
+* [Custom functions best practices](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
+* [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime) 
+* [Office add-in documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
