@@ -6,10 +6,10 @@ module.exports = {
     entry: './src/customfunctions.ts',
     output: {
         path: path.resolve(__dirname, 'dist/win32/ship'),
-        filename: 'index.win32.bundle'
-    },
+        filename: 'index.win32.bundle.js'
+    },    
     resolve: {
-        extensions: ['.ts', '.tsx', '.html', '.js', 'json']
+        extensions: ['.ts', '.tsx', '.html', '.js', 'json', '.bundle']
     },
     module: {
         rules: [
@@ -28,7 +28,8 @@ module.exports = {
                 use: 'file-loader'
             }
         ]
-    },
+    },    
+    devtool: "source-map",
     devServer: {
         port: 8081,
         hot: true,
@@ -36,5 +37,5 @@ module.exports = {
         headers: {
             "Access-Control-Allow-Origin": "*"
         }
-    }
+    }    
 };
