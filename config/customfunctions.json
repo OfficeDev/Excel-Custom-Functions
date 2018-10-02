@@ -5,7 +5,7 @@
       "id": "ADD",
       "name": "ADD",
       "description": "Add two numbers",
-      "helpUrl": "http://www.contoso.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -29,7 +29,7 @@
       "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
-      "helpUrl": "http://www.contoso.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -51,7 +51,7 @@
       "id": "CLOCK",
       "name": "CLOCK",
       "description": "Show the current time.",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "string",
         "dimensionality": "scalar"
@@ -67,7 +67,7 @@
       "id": "LOG",
       "name": "LOG",
       "description": "Write a message to the log.",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com/help",
       "result": {
         "type": "string",
         "dimensionality": "scalar"
