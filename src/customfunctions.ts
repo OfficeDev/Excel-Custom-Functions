@@ -1,7 +1,20 @@
-﻿declare var CustomFunctionMappings;
-
-function add(first: number, second: number): number {
+﻿function add(first: number, second: number): number {
   return first + second;
+}
+
+function clock(callback) {
+  const timer = setInterval(() => {
+    const time = currentTime();
+    callback.setResult(time);
+  }, 1000);
+
+  callback.onCanceled = () => {
+    clearInterval(timer);
+  };
+}
+
+function currentTime() {
+  return new Date().toLocaleTimeString();
 }
 
 function increment(incrementBy: number, callback) {
@@ -16,5 +29,15 @@ function increment(incrementBy: number, callback) {
   };
 }
 
-CustomFunctionMappings.ADD = add;
-CustomFunctionMappings.INCREMENT = increment;
+function logMessage(message: string) {
+  console.log(message);
+
+  return message;
+}
+
+if (typeof(CustomFunctionMappings) !== 'undefined') {
+  CustomFunctionMappings.ADD = add;
+  CustomFunctionMappings.CLOCK = clock;
+  CustomFunctionMappings.INCREMENT = increment;
+  CustomFunctionMappings.LOG = logMessage;
+}

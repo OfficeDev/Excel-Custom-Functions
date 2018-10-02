@@ -20,7 +20,7 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 
 ## Prerequisites
 
-* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/en-us/office-insider) program. You must have Office build number 10827 or later.
+* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/office-insider) program. You must have Office build number 10827 or later.
 
 ## To use the project
 
@@ -70,7 +70,7 @@ Questions about Microsoft Office 365 development in general should be posted to 
 
 * [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview)
 * [Custom functions best practices](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
-* [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime). 
+* [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime) 
 * [Office add-in documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
 

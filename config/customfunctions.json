@@ -1,11 +1,11 @@
-{
+﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",
   "functions": [
     {
       "id": "ADD",
       "name": "ADD",
       "description": "Add two numbers",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -29,23 +29,57 @@
       "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
-          "type": "number",
-          "dimensionality": "scalar"
-    },
-    "parameters": [
-        {
-            "name": "increment",
-            "description": "Amount to increment",
             "type": "number",
             "dimensionality": "scalar"
+      },
+      "parameters": [
+        {
+          "name": "increment",
+          "description": "Amount to increment",
+          "type": "number",
+          "dimensionality": "scalar"
         }
-    ],
-    "options": {
+      ],
+      "options": {
         "cancelable": true,
         "stream": true
       }
+    },
+    {
+      "id": "CLOCK",
+      "name": "CLOCK",
+      "description": "Show the current time.",
+      "helpUrl": "http://dev.office.com",
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      },
+      "parameters": [
+      ],
+      "options": {
+        "cancelable": true,
+        "stream": true
+      }
+    },
+    {
+      "id": "LOG",
+      "name": "LOG",
+      "description": "Write a message to the log.",
+      "helpUrl": "http://dev.office.com",
+      "result": {
+        "type": "string",
+        "dimensionality": "scalar"
+      },
+      "parameters": [
+        {
+          "name": "message",
+          "description": "The message.",
+          "type": "string",
+          "dimensionality": "scalar"
+        }
+      ]
     }
   ]
 }
