@@ -31,8 +31,8 @@
       "description": "Periodically increment a value",
       "helpUrl": "http://www.contoso.com",
       "result": {
-        "type": "number",
-        "dimensionality": "scalar"
+            "type": "number",
+            "dimensionality": "scalar"
       },
       "parameters": [
         {

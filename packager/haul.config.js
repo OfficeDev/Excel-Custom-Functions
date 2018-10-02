@@ -1,6 +1,6 @@
 const { createWebpackConfig } = require('haul');
-import { join, relative } from 'path';
-import * as webpack from "webpack";
+import { join, relative, resolve } from 'path';
+const webpack = require('webpack');
 
 function createHaulConfig() {
   return {
@@ -13,10 +13,6 @@ function createHaulConfig() {
     },
     webpack: options => {
       const { platform, dev, bundle } = options;
-      //const devOrShip = dev ? 'dev' : 'ship';
-      const devOrShip = 'ship';
-      //  resolve each source to an entry file
-
       const providesModuleNodeModules = [];
 
       if (bundle) {
@@ -49,7 +45,7 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: {index: ['./src/customfunctions.ts'] }
+        entry: { index: ['./src/customfunctions.ts'] }
       });
       let config = factory({
         ...options,
@@ -57,30 +53,28 @@ function createHaulConfig() {
         providesModuleNodeModules
       });
 
-      // redirect react-native includes to our fork of react-native
-      // config.resolve.alias['react-native'] = '@office-iss/react-native';
-
       // Haul config adds a bunch of polyfills we dont need, since they are provided by the platform bundles.
       config.entry.index.splice(0, config.entry.index.length - 1);
-      // // Add bootstrapper into entry
-      // const pbBootstrapperPath = join(__dirname, 'platform-bundle-bootstrapper.js');
-      // config.entry.index.unshift(pbBootstrapperPath);
+
+      // Add bootstrapper into entry
+      const pbBootstrapperPath = join(__dirname, 'platform-bundle-bootstrapper.js');
+      config.entry.index.unshift(pbBootstrapperPath);
 
       //
       //  webpack: module rules
       //
 
-      // const babelLoaderRule = config.module.rules[1];
-      // if (!babelLoaderRule.use[0].loader.includes('babel-loader')) {
-      //   throw new Error('Failed to find babel-loader rule in the webpack configuration');
-      // }
-      // config.module.rules.splice(1, 1); // Remove babel-loader, since it should already be pure js
+      const babelLoaderRule = config.module.rules[1];
+      if (!babelLoaderRule.use[0].loader.includes('babel-loader')) {
+        throw new Error('Failed to find babel-loader rule in the webpack configuration');
+      }
+      config.module.rules.splice(1, 1); // Remove babel-loader, since it should already be pure js
 
-      // const assetLoaderRule = config.module.rules[1];
-      // if (!assetLoaderRule.use.loader.includes('assetLoader.js')) {
-      //   throw new Error('Failed to find the haul asset-loader rule in the webpack configuration');
-      // }
-      // config.module.rules.splice(1, 1); // Remove asset-loader, since it should have been done already
+      const assetLoaderRule = config.module.rules[1];
+      if (!assetLoaderRule.use.loader.includes('assetLoader.js')) {
+        throw new Error('Failed to find the haul asset-loader rule in the webpack configuration');
+      }
+      config.module.rules.splice(1, 1); // Remove asset-loader, since it should have been done already
 
       config.module.rules.push({
         test: /\.tsx?$/,
@@ -100,19 +94,18 @@ function createHaulConfig() {
       });
 
       // Setup platform file resolution
-      config.resolve.extensions = ['bundle', 'jsbundle'];
+      config.resolve.extensions = ['bundle', 'jsbundle', 'js', 'ts'];
 
       config.output.filename = outputFilename;
 
       // Remove the case sensitive checks for now -- haul adds this as the first plugin
       config.plugins.shift();
-      
-      const jsonWithRegEx = (_key, value) => {
-        if (value instanceof RegExp) return value.toString();
-        return value;
-      };
-      console.log(JSON.stringify(config, jsonWithRegEx, 2));
-      console.log(JSON.stringify(options, jsonWithRegEx, 2));      
+      // const jsonWithRegEx = (_key, value) => {
+      //   if (value instanceof RegExp) return value.toString();
+      //   return value;
+      // };
+      // console.log(JSON.stringify(config, jsonWithRegEx, 2));
+      // console.log(JSON.stringify(options, jsonWithRegEx, 2));
 
       return config;
     }
