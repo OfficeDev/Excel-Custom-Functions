@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",
   "functions": [
     {
-      "id": "add",
+      "id": "ADD",
       "name": "ADD",
       "description": "Add two numbers",
       "helpUrl": "http://www.contoso.com",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "id": "increment",
+      "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
       "helpUrl": "http://www.contoso.com",
@@ -48,7 +48,7 @@
       }
     },
     {
-      "id": "clock",
+      "id": "CLOCK",
       "name": "CLOCK",
       "description": "Show the current time.",
       "helpUrl": "http://dev.office.com",
@@ -64,7 +64,7 @@
       }
     },
     {
-      "id": "log",
+      "id": "LOG",
       "name": "LOG",
       "description": "Write a message to the log.",
       "helpUrl": "http://dev.office.com",
