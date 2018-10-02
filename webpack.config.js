@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/customfunctions.ts',
+    entry: './src/customfunctions.js',
     output: {
         path: path.resolve(__dirname, 'dist/win32/ship'),
         filename: 'index.win32.bundle.js'
@@ -13,11 +13,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: 'ts-loader'
-            },
             {
                 test: /\.html$/,
                 exclude: /node_modules/,

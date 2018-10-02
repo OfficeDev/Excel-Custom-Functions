@@ -1,4 +1,4 @@
-﻿function add(first: number, second: number): number {
+﻿function add(first, second) {
   return first + second;
 }
 
@@ -17,7 +17,7 @@ function currentTime() {
   return new Date().toLocaleTimeString();
 }
 
-function increment(incrementBy: number, callback) {
+function increment(incrementBy, callback) {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
@@ -29,7 +29,7 @@ function increment(incrementBy: number, callback) {
   };
 }
 
-function logMessage(message: string) {
+function logMessage(message) {
   console.log(message);
 
   return message;

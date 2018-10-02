@@ -49,7 +49,7 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: {index: ['./src/customfunctions.ts'] }
+        entry: {index: ['./src/customfunctions.js'] }
       });
       let config = factory({
         ...options,
@@ -81,23 +81,6 @@ function createHaulConfig() {
       //   throw new Error('Failed to find the haul asset-loader rule in the webpack configuration');
       // }
       // config.module.rules.splice(1, 1); // Remove asset-loader, since it should have been done already
-
-      config.module.rules.push({
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: "ts-loader"
-      });
-
-      config.module.rules.push({
-        test: /\.html$/,
-        exclude: /node_modules/,
-        use: "html-loader"
-      });
-
-      config.module.rules.push({
-        test: /\.(png|jpg|jpeg|gif)$/,
-        use: "file-loader"
-      });
 
       // Setup platform file resolution
       config.resolve.extensions = ['bundle', 'jsbundle'];
