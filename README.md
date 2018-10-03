@@ -43,7 +43,7 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 
 4. In Excel, test a custom function within the sample project by entering the value `=CONTOSO.ADD(10, 200)` in a cell. The `ADD` custom function computes the sum of the two numbers that you specify as input parameters, so the calculated result should be **210**.
 
-5. In Excel, test another custom function within the sample project by entering `=CONTOSO.INCREMENT(increment)`. The `INCREMENT` custom function is a streaming custom function that periodically increments the cell value by the amount you specify as an input parameter.
+5. In Excel, test another custom function within the sample project by entering `=CONTOSO.INCREMENT(2)`. The `INCREMENT` custom function is a streaming custom function that periodically increments the cell value by the amount that you specify as an input parameter.
 
 6. If you make changes to the sample add-in project, copy the updated files to your website, and then close Excel and reopen Excel. After you reopen Excel, reregister the add-in by repeating the instructions specified in preceding step #3.
 
