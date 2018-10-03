@@ -33,7 +33,7 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 
 2. At a command prompt from within your custom functions project directory, run `npm start` to start a localhost server instance, launch Excel, and sideload the custom functions add-in. (For additional information about sideloading Office Add-ins, see [Sideload Office Add-ins for testing](https://aka.ms/sideload-addins).)
 
-3. After Excel launches, register the custom-functions add-in by completing the following steps:
+3. After Excel launches, register the custom functions add-in by completing the following steps:
 
     1. In Excel, choose the **Insert** tab and then choose the down-arrow that's located immediately to the right of **My Add-ins**.
 
