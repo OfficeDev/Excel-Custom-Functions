@@ -70,7 +70,7 @@ Questions about Office Add-ins development in general should be posted to [Stack
 * [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime) 
 * [Custom functions tutorial](https://docs.microsoft.com/office/dev/add-ins/excel/excel-tutorial-custom-functions)
 * [Office Add-ins documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
-* [OfficeDev on Github](https://github.com/officedev) (for more Office Add-in samples)
+* [OfficeDev on GitHub](https://github.com/officedev?q=add-in) (for more Office Add-in samples)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
