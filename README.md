@@ -8,10 +8,9 @@ This repository contains a simple custom functions add-in project that you can u
 
 * [Change History](#change-history)
 * [Prerequisites](#prerequisites)
-* [To use the project](#to-use-the-project)
+* [Using this project](#using-this-project)
 * [Making changes](#making-changes)
 * [Debugging](#debugging)
-* [IntelliSense for the JSON file in Visual Studio Code](#intellisense-for-the-json-file-in-visual-studio-code)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
 
@@ -71,7 +70,7 @@ Questions about Office Add-ins development in general should be posted to [Stack
 * [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime) 
 * [Custom functions tutorial](https://docs.microsoft.com/office/dev/add-ins/excel/excel-tutorial-custom-functions)
 * [Office Add-ins documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
-* More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
+* [OfficeDev on Github](https://github.com/officedev) (for more Office Add-in samples)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
