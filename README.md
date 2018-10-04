@@ -6,19 +6,12 @@ This repository contains a simple custom functions add-in project that you can u
 
 ## Table of Contents
 
-* [Change history](#change-history)
 * [Prerequisites](#prerequisites)
 * [Using this project](#using-this-project)
 * [Making changes](#making-changes)
 * [Debugging](#debugging)
 * [Questions and comments](#questions-and-comments)
 * [Additional resources](#additional-resources)
-
-## Change history
-
-* Oct 27, 2017: Initial version.
-* April 23, 2018: Revised and expanded.
-* June 1, 2018: Bug fixes.
 
 ## Prerequisites
 
