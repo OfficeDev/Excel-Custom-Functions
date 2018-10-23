@@ -1,6 +1,7 @@
 ﻿{
   "functions": [
     {
+      "id": "ADD",
       "name": "add",
       "description": "Add two numbers",
       "helpUrl": "http://www.contoso.com/help",
@@ -24,6 +25,7 @@
       ]
     },
     {
+      "id": "ADDASYNC",
       "name": "addAsync",
       "description": "Add two numbers (async)",
       "helpUrl": "http://www.contoso.com/help",
@@ -47,6 +49,7 @@
       ]
     },
     {
+      "id": "INCREMENT",
         "name": "INCREMENT",
         "description": "Periodically increment a value",
         "helpUrl": "http://www.contoso.com/help",
