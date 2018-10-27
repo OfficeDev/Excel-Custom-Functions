@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",
   "functions": [
     {
-      "id": "ADD",
+      "id": "add",
       "name": "ADD",
       "description": "Add two numbers",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
         "type": "number",
         "dimensionality": "scalar"
@@ -26,10 +26,10 @@
       ]
     },
     {
-      "id": "INCREMENT",
+      "id": "increment",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
-      "helpUrl": "http://dev.office.com",
+      "helpUrl": "http://www.contoso.com",
       "result": {
           "type": "number",
           "dimensionality": "scalar"
