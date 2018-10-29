@@ -1,6 +1,6 @@
 ﻿
 function add(first, second){
-  return first + second;
+  return first + second + 100;
 }
 
 function increment(incrementBy, callback) {
