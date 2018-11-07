@@ -37,9 +37,7 @@ On a machine with a valid instance of an Excel Insider build installed, follow t
 
 4. Follow the instructions below, choosing based on your platform. 
 
-	If using Excel Online: 
-
-	If you are using Excel Online you will need to manually sideload your app. Open up Excel Online in your favorite browser, make a new and choose **Insert** | **Office-Add-ins**. A new window will appear and in the top right-hand corner, select **Manage My Add-ins**. Additonal information on sideloading can be found at <https://aka.ms/sideload-addins>.
+	If you are using Excel Online, you will need to manually sideload your app. Open up Excel Online in your favorite browser, make a new and choose **Insert** | **Office-Add-ins**. A new window will appear and in the top right-hand corner, select **Manage My Add-ins**. Additonal information on sideloading can be found at <https://aka.ms/sideload-addins>.
 
 	If using Excel for Windows or Mac, sideloading automatically happens through `npm run start`, so there's no need to do anything for this step. If you launch Excel, your add-in should be available to use. If it has not loaded, select **Insert** | **Office Add-ins**. In the list of available add-ins, find the Developer Add-ins section and select the Excel Custom Functions add-in to register it. 
 	
