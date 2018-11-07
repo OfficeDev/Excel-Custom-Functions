@@ -20,13 +20,18 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 
 ## Prerequisites
 
-* Install Office 2016 for Windows and join the [Office Insider](https://products.office.com/en-us/office-insider) program. You must have Office build number 10827 or later.
+* Custom functions are in preview and available on Excel for Windows (version 1810 or later), Excel for Mac (version 13.329 or later), and Excel Online. To use custom functions within Excel for Windows or Excel for Mac, you must have an Office 365 subscription, join the [Office Insider program](https://insider.office.com/) (Insider level -- formerly called "Insider Fast"), and use a sufficiently recent build of Excel (as specified earlier in this note). To use custom functions within Excel Online, login by using either your Office 365 subscription or a [Microsoft account](https://account.microsoft.com/account). If you don't already have an Office 365 subscription, you can get one by joining the [Office 365 Developer Program](https://developer.microsoft.com/en-us/office/dev-program).
+
+* [Node.js and npm](https://nodejs.org/en/)
+
+* [Git Bash](https://git-scm.com/downloads) (or another Git client)
+
 
 ## To use the project
 
 On a machine with a valid instance of an Excel Insider build installed, follow these instructions to use this custom function sample add-in:
 
-1. On the machine where your custom functions project is installed, follow the instructions to install the self-signed certificates (https://github.com/OfficeDev/generator-office/blob/master/src/docs/ssl.md) . 
+1. Ensure you have On the machine where your custom functions project is installed, follow the instructions to install the self-signed certificates (https://github.com/OfficeDev/generator-office/blob/master/src/docs/ssl.md) . 
 2. From a command prompt from within your custom functions project directory, run `npm run start` to start a localhost server instance. 
 3. Run `npm run sideload` to launch Excel and load the custom functions add-in. Additonal information on sideloading can be found at <https://aka.ms/sideload-addins>.
 4. After Excel launches, you will need to register the custom-functions add-in to work around a bug:
