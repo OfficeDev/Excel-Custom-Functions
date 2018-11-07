@@ -31,20 +31,26 @@ Learn how to use custom functions in Excel (similar to user-defined functions, o
 
 On a machine with a valid instance of an Excel Insider build installed, follow these instructions to use this custom function sample add-in:
 
-1. Ensure you have On the machine where your custom functions project is installed, follow the instructions to install the self-signed certificates (https://github.com/OfficeDev/generator-office/blob/master/src/docs/ssl.md) . 
-2. From a command prompt from within your custom functions project directory, run `npm run start` to start a localhost server instance. 
-3. Run `npm run sideload` to launch Excel and load the custom functions add-in. Additonal information on sideloading can be found at <https://aka.ms/sideload-addins>.
-4. After Excel launches, you will need to register the custom-functions add-in to work around a bug:
-    a. On the upper-left-hand side of Excel, there is a small hexagon icon with a dropdown arrow. The icon is to right of the Save icon.
-    b. Click on this dropdown arrow and then click on the Custom Functions Sample add-in to register it.
+1. Clone this repository, then navigate to the cloned project. 
+2. In a command line interface, run `npm -i` to install the project. 
+3. Run `npm run start` to start a localhost server instance.  
+
+4. Follow the instructions below, choosing based on your platform. 
+
+	If using Excel Online: 
+
+	If you are using Excel Online you will need to manually sideload your app. Open up Excel Online in your favorite browser, make a new and choose **Insert** | **Office-Add-ins**. A new window will appear and in the top right-hand corner, select **Manage My Add-ins**. Additonal information on sideloading can be found at <https://aka.ms/sideload-addins>.
+
+	If using Excel for Windows or Mac, sideloading automatically happens through `npm run start`, so there's no need to do anything for this step. If you launch Excel, your add-in should be available to use. If it has not loaded, select **Insert** | **Office Add-ins**. In the list of available add-ins, find the Developer Add-ins section and select the Excel Custom Functions add-in to register it. 
+	
 5. Test a custom function by entering `=CONTOSO.ADD(num1, num2)` in a cell.
 6. Try the other functions in the sample: `=CONTOSO.ADDASYNC(num1, num2)`, `CONTOSO.INCREMENTVALUE(increment)`.
-7. If you make changes to the sample add-in, copy the updated files to your website, and then close and reopen Excel. If your functions are not available in Excel, re-insert the add-in using **Insert** > **My Add-ins**.
+7. If you make changes to the sample add-in, copy the updated files to your website, and then close and reopen Excel. If your functions are not available in Excel, re-insert the add-in using **Insert** | **My Add-ins**.
 
 ## Making changes
 If you make changes to the sample functions code (in the JS file), close and reopen Excel to test them.
 
-If you change the functions metadata (in the JSON file), close Excel and delete your cache folder `Users/<user>/AppData/Local/Microsoft/Office/16.0/Wef/CustomFunctions`. Then re-insert the add-in using **Insert** > **My Add-ins**.
+If you change the functions metadata (in the JSON file), close Excel and delete your cache folder `Users/<user>/AppData/Local/Microsoft/Office/16.0/Wef/CustomFunctions`. Then re-insert the add-in using **Insert** | **My Add-ins**.
 
 ## Debugging
 Currently, the best method for debugging Excel custom functions is to first [sideload](https://docs.microsoft.com/office/dev/add-ins/testing/sideload-office-add-ins-for-testing) your add-in within **Excel Online**. Then you can debug your custom functions by using the [F12 debugging tool native to your browser](https://docs.microsoft.com/office/dev/add-ins/testing/debug-add-ins-in-office-online). Use `console.log` statements within your custom functions code to send output to the console in real time.
