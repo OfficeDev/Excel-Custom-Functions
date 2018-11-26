@@ -3,8 +3,8 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "npm: build",
+        {            
+            "label": "Build",
             "type": "npm",
             "script": "build",
             "group": {
@@ -13,48 +13,43 @@
             }
         },
         {
-            "label": "npm: dev-server",
+            "label": "Dev Server",
             "type": "npm",
             "script": "dev-server",
             "problemMatcher": []
         },
         {
-            "label": "npm: packager",
+            "label": "Install",
+            "type": "npm",
+            "script": "install",
+            "problemMatcher": []
+        },
+        {
+            "label": "Packager",
             "type": "npm",
             "script": "packager",
             "problemMatcher": []
         },
         {
+            "label": "Start Debug",
+            "dependsOn": [
+                "Dev Server",
+                "Packager",
+                "Watch"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Stop Debug",
             "type": "npm",
             "script": "stop",
             "problemMatcher": []
         },
         {
-            "type": "npm",
-            "script": "unload",
-            "problemMatcher": []
-        },
-        {
-            "label": "npm: watch",
+            "label": "Watch",
             "type": "npm",
             "script": "watch",
             "problemMatcher": []
-        },
-        {
-            "label": "Debugging",
-            "dependsOn": [
-                "npm: dev-server",
-                "npm: packager",
-                "npm: watch"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "label": "Stop Debugging",
-            "dependsOn": [
-                "npm: stop",
-                "npm: unload"
-            ]
         }
     ]
 }

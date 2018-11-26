@@ -9,13 +9,12 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/office-addin-debugging/lib/debugging.js",
-      "args": ["start", "manifest.xml", "--source-bundle-url-path", "index.win32", "--dev-server", "npm run dev-server", "--packager", "npm run packager"],
+      "args": ["start", "manifest.xml", "--source-bundle-url-path", "index.win32", "--dev-server", "npm run dev-server", "--dev-server-port", "3000", "--packager", "npm run packager", "--sideload", "npm run sideload"],
       "env": {
         "Path": "${workspaceFolder}/node_modules/.bin;${env:Path};"
       },
       "autoAttachChildProcesses": true,
-      "sourceMaps": true,
-      "postDebugTask": "Stop Debugging"
+      "postDebugTask": "Stop Debug"
     }
   ]
 }
