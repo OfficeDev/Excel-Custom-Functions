@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run start-desktop",
     "start-desktop": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --packager \"npm run packager\" --sideload \"npm run sideload\" --source-bundle-url-path index.win32",
+    "start-desktop-direct": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --sideload \"npm run sideload\" --source-bundle-url-path index.win32 --debug-method direct --no-live-reload",
     "start-web": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --no-debug --no-live-reload",
     "stop": "office-addin-debugging stop manifest.xml --unload \"npm run unload\"",
     "build": "webpack -p --mode production",
