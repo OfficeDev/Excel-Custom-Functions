@@ -5,7 +5,8 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "webpack -p --mode production",
-    "dev-server": "webpack-dev-server --mode development --hotOnly",
+    "build-dev": "webpack --mode development",
+    "dev-server": "webpack-dev-server --mode development",
     "packager": "haul start --config ./packager/haul.config.js",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
     "start": "npm run start-desktop",
@@ -13,7 +14,8 @@
     "start-desktop-direct": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --sideload \"npm run sideload\" --source-bundle-url-path index.win32 --debug-method direct --no-live-reload",
     "start-web": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --no-debug --no-live-reload",
     "stop": "office-addin-debugging stop manifest.xml --unload \"npm run unload\"",
-    "unload": "office-toolbox remove -m manifest.xml -a excel"
+    "unload": "office-toolbox remove -m manifest.xml -a excel",
+    "watch": "webpack --mode development --watch"
   },
   "dependencies": {
     "@microsoft/office-js-helpers": "^1.0.1",
@@ -33,6 +35,7 @@
     "@types/react-native": "~0.55.1",
     "babel-preset-react-native": "^4.0.0",
     "clean-webpack-plugin": "^1.0.0",
+    "concurrently": "^4.1.0",
     "copy-webpack-plugin": "^4.6.0",
     "file-loader": "^1.1.11",
     "fs": "0.0.1-security",
