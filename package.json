@@ -1,8 +1,6 @@
 {
   "name": "excel-custom-functions",
   "version": "2.0.0",
-  "main": "./src/customfunctions.ts",
-  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "webpack -p --mode production",
     "build-dev": "webpack --mode development",
