@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "baseUrl": ".",
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "react",
-    "outDir": "lib",
-    "declaration": true,
-    "sourceMap": true,
     "experimentalDecorators": true,
+    "jsx": "react",
     "noEmitOnError": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es5",
   },
   "exclude": [
     "node_modules",

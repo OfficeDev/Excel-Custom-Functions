@@ -35,7 +35,7 @@ function logMessage(message: string) {
   return message;
 }
 
-if (typeof(CustomFunctionMappings) !== 'undefined') {
+if (typeof(CustomFunctionMappings) !== "undefined") {
   CustomFunctionMappings.ADD = add;
   CustomFunctionMappings.CLOCK = clock;
   CustomFunctionMappings.INCREMENT = increment;
