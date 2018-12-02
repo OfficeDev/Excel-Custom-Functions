@@ -45,7 +45,7 @@ function createHaulConfig() {
 
       const factory = createWebpackConfig({
         ...options,
-        entry: { index: ['./src/customfunctions.ts'] }
+        entry: { index: ['./src/functions/functions.ts'] }
       });
       let config = factory({
         ...options,
