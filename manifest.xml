@@ -30,12 +30,12 @@
 						<Script>
 							<SourceLocation resid="Contoso.Functions.Script.Url" />
 						</Script>
-						<Metadata>
-							<SourceLocation resid="Contoso.Functions.Metadata.Url" />
-						</Metadata>
 						<Page>
 							<SourceLocation resid="Contoso.Functions.Page.Url"/>
 						</Page>
+						<Metadata>
+							<SourceLocation resid="Contoso.Functions.Metadata.Url" />
+						</Metadata>
 						<Namespace resid="Contoso.Functions.Namespace" />
 					</ExtensionPoint>
 				</AllFormFactors>
