@@ -1,40 +1,68 @@
-﻿function add(first: number, second: number): number {
+﻿/**
+ * Adds two numbers.
+ * @param first First number
+ * @param second Second number
+ * @returns The sum of the two numbers.
+ */
+function add(first: number, second: number): number {
   return first + second;
 }
 
-function clock(callback) {
+/**
+ * Displays the current time once a second.
+ * @param handler Custom function handler  
+ */
+function clock(handler: CustomFunctions.StreamingHandler<string>): void {
   const timer = setInterval(() => {
     const time = currentTime();
-    callback.setResult(time);
+    handler.setResult(time);
   }, 1000);
 
-  callback.onCanceled = () => {
+  handler.onCanceled = () => {
     clearInterval(timer);
   };
 }
 
-function currentTime() {
+/**
+ * Returns the current time.
+ * @returns String with the current time formatted for the current locale.
+ */
+function currentTime(): string {
   return new Date().toLocaleTimeString();
 }
 
-function increment(incrementBy: number, callback) {
+/**
+ * Increments a value once a second.
+ * @param incrementBy Amount to increment
+ * @param handler Custom function handler 
+ */
+function increment(incrementBy: number, handler: CustomFunctions.StreamingHandler<number>): void {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
-    callback.setResult(result);
+    handler.setResult(result);
   }, 1000);
 
-  callback.onCanceled = () => {
+  handler.onCanceled = () => {
     clearInterval(timer);
   };
 }
 
-function logMessage(message: string) {
+/**
+ * Writes a message to console.log().
+ * @param message String to write.
+ * @returns String to write.
+ */
+function logMessage(message: string): string {
   console.log(message);
 
   return message;
 }
 
+/**
+ * Defines the implementation of the custom functions
+ * for the function id defined in the metadata file (functions.json).
+ */
 if (typeof(CustomFunctionMappings) !== "undefined") {
   CustomFunctionMappings.ADD = add;
   CustomFunctionMappings.CLOCK = clock;
