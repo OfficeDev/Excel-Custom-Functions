@@ -9,19 +9,14 @@ module.exports = (env, options) => {
   const config = {
     devtool: "source-map",
     entry: {
-        functions: "./src/functions/functions.ts",
-        taskpane: "./src/taskpane/taskpane.ts"
+        functions: "./src/functions/functions.js",
+        taskpane: "./src/taskpane/taskpane.js"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
     },
     module: {
       rules: [
-        {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: "ts-loader"
-        },
         {
           test: /\.html$/,
           exclude: /node_modules/,
