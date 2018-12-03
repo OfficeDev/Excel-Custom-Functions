@@ -1,6 +1,11 @@
 {
   "name": "excel-custom-functions",
   "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OfficeDev/Excel-Custom-Functions.git"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "webpack -p --mode production",
     "build-dev": "webpack --mode development",
