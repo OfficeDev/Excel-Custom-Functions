@@ -5,28 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Excel Desktop (Direct)",
+      "name": "Excel Desktop",
       "type": "node",
       "request": "attach",
       "port": 9229,
       "protocol": "inspector",
       "timeout": 600000,
       "trace": true,
-      "preLaunchTask": "Debug: Desktop (Direct)",
+      "preLaunchTask": "Debug: Desktop",
       "postDebugTask": "Stop Debug",
       "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
-    },    
-    {
-      "name": "Excel Desktop (Proxy)",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/office-addin-debugging/lib/debugging.js",
-      "args": ["start", "manifest.xml", "--source-bundle-url-path", "index.win32", "--dev-server", "npm run dev-server", "--dev-server-port", "3000", "--packager", "npm run packager", "--sideload", "npm run sideload"],
-      "env": {
-        "Path": "${workspaceFolder}/node_modules/.bin;${env:Path};"
-      },
-      "autoAttachChildProcesses": true,
-      "postDebugTask": "Stop Debug"
     }
   ]
 }

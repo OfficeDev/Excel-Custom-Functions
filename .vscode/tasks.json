@@ -29,23 +29,9 @@
             }
         },
         {
-            "label": "Debug: Desktop (Direct)",
+            "label": "Debug: Desktop",
             "type": "npm",
             "script": "start-desktop",
-            "presentation": {
-                "clear": true,
-                "panel": "shared",
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Debug: Desktop (Proxy)",
-            "dependsOn": [
-                "Dev Server",
-                "Packager",
-                "Watch"
-            ],
             "presentation": {
                 "clear": true,
                 "panel": "shared",
@@ -71,16 +57,6 @@
                 "clear": true,
                 "panel": "shared",
                 "showReuseMessage": false
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Packager",
-            "type": "npm",
-            "script": "packager",
-            "presentation": {
-                "clear": true,
-                "panel": "dedicated",
             },
             "problemMatcher": []
         },
