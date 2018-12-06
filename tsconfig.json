@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "noEmitOnError": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es5",
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib",
+    "lib-amd"
+  ]
+}
