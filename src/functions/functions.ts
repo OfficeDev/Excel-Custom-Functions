@@ -1,5 +1,6 @@
 ﻿/**
  * Adds two numbers.
+ * @customfunction 
  * @param first First number
  * @param second Second number
  * @returns The sum of the two numbers.
@@ -10,6 +11,7 @@ function add(first: number, second: number): number {
 
 /**
  * Displays the current time once a second.
+ * @customfunction 
  * @param handler Custom function handler  
  */
 function clock(handler: CustomFunctions.StreamingHandler<string>): void {
@@ -25,6 +27,7 @@ function clock(handler: CustomFunctions.StreamingHandler<string>): void {
 
 /**
  * Returns the current time.
+ * @customfunction 
  * @returns String with the current time formatted for the current locale.
  */
 function currentTime(): string {
@@ -33,6 +36,7 @@ function currentTime(): string {
 
 /**
  * Increments a value once a second.
+ * @customfunction 
  * @param incrementBy Amount to increment
  * @param handler Custom function handler 
  */
@@ -50,6 +54,7 @@ function increment(incrementBy: number, handler: CustomFunctions.StreamingHandle
 
 /**
  * Writes a message to console.log().
+ * @customfunction 
  * @param message String to write.
  * @returns String to write.
  */

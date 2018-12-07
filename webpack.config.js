@@ -1,5 +1,5 @@
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const fs = require("fs");
 const webpack = require("webpack");
@@ -35,12 +35,10 @@ module.exports = (env, options) => {
     },
     plugins: [
       new CleanWebpackPlugin(dev ? [] : ["dist"]),
-      new CopyWebpackPlugin([
-        {
-          to: "functions.json",
-          from: "./src/functions/functions.json"
-        }
-      ]),
+      new CustomFunctionsMetadataPlugin({
+        output: "functions.json",
+        input: "./src/functions/functions.ts"
+      }),
       new HtmlWebpackPlugin({
         filename: "functions.html",
         template: "./src/functions/functions.html",
