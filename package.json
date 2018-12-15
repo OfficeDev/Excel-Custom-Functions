@@ -16,6 +16,7 @@
     "start-web": "office-addin-debugging start manifest.xml --dev-server \"npm run dev-server\" --dev-server-port 3000 --no-debug --no-live-reload",
     "stop": "office-addin-debugging stop manifest.xml --unload \"npm run unload\"",
     "unload": "office-toolbox remove -m manifest.xml -a excel",
+    "validate": "office-toolbox validate -m manifest.xml",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
