@@ -56,6 +56,9 @@ module.exports = (env, options) => {
       })
     ],
     devServer: {
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       https: {
         key: fs.readFileSync("./certs/server.key"),
         cert: fs.readFileSync("./certs/server.crt"),
