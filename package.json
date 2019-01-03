@@ -26,7 +26,7 @@
     "office-ui-fabric-js": "^1.3.0"
   },
   "devDependencies": {
-    "@types/custom-functions-runtime": "^1.4.7",
+    "@types/custom-functions-runtime": "^1.4.8",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/flux": "^3.1.0",

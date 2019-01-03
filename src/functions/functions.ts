@@ -63,9 +63,7 @@ function logMessage(message: string): string {
  * Defines the implementation of the custom functions
  * for the function id defined in the metadata file (functions.json).
  */
-if (typeof(CustomFunctionMappings) !== "undefined") {
-  CustomFunctionMappings.ADD = add;
-  CustomFunctionMappings.CLOCK = clock;
-  CustomFunctionMappings.INCREMENT = increment;
-  CustomFunctionMappings.LOG = logMessage;
-}
+CustomFunctions.associate("ADD", add);
+CustomFunctions.associate("CLOCK", clock);
+CustomFunctions.associate("INCREMENT", increment);
+CustomFunctions.associate("LOG", logMessage);
