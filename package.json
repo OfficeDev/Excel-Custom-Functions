@@ -12,6 +12,7 @@
     "watch": "webpack -p --mode development --watch"
   },
   "devDependencies": {
+    "@types/custom-functions-runtime": "^1.4.8",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
     "file-loader": "^1.1.11",
@@ -24,7 +25,6 @@
     "typescript": "^2.7.2",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0",
-    "webpack-command": "^0.4.1",
     "webpack-dev-server": "^3.1.1"
   }
 }
