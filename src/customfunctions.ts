@@ -15,5 +15,5 @@ function increment(incrementBy: number, callback) {
   };
 }
 
-CustomFunctions.associate("add", add);
-CustomFunctions.associate("increment", increment);
+CustomFunctions.associate("ADD", add);
+CustomFunctions.associate("INCREMENT", increment);
