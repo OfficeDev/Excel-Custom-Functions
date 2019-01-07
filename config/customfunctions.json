@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/office-js/custom-functions.schema.json",
   "functions": [
     {
-      "id": "add",
+      "id": "ADD",
       "name": "ADD",
       "description": "Add two numbers",
       "helpUrl": "http://www.contoso.com",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "id": "increment",
+      "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
       "helpUrl": "http://www.contoso.com",
