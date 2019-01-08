@@ -1,5 +1,4 @@
-﻿declare var CustomFunctionMappings;
-
+﻿
 function add(first: number, second: number): number {
   return first + second;
 }
@@ -16,5 +15,5 @@ function increment(incrementBy: number, callback) {
   };
 }
 
-CustomFunctionMappings.ADD = add;
-CustomFunctionMappings.INCREMENT = increment;
+CustomFunctions.associate("ADD", add);
+CustomFunctions.associate("INCREMENT", increment);
