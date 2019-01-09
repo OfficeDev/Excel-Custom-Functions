@@ -15,6 +15,9 @@ module.exports = (env, options) => {
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
     },
+    node: {
+      fs: 'empty'
+    },
     module: {
       rules: [
         {

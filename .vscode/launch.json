@@ -15,6 +15,40 @@
       "preLaunchTask": "Debug: Desktop",
       "postDebugTask": "Stop Debug",
       "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
-    }
+    },
+    { 
+      "type": "node", 
+      "request": "launch", 
+      "name": "Mocha Tests", 
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha", 
+      "args": [ 
+          "-u", 
+          "tdd", 
+          "--timeout", 
+          "999999", 
+          "--colors", 
+          "${workspaceFolder}\\test" 
+      ], 
+      "internalConsoleOptions": "openOnSessionStart",
+              "outFiles":  ["${workspaceRoot}/test/sideloadTest.js"] 
+  },
+  
+  { 
+
+
+    "name": "Attach to Process", 
+
+
+     "type": "node", 
+
+
+     "request": "attach", 
+
+
+     "port": 9229 
+
+
+}
+
   ]
 }

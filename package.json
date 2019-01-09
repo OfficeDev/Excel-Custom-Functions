@@ -17,7 +17,8 @@
     "stop": "office-addin-debugging stop manifest.xml --unload \"npm run unload\"",
     "unload": "office-toolbox remove -m manifest.xml -a excel",
     "validate": "office-toolbox validate -m manifest.xml",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode development --watch",
+    "test": "mocha --timeout 0 test/**.js"
   },
   "dependencies": {
     "@microsoft/office-js-helpers": "^1.0.1",
@@ -46,6 +47,14 @@
     "typescript": "^3.1.6",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.65",
+    "concurrently": "^3.4.0",
+    "cpx": "^1.5.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^3.0.2",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.7.2"
   }
 }
