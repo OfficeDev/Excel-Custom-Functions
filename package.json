@@ -55,6 +55,12 @@
     "mocha": "^5.2.0",
     "ts-node": "^3.0.2",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.2"
+    "yeoman-test": "^1.7.2",
+    "shelljs": "^0.8.3",
+    "child_process": "^1.0.2",
+    "express": "^4.16.4",
+    "http": "^0.0.0",
+    "cors": "^2.8.5",
+    "xmlhttprequest": "^1.8.0"
   }
 }

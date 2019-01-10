@@ -5,7 +5,9 @@
 
 import * as OfficeHelpers from "@microsoft/office-js-helpers";
 import * as fs from 'fs';
-let cfValues;
+import * as http from 'http';
+const httpRequest = require('xmlhttprequest').XMLHttpRequest;
+// import * as childProcess from "child_process";
 
 $(document).ready(() => {
   $("#run").click(run);
@@ -16,42 +18,40 @@ Office.initialize = async () => {
   $("#sideload-msg").hide();
   $("#app-body").show();
   await run();
-  await saveFile(cfValues);
 };
 
 async function run() {
+  var cfValue;
   try {
     await Excel.run(async context => {
-      /**
-       * Insert your Excel code here
-       */
-
       const range = context.workbook.getSelectedRange();
       range.formulas = [['=CONTOSO.ADD(1,2)']];
-      range.load("values");
-
       await context.sync();
-
-      cfValues = [[range.values[0],[0]]];
-      
-      // const sheet = context.workbook.worksheets.getActiveWorksheet();
-      // const setRange =  sheet.getRange("B5");
-      // setRange.values = [[cfValues]];
-
-      // await context.sync();
-
-      console.log(`The range address was ${range.values[0][0]}.`);
     });
   } catch (error) {
     OfficeHelpers.UI.notify(error);
     OfficeHelpers.Utilities.log(error);
 }
+await sleep(2000);
+await readData()
+}
+
+async function readData() {
+  await Excel.run(async context => {
+
+    const range = context.workbook.getSelectedRange();
+    range.load("values");
+    await context.sync();
+
+    var cfValue = range.values[0][0];
+    await sendData(cfValue);
+  });
 }
 
 async function saveFile(value)
 {
   const tempDir = process.env.TEMP;
-  const defaultRuntimeLogFileName = "CFValues.log";
+  const defaultRuntimeLogFileName = "CFValue.log";
   let path = `${tempDir}\\${defaultRuntimeLogFileName}`;
 
   const file = fs.openSync(path, "a+");
@@ -61,4 +61,26 @@ async function saveFile(value)
     console.log('Saved!');
   });
   fs.closeSync(file);
+}
+
+async function sendData(value)
+{
+  var data = {"cfValue": value};
+  var json = JSON.stringify(data);
+    
+  const Http = new httpRequest();
+  // var url=`http://localhost:8080`;
+  // var postUrl = url + "?data=" + encodeURIComponent(json);
+  var testUrl = `https://localhost:8081/`
+  // Http.open("GET", postUrl, true);  
+  // Http.setRequestHeader('Content-type','application/json; charset=utf-8');
+  Http.open("GET", testUrl, true);  
+  Http.send();
+  Http.onreadystatechange=(e)=> {
+    console.log(Http.responseText)
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
