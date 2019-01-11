@@ -21,7 +21,6 @@ Office.initialize = async () => {
 };
 
 async function run() {
-  var cfValue;
   try {
     await Excel.run(async context => {
       const range = context.workbook.getSelectedRange();
@@ -69,12 +68,11 @@ async function sendData(value)
   var json = JSON.stringify(data);
     
   const Http = new httpRequest();
-  // var url=`http://localhost:8080`;
-  // var postUrl = url + "?data=" + encodeURIComponent(json);
-  var testUrl = `https://localhost:8081/`
-  // Http.open("GET", postUrl, true);  
-  // Http.setRequestHeader('Content-type','application/json; charset=utf-8');
-  Http.open("GET", testUrl, true);  
+  const url=`https://localhost:8080`;
+  let postUrl = url + "?data=" + encodeURIComponent(json);
+  Http.open("GET", postUrl, true);  
+  Http.setRequestHeader('Content-type','application/json; charset=utf-8');
+  // Http.open("GET", testUrl, true);  
   Http.send();
   Http.onreadystatechange=(e)=> {
     console.log(Http.responseText)
