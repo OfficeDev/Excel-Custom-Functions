@@ -4,10 +4,9 @@
  */
 
 import * as OfficeHelpers from "@microsoft/office-js-helpers";
-import * as fs from 'fs';
-import * as http from 'http';
 const httpRequest = require('xmlhttprequest').XMLHttpRequest;
-// import * as childProcess from "child_process";
+const testFunctions = ['=CONTOSO.ADD(1,2)', '=CONTOSO.CLOCK()', '=CONTOSO.INCREMENT(2)'];
+let cfValues = [];
 
 $(document).ready(() => {
   $("#run").click(run);
@@ -17,22 +16,49 @@ $(document).ready(() => {
 Office.initialize = async () => {
   $("#sideload-msg").hide();
   $("#app-body").show();
-  await run();
 };
 
 async function run() {
+
+  await runCfTests();
   try {
     await Excel.run(async context => {
+      /**
+       * Insert your Excel code here
+       */
       const range = context.workbook.getSelectedRange();
-      range.formulas = [['=CONTOSO.ADD(1,2)']];
+
+      // Read the range address
+      range.load("address");
+
+      // Update the fill color
+      range.format.fill.color = "yellow";
+
       await context.sync();
+      console.log(`The range address was ${range.address}.`);
     });
   } catch (error) {
     OfficeHelpers.UI.notify(error);
     OfficeHelpers.Utilities.log(error);
+  }
 }
-await sleep(2000);
-await readData()
+
+async function runCfTests() {  
+  try {
+    await Excel.run(async context => {
+      for (let i = 0; i < testFunctions.length; i++) {
+        const range = context.workbook.getSelectedRange();
+        range.formulas = [[testFunctions[i]]];
+        await context.sync();
+        await sleep(2000);
+        await readData()
+      }
+    });
+    sendData(cfValues);
+  } catch (error) {
+    OfficeHelpers.UI.notify(error);
+    OfficeHelpers.Utilities.log(error);
+  }
 }
 
 async function readData() {
@@ -42,24 +68,8 @@ async function readData() {
     range.load("values");
     await context.sync();
 
-    var cfValue = range.values[0][0];
-    await sendData(cfValue);
+    cfValues.push(range.values[0][0]);
   });
-}
-
-async function saveFile(value)
-{
-  const tempDir = process.env.TEMP;
-  const defaultRuntimeLogFileName = "CFValue.log";
-  let path = `${tempDir}\\${defaultRuntimeLogFileName}`;
-
-  const file = fs.openSync(path, "a+");
-
-  fs.writeFile(path, value, function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-  fs.closeSync(file);
 }
 
 async function sendData(value)
@@ -72,13 +82,25 @@ async function sendData(value)
   let postUrl = url + "?data=" + encodeURIComponent(json);
   Http.open("GET", postUrl, true);  
   Http.setRequestHeader('Content-type','application/json; charset=utf-8');
-  // Http.open("GET", testUrl, true);  
   Http.send();
   Http.onreadystatechange=(e)=> {
-    console.log(Http.responseText)
   }
 }
 
-function sleep(ms) {
+async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function testServerStarted() {
+  const Http = new httpRequest();
+  const url = `https://localhost:8080`;
+  const testServerUrl = url + "?data=" + encodeURIComponent("ping");
+  Http.open("GET", testServerUrl, true);   
+  Http.send("ping");
+  Http.onreadystatechange=(e)=> {
+    if (Http.responseText == '200') {
+      return true;
+    }
+  }
+  return true  ;
 }
