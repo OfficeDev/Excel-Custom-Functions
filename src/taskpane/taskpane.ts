@@ -5,7 +5,7 @@
 
 import * as OfficeHelpers from "@microsoft/office-js-helpers";
 const httpRequest = require('xmlhttprequest').XMLHttpRequest;
-const testFunctions = ['=CONTOSO.ADD(1,2)', '=CONTOSO.CLOCK()', '=CONTOSO.INCREMENT(2)'];
+const testFunctions = ['=CONTOSO.ADD(1,2)', '=CONTOSO.CLOCK()', '=CONTOSO.INCREMENT(2)', '=CONTOSO.LOG("this is a test")'];
 let cfValues = [];
 
 $(document).ready(() => {
@@ -16,11 +16,11 @@ $(document).ready(() => {
 Office.initialize = async () => {
   $("#sideload-msg").hide();
   $("#app-body").show();
+
+  isTtestServerStarted(); 
 };
 
 async function run() {
-
-  await runCfTests();
   try {
     await Excel.run(async context => {
       /**
@@ -68,18 +68,19 @@ async function readData() {
     range.load("values");
     await context.sync();
 
-    cfValues.push(range.values[0][0]);
+    var data = {"cfValue": range.values[0][0]};
+    cfValues.push(data);
   });
 }
 
-async function sendData(value)
+async function sendData(values)
 {
-  var data = {"cfValue": value};
-  var json = JSON.stringify(data);
+  //make cfValues a json blob that we can pass in single request to test server
+  var json = JSON.stringify(values);  
     
   const Http = new httpRequest();
-  const url=`https://localhost:8080`;
-  let postUrl = url + "?data=" + encodeURIComponent(json);
+  const url=`https://localhost:8080/`;
+  let postUrl = url + "results/?data=" + encodeURIComponent(json);
   Http.open("GET", postUrl, true);  
   Http.setRequestHeader('Content-type','application/json; charset=utf-8');
   Http.send();
@@ -91,16 +92,14 @@ async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function testServerStarted() {
+function isTtestServerStarted() {
   const Http = new httpRequest();
-  const url = `https://localhost:8080`;
-  const testServerUrl = url + "?data=" + encodeURIComponent("ping");
-  Http.open("GET", testServerUrl, true);   
-  Http.send("ping");
-  Http.onreadystatechange=(e)=> {
-    if (Http.responseText == '200') {
-      return true;
+  const pingUrl = `https://localhost:8080/ping`;
+  Http.onreadystatechange=(e)=> {    
+    if (Http.readyState === 4 && Http.status === 200) {
+      runCfTests();
     }
   }
-  return true  ;
+  Http.open("GET", pingUrl, true);
+  Http.send("ping");
 }
