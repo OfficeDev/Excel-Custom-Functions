@@ -4,8 +4,7 @@
  */
 
 import * as OfficeHelpers from "@microsoft/office-js-helpers";
-const httpRequest = require('xmlhttprequest').XMLHttpRequest;
-const testFunctions = ['=CONTOSO.ADD(1,2)', '=CONTOSO.CLOCK()', '=CONTOSO.INCREMENT(2)', '=CONTOSO.LOG("this is a test")'];
+const testFunctions = ['=CONTOSO.ADD(5,2)', '=CONTOSO.CLOCK()', '=CONTOSO.INCREMENT(4)', '=CONTOSO.LOG("this is a test")'];
 let cfValues = [];
 
 $(document).ready(() => {
@@ -17,6 +16,7 @@ Office.initialize = async () => {
   $("#sideload-msg").hide();
   $("#app-body").show();
 
+  // If a test server is running, then run Custom Functions tests on initialize of taskpane
   isTtestServerStarted(); 
 };
 
@@ -44,32 +44,35 @@ async function run() {
 }
 
 async function runCfTests() {  
-  try {
-    await Excel.run(async context => {
-      for (let i = 0; i < testFunctions.length; i++) {
-        const range = context.workbook.getSelectedRange();
-        range.formulas = [[testFunctions[i]]];
-        await context.sync();
-        await sleep(2000);
-        await readData()
-      }
-    });
-    sendData(cfValues);
-  } catch (error) {
-    OfficeHelpers.UI.notify(error);
-    OfficeHelpers.Utilities.log(error);
-  }
+  await Excel.run(async context => {
+    for (let i = 0; i < testFunctions.length; i++) {
+      const range = context.workbook.getSelectedRange();
+      const formula : string = testFunctions[i]
+      range.formulas = [[formula]];
+      await context.sync();
+      await sleep(2000);
+
+      // Check to if this is a streaming function
+      await readData(formula.indexOf("INCREMENT") > 0)
+    }
+  });
+  sendData(cfValues);
 }
 
-async function readData() {
+async function readData(isStreamingFunction: boolean) {
   await Excel.run(async context => {
 
-    const range = context.workbook.getSelectedRange();
-    range.load("values");
-    await context.sync();
-
-    var data = {"cfValue": range.values[0][0]};
-    cfValues.push(data);
+    // if this is a streaming function, we want to capture two values so we can
+    // validate the function is indeed streaming
+    for (let i = 0; isStreamingFunction ?  i <= 1 : i < 1; i++)
+    {
+      const range = context.workbook.getSelectedRange();
+      range.load("values");
+      await context.sync();
+  
+      var data = {"cfValue": range.values[0][0]};
+      cfValues.push(data);
+    }
   });
 }
 
@@ -78,14 +81,12 @@ async function sendData(values)
   //make cfValues a json blob that we can pass in single request to test server
   var json = JSON.stringify(values);  
     
-  const Http = new httpRequest();
-  const url=`https://localhost:8080/`;
-  let postUrl = url + "results/?data=" + encodeURIComponent(json);
-  Http.open("GET", postUrl, true);  
+  const Http = new XMLHttpRequest();
+  const url: string =`https://localhost:8080/`;
+  let dataUrl : string = url + "results/?data=" + encodeURIComponent(json);
+  Http.open("GET", dataUrl, true);  
   Http.setRequestHeader('Content-type','application/json; charset=utf-8');
   Http.send();
-  Http.onreadystatechange=(e)=> {
-  }
 }
 
 async function sleep(ms) {
@@ -93,13 +94,13 @@ async function sleep(ms) {
 }
 
 function isTtestServerStarted() {
-  const Http = new httpRequest();
-  const pingUrl = `https://localhost:8080/ping`;
+  const Http = new XMLHttpRequest();
+  const pingUrl : string = `https://localhost:8080/ping`;
   Http.onreadystatechange=(e)=> {    
     if (Http.readyState === 4 && Http.status === 200) {
       runCfTests();
     }
   }
   Http.open("GET", pingUrl, true);
-  Http.send("ping");
+  Http.send();
 }

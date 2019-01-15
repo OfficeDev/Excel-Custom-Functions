@@ -20,23 +20,29 @@ describe("Setup test environment", function() {
 });
 
 describe("Test Excel Custom Functions", function() {
-  describe("Get test results for custom functions and validate results", function() {
+  describe("Get test results for custom functions and validate results", function() {    
     it("should get results from the taskpane application", async function() {
       await promiseGetTestResults;
-      assert.equal(cfValues[0].length, 4);
+      assert.equal(cfValues[0].length, 5);
     });
     it("ADD function should return expected value", async function() {
-      assert.equal("3", cfValues[0][0].cfValue);
+      assert.equal(7, cfValues[0][0].cfValue);
     });
     it("CLOCK function should return expected value", async function() {
       // see if returned string contains 'AM' or 'PM'
       assert.equal(true, cfValues[0][1].cfValue.includes("AM") || cfValues[0][1].cfValue.includes("PM") ? true : false);
     });
     it("INCREMENT function should return expected value", async function() {
+      // Check to see that both captured streaming values are numbers
       assert.equal(false, isNaN(cfValues[0][2].cfValue));
+      assert.equal(false, isNaN(cfValues[0][3].cfValue));
+
+      // Check to see that both captured streaming values are divisible by 4
+      assert.equal(0, cfValues[0][2].cfValue % 4);
+      assert.equal(0, cfValues[0][3].cfValue % 4);
     });
     it("LOG function should return expected value", async function() {
-      assert.equal("this is a test", cfValues[0][3].cfValue);
+      assert.equal("this is a test", cfValues[0][4].cfValue);
     });
   });
 });
@@ -82,6 +88,7 @@ async function _getTestResults() {
       res.send('200');
       cfValues.push(JSON.parse(req.query.data));
       resolve(cfValues);
+      console.log("Shutting down test server");
       server.close();
     });
 });
