@@ -58,12 +58,10 @@ async function _executeCommandLine(cmdLine): Promise<boolean> {
 export async function getTestResults(): Promise<any> {
     return new Promise<any>(async function(resolve) {
         app.get('/results', function(req,res) {
-            let cfValues = [];
             res.send('200');
-            cfValues.push(JSON.parse(req.query.data));
-            console.log("Shutting down test server");
+            const jsonData : JSON = JSON.parse(req.query.data);
             server.close();
-            resolve(cfValues);
+            resolve(jsonData);
     });
 });
 }
@@ -90,7 +88,7 @@ async function _startDevServer(): Promise<boolean> {
     subProcess = childProcess.spawn(cmdLine, [], {
         detached: true,
         shell: true,
-        stdio: "ignore",
+        stdio: "ignore"
     });
     subProcess.on("error", (err) => {
     console.log(`Unable to run command: ${cmdLine}.\n${err}`);
