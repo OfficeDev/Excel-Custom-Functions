@@ -10,7 +10,13 @@ export async function runCfTests(): Promise<void> {
             const range = context.workbook.getSelectedRange();
             range.formulas = [[formula]];
             await context.sync();
-            await sleep(2000);
+
+            // Mac is much slower so we need to wait longer for the function to return a value
+            if (process.platform === "win32") {
+                await sleep(2000);
+            } else {
+                await sleep(8000);
+            }
     
             // Check to if this is a streaming function
             await readData(key, customFunctions[key].streaming != undefined ? 2 : 1)            
@@ -48,7 +54,6 @@ async function sendData(values: any): Promise<void> {
     const url: string =`https://localhost:8080/results/`;
     let dataUrl : string = url + "?data=" + encodeURIComponent(json);
     xhr.open("GET", dataUrl, true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send();
 }
 

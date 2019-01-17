@@ -28,7 +28,12 @@ export async function startTestServer(): Promise<boolean> {
 }
 
 export async function setupTestEnvironment(): Promise<boolean> {
-    return new Promise<boolean>(async function(resolve) {
+    return new Promise<boolean>(async function(resolve, reject) {
+
+        if (process.platform !== 'win32' && process.platform !== 'darwin') {
+            reject();
+          }
+
         devServerStarted = await _startDevServer();
         let sideLoadSuceeded : boolean = false      
         try {
