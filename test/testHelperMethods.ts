@@ -71,13 +71,15 @@ export async function getTestResults(): Promise<any> {
 }
 
 export async function teardownTestEnvironment():Promise<void> {
-    try {
-        const cmdLine = "tskill excel";
-        await _executeCommandLine(cmdLine);
-    } catch (err) {
-        console.log(`Unable to kill Excel process. ${err}`);
-    }
-    
+    if (process.platform !== 'win32') {
+        try {
+            const cmdLine = "tskill excel";
+            await _executeCommandLine(cmdLine);
+        } catch (err) {
+            console.log(`Unable to kill Excel process. ${err}`);
+        }        
+    }    
+
     // if the dev-server was started, kill the spawned process
     if (devServerStarted) {
         childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);

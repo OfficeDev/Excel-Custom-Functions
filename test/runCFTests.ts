@@ -36,13 +36,19 @@ async function readData(cfName: string, readCount: number): Promise<void> {
             range.load("values");
             await context.sync();
 
+            // Mac is much slower so we need to wait longer for the function to return a value
+            if (process.platform === "win32") {
+                await sleep(2000);
+            } else {
+                await sleep(8000);
+            }
+
             var data  = {};
             var nameKey = "Name";
             var valueKey = "Value";            
             data[nameKey] = cfName;
             data[valueKey] = range.values[0][0];
             cfValues.push(data);
-            await sleep(2000);
         }
     });
 }
