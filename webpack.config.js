@@ -9,7 +9,8 @@ module.exports = (env, options) => {
   const config = {
     devtool: "source-map",
     entry: {
-        taskpane: "./src/taskpane/taskpane.ts"
+      taskpane: "./src/taskpane/taskpane.ts",
+      ribbon: "./src/ribbon/ribbon.ts"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -38,6 +39,11 @@ module.exports = (env, options) => {
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
         chunks: ["taskpane"]
+      }),
+      new HtmlWebpackPlugin({
+        filename: "ribbon.html",
+        template: "./src/ribbon/ribbon.html",
+        chunks: ["ribbon"]
       }),
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"]
