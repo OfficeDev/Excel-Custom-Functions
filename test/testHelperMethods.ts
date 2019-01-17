@@ -44,7 +44,6 @@ export async function setupTestEnvironment(): Promise<boolean> {
 
 async function _executeCommandLine(cmdLine): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-        console.log(`Starting: ${cmdLine}`);
         childProcess.exec(cmdLine, (error) => {
             if (error) {
                 reject(false);
@@ -68,7 +67,6 @@ export async function getTestResults(): Promise<any> {
 
 export async function teardownTestEnvironment():Promise<void> {
     try {
-        console.log(`Shutting down Excel`);
         const cmdLine = "tskill excel";
         await _executeCommandLine(cmdLine);
     } catch (err) {
@@ -83,7 +81,6 @@ export async function teardownTestEnvironment():Promise<void> {
 
 async function _startDevServer(): Promise<boolean> {
     devServerStarted = false;
-    console.log(`Starting dev-server`);
     const cmdLine = "npm run dev-server";
     subProcess = childProcess.spawn(cmdLine, [], {
         detached: true,

@@ -1,6 +1,6 @@
 import * as functionsJsonData from './functionsTestData.json';
 const customFunctions = (<any>functionsJsonData).functions;
-let cfValues = []
+let cfValues = [];
 
 export async function runCfTests(): Promise<void> {
     await Excel.run(async context => {
