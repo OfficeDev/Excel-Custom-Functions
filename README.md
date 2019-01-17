@@ -4,6 +4,12 @@ Custom functions enable you to add new functions to Excel by defining those func
 
 This repository contains the source code used by the [Yo Office generator](https://github.com/OfficeDev/generator-office) when you create a new custom functions project. You can also use this repository as a sample to base your own custom functions project from if you choose not to use the generator. For more detailed information about custom functions in Excel, see the [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview) article in the Office Add-ins documentation or see the [additional resources](#additional-resources) section of this repository.
 
+## Known Issues and Workarounds
+In the 32 bit version of the Office 365 *December* Insiders Version 1901 (Build 11128.20000),  Custom Functions may not work properly. 
+In some cases you can workaround this bug by downloading the file at https://github.com/OfficeDev/Excel-Custom-Functions/blob/december-insiders-workaround/excel-udf-host.win32.bundle. Then, copy it your "C:\Program Files (x86)\Microsoft Office\root\Office16" folder.
+
+This does not affect Excel Online. We expect to resolve this in the January Insiders build update.
+
 ## Questions and comments
 
 We'd love to get your feedback about this sample. You can send your feedback to us in the *Issues* section of this repository.
