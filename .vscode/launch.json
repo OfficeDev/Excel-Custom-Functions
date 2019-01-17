@@ -7,14 +7,23 @@
     {
       "name": "Excel Desktop",
       "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "protocol": "inspector",
-      "timeout": 600000,
-      "trace": true,
-      "preLaunchTask": "Debug: Desktop",
-      "postDebugTask": "Stop Debug",
-      "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "start-desktop"
+      ],
+    },
+    {
+      "name": "Office Online (Edge)",
+      "type": "edge",
+      "request": "launch",
+      // To debug your Add-in:
+      // 1. Replace the url with the share link to an Office Online document.
+      // 2. Sideload your Add-in. https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
+      "url": "https://www.office.com",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "Debug: Web"
     }
   ]
 }
