@@ -19,11 +19,19 @@
       "type": "edge",
       "request": "launch",
       // To debug your Add-in:
-      // 1. Replace the url with the share link to an Office Online document.
+      // 1. When prompted, enter the url (share link) to an Office Online document.
       // 2. Sideload your Add-in. https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
-      "url": "https://www.office.com",
+      "url": "${input:officeOnlineDocumentUrl}",
       "webRoot": "${workspaceFolder}",
       "preLaunchTask": "Debug: Web"
     }
-  ]
+  ],
+  "inputs": [
+    {
+        "id": "officeOnlineDocumentUrl",
+        "type": "promptString",
+        "description": "Please enter the url for the Office Online document.",
+    }
+],
+
 }
