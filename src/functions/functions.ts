@@ -26,6 +26,38 @@ function clock(handler: CustomFunctions.StreamingHandler<string>): void {
 }
 
 /**
+ * Computes the nth Fibonacci number.
+ * @customfunction 
+ * @param n number
+ */
+function fib(n: number): number {
+  if (n < 0) {
+    throw new Error("n cannot be negative.");
+  }
+
+  const values: number[] = [1, 1];
+
+  for (let index = 2; index <= n; ++index) {
+    values[index % 2] = values[0] + values[1];
+  }
+
+  return values[n % 2];
+}
+
+let count: number = 0;
+
+/**
+ * Returns the number of times that the function was called
+ * @customfunction
+ */
+function callCount(): number {
+  ++count;
+
+  return count;
+}
+CustomFunctions.associate("callCount", callCount);
+
+/**
  * Returns the current time.
  * @customfunction 
  * @returns String with the current time formatted for the current locale.
@@ -65,10 +97,23 @@ function logMessage(message: string): string {
 }
 
 /**
+ * Regular expression test
+ * @customfunction
+ * @param string The string to test
+ * @param pattern Regular expression pattern
+ * @returns True if it matches the pattern; false otherwise
+ */
+function regex(string: string, pattern: string): boolean {
+  return new RegExp(pattern).test(string);
+}
+
+/**
  * Defines the implementation of the custom functions
  * for the function id defined in the metadata file (functions.json).
  */
 CustomFunctions.associate("ADD", add);
 CustomFunctions.associate("CLOCK", clock);
+CustomFunctions.associate("FIB", fib);
 CustomFunctions.associate("INCREMENT", increment);
 CustomFunctions.associate("LOG", logMessage);
+CustomFunctions.associate("REGEX", regex);
