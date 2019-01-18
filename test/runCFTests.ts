@@ -2,7 +2,7 @@ import * as functionsJsonData from './functionsTestData.json';
 const customFunctions = (<any>functionsJsonData).functions;
 let cfValues = [];
 
-export async function runCfTests(): Promise<void> {
+export async function runCfTests(operatingSystem: string): Promise<void> {
     await Excel.run(async context => {
         for (let key in customFunctions)
         {
@@ -12,18 +12,17 @@ export async function runCfTests(): Promise<void> {
             await context.sync();
 
             // Mac is much slower so we need to wait longer for the function to return a value
-            const isWindows = (process.platform === "win32");
-            await sleep(isWindows ? 2000 : 8000);
+            await sleep(operatingSystem === "Win32" ? 2000 : 8000);
 
             // Check to if this is a streaming function
-            await readData(key, customFunctions[key].streaming != undefined ? 2 : 1)            
+            await readData(key, customFunctions[key].streaming != undefined ? 2 : 1, operatingSystem)            
         }
     });
     
     sendData(cfValues);
 }
 
-async function readData(cfName: string, readCount: number): Promise<void> {
+async function readData(cfName: string, readCount: number, operatingSystem: string): Promise<void> {
     await Excel.run(async context => {
         // if this is a streaming function, we want to capture two values so we can
         // validate the function is indeed streaming
@@ -34,8 +33,7 @@ async function readData(cfName: string, readCount: number): Promise<void> {
             await context.sync();
 
             // Mac is much slower so we need to wait longer for the function to return a value
-            const isWindows = (process.platform === "win32");
-            await sleep(isWindows ? 2000 : 8000);
+            await sleep(operatingSystem === "Win32" ? 2000 : 8000);
 
             var data  = {};
             var nameKey = "Name";

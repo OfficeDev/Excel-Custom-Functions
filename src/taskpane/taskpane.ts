@@ -47,7 +47,7 @@ async function isTestServerStarted(): Promise<void> {
   const pingUrl : string = `https://localhost:8080/ping`;
   xhr.onreadystatechange=(e)=> {    
     if (xhr.readyState === 4 && xhr.status === 200) {
-      cfTests.runCfTests();
+      cfTests.runCfTests(xhr.responseText);
     }
   }
   xhr.open("GET", pingUrl, true);

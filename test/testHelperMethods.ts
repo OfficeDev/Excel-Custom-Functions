@@ -1,4 +1,5 @@
 import * as childProcess from "child_process";
+import * as cors from "cors";
 import * as fs from "fs";
 import * as express from "express";
 let devServerStarted : boolean = false;
@@ -12,8 +13,9 @@ export async function startTestServer(): Promise<boolean> {
         const cert = fs.readFileSync('certs/server.crt');
         const options = { key: key, cert: cert };
         
-        app.get('/ping', function(req, res) {
-            res.send('200');
+        app.use(cors())
+        app.get('/ping', function(req, res, next) {
+            res.send(process.platform === "win32" ? 'Win32' : 'Mac');
             resolve(true);
         });
         
@@ -71,18 +73,18 @@ export async function getTestResults(): Promise<any> {
 }
 
 export async function teardownTestEnvironment():Promise<void> {
-    if (process.platform !== 'win32') {
+    // Still investigating how to do shutdown on Mac
+    if (process.platform == 'win32') {
         try {
             const cmdLine = "tskill excel";
             await _executeCommandLine(cmdLine);
         } catch (err) {
             console.log(`Unable to kill Excel process. ${err}`);
-        }        
-    }    
-
-    // if the dev-server was started, kill the spawned process
-    if (devServerStarted) {
-        childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
+        }
+        // if the dev-server was started, kill the spawned process
+        if (devServerStarted) {
+            childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
+        }
     }
 }
 

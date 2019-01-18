@@ -39,6 +39,7 @@
     "child_process": "^1.0.2",
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "file-loader": "^1.1.11",
     "fs": "0.0.1-security",
