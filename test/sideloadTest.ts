@@ -51,14 +51,11 @@ describe("Test Excel Custom Functions", function() {
   });
 });
 
-// Still investigating how to do test teardown on Mac
-if (process.platform == 'win32') {
-  describe("Teardown test environment", function() {
+describe("Teardown test environment", function() {
     describe("Kill Excel and the test server", function() {
       it("should close Excel and stop the test server", async function() {
-        helperMethods.teardownTestEnvironment();
+        await helperMethods.teardownTestEnvironment(process.platform == 'win32' ? "EXCEL" : "Excel");
       });
     });
   });
-}
 

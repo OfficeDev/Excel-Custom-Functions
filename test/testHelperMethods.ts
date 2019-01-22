@@ -1,4 +1,5 @@
 import * as childProcess from "child_process";
+import * as cps from "current-processes";
 import * as cors from "cors";
 import * as fs from "fs";
 import * as express from "express";
@@ -72,19 +73,24 @@ export async function getTestResults(): Promise<any> {
 });
 }
 
-export async function teardownTestEnvironment():Promise<void> {
-    // Still investigating how to do shutdown on Mac
-    if (process.platform == 'win32') {
-        try {
-            const cmdLine = "tskill excel";
+export async function teardownTestEnvironment(processName: string):Promise<void> {
+    try {
+        if (process.platform == 'win32') {
+            const cmdLine = `tskill ${processName}`;
             await _executeCommandLine(cmdLine);
+        } else {
+            const pid = await _getProcessId(processName);
+            if (pid != undefined) {
+                    process.kill(pid);
+                }
+            }
         } catch (err) {
-            console.log(`Unable to kill Excel process. ${err}`);
-        }
-        // if the dev-server was started, kill the spawned process
-        if (devServerStarted) {
-            childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
-        }
+        console.log(`Unable to kill Excel process. ${err}`);
+    }
+
+    // if the dev-server was started, kill the spawned process
+    if (devServerStarted) {
+        childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
     }
 }
 
@@ -100,4 +106,20 @@ async function _startDevServer(): Promise<boolean> {
     console.log(`Unable to run command: ${cmdLine}.\n${err}`);
 });
 return subProcess.pid != undefined;
+}
+
+async function _getProcessId(processName: string): Promise<number> {
+    return new Promise<number>(async function(resolve) {
+        cps.get(function(err: Error, processes) {
+            try {
+                const p = processes.filter(function(p) {
+                    return (p.name == processName);
+                });
+                resolve(p != undefined ? p[0].pid : undefined);
+            }
+            catch (err) {
+                console.log("Unable to get list of processes");
+            }
+        });
+    });
 }
