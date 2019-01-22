@@ -74,8 +74,9 @@ export async function getTestResults(): Promise<any> {
 }
 
 export async function teardownTestEnvironment(processName: string):Promise<void> {
+    const operatingSystem: string = process.platform;
     try {
-        if (process.platform == 'win32') {
+        if (operatingSystem == 'win32') {
             const cmdLine = `tskill ${processName}`;
             await _executeCommandLine(cmdLine);
         } else {
@@ -90,7 +91,11 @@ export async function teardownTestEnvironment(processName: string):Promise<void>
 
     // if the dev-server was started, kill the spawned process
     if (devServerStarted) {
-        childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
+        if (operatingSystem == 'win32') {
+            childProcess.spawn("taskkill", ["/pid", subProcess.pid, '/f', '/t']);
+        } else {
+            subProcess.kill();
+        }
     }
 }
 
@@ -113,9 +118,9 @@ async function _getProcessId(processName: string): Promise<number> {
         cps.get(function(err: Error, processes) {
             try {
                 const p = processes.filter(function(p) {
-                    return (p.name == processName);
+                    return (p.name.indexOf(processName) > 0);
                 });
-                resolve(p != undefined ? p[0].pid : undefined);
+                resolve(p.length > 0 ? p[0].pid : undefined);
             }
             catch (err) {
                 console.log("Unable to get list of processes");
