@@ -16,7 +16,7 @@ Office.initialize = async () => {
   $("#app-body").show();
 
   // If a test server is running, then run Custom Functions tests on initialize of taskpane
-  await isTestServerStarted();  
+  await cfTests.isTestServerStarted();  
 };
 
 async function run() {
@@ -40,16 +40,4 @@ async function run() {
     OfficeHelpers.UI.notify(error);
     OfficeHelpers.Utilities.log(error);
   }
-}
-
-async function isTestServerStarted(): Promise<void> {
-  const xhr = new XMLHttpRequest();
-  const pingUrl : string = `https://localhost:8080/ping`;
-  xhr.onreadystatechange=(e)=> {    
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      cfTests.runCfTests(xhr.responseText);
-    }
-  }
-  xhr.open("GET", pingUrl, true);
-  xhr.send();
 }
