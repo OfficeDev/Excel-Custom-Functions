@@ -9,10 +9,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "start-desktop"
-      ],
+      "runtimeArgs": ["run-script", "start", "desktop"]
     },
     {
       "name": "Office Online (Edge)",
@@ -28,10 +25,9 @@
   ],
   "inputs": [
     {
-        "id": "officeOnlineDocumentUrl",
-        "type": "promptString",
-        "description": "Please enter the url for the Office Online document.",
+      "id": "officeOnlineDocumentUrl",
+      "type": "promptString",
+      "description": "Please enter the url for the Office Online document."
     }
-],
-
+  ]
 }
