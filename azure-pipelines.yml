@@ -1,0 +1,5 @@
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
