@@ -2,58 +2,10 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-jobs:
-- job: Job_1
-  displayName: Windows Agent
-  condition: succeeded()
-  pool:
-    name: OPX Windows Dogfood Pool
-    demands: npm
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run build'
-
-  - task: Npm@1
-    displayName: 'npm test'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run test'
-
-- job: Job_2
-  displayName: Mac Agent
-  condition: succeeded()
-  pool:
-    name: OPX Mac Dogfood Pool
-    demands: npm
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run build'
-
-  - task: Npm@1
-    displayName: 'npm test'
-    inputs:
-      command: custom
-      verbose: false
-      customCommand: 'run test'
-
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
 
 
