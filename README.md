@@ -3,7 +3,7 @@
 This repository contains the source code used by the [Yo Office generator](https://github.com/OfficeDev/generator-office) when you create a new Office Add-in that appears in the task pane. You can also use this repository as a sample to base your own project from if you choose not to use the generator. 
 
 ## TypeScript
-This template is written using [TypeScript](http://www.typescriptlang.org/). For the JavaScript version of this template, go to [Excel-Custom-Functions-JS](https://github.com/OfficeDev/Excel-Custom-Functions-JS).
+This template is written using [TypeScript](http://www.typescriptlang.org/). For the JavaScript version of this template, go to [Office-Addin-TaskPane-JS](https://github.com/OfficeDev/Office-Addin-TaskPane-JS).
 
 ## Questions and comments
 
