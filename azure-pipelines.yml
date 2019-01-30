@@ -1,5 +1,2 @@
 trigger:
-  branches:
-    include:
-    - master
-    - releases/*
+- master
