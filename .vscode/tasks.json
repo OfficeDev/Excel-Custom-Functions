@@ -31,7 +31,7 @@
         {
             "label": "Debug: Desktop",
             "type": "npm",
-            "script": "start-desktop",
+            "script": "start",
             "presentation": {
                 "clear": true,
                 "panel": "shared",
