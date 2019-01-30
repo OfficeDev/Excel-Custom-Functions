@@ -5,7 +5,7 @@
  * @returns The sum of the two numbers.
  */
 function add(first: number, second: number): number {
-  return first + second;
+  return first + second + 10;
 }
 
 /**
