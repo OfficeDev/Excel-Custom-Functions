@@ -1,6 +1,6 @@
 import * as helperMethods from './testHelperMethods';
 import * as fs from "fs";
-const assert = require('assert');
+import * as assert from "assert";
 let cfValues = [];
 const promiseSetupTestEnvironment = helperMethods.setupTestEnvironment();
 const promiseStartTestServer = helperMethods.startTestServer();
