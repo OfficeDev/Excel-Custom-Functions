@@ -9,16 +9,24 @@ function add(first: number, second: number): number {
 }
 
 /**
- * Displays the current time once a second.
- * @param handler Custom function handler  
+ * Returns the address where the function was called 
+ * @param invocation 
  */
-function clock(handler: CustomFunctions.StreamingHandler<string>): void {
+function address(invocation: CustomFunctions.Invocation): string {
+  return invocation.address || "";
+}
+
+/**
+ * Displays the current time once a second.
+ * @param invocation Custom function handler  
+ */
+function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
   const timer = setInterval(() => {
     const time = currentTime();
-    handler.setResult(time);
+    invocation.setResult(time);
   }, 1000);
 
-  handler.onCanceled = () => {
+  invocation.onCanceled = () => {
     clearInterval(timer);
   };
 }
@@ -34,16 +42,16 @@ function currentTime(): string {
 /**
  * Increments a value once a second.
  * @param incrementBy Amount to increment
- * @param handler Custom function handler 
+ * @param invocation Custom function handler 
  */
-function increment(incrementBy: number, handler: CustomFunctions.StreamingHandler<number>): void {
+function increment(incrementBy: number, invocation: CustomFunctions.StreamingInvocation<number>): void {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
-    handler.setResult(result);
+    invocation.setResult(result);
   }, 1000);
 
-  handler.onCanceled = () => {
+  invocation.onCanceled = () => {
     clearInterval(timer);
   };
 }
@@ -64,6 +72,7 @@ function logMessage(message: string): string {
  * for the function id defined in the metadata file (functions.json).
  */
 CustomFunctions.associate("ADD", add);
+CustomFunctions.associate("ADDRESS", address);
 CustomFunctions.associate("CLOCK", clock);
 CustomFunctions.associate("INCREMENT", increment);
 CustomFunctions.associate("LOG", logMessage);

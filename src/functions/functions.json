@@ -26,6 +26,16 @@
       ]
     },
     {
+      "id": "ADDRESS",
+      "name": "ADDRESS",
+      "description": "Returns the address where the function was called.",
+      "helpUrl": "http://www.contoso.com/help",
+      "parameters": [],
+      "options": {
+        "requiresAddress": true
+      }
+    },
+    {
       "id": "INCREMENT",
       "name": "INCREMENT",
       "description": "Periodically increment a value",
