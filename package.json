@@ -7,6 +7,7 @@
   },
   "license": "MIT",
   "config": {
+    "app-to-debug": "excel",
     "app-type-to-debug": "desktop",
     "dev-server-port": 3000,
     "source-bundle-url-path": "index.win32"
@@ -16,9 +17,13 @@
     "build-dev": "webpack --mode development",
     "dev-server": "webpack-dev-server --mode development",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
+    "sideload:excel": "office-toolbox sideload -m manifest.xml -a excel",
     "start": "office-addin-debugging start manifest.xml",
+    "start:desktop": "office-addin-debugging start manifest.xml desktop",
+    "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
     "unload": "office-toolbox remove -m manifest.xml -a excel",
+    "unload:excel": "office-toolbox remove -m manifest.xml -a excel",
     "validate": "office-toolbox validate -m manifest.xml",
     "watch": "webpack --mode development --watch"
   },
