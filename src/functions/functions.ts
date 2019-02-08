@@ -9,14 +9,6 @@ function add(first: number, second: number): number {
 }
 
 /**
- * Returns the address where the function was called 
- * @param invocation 
- */
-function address(invocation: CustomFunctions.Invocation): string {
-  return invocation.address || "";
-}
-
-/**
  * Displays the current time once a second.
  * @param invocation Custom function handler  
  */
@@ -72,7 +64,6 @@ function logMessage(message: string): string {
  * for the function id defined in the metadata file (functions.json).
  */
 CustomFunctions.associate("ADD", add);
-CustomFunctions.associate("ADDRESS", address);
 CustomFunctions.associate("CLOCK", clock);
 CustomFunctions.associate("INCREMENT", increment);
 CustomFunctions.associate("LOG", logMessage);
