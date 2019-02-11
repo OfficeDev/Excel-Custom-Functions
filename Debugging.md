@@ -3,8 +3,7 @@
 ## Using Visual Studio Code
 
 1. Open the folder in VS Code.
-2. Run the `Watch` task using `Terminal`, `Run Task`.
-3. Run the `Dev Server` task using `Terminal`, `Run Task`.
+2. Run the `Dev Server` task using `Terminal`, `Run Task`.
 
 
 ### Office Online (Edge - Windows 10 / Chrome - Mac)
@@ -35,9 +34,7 @@
 
 ## From the command line
 
-### Watch / Build
-* Use `npm run watch` to run build for development, and rebuild automatically when a source file is saved.
-* If you would rather build manually, use `npm run build-dev` to build for development.
+### Build
 * To build for production, use `npm run build`.
 
 ### Dev Server
@@ -45,14 +42,12 @@
 
 ### Debugging (Desktop)
 * To start debugging, use `npm start desktop -- --app {app}` where `{app}` is `excel`, `powerpoint`, or `word`.
-* Be sure to build or run watch beforehand.
 * If the dev-server is not already running, it will run the dev-server in a separate window.
 * The add-in will be configured for debugging, and a document will be opened which loads the add-in.
 * Once you're done debugging, use `npm stop desktop -- --app {app}` so the add-in is no longer configured for debugging.
 
 ### Debugging (Office Online)
 * To start debugging, use `npm start web`.
-* Be sure to build or run watch beforehand.
 * If the dev-server is not already running, it will run the dev-server in a separate window.
 * Open the desired Office document in the browser.
 * Use `Insert`, `Add-ins` to upload the manifest file. [More info](https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing_)
