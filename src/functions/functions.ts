@@ -8,6 +8,7 @@
 function add(first: number, second: number): number {
   return first + second;
 }
+CustomFunctions.associate("ADD", add);
 
 /**
  * Displays the current time once a second.
@@ -24,6 +25,7 @@ function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
     clearInterval(timer);
   };
 }
+CustomFunctions.associate("CLOCK", clock);
 
 /**
  * Computes the nth Fibonacci number.
@@ -40,6 +42,7 @@ function fib(n: number): number {
   for (let index = 2; index <= n; ++index) {
     values[index % 2] = values[0] + values[1];
   }
+  CustomFunctions.associate("FIB", fib);
 
   return values[n % 2];
 }
@@ -83,6 +86,7 @@ function increment(incrementBy: number, invocation: CustomFunctions.StreamingInv
     clearInterval(timer);
   };
 }
+CustomFunctions.associate("INCREMENT", increment);
 
 /**
  * Writes a message to console.log().
@@ -95,6 +99,7 @@ function logMessage(message: string): string {
 
   return message;
 }
+CustomFunctions.associate("LOG", logMessage);
 
 /**
  * Regular expression test
@@ -106,14 +111,5 @@ function logMessage(message: string): string {
 function regex(string: string, pattern: string): boolean {
   return new RegExp(pattern).test(string);
 }
-
-/**
- * Defines the implementation of the custom functions
- * for the function id defined in the metadata file (functions.json).
- */
-CustomFunctions.associate("ADD", add);
-CustomFunctions.associate("CLOCK", clock);
-CustomFunctions.associate("FIB", fib);
-CustomFunctions.associate("INCREMENT", increment);
-CustomFunctions.associate("LOG", logMessage);
 CustomFunctions.associate("REGEX", regex);
+
