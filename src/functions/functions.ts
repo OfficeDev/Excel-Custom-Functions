@@ -29,7 +29,7 @@ CustomFunctions.associate("CLOCK", clock);
 
 /**
  * Computes the nth Fibonacci number.
- * @customfunction 
+ * @customfunction FIBONACCI 斐波那契
  * @param n number
  */
 function fib(n: number): number {
@@ -42,10 +42,11 @@ function fib(n: number): number {
   for (let index = 2; index <= n; ++index) {
     values[index % 2] = values[0] + values[1];
   }
-  CustomFunctions.associate("FIB", fib);
 
   return values[n % 2];
 }
+CustomFunctions.associate("FIBONACCI", fib);
+
 
 let count: number = 0;
 
