@@ -1,10 +1,29 @@
 # Debugging
 
+## Prerequisites
+
+1. Node.js version 8 or higher. 
+2. VS Code - latest version recommended. 
+
+## First Time
+
+1. Trust the SSL certificates for `https://localhost`. [More info](https://github.com/OfficeDev/generator-office/blob/master/src/docs/ssl.md)
+2. On Mac, enable debugging for the webview using Safari Web Inspector.
+    
+    In a Terminal window, run these commands:
+    ```
+    defaults write com.microsoft.Word OfficeWebAddinDeveloperExtras -bool true
+    defaults write com.microsoft.Excel OfficeWebAddinDeveloperExtras -bool true
+    defaults write com.microsoft.Powerpoint OfficeWebAddinDeveloperExtras -bool true
+    defaults write com.microsoft.Outlook OfficeWebAddinDeveloperExtras -bool true
+    ```
+
 ## Using Visual Studio Code
 
 1. Open the folder in VS Code.
 2. Run the `Dev Server` task using `Terminal`, `Run Task`.
 
+    The first time, open a browser to https://localhost:3000 to verify that the SSL certificates are trusted.
 
 ### Office Online (Edge - Windows 10 / Chrome - Mac)
 1. Switch to the Debug view using `View`, `Debug` or press Ctrl+Shift+D.
