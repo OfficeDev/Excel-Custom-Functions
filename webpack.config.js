@@ -50,7 +50,7 @@ module.exports = (env, options) => {
         filename: "ribbon.html",
         template: "./src/ribbon/ribbon.html",
         chunks: ["ribbon"]
-      }),      
+      }),
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"]
       })
