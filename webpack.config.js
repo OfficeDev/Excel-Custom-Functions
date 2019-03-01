@@ -40,11 +40,17 @@ module.exports = (env, options) => {
         template: "./src/taskpane/taskpane.html",
         chunks: ["taskpane"]
       }),
+      new CopyWebpackPlugin([
+        {
+          to: "taskpane.css",
+          from: "./src/taskpane/taskpane.css"
+        }
+      ]),
       new HtmlWebpackPlugin({
         filename: "ribbon.html",
         template: "./src/ribbon/ribbon.html",
         chunks: ["ribbon"]
-      }),
+      }),      
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"]
       })
