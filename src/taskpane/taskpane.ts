@@ -4,15 +4,19 @@
  */
 
 import * as OfficeHelpers from "@microsoft/office-js-helpers";
+import * as cfTest from "../../test/cfTest";
 
 $(document).ready(() => {
   $("#run").click(run);
 });
 
 // The initialize function must be run each time a new page is loaded
-Office.initialize = () => {
+Office.initialize = async () => {
   $("#sideload-msg").hide();
   $("#app-body").show();
+
+  // If a test server is running, then run Custom Functions tests on initialize of taskpane
+  await cfTest.isTestServerStarted();  
 };
 
 async function run() {

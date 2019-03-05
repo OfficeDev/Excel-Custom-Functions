@@ -16,6 +16,10 @@ module.exports = (env, options) => {
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
     },
+    node: {
+      child_process: 'empty',
+      fs: 'empty',
+     },
     module: {
       rules: [
         {

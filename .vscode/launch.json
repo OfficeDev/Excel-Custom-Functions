@@ -17,6 +17,24 @@
       "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test",
+        "-r",
+        "ts-node/register",
+        "${workspaceFolder}/test/**/*.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+    },
+    {
       "name": "Office Online (Chrome)",
       "type": "chrome",
       "request": "launch",
