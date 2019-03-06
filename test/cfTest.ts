@@ -1,11 +1,11 @@
 import * as functionsJsonData from './functionsTestData.json';
-import * as testHelper from "./testHelpers"
+import {pingTestServer, sendTestResults} from "office-addin-test-helpers";
 const customFunctions = (<any>functionsJsonData).functions;
 const port: number = 8080;
 let testValues = [];
 
 export async function isTestServerStarted(): Promise<void> {
-    const testServerResponse: any = await testHelper.pingTestServer(port);
+    const testServerResponse: any = await pingTestServer(port);
     if (testServerResponse["status"] === 200) {
         runCfTests(testServerResponse["platform"]);
     }
@@ -27,7 +27,7 @@ export async function runCfTests(platform: string): Promise<void> {
         }
     });
 
-    await testHelper.sendTestResults(testValues, port);
+    await sendTestResults(testValues, port);
 }
 
 export async function readData(cfName: string, readCount: number, platform: string): Promise<boolean> {

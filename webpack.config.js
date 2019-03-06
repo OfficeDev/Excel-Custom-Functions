@@ -46,6 +46,12 @@ module.exports = (env, options) => {
           from: "./src/functions/functions.json"
         }
       ]),
+      new CopyWebpackPlugin([
+        {
+          to: "taskpane.css",
+          from: "./src/taskpane/taskpane.css"
+        }
+      ]),
       new HtmlWebpackPlugin({
         filename: "functions.html",
         template: "./src/functions/functions.html",
@@ -55,7 +61,7 @@ module.exports = (env, options) => {
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
         chunks: ["taskpane"]
-      }),
+      }),      
       new HtmlWebpackPlugin({
         filename: "ribbon.html",
         template: "./src/ribbon/ribbon.html",

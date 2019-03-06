@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import * as fs from "fs";
 import * as mocha from "mocha";
-import * as testHelper from "./testHelpers";
+import * as testHelper from "office-addin-test-helpers";
 import * as testServerInfra from "office-addin-test-server";
 const functionsJsonFile: string = `${__dirname}/functionsTestData.json`;
 const functionsJsonData = JSON.parse(fs.readFileSync(functionsJsonFile).toString());
@@ -14,7 +14,7 @@ describe("Setup test environment", function () {
         it("Sideload should have completed and dev-server should have started", async function () {
             this.timeout(0);
             const startDevServer = await testHelper.startDevServer();
-            const sideloadApplication = await testHelper.sideloadExcel();
+            const sideloadApplication = await testHelper.sideloadDesktopApp("test");
             assert.equal(startDevServer, true);
             assert.equal(sideloadApplication, true);
         });
@@ -63,7 +63,7 @@ describe("Teardown test environment", function () {
             this.timeout(0);
             const stopTestServer = await testServer.stopTestServer();
             assert.equal(stopTestServer, true);
-            await testHelper.teardownTestEnvironment();
+            await testHelper.teardownTestEnvironment("excel");
         });
     });
 })

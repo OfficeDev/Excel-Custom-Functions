@@ -16,7 +16,7 @@ Office.initialize = async () => {
   $("#app-body").show();
 
   // If a test server is running, then run Custom Functions tests on initialize of taskpane
-  await cfTest.isTestServerStarted();  
+  await cfTest.isTestServerStarted();
 };
 
 async function run() {
