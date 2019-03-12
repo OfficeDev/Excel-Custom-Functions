@@ -42,7 +42,7 @@
     "@types/office-runtime": "^1.0.7",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
-    "custom-functions-metadata-plugin": "0.0.12",
+    "custom-functions-metadata-plugin": "0.0.14",
     "file-loader": "^3.0.1",
     "fs": "0.0.1-security",
     "html-loader": "^0.5.5",
