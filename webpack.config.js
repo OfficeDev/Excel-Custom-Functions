@@ -10,6 +10,7 @@ module.exports = (env, options) => {
     devtool: "source-map",
     entry: {
       functions: "./src/functions/functions.ts",
+      polyfill: 'babel-polyfill',
       taskpane: "./src/taskpane/taskpane.ts",
       ribbon: "./src/ribbon/ribbon.ts"
     },
@@ -18,6 +19,11 @@ module.exports = (env, options) => {
     },
     module: {
       rules: [
+        {
+          test: /\.ts$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        },
         {
           test: /\.tsx?$/,
           exclude: /node_modules/,
@@ -45,12 +51,12 @@ module.exports = (env, options) => {
       new HtmlWebpackPlugin({
         filename: "functions.html",
         template: "./src/functions/functions.html",
-        chunks: ["functions"]
+        chunks: ['polyfill', 'functions']
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ["taskpane"]
+        chunks: ['polyfill', 'taskpane']
       }),
       new CopyWebpackPlugin([
         {
@@ -61,11 +67,8 @@ module.exports = (env, options) => {
       new HtmlWebpackPlugin({
         filename: "ribbon.html",
         template: "./src/ribbon/ribbon.html",
-        chunks: ["ribbon"]
+        chunks: ['polyfill', 'ribbon']
       }),
-      new webpack.ProvidePlugin({
-        Promise: ["es6-promise", "Promise"]
-      })
     ],
     devServer: {
       headers: {
