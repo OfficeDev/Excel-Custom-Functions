@@ -3,16 +3,11 @@
  * See LICENSE in the project root for license information.
  */
 
-import * as OfficeHelpers from "@microsoft/office-js-helpers";
-
-$(document).ready(() => {
-  $("#run").click(run);
-});
-
 // The initialize function must be run each time a new page is loaded
 Office.initialize = () => {
-  $("#sideload-msg").hide();
-  $("#app-body").show();
+  document.getElementById('sideload-msg').style.display='none';
+  document.getElementById('app-body').style.display='flex';
+  document.getElementById('run').onclick = run;
 };
 
 async function run() {
@@ -50,8 +45,7 @@ async function runExcel() {
       console.log(`The range address was ${range.address}.`);
     });
   } catch (error) {
-    OfficeHelpers.UI.notify(error);
-    OfficeHelpers.Utilities.log(error);
+    console.error(error);
   }
 }
 
