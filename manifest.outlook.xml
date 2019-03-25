@@ -46,7 +46,7 @@
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <FunctionFile resid="Contoso.Ribbon.Url" />
+          <FunctionFile resid="Contoso.Commands.Url" />
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
               <Group id="msgReadGroup">
@@ -79,7 +79,7 @@
         <bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Contoso.Ribbon.Url" DefaultValue="https://localhost:3000/ribbon.html" />
+        <bt:Url id="Contoso.Commands.Url" DefaultValue="https://localhost:3000/commands.html" />
         <bt:Url id="Contoso.Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
