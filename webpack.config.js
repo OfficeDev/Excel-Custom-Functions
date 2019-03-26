@@ -13,7 +13,7 @@ module.exports = async (env, options) => {
     entry: {
       polyfill: 'babel-polyfill',
       taskpane: "./src/taskpane/taskpane.ts",
-      ribbon: "./src/ribbon/ribbon.ts"
+      commands: "./src/commands/commands.ts"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -55,9 +55,9 @@ module.exports = async (env, options) => {
         }
       ]),
       new HtmlWebpackPlugin({
-        filename: "ribbon.html",
-        template: "./src/ribbon/ribbon.html",
-        chunks: ["polyfill", "ribbon"]
+        filename: "commands.html",
+        template: "./src/commands/commands.html",
+        chunks: ["polyfill", "commands"]
       }),
     ],
     devServer: {
