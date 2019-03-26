@@ -6,7 +6,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 
 module.exports = async (env, options) => {
-  const httsServerInfo = await devCerts.gethttpsServerOptions();
+  // const https = await devCerts.gethttpsServerOptions();
   const dev = options.mode === "development";
   const config = {
     devtool: "source-map",
@@ -64,7 +64,7 @@ module.exports = async (env, options) => {
       headers: {
         "Access-Control-Allow-Origin": "*"
       },
-      https: httsServerInfo,
+      https: await devCerts.getHttpsServerOptions(),
       port: 3000
     }
   };
