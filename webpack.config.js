@@ -6,7 +6,6 @@ const fs = require("fs");
 const webpack = require("webpack");
 
 module.exports = async (env, options) => {
-  // const https = await devCerts.gethttpsServerOptions();
   const dev = options.mode === "development";
   const config = {
     devtool: "source-map",
