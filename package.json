@@ -33,7 +33,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jquery": "^3.3.22",
-    "@types/office-js": "0.0.158",
+    "@types/office-js": "0.0.170",
     "@types/office-runtime": "^1.0.7",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
