@@ -45,7 +45,7 @@
             <Description resid="Contoso.GetStarted.Description"/>
             <LearnMoreUrl resid="Contoso.GetStarted.LearnMoreUrl"/>
           </GetStarted>
-          <FunctionFile resid="Contoso.Ribbon.Url" />
+          <FunctionFile resid="Contoso.Commands.Url" />
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="Contoso.Group1">
@@ -88,7 +88,7 @@
         <bt:Url id="Contoso.Functions.Metadata.Url" DefaultValue="https://localhost:3000/dist/functions.json" />
         <bt:Url id="Contoso.Functions.Page.Url" DefaultValue="https://localhost:3000/dist/functions.html" />
         <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
-        <bt:Url id="Contoso.Ribbon.Url" DefaultValue="https://localhost:3000/ribbon.html" />
+        <bt:Url id="Contoso.Commands.Url" DefaultValue="https://localhost:3000/commands.html" />
         <bt:Url id="Contoso.Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html" />
       </bt:Urls>
       <bt:ShortStrings>
