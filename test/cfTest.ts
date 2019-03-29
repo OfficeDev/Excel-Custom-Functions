@@ -1,7 +1,7 @@
 import * as functionsJsonData from './functionsTestData.json';
 import {pingTestServer, sendTestResults} from "office-addin-test-helpers";
 const customFunctions = (<any>functionsJsonData).functions;
-const port: number = 8080;
+const port: number = 4201;
 let testValues = [];
 
 export async function isTestServerStarted(): Promise<void> {

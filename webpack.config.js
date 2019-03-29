@@ -2,7 +2,6 @@ const devCerts = require("office-addin-dev-certs");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const fs = require("fs");
 const webpack = require("webpack");
 
 module.exports = async (env, options) => {
@@ -19,8 +18,7 @@ module.exports = async (env, options) => {
       extensions: [".ts", ".tsx", ".html", ".js"]
     },
     node: {
-      child_process: 'empty',
-      fs: 'empty',
+      child_process: 'empty'
      },
     module: {
       rules: [
