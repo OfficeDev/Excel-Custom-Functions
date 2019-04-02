@@ -28,42 +28,7 @@ function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
 CustomFunctions.associate("CLOCK", clock);
 
 /**
- * Computes the nth Fibonacci number.
- * @customfunction FIBONACCI 斐波那契
- * @param n number
- */
-function fib(n: number): number {
-  if (n < 0) {
-    throw new Error("n cannot be negative.");
-  }
-
-  const values: number[] = [1, 1];
-
-  for (let index = 2; index <= n; ++index) {
-    values[index % 2] = values[0] + values[1];
-  }
-
-  return values[n % 2];
-}
-CustomFunctions.associate("FIBONACCI", fib);
-
-
-let count: number = 0;
-
-/**
- * Returns the number of times that the function was called
- * @customfunction
- */
-function callCount(): number {
-  ++count;
-
-  return count;
-}
-CustomFunctions.associate("callCount", callCount);
-
-/**
  * Returns the current time.
- * @customfunction 
  * @returns String with the current time formatted for the current locale.
  */
 function currentTime(): string {
@@ -91,7 +56,7 @@ CustomFunctions.associate("INCREMENT", increment);
 
 /**
  * Writes a message to console.log().
- * @customfunction 
+ * @customfunction LOG
  * @param message String to write.
  * @returns String to write.
  */
@@ -101,16 +66,3 @@ function logMessage(message: string): string {
   return message;
 }
 CustomFunctions.associate("LOG", logMessage);
-
-/**
- * Regular expression test
- * @customfunction
- * @param string The string to test
- * @param pattern Regular expression pattern
- * @returns True if it matches the pattern; false otherwise
- */
-function regex(string: string, pattern: string): boolean {
-  return new RegExp(pattern).test(string);
-}
-CustomFunctions.associate("REGEX", regex);
-
