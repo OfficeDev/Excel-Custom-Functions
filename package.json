@@ -22,14 +22,14 @@
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
-    "test": "mocha -r ts-node/register --timeout 0 test/**/*.ts",
+    "test": "mocha -r ts-node/register --timeout 0 test/**/tests.ts",
     "unload": "office-toolbox remove -m manifest.xml -a excel",
     "unload:excel": "office-toolbox remove -m manifest.xml -a excel",
     "validate": "office-toolbox validate -m manifest.xml",
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "office-addin-test-helpers": "^0.0.3"
+    "office-addin-test-helpers": "^0.0.4"
   },
   "devDependencies": {
     "@types/custom-functions-runtime": "^1.4.10",
@@ -52,7 +52,7 @@
     "mocha": "^5.2.0",
     "office-addin-debugging": "^2.1.7",
     "office-addin-dev-certs": "0.0.4",
-    "office-addin-test-server": "^0.0.3",
+    "office-addin-test-server": "^0.0.4",
     "office-toolbox": "^0.1.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^5.3.1",

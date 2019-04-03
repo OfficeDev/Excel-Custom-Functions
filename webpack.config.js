@@ -12,7 +12,8 @@ module.exports = async (env, options) => {
       functions: "./src/functions/functions.ts",
       polyfill: 'babel-polyfill',
       taskpane: "./src/taskpane/taskpane.ts",
-      commands: "./src/commands/commands.ts"
+      commands: "./src/commands/commands.ts",
+      test: "./src/test/cfTest.ts"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -72,6 +73,11 @@ module.exports = async (env, options) => {
         template: "./src/commands/commands.html",
         chunks: ["polyfill", "commands"]
       }),
+      new HtmlWebpackPlugin({
+        filename: "test.html",
+        template: "./src/taskpane/taskpane.html",
+        chunks: ['polyfill', 'test']
+      }), 
     ],
     devServer: {
       headers: {

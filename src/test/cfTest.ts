@@ -1,20 +1,26 @@
 import * as functionsJsonData from './functionsTestData.json';
 import {pingTestServer, sendTestResults} from "office-addin-test-helpers";
-const customFunctions = (<any>functionsJsonData).functions;
+const customFunctionsData = (<any>functionsJsonData).functions;
 const port: number = 4201;
 let testValues = [];
 
-export async function isTestServerStarted(): Promise<void> {
-    const testServerResponse: any = await pingTestServer(port);
-    if (testServerResponse["status"] === 200) {
-        runCfTests(testServerResponse["platform"]);
-    }
-}
+Office.initialize = async () => {
+    document.getElementById('sideload-msg').style.display = 'none';
+    document.getElementById('app-body').style.display = 'flex';
+    document.getElementById('run').onclick = run;
 
-export async function runCfTests(platform: string): Promise<void> {
+    const testServerResponse: object = await pingTestServer(port);
+    if (testServerResponse["status"] === 200) {
+        await runCfTests(testServerResponse["platform"]);
+        await sendTestResults(testValues, port);
+    }
+};
+
+async function runCfTests(platform: string): Promise<void> {
+    // Exercise custom functions
     await Excel.run(async context => {
-        for (let key in customFunctions) {
-            const formula: string = customFunctions[key].formula;
+        for (let key in customFunctionsData) {
+            const formula: string = customFunctionsData[key].formula;
             const range = context.workbook.getSelectedRange();
             range.formulas = [[formula]];
             await context.sync();
@@ -23,15 +29,13 @@ export async function runCfTests(platform: string): Promise<void> {
             await sleep(platform === "Win32" ? 2000 : 8000);
 
             // Check to if this is a streaming function
-            await readData(key, customFunctions[key].streaming != undefined ? 2 : 1, platform)
+            await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1, platform)
         }
     });
-
-    await sendTestResults(testValues, port);
 }
 
-export async function readData(cfName: string, readCount: number, platform: string): Promise<boolean> {
-    return new Promise<boolean>(async (resolve) => {
+export async function readCFData(cfName: string, readCount: number, platform: string): Promise<boolean> {
+    return new Promise<boolean>(async (resolve, reject) => {
         await Excel.run(async context => {
             // if this is a streaming function, we want to capture two values so we can
             // validate the function is indeed streaming
@@ -44,20 +48,24 @@ export async function readData(cfName: string, readCount: number, platform: stri
                     // Mac is much slower so we need to wait longer for the function to return a value
                     await sleep(platform === "Win32" ? 2000 : 8000);
 
-                    var data = {};
-                    var nameKey = "Name";
-                    var valueKey = "Value";
-                    data[nameKey] = cfName;
-                    data[valueKey] = range.values[0][0];
-                    testValues.push(data);
+                    addTestResult(cfName, range.values[0][0]);
                     resolve(true);
 
-                } catch (err) {
-                    throw new Error(err);
+                } catch {
+                    reject(false)
                 }
             }
         });
     });
+}
+
+function addTestResult(resultName: string, resultValue: any) {
+    var data = {};
+    var nameKey = "Name";
+    var valueKey = "Value";
+    data[nameKey] = resultName;
+    data[valueKey] = resultValue;
+    testValues.push(data);
 }
 
 async function sleep(ms: number): Promise<any> {

@@ -2,15 +2,11 @@
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
-
-import * as cfTest from "../../test/cfTest";
 // The initialize function must be run each time a new page is loaded
-Office.initialize = async () => {
+Office.initialize = () => {
   document.getElementById('sideload-msg').style.display='none';
   document.getElementById('app-body').style.display='flex';
   document.getElementById('run').onclick = run;
-  // If a test server is running, then run Custom Functions tests on initialize of taskpane
-  await cfTest.isTestServerStarted();
 };
 
 async function run() {
