@@ -1,41 +1,83 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const devCerts = require("office-addin-dev-certs");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const fs = require("fs");
+const webpack = require("webpack");
 
-module.exports = {
-    entry: './src/customfunctions.ts',
-    output: {
-        path: path.resolve(__dirname, 'dist/win32/ship'),
-        filename: 'index.win32.bundle'
+module.exports = async (env, options) => {
+  const dev = options.mode === "development";
+  const config = {
+    devtool: "source-map",
+    entry: {
+      functions: "./src/functions/functions.ts",
+      polyfill: 'babel-polyfill',
+      taskpane: "./src/taskpane/taskpane.ts",
+      commands: "./src/commands/commands.ts"
     },
-    devtool: 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.html', '.js', 'json']
+      extensions: [".ts", ".tsx", ".html", ".js"]
     },
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: 'ts-loader'
-            },
-            {
-                test: /\.html$/,
-                exclude: /node_modules/,
-                use: 'html-loader'
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                use: 'file-loader'
-            }
-        ]
-    },
-    devServer: {
-        port: 8081,
-        hot: true,
-        inline: true,
-        headers: {
-            "Access-Control-Allow-Origin": "*"
+      rules: [
+        {
+          test: /\.ts$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        },
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: "ts-loader"
+        },
+        {
+          test: /\.html$/,
+          exclude: /node_modules/,
+          use: "html-loader"
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif)$/,
+          use: "file-loader"
         }
+      ]
+    },
+    plugins: [
+      new CleanWebpackPlugin(dev ? [] : ["dist"]),
+      new CustomFunctionsMetadataPlugin({
+        output: "functions.json",
+        input: "./src/functions/functions.ts"
+      }),
+      new HtmlWebpackPlugin({
+        filename: "functions.html",
+        template: "./src/functions/functions.html",
+        chunks: ['polyfill', 'functions']
+      }),
+      new HtmlWebpackPlugin({
+        filename: "taskpane.html",
+        template: "./src/taskpane/taskpane.html",
+        chunks: ['polyfill', 'taskpane']
+      }),
+      new CopyWebpackPlugin([
+        {
+          to: "taskpane.css",
+          from: "./src/taskpane/taskpane.css"
+        }
+      ]),
+      new HtmlWebpackPlugin({
+        filename: "commands.html",
+        template: "./src/commands/commands.html",
+        chunks: ["polyfill", "commands"]
+      }),
+    ],
+    devServer: {
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
+      https: await devCerts.getHttpsServerOptions(),
+      port: 3000
     }
+  };
+
+  return config;
 };

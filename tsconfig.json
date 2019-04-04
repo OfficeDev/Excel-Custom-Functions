@@ -1,9 +1,22 @@
 {
-    "compilerOptions": {
-      "outDir": "dist/win32/ship",
-      "target": "es2015"
-    },
-    "files": [
-        "./src/customfunctions.ts"
-      ]
-    }
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "noEmitOnError": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es5",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib",
+    "lib-amd"
+  ]
+}
