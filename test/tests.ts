@@ -15,26 +15,22 @@ if (process.platform =='win32') {
     const testServer = new testServerInfra.TestServer(port);
     let testValues: any = [];
 
-    describe("Setup test environment", function () {
-        describe("Start sideload, start dev-server, and start test-server", function () {
-            it("Sideload should have completed and dev-server should have started", async function () {
+    describe("Test Excel Custom Functions", function () {
+        before("Start test server", async function () {
+            const testServerStarted = await testServer.startTestServer(true /* mochaTest */);
+            const serverResponse = await testHelper.pingTestServer(port);
+            assert.equal(testServerStarted, true);
+            assert.equal(serverResponse["status"], 200);
+        }),
+        describe("Start dev-server and sideload application", function () {
+            it(`Sideload should have completed for ${host} and dev-server should have started`, async function () {
                 this.timeout(0);
                 const startDevServer = await testHelper.startDevServer();
                 const sideloadApplication = await testHelper.sideloadDesktopApp(host, manifestPath);
-                assert.equal(startDevServer, true, "Dev server started");
-                assert.equal(sideloadApplication, true, "Excel sideloaded successfully");
-            });
-            it("Test server should have started and Excel taskpane should have pinged the server", async function () {
-                this.timeout(0);
-                const testServerStarted = await testServer.startTestServer(true /*mochaTest*/);
-                const response = await testHelper.pingTestServer(port);
-                assert.equal(testServerStarted, true);
-                assert.equal(response["status"], 200);
+                assert.equal(startDevServer, true);
+                assert.equal(sideloadApplication, true);
             });
         });
-    });
-
-    describe("Test Excel Custom Functions", function () {
         describe("Get test results for custom functions and validate results", function () {
             it("should get results from the taskpane application", async function () {
                 this.timeout(0);
@@ -63,16 +59,11 @@ if (process.platform =='win32') {
                 assert.equal(functionsJsonData.functions.LOG.result, testValues[5].Value);
             });
         });
-    });
-
-    describe("Teardown test environment", function () {
-        describe("Kill Excel and the test server", function () {
-            it("should close Excel and stop the test server", async function () {
-                this.timeout(0);
-                const stopTestServer = await testServer.stopTestServer();
-                assert.equal(stopTestServer, true);
-                await testHelper.teardownTestEnvironment(host);
-            });
+        after("Teardown test environment", async function () {
+            const stopTestServer = await testServer.stopTestServer();
+            assert.equal(stopTestServer, true);
+            const testEnvironmentTornDown = await testHelper.teardownTestEnvironment(host)
+            assert.equal(testEnvironmentTornDown, true);
         });
-    })
+    });
 }
