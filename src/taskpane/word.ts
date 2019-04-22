@@ -16,15 +16,13 @@ export async function run() {
     /**
      * Insert your Word code here
      */
-    const range = context.document.getSelection();
 
-    // Read the range text
-    range.load("text");
+    // insert a paragraph at the end of the document.
+    const paragraph = context.document.body.insertParagraph("Hello World", Word.InsertLocation.end);
 
-    // Update font color
-    range.font.color = "red";
+    // change the paragraph color to blue.
+    paragraph.font.color = "blue";
 
     await context.sync();
-    console.log(`The selected text was ${range.text}.`);
   });
 }
