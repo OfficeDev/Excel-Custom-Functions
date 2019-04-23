@@ -9,7 +9,7 @@ This template is written using [TypeScript](http://www.typescriptlang.org/). For
 
 We'd love to get your feedback about this sample. You can send your feedback to us in the *Issues* section of this repository.
 
-Questions about Microsoft Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/office-js+API). If your question is about the Office JavaScript APIs, make sure that your questions are tagged with [office-js] and [API].
+Questions about Microsoft Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/office-js+API).  If your question is about the Office JavaScript APIs, make sure it's tagged with  [office-js].
 
 ## Additional resources
 
