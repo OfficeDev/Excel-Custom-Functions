@@ -58,9 +58,9 @@
                     <Description resid="TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="tpicon_16x16" />
-                    <bt:Image size="32" resid="tpicon_32x32" />
-                    <bt:Image size="80" resid="tpicon_80x80" />
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <SourceLocation resid="Taskpane.Url" />
@@ -74,9 +74,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="tpicon_16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="tpicon_32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="tpicon_80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html" />

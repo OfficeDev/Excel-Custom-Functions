@@ -34,9 +34,9 @@
               <Group id="Group1">
                 <Label resid="Group1Label" />
                 <Icon>
-                  <bt:Image size="16" resid="tpicon_16x16" />
-                  <bt:Image size="32" resid="tpicon_32x32" />
-                  <bt:Image size="80" resid="tpicon_80x80" />
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
                 </Icon>
                 <Control xsi:type="Button" id="TaskpaneButton">
                   <Label resid="TaskpaneButton.Label" />
@@ -45,9 +45,9 @@
                     <Description resid="TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="tpicon_16x16" />
-                    <bt:Image size="32" resid="tpicon_32x32" />
-                    <bt:Image size="80" resid="tpicon_80x80" />
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
@@ -62,9 +62,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="tpicon_16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
-        <bt:Image id="tpicon_32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-        <bt:Image id="tpicon_80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
