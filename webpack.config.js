@@ -10,7 +10,7 @@ module.exports = async (env, options) => {
   const config = {
     devtool: "source-map",
     entry: {
-      polyfill: 'babel-polyfill',
+      polyfill: "@babel/polyfill",
       taskpane: "./src/taskpane/taskpane.ts",
       commands: "./src/commands/commands.ts"
     },
@@ -22,7 +22,7 @@ module.exports = async (env, options) => {
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: 'babel-loader'
+          use: "babel-loader"
         },
         {
           test: /\.tsx?$/,
@@ -41,11 +41,11 @@ module.exports = async (env, options) => {
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(dev ? [] : ["dist"]),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ['polyfill', 'taskpane']
+        chunks: ["polyfill", "taskpane"]
       }),
       new CopyWebpackPlugin([
         {
@@ -57,7 +57,7 @@ module.exports = async (env, options) => {
         filename: "commands.html",
         template: "./src/commands/commands.html",
         chunks: ["polyfill", "commands"]
-      }),
+      })
     ],
     devServer: {
       headers: {
