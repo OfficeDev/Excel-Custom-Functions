@@ -14,6 +14,7 @@
   "scripts": {
     "build": "webpack -p --mode production",
     "build-dev": "webpack --mode development",
+    "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack-dev-server --mode development",
     "sideload": "echo Please specify which app using 'npm run sideload:app'.",
     "sideload:excel": "office-toolbox sideload -m manifest.xml -a excel",
