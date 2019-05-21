@@ -53,6 +53,7 @@
     "office-toolbox": "^0.1.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^5.4.4",
+    "ts-node": "^8.1.0",
     "typescript": "^3.4.5",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
