@@ -16,9 +16,6 @@ module.exports = async (env, options) => {
             polyfill: "@babel/polyfill",
             taskpane: path.resolve(__dirname, './src/taskpaneTest.ts'),
         },
-        output: {
-            path: path.resolve(__dirname, "testbuild"),
-        },
         resolve: {
             extensions: [".ts", ".tsx", ".html", ".js"]
         },
@@ -77,7 +74,6 @@ module.exports = async (env, options) => {
             }),
         ],
         devServer: {
-            contentBase: path.resolve(__dirname, "testbuild"),
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },

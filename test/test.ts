@@ -60,7 +60,7 @@ describe("Test Excel Custom Functions", function () {
     after("Teardown test environment", async function () {
         const stopTestServer = await testServer.stopTestServer();
         assert.equal(stopTestServer, true);
-        const testEnvironmentTornDown = await testHelper.teardownTestEnvironment(host)
+        const testEnvironmentTornDown = await testHelper.teardownTestEnvironment(host);
         assert.equal(testEnvironmentTornDown, true);
     });
 });
