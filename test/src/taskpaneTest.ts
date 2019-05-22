@@ -13,9 +13,7 @@ Office.initialize = async () => {
     if (testServerResponse["status"] === 200) {
         await runCfTests(testServerResponse["platform"]);
         await sendTestResults(testValues, port);
-        if (testServerResponse["platform"] === "Windows") {
-            await closeWorkbook();
-        }
+        await closeWorkbook();
     }
 };
 
