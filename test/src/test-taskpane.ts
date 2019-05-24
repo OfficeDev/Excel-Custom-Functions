@@ -1,4 +1,4 @@
-import * as functionsJsonData from './testData.json';
+import * as functionsJsonData from './test-data.json';
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";    
 const customFunctionsData = (<any>functionsJsonData).functions; 
 const port: number = 4201;

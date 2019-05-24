@@ -14,7 +14,7 @@ module.exports = async (env, options) => {
             commands: path.resolve(__dirname, './../src/commands/commands.ts'),
             functions: path.resolve(__dirname, './../src/functions/functions.ts'),
             polyfill: "@babel/polyfill",
-            taskpane: path.resolve(__dirname, './src/taskpaneTest.ts'),
+            taskpane: path.resolve(__dirname, './src/test-taskpane.ts'),
         },
         resolve: {
             extensions: [".ts", ".tsx", ".html", ".js"]
@@ -58,7 +58,7 @@ module.exports = async (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 filename: "taskpane.html",
-                template: path.resolve(__dirname, './src/taskpane.html'),
+                template: path.resolve(__dirname, './src/test-taskpane.html'),
                 chunks: ["polyfill", "taskpane"]
             }),
             new CopyWebpackPlugin([
@@ -69,7 +69,7 @@ module.exports = async (env, options) => {
             ]),
             new HtmlWebpackPlugin({
                 filename: "commands.html",
-                template: path.resolve(__dirname, './src/commands.html'),
+                template: path.resolve(__dirname, './src/test-commands.html'),
                 chunks: ["polyfill", "commands"]
             }),
         ],
