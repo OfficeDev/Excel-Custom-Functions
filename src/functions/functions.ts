@@ -5,7 +5,7 @@
  * @param second Second number
  * @returns The sum of the two numbers.
  */
-function add(first: number, second: number): number {
+export function add(first: number, second: number): number {
   return first + second;
 }
 
@@ -14,7 +14,7 @@ function add(first: number, second: number): number {
  * @customfunction 
  * @param invocation Custom function handler  
  */
-function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
+export function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
   const timer = setInterval(() => {
     const time = currentTime();
     invocation.setResult(time);
@@ -29,7 +29,7 @@ function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
  * Returns the current time.
  * @returns String with the current time formatted for the current locale.
  */
-function currentTime(): string {
+export function currentTime(): string {
   return new Date().toLocaleTimeString();
 }
 
@@ -39,7 +39,7 @@ function currentTime(): string {
  * @param incrementBy Amount to increment
  * @param invocation Custom function handler 
  */
-function increment(incrementBy: number, invocation: CustomFunctions.StreamingInvocation<number>): void {
+export function increment(incrementBy: number, invocation: CustomFunctions.StreamingInvocation<number>): void {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;
@@ -57,7 +57,7 @@ function increment(incrementBy: number, invocation: CustomFunctions.StreamingInv
  * @param message String to write.
  * @returns String to write.
  */
-function logMessage(message: string): string {
+export function logMessage(message: string): string {
   console.log(message);
 
   return message;
