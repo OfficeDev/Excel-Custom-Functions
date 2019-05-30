@@ -9,13 +9,13 @@ describe("Test Excel Custom Functions", function () {
         });
     });
     describe("Test logMessage function", function () {
-        it(`logMessage function should return expected value`, async function () {
+        it(`LogMessage function should return expected value`, async function () {
             const message: string = "Hello World!"
             assert.equal(functions.logMessage(message), message);
         });
     });
     describe("Test currentTime function", function () {
-        it(`currentTime function should return time value`, async function () {
+        it(`CurrentTime function should return time value`, async function () {
             const time = functions.currentTime();
             assert.equal(time.includes("AM") || time.includes("PM"), true);
         });
