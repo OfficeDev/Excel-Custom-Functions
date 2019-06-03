@@ -2,10 +2,9 @@ import * as assert from "assert";
 import * as fs from "fs";
 import * as mocha from "mocha";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
-import * as officeAddinTestHelpers from "office-addin-test-helpers";
+import { pingTestServer } from "office-addin-test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
-const testHelpers = require("./src/test-helpers");
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const port: number = 4201;
@@ -15,23 +14,20 @@ const testServer = new officeAddinTestServer.TestServer(port);
 let testValues: any = [];
 
 describe("Test Excel Custom Functions", function () {
-    before("Start test server", async function () {
+    before(`Setup test environment and sideload ${host}`, async function () {
+        this.timeout(0);
+        // Start test server and ping to ensure it's started
         const testServerStarted = await testServer.startTestServer(true /* mochaTest */);
-        const serverResponse = await officeAddinTestHelpers.pingTestServer(port);
+        const serverResponse = await pingTestServer(port);
         assert.equal(testServerStarted, true);
         assert.equal(serverResponse["status"], 200);
-    }),
-        describe("Start dev-server and sideload application", function () {
-            it(`Sideload should have completed for ${host} and dev-server should have started`, async function () {
-                this.timeout(0);
-                const startDevServer = await testHelpers.startDevServer();
-                assert.equal(startDevServer, true);
 
-                const sideloadCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js sideload -m ${manifestPath} -a ${host}`;
-                await startDebugging(manifestPath, AppType.Desktop, undefined, undefined, undefined, undefined,
-                    undefined, undefined, undefined, sideloadCmd);
-            });
-        });
+        // Call startDebugging to start dev-server and sideload
+        const devServerCmd = `npm run dev-server-test`;
+        const sideloadCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js sideload -m ${manifestPath} -a ${host}`;
+        await startDebugging(manifestPath, AppType.Desktop, undefined, undefined, devServerCmd, undefined,
+            undefined, undefined, undefined, sideloadCmd);
+    }),
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
             this.timeout(0);
@@ -69,9 +65,5 @@ describe("Test Excel Custom Functions", function () {
         // Unregister the add-in
         const unregisterCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js remove -m ${manifestPath} -a ${host}`;
         await stopDebugging(manifestPath, unregisterCmd);
-
-        // Stop dev-server
-        const devServerStopped = await testHelpers.stopDevServer();
-        assert.equal(devServerStopped, true);
     });
 });
