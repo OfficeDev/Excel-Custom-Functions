@@ -23,7 +23,7 @@ hosts.forEach(function (host) {
             assert.equal(serverResponse["status"], 200);
 
             // Call startDebugging to start dev-server and sideload
-            const devServerCmd = `npm run dev-server-test`;
+            const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js `;
             const sideloadCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js sideload -m ${manifestPath} -a ${host}`;
             await startDebugging(manifestPath, AppType.Desktop, undefined, undefined, devServerCmd, undefined,
                 undefined, undefined, undefined, sideloadCmd);
