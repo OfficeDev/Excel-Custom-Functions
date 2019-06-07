@@ -12,8 +12,9 @@
     "dev-server-port": 3000
   },
   "scripts": {
-    "build": "webpack -p --mode production",
-    "build-dev": "webpack --mode development",
+    "build": "webpack -p --mode production --https false",
+    "build:dev": "webpack --mode development --https false",
+    "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
     "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack-dev-server --mode development",
     "sideload": "echo Please specify which app using 'npm run sideload:app'.",
