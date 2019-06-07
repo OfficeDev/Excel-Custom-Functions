@@ -12,9 +12,10 @@
     "dev-server-port": 3000
   },
   "scripts": {
-    "build": "webpack -p --mode production",
-    "build-dev": "webpack --mode development",
-    "build-test": "webpack --config ./test/webpack.config.js --mode development",
+    "build": "webpack -p --mode production --https false",
+    "build:dev": "webpack --mode development --https false",
+    "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
+    "build-test": "webpack --config ./test/webpack.config.js --mode development --https false",
     "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack-dev-server --mode development",
     "dev-server-test": "webpack-dev-server --config ./test/webpack.config.js --mode development",
