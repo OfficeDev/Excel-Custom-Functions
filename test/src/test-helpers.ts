@@ -1,4 +1,3 @@
-import * as childProcess from "child_process";
 
 export async function closeWorkbook(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {

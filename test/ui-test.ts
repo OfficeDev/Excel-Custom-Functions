@@ -3,7 +3,6 @@ import * as fs from "fs";
 import * as mocha from "mocha";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { pingTestServer } from "office-addin-test-helpers";
-import { modifyManifestFile } from 'office-addin-manifest';
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 const host: string = "excel";
@@ -24,7 +23,6 @@ describe("Test Excel Custom Functions", function () {
         assert.equal(serverResponse["status"], 200);
 
         // Call startDebugging to start dev-server and sideload
-        await modifyManifestFile(`./test/test-manifest.xml`, 'random', `Excel Custom Functions Test`);
         const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
         const sideloadCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js sideload -m ${manifestPath} -a ${host}`;
         await startDebugging(manifestPath, AppType.Desktop, undefined, undefined, devServerCmd, undefined,

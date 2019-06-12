@@ -76,7 +76,6 @@ module.exports = async (env, options) => {
             }),
         ],
         devServer: {
-            contentBase: path.join(__dirname, 'testBuild'),
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },
