@@ -1,0 +1,25 @@
+{
+    "functions": {
+        "ADD": {
+            "formula": "=CONTOSO.ADD(5,2)",
+            "result": "7"
+        },
+        "CLOCK": {
+            "formula": "=CONTOSO.CLOCK()",
+            "result": {
+                "amString": "AM",
+                "pmString": "PM"
+            },
+            "streaming": true
+        },
+        "INCREMENT": {
+            "formula": "=CONTOSO.INCREMENT(4)",
+            "result": "4",
+            "streaming": true
+        },
+        "LOG": {
+            "formula": "=CONTOSO.LOG(\"this is a test\")",
+            "result": "this is a test"
+        }
+    }
+}
