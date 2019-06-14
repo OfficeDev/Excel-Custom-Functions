@@ -29,7 +29,10 @@
     "validate": "office-toolbox validate -m manifest.xml",
     "watch": "webpack --mode development --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/ws": "^6.0.1",
+    "ws": "^7.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/polyfill": "^7.4.4",

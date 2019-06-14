@@ -5,6 +5,41 @@ import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { pingTestServer } from "office-addin-test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
+import * as WebSocket from "ws";
+
+let connected = false;
+let events = [];
+
+function initializeDebugger(){
+    let ws = new WebSocket('ws://127.0.0.1:9229/runtime1');
+    ws.onopen = function () {
+        connected = true;
+        console.log('socket connection opened');
+        ws.send("{\"id\":1,\"method\":\"Console.enable\"}")
+        ws.send("{\"id\":2,\"method\":\"Debugger.enable\"}")
+        ws.send("{\"id\":3,\"method\":\"Runtime.enable\"}")
+        ws.send("{\"id\":5,\"method\":\"Runtime.runIfWaitingForDebugger\"}")
+    };
+
+    ws.onmessage = function (event) {
+        const data = JSON.parse(event.data.toString())
+        if(data["method"] === "Runtime.consoleAPICalled"){
+            console.log(event.data);
+            events.push(data["params"]);
+        }
+    };
+    ws.onclose = function(){
+        if (!connected){
+            setTimeout(function(){initializeDebugger()}, 1000);
+        }
+        else{
+            console.log("Connection closed...");
+        }
+    };
+    ws.onerror = function (event) {
+    };
+}
+
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const port: number = 4201;
@@ -31,6 +66,7 @@ describe("Test Excel Custom Functions", function () {
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
             this.timeout(0);
+            initializeDebugger();
             // Expecting six result values
             testValues = await testServer.getTestResults();
             assert.equal(testValues.length, 6);
@@ -54,6 +90,13 @@ describe("Test Excel Custom Functions", function () {
         });
         it("LOG function should return expected value", async function () {
             assert.equal(testJsonData.functions.LOG.result, testValues[5].Value);
+            //protocol validation
+            assert.strictEqual(events.length, 1);
+            const logEvent = events.shift();
+            assert.equal(logEvent["type"], "log");
+            assert.strictEqual(logEvent["args"].length, 1);
+            assert.equal(logEvent["args"][0]["type"], "string");
+            assert.equal(logEvent["args"][0]["description"], "this is a test");
         });
     });
     after("Teardown test environment", async function () {
