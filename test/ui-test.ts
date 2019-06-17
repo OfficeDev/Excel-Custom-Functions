@@ -9,12 +9,12 @@ import * as WebSocket from "ws";
 
 let connected = false;
 let events = [];
+let retries = 10;
 
 function initializeDebugger(){
     let ws = new WebSocket('ws://127.0.0.1:9229/runtime1');
     ws.onopen = function () {
         connected = true;
-        console.log('socket connection opened');
         ws.send("{\"id\":1,\"method\":\"Console.enable\"}")
         ws.send("{\"id\":2,\"method\":\"Debugger.enable\"}")
         ws.send("{\"id\":3,\"method\":\"Runtime.enable\"}")
@@ -24,16 +24,13 @@ function initializeDebugger(){
     ws.onmessage = function (event) {
         const data = JSON.parse(event.data.toString())
         if(data["method"] === "Runtime.consoleAPICalled"){
-            console.log(event.data);
             events.push(data["params"]);
         }
     };
     ws.onclose = function(){
-        if (!connected){
+        if (retries && !connected){
             setTimeout(function(){initializeDebugger()}, 1000);
-        }
-        else{
-            console.log("Connection closed...");
+            retries--;
         }
     };
     ws.onerror = function (event) {
@@ -93,6 +90,7 @@ describe("Test Excel Custom Functions", function () {
             //protocol validation
             assert.strictEqual(events.length, 1);
             const logEvent = events.shift();
+            console.log(logEvent);
             assert.equal(logEvent["type"], "log");
             assert.strictEqual(logEvent["args"].length, 1);
             assert.equal(logEvent["args"][0]["type"], "string");
