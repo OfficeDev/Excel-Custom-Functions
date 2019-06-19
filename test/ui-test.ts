@@ -29,7 +29,7 @@ function initializeDebugger(){
     };
     ws.onclose = function(){
         if (retries && !connected){
-            setTimeout(function(){initializeDebugger()}, 1000);
+            setTimeout(initializeDebugger, 1000);
             retries--;
         }
     };
