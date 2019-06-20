@@ -11,7 +11,7 @@ let connected = false;
 let events = [];
 let retries = 10;
 
-function initializeDebugger(){
+function initializeMockDebugger(){
     let ws = new WebSocket('ws://127.0.0.1:9229/runtime1');
     ws.onopen = function () {
         connected = true;
@@ -29,7 +29,7 @@ function initializeDebugger(){
     };
     ws.onclose = function(){
         if (retries && !connected){
-            setTimeout(initializeDebugger, 1000);
+            setTimeout(initializeMockDebugger, 1000);
             retries--;
         }
     };
@@ -63,7 +63,7 @@ describe("Test Excel Custom Functions", function () {
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
             this.timeout(0);
-            initializeDebugger();
+            initializeMockDebugger();
             // Expecting six result values
             testValues = await testServer.getTestResults();
             assert.equal(testValues.length, 6);
