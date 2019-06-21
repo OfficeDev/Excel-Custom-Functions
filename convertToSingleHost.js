@@ -8,9 +8,10 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 async function removeTestInfraStructure() {
     deleteFolder(path.resolve(`${process.cwd()}/test`));
-    await convertProjectToSingleHost(host);
     await updatePackageJsonFile(host);
     await updateLaunchJsonFile();
+    // delete this script
+    await unlinkFileAsync("./convertToSingleHost.js");
 }
 
 async function updatePackageJsonFile() {
