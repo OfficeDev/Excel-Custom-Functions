@@ -4,11 +4,12 @@ const util = require("util");
 const testPackages = ["@types/mocha", "@types/node", "current-processes", "mocha", "office-addin-test-helpers",
     "office-addin-test-server", "ts-node"];
 const readFileAsync = util.promisify(fs.readFile);
+const unlinkFileAsync = util.promisify(fs.unlink);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 async function removeTestInfraStructure() {
     deleteFolder(path.resolve(`${process.cwd()}/test`));
-    await updatePackageJsonFile(host);
+    await updatePackageJsonFile();
     await updateLaunchJsonFile();
     // delete this script
     await unlinkFileAsync("./convertToSingleHost.js");
