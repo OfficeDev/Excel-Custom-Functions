@@ -16,6 +16,7 @@
     "build": "webpack -p --mode production --https false",
     "build:dev": "webpack --mode development --https false",
     "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
+    "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack-dev-server --mode development",
     "sideload": "office-toolbox sideload -m manifest.xml -a excel",
     "sideload:excel": "office-toolbox sideload -m manifest.xml -a excel",
