@@ -41,7 +41,7 @@
     "@types/office-js": "^1.0.19",
     "@types/office-runtime": "^1.0.8",
     "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.0.3",
     "custom-functions-metadata-plugin": "^1.0.1",
     "file-loader": "^4.0.0",
