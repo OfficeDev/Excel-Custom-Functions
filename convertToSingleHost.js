@@ -8,8 +8,11 @@ const unlinkFileAsync = util.promisify(fs.unlink);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 async function removeTestInfraStructure() {
-    deleteFolder(path.resolve(`${process.cwd()}/test`));
-    deleteFolder(path.resolve(`${process.cwd()}/.github`));
+    deleteFolder(path.resolve(`./test`));
+    
+    // delete the .github folder
+    deleteFolder(path.resolve(`./.github`));
+    
     await updatePackageJsonFile();
     await updateLaunchJsonFile();
     // delete this script
