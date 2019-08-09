@@ -17,6 +17,9 @@
     "build-dev": "webpack --mode development --https false && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
     "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack-dev-server --mode development",
+    "lint": "office-addin-lint check",
+    "lint:fix": "office-addin-lint fix",
+    "prettier": "office-addin-lint prettier",
     "sideload": "echo Please specify which app using 'npm run sideload:app'.",
     "sideload:excel": "office-toolbox sideload -m manifest.xml -a excel",
     "sideload:powerpoint": "office-toolbox sideload -m manifest.xml -a powerpoint",
@@ -46,12 +49,15 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.3",
     "current-processes": "^0.2.1",
+    "eslint-config-office-addins": "^1.0.1",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mocha": "^6.1.4",
     "office-addin-debugging": "^2.4.2",
     "office-addin-dev-certs": "^1.3.2",
+    "office-addin-lint": "^1.0.1",
+    "office-addin-prettier-config": "^1.0.1",
     "office-addin-test-helpers": "^1.0.1",
     "office-addin-test-server": "^1.0.2",
     "office-toolbox": "^0.2.1",
@@ -62,5 +68,6 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
-  }
+  },
+  "prettier": "office-addin-prettier-config"
 }
