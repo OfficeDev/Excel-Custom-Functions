@@ -15,7 +15,8 @@ export async function run() {
   /**
    * Insert your PowerPoint code here
    */
-  Office.context.document.setSelectedDataAsync("Hello World!",
+  Office.context.document.setSelectedDataAsync(
+    "Hello World!",
     {
       coercionType: Office.CoercionType.Text
     },
