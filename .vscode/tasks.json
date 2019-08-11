@@ -64,6 +64,22 @@
       "problemMatcher": []
     },
     {
+      "label": "Lint: Check for problems",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "label": "Lint: Fix all auto-fixable problems",
+      "type": "npm",
+      "script": "lint:fix",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
       "label": "Stop Debug",
       "type": "npm",
       "script": "stop",
@@ -83,6 +99,6 @@
         "panel": "dedicated"
       },
       "problemMatcher": []
-    }
+    },
   ]
 }
