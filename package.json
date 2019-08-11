@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.5.4",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.6.3",
-    "@types/office-js": "^1.0.19",
+    "@types/office-js": "^1.0.27",
     "@types/office-runtime": "^1.0.8",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
