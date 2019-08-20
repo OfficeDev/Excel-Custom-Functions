@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import * as fs from "fs";
 import * as mocha from "mocha";
+import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
 import { pingTestServer } from "office-addin-test-helpers";
@@ -25,7 +26,8 @@ describe("Test Excel Custom Functions", function () {
 
         // Call startDebugging to start dev-server and sideload
         const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
-        await startDebugging(manifestPath, AppType.Desktop, toOfficeApp(host), undefined, undefined, devServerCmd);
+        const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
+        await startDebugging(manifestPath, AppType.Desktop, toOfficeApp(host), undefined, undefined, devServerCmd, devServerPort);
     }),
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
