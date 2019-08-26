@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+/* global console, document, Office */
+
 Office.onReady(info => {
   if (info.host === Office.HostType.PowerPoint) {
     document.getElementById("sideload-msg").style.display = "none";
@@ -15,7 +17,8 @@ export async function run() {
   /**
    * Insert your PowerPoint code here
    */
-  Office.context.document.setSelectedDataAsync("Hello World!",
+  Office.context.document.setSelectedDataAsync(
+    "Hello World!",
     {
       coercionType: Office.CoercionType.Text
     },
