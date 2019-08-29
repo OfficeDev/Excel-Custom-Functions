@@ -1,7 +1,9 @@
 import * as assert from "assert";
 import * as fs from "fs";
 import * as mocha from "mocha";
+import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
+import { toOfficeApp } from "office-addin-manifest";
 import { pingTestServer } from "office-addin-test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
@@ -24,9 +26,8 @@ describe("Test Excel Custom Functions", function () {
 
         // Call startDebugging to start dev-server and sideload
         const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
-        const sideloadCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js sideload -m ${manifestPath} -a ${host}`;
-        await startDebugging(manifestPath, AppType.Desktop, undefined, undefined, devServerCmd, undefined,
-            undefined, undefined, undefined, sideloadCmd);
+        const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
+        await startDebugging(manifestPath, AppType.Desktop, toOfficeApp(host), undefined, undefined, devServerCmd, devServerPort);
     }),
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
@@ -63,7 +64,6 @@ describe("Test Excel Custom Functions", function () {
         assert.equal(stopTestServer, true);
 
         // Unregister the add-in
-        const unregisterCmd = `node ./node_modules/office-toolbox/app/office-toolbox.js remove -m ${manifestPath} -a ${host}`;
-        await stopDebugging(manifestPath, unregisterCmd);
+        await stopDebugging(manifestPath);
     });
 });
