@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+/* global document, Office, Word */
+
 Office.onReady(info => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("sideload-msg").style.display = "none";
