@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global document, Office */
+/* global console document, Office */
 
 Office.onReady(info => {
   if (info.host === Office.HostType.Project) {
@@ -16,35 +16,30 @@ Office.onReady(info => {
 export async function run() {
   try {
     // Get the GUID of the selected task
-    Office.context.document.getSelectedTaskAsync((result) => {
+    Office.context.document.getSelectedTaskAsync(result => {
       let taskGuid;
       if (result.status === Office.AsyncResultStatus.Succeeded) {
         taskGuid = result.value;
 
         // Set the specified fields for the selected task.
         const targetFields = [Office.ProjectTaskFields.Name, Office.ProjectTaskFields.Notes];
-        const fieldValues = ['New task name', 'Notes for the task.'];
+        const fieldValues = ["New task name", "Notes for the task."];
 
         // Set the field value. If the call is successful, set the next field.
-        for (let i = 0; i < targetFields.length; i++) {
-          Office.context.document.setTaskFieldAsync(
-            taskGuid,
-            targetFields[i],
-            fieldValues[i],
-            (result) => {
-              if (result.status === Office.AsyncResultStatus.Succeeded) {
-                i++;
-              } else {
-                console.log(result.error);
-              }
+        for (let index = 0; index < targetFields.length; index++) {
+          Office.context.document.setTaskFieldAsync(taskGuid, targetFields[index], fieldValues[index], result => {
+            if (result.status === Office.AsyncResultStatus.Succeeded) {
+              index++;
+            } else {
+              console.log(result.error);
             }
-          );
+          });
         }
       } else {
         console.log(result.error);
       }
     });
-  } catch(error) {
+  } catch (error) {
     console.error(error);
   }
 }
