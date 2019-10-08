@@ -40,6 +40,8 @@ export async function run() {
             }
           );
         }
+      } else {
+        console.log(result.error);
       }
     });
   } catch(error) {
