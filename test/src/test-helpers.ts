@@ -1,5 +1,5 @@
 import * as childProcess from "child_process";
-import * as cps from "current-processes";
+const find = require('find-process');
 
 export async function closeDesktopApplication(application: string): Promise<boolean> {
     return new Promise<boolean>(async function (resolve, reject) {
@@ -76,17 +76,18 @@ export async function sleep(ms: number): Promise<any> {
 
 async function getProcessId(processName: string): Promise<number> {
     return new Promise<number>(async function (resolve, reject) {
-        cps.get(function (err: Error, processes: any) {
-            try {
-                const processArray = processes.filter(function (p: any) {
-                    return (p.name.indexOf(processName) > 0);
+        try {
+            find('name', processName, false /* strict */)
+                .then((process) => {
+                    if (process.length > 0) {
+                        resolve(process[0].pid);
+                    } else {
+                        resolve(undefined);
+                    }                    
                 });
-                resolve(processArray.length > 0 ? processArray[0].pid : undefined);
-            }
-            catch (err) {
-                reject(err);
-            }
-        });
+        } catch (err) {
+            reject(err);
+        }
     });
 }
 
