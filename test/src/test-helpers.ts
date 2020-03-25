@@ -1,5 +1,5 @@
 import * as childProcess from "child_process";
-const find = require('find-process');
+const find = require("find-process");
 
 export async function closeDesktopApplication(application: string): Promise<boolean> {
     return new Promise<boolean>(async function (resolve, reject) {
@@ -74,7 +74,7 @@ export async function sleep(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function getProcessId(processName: string): Promise<number> {
+async function getProcessId(processName: string): Promise<number|undefined> {
     return new Promise<number>(async function (resolve, reject) {
         try {
             find('name', processName, false /* strict */)
