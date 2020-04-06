@@ -1,5 +1,5 @@
 import * as childProcess from "child_process";
-const find = require("find-process");
+import find = require("find-process")
 
 export async function closeDesktopApplication(application: string): Promise<boolean> {
     return new Promise<boolean>(async function (resolve, reject) {
