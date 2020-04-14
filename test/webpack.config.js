@@ -18,7 +18,8 @@ module.exports = async (env, options) => {
             extensions: [".ts", ".tsx", ".html", ".js"]
         },
         node: {
-            child_process: 'empty'
+            child_process: 'empty',
+            fs: 'empty'
         },
         module: {
             rules: [
