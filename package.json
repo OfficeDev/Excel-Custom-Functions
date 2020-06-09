@@ -38,7 +38,7 @@
     "@types/find-process": "1.2.0",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.11.0",
-    "@types/office-js": "^1.0.91",
+    "@types/office-js-preview": "^1.0.85",
     "@types/office-runtime": "^1.0.13",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^2.0.1",

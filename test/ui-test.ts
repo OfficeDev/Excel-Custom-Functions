@@ -34,7 +34,7 @@ describe("Test Excel Custom Functions", function () {
             this.timeout(0);
             // Expecting six result values
             testValues = await testServer.getTestResults();
-            assert.equal(testValues.length, 6);
+            assert.equal(testValues.length, 7);
         });
         it("ADD function should return expected value", async function () {
             assert.equal(testJsonData.functions.ADD.result, testValues[0].Value);
@@ -55,6 +55,14 @@ describe("Test Excel Custom Functions", function () {
         });
         it("LOG function should return expected value", async function () {
             assert.equal(testJsonData.functions.LOG.result, testValues[5].Value);
+        });
+    });
+    describe(`Get test results for Excel taskpane project and validate results`, function () {
+        it("Validate expected result name", async function () {
+            assert.equal(testValues[6].Name, "fill-color");
+        });
+        it("Validate expected result", async function () {
+            assert.equal(testValues[6].Value, "#FFFF00");
         });
     });
     after("Teardown test environment", async function () {
