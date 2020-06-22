@@ -45,7 +45,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "custom-functions-metadata-plugin": "^1.0.30",
     "eslint-config-office-addins": "^1.0.15",
-    "file-loader": "^6.0.0",
+    "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.3.0",
     "mocha": "^7.1.1",
