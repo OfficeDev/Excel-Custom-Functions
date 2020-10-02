@@ -26,28 +26,70 @@
       ]
     },
     {
-      "name": "Excel Desktop",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "desktop"],
-      "args": ["--", "--app", "excel"]
+      "name": "Excel Desktop (Edge Chromium)",
+      "type": "edge",
+      "request": "attach",
+      "useWebView": "advanced",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
     },
     {
-      "name": "PowerPoint Desktop",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "desktop"],
-      "args": ["--", "--app", "powerpoint"]
+      "name": "Excel Desktop (Edge Legacy)",
+      "type": "office-addin",
+      "request": "attach",
+      "url": "https://localhost:3000/taskpane.html?_host_Info=Excel$Win32$16.01$en-US$$$$0",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
     },
     {
-      "name": "Word Desktop",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "desktop"],
-      "args": ["--", "--app", "word"]
+      "name": "PowerPoint Desktop (Edge Chromium)",
+      "type": "edge",
+      "request": "attach",
+      "useWebView": "advanced",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: PowerPoint Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "PowerPoint Desktop (Edge Legacy)",
+      "type": "office-addin",
+      "request": "attach",
+      "url": "https://localhost:3000/taskpane.html?_host_Info=PowerPoint$Win32$16.01$en-US$$$$0",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: PowerPoint Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "Word Desktop (Edge Chromium)",
+      "type": "edge",
+      "request": "attach",
+      "useWebView": "advanced",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Word Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "Word Desktop (Edge Legacy)",
+      "type": "office-addin",
+      "request": "attach",
+      "url": "https://localhost:3000/taskpane.html?_host_Info=Word$Win32$16.01$en-US$$$$0",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Word Desktop",
+      "postDebugTask": "Stop Debug"
     },
     {
       "name": "Office Online (Chrome)",
