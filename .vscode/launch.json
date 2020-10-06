@@ -26,16 +26,26 @@
       ]
     },
     {
-      "name": "Excel Desktop",
-      "type": "node",
+      "name": "Excel Desktop (Edge Chromium)",
+      "type": "edge",
       "request": "attach",
-      "port": 9229,
-      "protocol": "inspector",
-      "timeout": 600000,
-      "trace": true,
-      "preLaunchTask": "Debug: Desktop",
-      "postDebugTask": "Stop Debug",
-      "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
+      "useWebView": "advanced",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
+      "name": "Excel Desktop (Edge Legacy)",
+      "type": "office-addin",
+      "request": "attach",
+      "url": "https://localhost:3000/taskpane.html?_host_Info=Excel$Win32$16.01$en-US$$$$0",
+      "port": 9222,
+      "timeout": 45000,
+      "webRoot": "${workspaceRoot}",
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
     },
     {
       "name": "Office Online (Chrome)",
