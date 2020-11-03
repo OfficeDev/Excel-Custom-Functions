@@ -21,9 +21,17 @@
         "${workspaceFolder}/test/*.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "runtimeArgs": [
-        "--preserve-symlinks"
-      ]
+      "runtimeArgs": ["--preserve-symlinks"]
+    },
+    {
+      "name": "Custom Functions Runtime",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "protocol": "inspector",
+      "timeout": 600000,
+      "trace": true,
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
@@ -31,7 +39,7 @@
       "request": "attach",
       "useWebView": "advanced",
       "port": 9222,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
@@ -68,6 +76,12 @@
       "url": "${input:officeOnlineDocumentUrl}",
       "webRoot": "${workspaceFolder}",
       "preLaunchTask": "Debug: Web"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Excel Desktop (Edge Chromium and Custom Functions)",
+      "configurations": ["Excel Desktop (Edge Chromium)", "Custom Functions Runtime"],
     }
   ],
   "inputs": [
