@@ -56,7 +56,7 @@ module.exports = async (env, options) => {
             new HtmlWebpackPlugin({
                 filename: "taskpane.html",
                 template: path.resolve(__dirname, './src/test-taskpane.html'),
-                chunks: ["polyfill", "taskpane"]
+                chunks: ["polyfill", "taskpane", "functions", "commands"]
             }),
             new CopyWebpackPlugin([
                 {
