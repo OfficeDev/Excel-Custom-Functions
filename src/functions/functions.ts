@@ -18,6 +18,9 @@ export function add(first: number, second: number): number {
  */
 export function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
   const timer = setInterval(() => {
+    let currentTime = () => {
+      return new Date().toLocaleTimeString();
+    }
     const time = currentTime();
     invocation.setResult(time);
   }, 1000);
@@ -25,14 +28,6 @@ export function clock(invocation: CustomFunctions.StreamingInvocation<string>): 
   invocation.onCanceled = () => {
     clearInterval(timer);
   };
-}
-
-/**
- * Returns the current time.
- * @returns String with the current time formatted for the current locale.
- */
-export function currentTime(): string {
-  return new Date().toLocaleTimeString();
 }
 
 /**
