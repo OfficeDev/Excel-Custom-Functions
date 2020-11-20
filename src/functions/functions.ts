@@ -18,10 +18,7 @@ export function add(first: number, second: number): number {
  */
 export function clock(invocation: CustomFunctions.StreamingInvocation<string>): void {
   const timer = setInterval(() => {
-    let currentTime = () => {
-      return new Date().toLocaleTimeString();
-    }
-    const time = currentTime();
+    const time = new Date().toLocaleTimeString();
     invocation.setResult(time);
   }, 1000);
 
