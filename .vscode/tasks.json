@@ -29,7 +29,7 @@
       }
     },
     {
-      "label": "Debug: Desktop",
+      "label": "Debug: Excel Desktop",
       "type": "npm",
       "script": "start:desktop",
       "presentation": {

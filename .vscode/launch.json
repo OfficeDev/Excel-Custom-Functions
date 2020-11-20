@@ -59,9 +59,10 @@
       "preLaunchTask": "Debug: Web"
     },
     {
-      "name": "Office Online (Edge)",
-      "type": "edge",
+      "name": "Office Online (Edge Chromium)",
+      "type": "pwa-msedge",
       "request": "launch",
+      "port": 9222,
       // To debug your Add-in:
       // 1. When prompted, enter the url (share link) to an Office Online document.
       // 2. Sideload your Add-in. https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
