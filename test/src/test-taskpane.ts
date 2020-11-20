@@ -1,7 +1,7 @@
 import * as functionsJsonData from './test-data.json';
 import { sleep, closeWorkbook} from "./test-helpers";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers"; 
-import { run } from "../../src/taskpane/taskpane"  
+import { run } from "../../src/taskpane/taskpane";
 const customFunctionsData = (<any>functionsJsonData).functions; 
 const port: number = 4201;
 let testValues = [];
@@ -13,6 +13,7 @@ Office.initialize = async () => {
 
     const testServerResponse: object = await pingTestServer(port);
     if (testServerResponse["status"] === 200) {
+        Office.addin.showAsTaskpane();
         await runCfTests(testServerResponse["platform"]);
         await runTaskpaneTest();
         await sendTestResults(testValues, port);

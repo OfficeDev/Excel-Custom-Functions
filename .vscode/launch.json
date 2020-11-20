@@ -31,7 +31,7 @@
       "request": "attach",
       "useWebView": "advanced",
       "port": 9229,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
@@ -42,7 +42,7 @@
       "request": "attach",
       "url": "https://localhost:3000/taskpane.html?_host_Info=Excel$Win32$16.01$en-US$$$$0",
       "port": 9229,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
