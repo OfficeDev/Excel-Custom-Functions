@@ -41,7 +41,10 @@ module.exports = async (env, options) => {
         },
         {
           test: /\.(png|jpg|jpeg|gif)$/,
-          use: "file-loader"
+          loader: "file-loader",
+          options: {
+            name: '[path][name].[ext]',          
+          }
         }
       ]
     },
@@ -62,6 +65,17 @@ module.exports = async (env, options) => {
         {
           to: "taskpane.css",
           from: "./src/taskpane/taskpane.css"
+        },
+        {
+          to: "[name]." + buildType + ".[ext]",
+          from: "manifest*.xml",
+          transform(content) {
+            if (dev) {
+              return content;
+            } else {
+              return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+            }
+          }
         }
       ]),
       new CopyWebpackPlugin([
