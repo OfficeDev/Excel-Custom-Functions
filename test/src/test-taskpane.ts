@@ -13,7 +13,6 @@ Office.initialize = async () => {
 
     const testServerResponse: object = await pingTestServer(port);
     if (testServerResponse["status"] === 200) {
-        Office.addin.showAsTaskpane();
         await runCfTests(testServerResponse["platform"]);
         await runTaskpaneTest();
         await sendTestResults(testValues, port);
