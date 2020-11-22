@@ -30,8 +30,8 @@
       "type": "edge",
       "request": "attach",
       "useWebView": "advanced",
-      "port": 9222,
-      "timeout": 45000,
+      "port": 9229,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
@@ -42,7 +42,7 @@
       "request": "attach",
       "url": "https://localhost:3000/taskpane.html?_host_Info=Excel$Win32$16.01$en-US$$$$0",
       "port": 9222,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
@@ -52,8 +52,8 @@
       "type": "edge",
       "request": "attach",
       "useWebView": "advanced",
-      "port": 9222,
-      "timeout": 45000,
+      "port": 9229,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: PowerPoint Desktop",
       "postDebugTask": "Stop Debug"
@@ -64,7 +64,7 @@
       "request": "attach",
       "url": "https://localhost:3000/taskpane.html?_host_Info=PowerPoint$Win32$16.01$en-US$$$$0",
       "port": 9222,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: PowerPoint Desktop",
       "postDebugTask": "Stop Debug"
@@ -74,8 +74,8 @@
       "type": "edge",
       "request": "attach",
       "useWebView": "advanced",
-      "port": 9222,
-      "timeout": 45000,
+      "port": 9229,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Word Desktop",
       "postDebugTask": "Stop Debug"
@@ -86,7 +86,7 @@
       "request": "attach",
       "url": "https://localhost:3000/taskpane.html?_host_Info=Word$Win32$16.01$en-US$$$$0",
       "port": 9222,
-      "timeout": 45000,
+      "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Word Desktop",
       "postDebugTask": "Stop Debug"
@@ -103,9 +103,10 @@
       "preLaunchTask": "Debug: Web"
     },
     {
-      "name": "Office Online (Edge)",
-      "type": "edge",
+      "name": "Office Online (Edge Chromium)",
+      "type": "pwa-msedge",
       "request": "launch",
+      "port": 9222,
       // To debug your Add-in:
       // 1. When prompted, enter the url (share link) to an Office Online document.
       // 2. Sideload your Add-in. https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
