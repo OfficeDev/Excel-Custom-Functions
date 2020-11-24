@@ -54,26 +54,16 @@ module.exports = async (env, options) => {
                 input: path.resolve(__dirname, './../src/functions/functions.ts')
             }),
             new HtmlWebpackPlugin({
-                filename: "functions.html",
-                template: path.resolve(__dirname, './../src/functions/functions.html'),
-                chunks: ["polyfill", "functions"]
-            }),
-            new HtmlWebpackPlugin({
                 filename: "taskpane.html",
                 template: path.resolve(__dirname, './src/test-taskpane.html'),
-                chunks: ["polyfill", "taskpane"]
+                chunks: ["polyfill", "taskpane", "functions", "commands"]
             }),
             new CopyWebpackPlugin([
                 {
                     to: "taskpane.css",
                     from: path.resolve(__dirname, './../src/taskpane/taskpane.css')
                 }
-            ]),
-            new HtmlWebpackPlugin({
-                filename: "commands.html",
-                template: path.resolve(__dirname, './src/test-commands.html'),
-                chunks: ["polyfill", "commands"]
-            }),
+            ])
         ],
         devServer: {
             headers: {
