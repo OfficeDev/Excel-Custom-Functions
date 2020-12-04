@@ -9,8 +9,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Contoso Task Pane Add-in"/>
   <Description DefaultValue="A template to get started."/>
-  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
