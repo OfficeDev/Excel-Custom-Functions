@@ -29,6 +29,9 @@ Step 1: git clone https://github.com/DoHaiTran/Excel-Custom-Functions.git
 Step 2: Run cmd as administrator on Windows 10
 Step 3: cd to folder which you save the project
 Step 4: npm -v
+Step 5: npm install .To setup env, lib JS,TS
+Step 6: npm start
+Step 7: You can debug in Visual Studio
 
 ## Copyright
 
