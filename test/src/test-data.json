@@ -1,8 +1,8 @@
 {
     "functions": {
         "ADD": {
-            "formula": "=CONTOSO.ADD(5,2)",
-            "result": "7"
+            "formula": "=CONTOSO.ADD(15,10)",
+            "result": "25"
         },
         "CLOCK": {
             "formula": "=CONTOSO.CLOCK()",
