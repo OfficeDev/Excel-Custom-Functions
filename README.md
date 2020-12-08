@@ -2,7 +2,7 @@
 
 Custom functions enable you to add new functions to Excel by defining those functions in JavaScript as part of an add-in. Users within Excel can access custom functions just as they would any native function in Excel, such as `SUM()`.  
 
-This repository contains the source code used by the [Yo Office generator](https://github.com/OfficeDev/generator-office) when you create a new custom functions project. You can also use this repository as a sample to base your own custom functions project from if you choose not to use the generator. For more detailed information about custom functions in Excel, see the [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview) article in the Office Add-ins documentation or see the [additional resources](#additional-resources) section of this repository.
+This repository contains the source code used by the [Yo Office generator](https://github.com/OfficeDev/generator-office/https://github.com/DoHaiTran/Excel-Custom-Functions.git) when you create a new custom functions project. You can also use this repository as a sample to base your own custom functions project from if you choose not to use the generator. For more detailed information about custom functions in Excel, see the [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview) article in the Office Add-ins documentation or see the [additional resources](#additional-resources) section of this repository.
 
 ## Debugging custom functions
 
@@ -23,6 +23,15 @@ Questions about Microsoft Office 365 development in general should be posted to 
 * More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## How to run
+Step 1: git clone https://github.com/DoHaiTran/Excel-Custom-Functions.git
+Step 2: Run cmd as administrator on Windows 10
+Step 3: cd to folder which you save the project
+Step 4: npm -v
+Step 5: npm install .To setup env, lib JS,TS
+Step 6: npm start
+Step 7: You can debug in Visual Studio
 
 ## Copyright
 
