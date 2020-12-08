@@ -51,7 +51,7 @@
     "office-addin-debugging": "^3.0.34",
     "office-addin-dev-certs": "^1.5.5",
     "office-addin-lint": "^1.0.26",
-    "office-addin-manifest": "1.5.7",
+    "office-addin-manifest": "1.5.12",
     "office-addin-prettier-config": "^1.0.12",
     "office-addin-test-helpers": "^1.0.27",
     "office-addin-test-server": "^1.0.30",
