@@ -27,6 +27,8 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 ## How to run
 Step 1: git clone https://github.com/DoHaiTran/Excel-Custom-Functions.git
 Step 2: Run cmd as administrator on Windows 10
+Step 3: cd to folder which you save the project
+Step 4: npm -v
 
 ## Copyright
 
