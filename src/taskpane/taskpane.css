@@ -66,12 +66,12 @@
  }
  
 .ms-Button.ms-Button--hero .ms-Button-label {
-  color: #0078d7;
+  color: #0076d7;
 }
 
 .ms-Button.ms-Button--hero:hover .ms-Button-label,
 .ms-Button.ms-Button--hero:focus .ms-Button-label{
-  color: #005a9e;
+  color: #00189e;
   cursor: pointer;
 }
 
