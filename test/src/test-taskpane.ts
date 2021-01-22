@@ -26,8 +26,8 @@ async function runCfTests(platform: string): Promise<void> {
             range.formulas = [[formula]];
             await context.sync();
 
-            // Mac is slower so we need to wait longer for the function to return a value
-            await sleep(platform === "Windows" ? 2000 : 8000);
+            // Allow time for custom function to resolve
+            await sleep(8000);
 
             // Check to if this is a streaming function
             await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1, platform)
