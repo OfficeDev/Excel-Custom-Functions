@@ -11,13 +11,13 @@ Office.initialize = async () => {
 
     const testServerResponse: object = await pingTestServer(port);
     if (testServerResponse["status"] === 200) {
-        await runCfTests(testServerResponse["platform"]);
+        await runCfTests();
         await sendTestResults(testValues, port);
         await closeWorkbook();
     }
 };
 
-async function runCfTests(platform: string): Promise<void> {
+async function runCfTests(): Promise<void> {
     // Exercise custom functions
     await Excel.run(async context => {
         for (let key in customFunctionsData) {
@@ -30,7 +30,7 @@ async function runCfTests(platform: string): Promise<void> {
             await sleep(8000);
 
             // Check to if this is a streaming function
-            await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1, platform)
+            await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1)
         }
     });
 }
@@ -49,7 +49,7 @@ async function closeWorkbook(): Promise<void> {
      });
 }
 
-export async function readCFData(cfName: string, readCount: number, platform: string): Promise<boolean> {
+export async function readCFData(cfName: string, readCount: number): Promise<boolean> {
     return new Promise<boolean>(async (resolve, reject) => {
         await Excel.run(async context => {
             // if this is a streaming function, we want to capture two values so we can
@@ -61,7 +61,7 @@ export async function readCFData(cfName: string, readCount: number, platform: st
                     await context.sync();
 
                     // Mac is slower so we need to wait longer for the function to return a value
-                    await sleep(platform === "Windows" ? 2000 : 8000);
+                    await sleep(8000);
 
                     addTestResult(cfName, range.values[0][0]);
                     resolve(true);
