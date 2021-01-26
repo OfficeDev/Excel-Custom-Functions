@@ -65,8 +65,8 @@ async function convertProjectToSingleHost(host) {
   // delete the .github folder
   deleteFolder(path.resolve(`./.github`));
 
-  // delete this script
-  await unlinkFileAsync("./convertToSingleHost.js");
+  // delete repo support files
+  await deleteSupportFiles();
 }
 
 async function updatePackageJsonForSingleHost(host) {
@@ -142,6 +142,14 @@ function deleteFolder(folder) {
   }
 }
 
+async function deleteSupportFiles()
+{
+    await unlinkFileAsync("CONTRIBUTING.md");
+    await unlinkFileAsync(".gitignore");
+    await unlinkFileAsync("LICENSE");
+    await unlinkFileAsync("README.md");
+    await unlinkFileAsync("./convertToSingleHost.js");
+}
 /**
  * Modify the project so that it only supports a single host.
  * @param host The host to support.
