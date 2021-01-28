@@ -2,64 +2,53 @@ import * as childProcess from "child_process";
 import find = require("find-process")
 
 export async function closeDesktopApplication(application: string): Promise<boolean> {
-    return new Promise<boolean>(async function (resolve, reject) {
-        let processName: string = "";
-        switch (application.toLowerCase()) {
-            case "excel":
-                processName = "Excel";
-                break;
-            case "powerpoint":
-                processName = (process.platform === "win32") ? "Powerpnt" : "Powerpoint";
-                break;
-            case "onenote":
-                processName = "Onenote";
-                break;
-            case "outlook":
-                processName = "Outlook";
-                break;
-            case "project":
-                processName = "Project";
-                break;
-            case "word":
-                processName = (process.platform === "win32") ? "Winword" : "Word";
-                break;
-            default:
-                reject(`${application} is not a valid Office desktop application.`);
-        }
+    let processName: string = "";
+    switch (application.toLowerCase()) {
+        case "excel":
+            processName = "Excel";
+            break;
+        case "powerpoint":
+            processName = (process.platform === "win32") ? "Powerpnt" : "Powerpoint";
+            break;
+        case "onenote":
+            processName = "Onenote";
+            break;
+        case "outlook":
+            processName = "Outlook";
+            break;
+        case "project":
+            processName = "Project";
+            break;
+        case "word":
+            processName = (process.platform === "win32") ? "Winword" : "Word";
+            break;
+        default:
+            throw new Error(`${application} is not a valid Office desktop application.`);
+    }
 
-        try {
-            let appClosed: boolean = false;
-            if (process.platform == "win32") {
-                const cmdLine = `tskill ${processName}`;
-                appClosed = await executeCommandLine(cmdLine);
+    try {
+        let appClosed: boolean = false;
+        if (process.platform == "win32") {
+            const cmdLine = `tskill ${processName}`;
+            appClosed = await executeCommandLine(cmdLine);
+        } else {
+            const pid = await getProcessId(processName);
+            if (pid != undefined) {
+                process.kill(pid);
+                appClosed = true;
             } else {
-                const pid = await getProcessId(processName);
-                if (pid != undefined) {
-                    process.kill(pid);
-                    appClosed = true;
-                } else {
-                    resolve(false);
-                }
+                return false;
             }
-            resolve(appClosed);
-        } catch (err) {
-            reject(`Unable to kill ${application} process. ${err}`);
         }
-    });
+        
+        return appClosed;
+    } catch (err) {
+        throw new Error(`Unable to kill ${application} process. ${err}`);
+    }
 }
 
 export async function closeWorkbook(): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-        try {
-            await Excel.run(async context => {
-                // @ts-ignore
-                context.workbook.close(Excel.CloseBehavior.skipSave);
-                resolve();
-            });
-        } catch {
-            reject();
-        }
-    });
+    await Excel.run(async context => context.workbook.close(Excel.CloseBehavior.skipSave));
 }
 
 export function addTestResult(testValues: any[], resultName: string, resultValue: any, expectedValue: any) {
@@ -75,20 +64,9 @@ export async function sleep(ms: number): Promise<any> {
 }
 
 async function getProcessId(processName: string): Promise<number|undefined> {
-    return new Promise<number>(async function (resolve, reject) {
-        try {
-            find('name', processName, false /* strict */)
-                .then((process) => {
-                    if (process.length > 0) {
-                        resolve(process[0].pid);
-                    } else {
-                        resolve(undefined);
-                    }                    
-                });
-        } catch (err) {
-            reject(err);
-        }
-    });
+    const [process] = await find('name', processName, false /* strict */)
+
+    return process ? process.pid : undefined;
 }
 
 async function executeCommandLine(cmdLine: string): Promise<boolean> {

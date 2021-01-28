@@ -14,26 +14,19 @@ Office.onReady(async(info) => {
 });
 
 export async function runTest() {
-    return new Promise<void>(async (resolve, reject) => {
-        try {
-            // Execute taskpane code
-            await run();
-            await testHelpers.sleep(2000);
+    // Execute taskpane code
+    await run();
+    await testHelpers.sleep(2000);
 
-            // Get output of executed taskpane code
-            Word.run(async (context) => {
-                var firstParagraph = context.document.body.paragraphs.getFirst();
-                firstParagraph.load("text");
-                await context.sync();
-                await testHelpers.sleep(2000);
+    // Get output of executed taskpane code
+    return Word.run(async (context) => {
+        var firstParagraph = context.document.body.paragraphs.getFirst();
+        firstParagraph.load("text");
+        await context.sync();
+        await testHelpers.sleep(2000);
 
-                testHelpers.addTestResult(testValues, "output-message", firstParagraph.text, "Hello World");
-                await sendTestResults(testValues, port);
-                testValues.pop();
-                resolve();
-            });
-        } catch {
-            reject();
-        }
+        testHelpers.addTestResult(testValues, "output-message", firstParagraph.text, "Hello World");
+        await sendTestResults(testValues, port);
+        testValues.pop();
     });
 }
