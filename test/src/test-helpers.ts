@@ -8,7 +8,7 @@ export async function closeDesktopApplication(application: string): Promise<bool
             processName = "Excel";
             break;
         case "powerpoint":
-            processName = (process.platform === "win32") ? "Powerpnt" : "Powerpoint";
+            processName = (process.platform === "win32") ? "Powerpnt" : "PowerPoint";
             break;
         case "onenote":
             processName = "Onenote";

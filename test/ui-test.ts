@@ -7,7 +7,7 @@ import * as officeAddinTestHelpers from "office-addin-test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 import * as testHelpers from "./src/test-helpers";
-const hosts = ["Excel", "Word"];
+const hosts = ["Excel", "PowerPoint", "Word"];
 const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const testServerPort: number = 4201;
 
@@ -21,8 +21,8 @@ hosts.forEach(function (host) {
             // Start test server and ping to ensure it's started
             const testServerStarted = await testServer.startTestServer(true /* mochaTest */);
             const serverResponse = await officeAddinTestHelpers.pingTestServer(testServerPort);
-            assert.equal(testServerStarted, true);
-            assert.equal(serverResponse["status"], 200);
+            assert.strictEqual(testServerStarted, true);
+            assert.strictEqual(serverResponse["status"], 200);
 
             // Call startDebugging to start dev-server and sideload
             const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js `;
@@ -34,29 +34,30 @@ hosts.forEach(function (host) {
             it("Validate expected result count", async function () {
                 this.timeout(0);
                 testValues = await testServer.getTestResults();
-                assert.equal(testValues.length > 0, true);
+                assert.strictEqual(testValues.length > 0, true);
             });
             it("Validate expected result name", async function () {
-                assert.equal(testValues[0].resultName, host.toLowerCase() === "excel" ? "fill-color" : "output-message");
+                assert.strictEqual(testValues[0].resultName, host.toLowerCase() === "excel" ? "fill-color" : "output-message");
             });
             it("Validate expected result", async function () {
-                assert.equal(testValues[0].resultValue, testValues[0].expectedValue);
+                assert.strictEqual(testValues[0].resultValue, testValues[0].expectedValue);
             });
         });
         after(`Teardown test environment and shutdown ${host}`, async function () {
             this.timeout(0);
             // Stop the test server
             const stopTestServer = await testServer.stopTestServer();
-            assert.equal(stopTestServer, true);
-
-            // Unregister the add-in
-            await stopDebugging(manifestPath);
+            assert.strictEqual(stopTestServer, true);
 
             // Close desktop application for all apps but Excel, which has it's own closeWorkbook API
             if (host != 'Excel') {
                 const applicationClosed = await testHelpers.closeDesktopApplication(host);
-                assert.equal(applicationClosed, true);
+                assert.strictEqual(applicationClosed, true);
             }
         });
     });
+});
+
+after(`Unregister the add-in`, async function () {
+    return stopDebugging(manifestPath);
 });
