@@ -7,9 +7,9 @@
   },
   "license": "MIT",
   "config": {
-    "app-to-debug": "excel",
-    "app-type-to-debug": "desktop",
-    "dev-server-port": 3000
+    "app_to_debug": "excel",
+    "app_type_to_debug": "desktop",
+    "dev_server_port": 3000
   },
   "scripts": {
     "build": "webpack -p --mode production --https false",
