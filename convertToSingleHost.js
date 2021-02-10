@@ -65,8 +65,8 @@ async function convertProjectToSingleHost(host) {
   // delete the .github folder
   deleteFolder(path.resolve(`./.github`));
 
-  // delete this script
-  await unlinkFileAsync("./convertToSingleHost.js");
+  // delete repo support files
+  await deleteSupportFiles();
 }
 
 async function updatePackageJsonForSingleHost(host) {
