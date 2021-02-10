@@ -143,6 +143,14 @@ function deleteFolder(folder) {
   }
 }
 
+async function deleteSupportFiles()
+{
+    await unlinkFileAsync("CONTRIBUTING.md");
+    await unlinkFileAsync(".gitignore");
+    await unlinkFileAsync("LICENSE");
+    await unlinkFileAsync("README.md");
+    await unlinkFileAsync("./convertToSingleHost.js");
+}
 /**
  * Modify the project so that it only supports a single host.
  * @param host The host to support.
