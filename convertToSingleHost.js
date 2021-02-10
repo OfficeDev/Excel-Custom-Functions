@@ -91,6 +91,9 @@ async function updatePackageJsonForSingleHost(host) {
     ) {
       delete content.scripts[key];
     }
+    if (host === "outlook" && key == "start:desktop:outlook") {
+      delete content.scripts[key];
+    }
   });
 
   if (!convertTest) {
