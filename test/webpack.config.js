@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
+
 const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
-const webpack = require("webpack");
 
 module.exports = async (env, options) => {
-    const dev = options.mode === "development";
+    // const dev = options.mode === "development";
     const config = {
         devtool: "source-map",
         entry: {
