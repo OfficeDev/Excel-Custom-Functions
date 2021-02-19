@@ -6,6 +6,7 @@
     "url": "https://github.com/OfficeDev/Excel-Custom-Functions.git"
   },
   "license": "MIT",
+  "random": "change",
   "config": {
     "app-to-debug": "excel",
     "app-type-to-debug": "desktop",
