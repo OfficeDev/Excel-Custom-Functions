@@ -39,6 +39,16 @@
       "problemMatcher": []
     },
     {
+      "label": "Debug: Outlook Desktop",
+      "type": "npm",
+      "script": "start:desktop -- --app outlook",
+      "presentation": {
+        "clear": true,
+        "panel": "dedicated",
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Debug: PowerPoint Desktop",
       "type": "npm",
       "script": "start:desktop -- --app powerpoint",

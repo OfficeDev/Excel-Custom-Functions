@@ -22,6 +22,7 @@
     "prettier": "office-addin-lint prettier",
     "start": "office-addin-debugging start manifest.xml",
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
+    "start:desktop:outlook": "office-addin-debugging start manifest.outlook.xml desktop --app outlook",
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
     "test": "mocha -r ts-node/register test/*.ts",

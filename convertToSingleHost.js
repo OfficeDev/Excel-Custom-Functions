@@ -88,6 +88,7 @@ async function updatePackageJsonForSingleHost(host) {
     if (key.startsWith("sideload:")
       || key.startsWith("unload:")
       || key === "convert-to-single-host"
+      || key === "start:desktop:outlook"
     ) {
       delete content.scripts[key];
     }
