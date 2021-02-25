@@ -69,12 +69,9 @@
       "problemMatcher": []
     },
     {
-      // To debug your Add-in:
-      // 1. When prompted, enter the url (share link) to an Office Online document.
-      // 2. Sideload your Add-in. https://docs.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing
       "label": "Debug: Web",
       "type": "npm",
-      "script": "start:web -- --document ${input:officeOnlineDocumentUrl}",
+      "script": "start:web",
       "presentation": {
         "clear": true,
         "panel": "shared",
@@ -143,12 +140,5 @@
       },
       "problemMatcher": []
     },
-  ],
-  "inputs": [
-    {
-      "id": "officeOnlineDocumentUrl",
-      "type": "promptString",
-      "description": "Please enter the url for the Office Online document."
-    }
   ]
 }
