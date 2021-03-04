@@ -29,7 +29,6 @@
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.13.1",
     "@babel/polyfill": "^7.12.1",
@@ -43,7 +42,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.1.1",
-    "custom-functions-metadata-plugin": "^1.0.41",
+    "custom-functions-metadata-plugin": "^1.0.43",
     "eslint-config-office-addins": "^1.0.20",
     "file-loader": "^4.3.0",
     "html-loader": "^0.5.5",
