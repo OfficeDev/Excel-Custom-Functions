@@ -146,7 +146,6 @@ function deleteFolder(folder) {
 async function deleteSupportFiles()
 {
     await unlinkFileAsync("CONTRIBUTING.md");
-    await unlinkFileAsync(".gitignore");
     await unlinkFileAsync("LICENSE");
     await unlinkFileAsync("README.md");
     await unlinkFileAsync("./convertToSingleHost.js");
