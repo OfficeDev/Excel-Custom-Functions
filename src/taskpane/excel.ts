@@ -10,7 +10,7 @@ import "../../assets/icon-80.png";
 
 /* global console, document, Excel, Office */
 
-Office.onReady((info) => {
+Office.onReady(info => {
   if (info.host === Office.HostType.Excel) {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
@@ -20,7 +20,7 @@ Office.onReady((info) => {
 
 export async function run() {
   try {
-    await Excel.run(async (context) => {
+    await Excel.run(async context => {
       /**
        * Insert your Excel code here
        */
