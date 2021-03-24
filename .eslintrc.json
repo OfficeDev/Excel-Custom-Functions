@@ -11,9 +11,6 @@
     },
     "project": "./tsconfig.json"
     },
-  "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
-  },
   "extends": [
     "eslint-config-office-addins"
   ]
