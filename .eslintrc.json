@@ -10,7 +10,7 @@
       "jsx": true
     },
     "project": "./tsconfig.json"
-    },
+  },
   "extends": [
     "eslint-config-office-addins"
   ]
