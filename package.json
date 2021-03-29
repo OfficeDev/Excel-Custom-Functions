@@ -11,6 +11,10 @@
     "app_type_to_debug": "desktop",
     "dev_server_port": 3000
   },
+  "engines": {
+    "node": ">=14 <15",
+    "npm": ">=6 <7"
+  },
   "scripts": {
     "build": "webpack -p --mode production --https false",
     "build:dev": "webpack --mode development --https false",
