@@ -33,8 +33,7 @@
       "protocol": "inspector",
       "timeout": 600000,
       "preLaunchTask": "Debug: Excel Desktop",
-      "postDebugTask": "Stop Debug",
-      "outFiles": [ "${workspaceFolder}/dist/**/*.js" ]
+      "postDebugTask": "Stop Debug"
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
