@@ -11,7 +11,7 @@ module.exports = async (env, options) => {
     const config = {
         devtool: "source-map",
         entry: {
-            polyfill: "@babel/polyfill",
+            polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
             test: path.resolve(__dirname, './src/test-taskpane.ts')
         },
         output: { path: path.resolve(__dirname, "testBuild") },
@@ -27,8 +27,13 @@ module.exports = async (env, options) => {
                 {
                     test: /\.ts$/,
                     exclude: /node_modules/,
-                    use: "babel-loader"
-                },  
+                    use: {
+                      loader: "babel-loader",
+                      options: {
+                        presets: ['@babel/preset-typescript']
+                      }
+                    }
+                },
                 {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
