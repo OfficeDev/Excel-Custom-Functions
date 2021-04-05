@@ -50,7 +50,8 @@ module.exports = async (env, options) => {
     },
     plugins: [
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: dev ? [] : ["**/*"]
+        cleanOnceBeforeBuildPatterns: dev ? [] : ["**/*"],
+        cleanAfterEveryBuildPatterns: ["!**/*"]
       }),
       new CustomFunctionsMetadataPlugin({
         output: "functions.json",
