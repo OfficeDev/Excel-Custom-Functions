@@ -26,7 +26,6 @@ async function runCfTests(platform: string): Promise<void> {
             range.formulas = [[formula]];
             await context.sync();
 
-            // Mac is slower so we need to wait longer for the function to return a value
             await sleep(8000);
 
             // Check to if this is a streaming function
@@ -60,7 +59,6 @@ export async function readCFData(cfName: string, readCount: number, platform: st
                     range.load("values");
                     await context.sync();
 
-                    // Mac is slower so we need to wait longer for the function to return a value
                     await sleep(8000);
 
                     addTestResult(cfName, range.values[0][0]);
