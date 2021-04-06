@@ -27,7 +27,7 @@ async function runCfTests(platform: string): Promise<void> {
             await context.sync();
 
             // Mac is slower so we need to wait longer for the function to return a value
-            await sleep(platform === "Windows" ? 2000 : 8000);
+            await sleep(8000);
 
             // Check to if this is a streaming function
             await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1, platform)
@@ -61,7 +61,7 @@ export async function readCFData(cfName: string, readCount: number, platform: st
                     await context.sync();
 
                     // Mac is slower so we need to wait longer for the function to return a value
-                    await sleep(platform === "Windows" ? 2000 : 8000);
+                    await sleep(8000);
 
                     addTestResult(cfName, range.values[0][0]);
                     resolve(true);
