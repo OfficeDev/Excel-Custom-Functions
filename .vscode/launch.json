@@ -26,6 +26,16 @@
       ]
     },
     {
+      "name": "Excel Desktop (Custom Functions)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "protocol": "inspector",
+      "timeout": 600000,
+      "preLaunchTask": "Debug: Excel Desktop",
+      "postDebugTask": "Stop Debug"
+    },
+    {
       "name": "Excel Desktop (Edge Chromium)",
       "type": "edge",
       "request": "attach",
@@ -47,6 +57,7 @@
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug"
     },
+
     {
       "name": "Office Online (Chrome)",
       "type": "chrome",
