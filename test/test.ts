@@ -7,7 +7,7 @@ import { toOfficeApp } from "office-addin-manifest";
 import { pingTestServer } from "office-addin-test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
-import * as WebSocket from "ws";
+const WebSocket = require("ws");
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const port: number = 4201;
