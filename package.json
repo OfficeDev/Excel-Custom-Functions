@@ -43,7 +43,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.1.1",
-    "custom-functions-metadata-plugin": "^1.0.49",
+    "custom-functions-metadata-plugin": "^1.0.41",
     "eslint-config-office-addins": "^1.0.23",
     "file-loader": "^4.3.0",
     "html-loader": "^0.5.5",
