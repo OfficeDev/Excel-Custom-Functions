@@ -17,7 +17,7 @@ Office.initialize = () => {
 
 async function run() {
   try {
-    await Excel.run(async context => {
+    await Excel.run(async (context) => {
       /**
        * Insert your Excel code here
        */
