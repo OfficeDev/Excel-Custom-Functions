@@ -5,7 +5,7 @@
  * @param second Second number
  * @returns The sum of the two numbers.
  */
-/* global clearInterval, console, setInterval */
+/* global clearInterval, console, CustomFunctions, setInterval */
 
 export function add(first: number, second: number): number {
   return first + second;

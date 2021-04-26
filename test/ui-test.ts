@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as fs from "fs";
-import * as mocha from "mocha";
+import { after, before, describe, it } from "mocha";
 import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
