@@ -50,7 +50,7 @@
     "html-webpack-plugin": "^4.5.2",
     "mocha": "^8.3.2",
     "office-addin-cli": "^1.1.1",
-    "office-addin-debugging": "^3.0.42",
+    "office-addin-debugging": "^4.1.6",
     "office-addin-dev-certs": "^1.5.18",
     "office-addin-lint": "^1.1.7",
     "office-addin-manifest": "^1.5.22",

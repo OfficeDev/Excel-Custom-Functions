@@ -27,8 +27,16 @@ describe("Test Excel Custom Functions", function () {
         // Call startDebugging to start dev-server and sideload
         const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
         const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
-            await startDebugging(manifestPath, AppType.Desktop, toOfficeApp(host), undefined, undefined, 
-                devServerCmd, devServerPort, undefined, undefined, undefined, false /* enableDebugging */);
+        const options = { 
+            appType: AppType.Desktop, 
+            app: toOfficeApp(host), 
+            devServerCommandLine: devServerCmd, 
+            devServerPort: devServerPort, 
+            enableDebugging: false,
+            enableLiveReload: true,
+            openDevTools: false
+        };
+        await startDebugging(manifestPath, options);
     }),
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
