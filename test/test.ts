@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import * as fs from "fs";
-import * as mocha from "mocha";
+import { after, before, describe, it } from "mocha";
 import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
@@ -32,8 +32,14 @@ describe("Test Excel Custom Functions", function () {
         // Call startDebugging to start dev-server and sideload
         const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
         const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
-            await startDebugging(manifestPath, AppType.Desktop, toOfficeApp(host), undefined, undefined, 
-                devServerCmd, devServerPort, undefined, undefined, undefined, true /* enableDebugging */);
+        const options = { 
+            appType: AppType.Desktop, 
+            app: toOfficeApp(host), 
+            devServerCommandLine: devServerCmd, 
+            devServerPort: devServerPort, 
+            enableDebugging: false
+        };
+        await startDebugging(manifestPath, options);
     });
     describe("Test Debugger", function () {
         let ws;
