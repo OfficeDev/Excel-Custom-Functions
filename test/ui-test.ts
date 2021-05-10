@@ -32,9 +32,7 @@ describe("Test Excel Custom Functions", function () {
             app: toOfficeApp(host), 
             devServerCommandLine: devServerCmd, 
             devServerPort: devServerPort, 
-            enableDebugging: false,
-            enableLiveReload: true,
-            openDevTools: false
+            enableDebugging: false
         };
         await startDebugging(manifestPath, options);
     }),
