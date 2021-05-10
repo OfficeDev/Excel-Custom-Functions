@@ -41,10 +41,19 @@ For most contributions, you'll be asked to sign a Contribution License Agreement
 Be sure to satisfy all of the requirements in the following list before submitting a pull request: 
 
 - Follow the code style that is appropriate for the platform and language in this repo. For example, Android code follows the style conventions found in the [Code Style for Contributors guide](https://source.android.com/source/code-style.html).
-- Test your code.
+- Test your code throught the [Testing Guidelines](https://github.com/OfficeDev/Excel-Custom-Functions/blob/master/CONTRIBUTING.md#testing-guidelines).
 - Test the UI thoroughly to be sure nothing has been broken by your change.
 - Keep the size of your code change reasonable. if the repository owner cannot review your code change in 4 hours or less, your pull request may not be reviewed and approved quickly.
 - Avoid unnecessary changes. The reviewer will check differences between your code and the original code. Whitespace changes are called out along with your code. Be sure your changes will help improve the content. 
+
+### Testing guidelines
+
+Before submitting your changes, please make the following manual tests to certify that the following scenarios are still working:
+
+- Set data in taskpane and read it using custom functions
+- Set data in custom function and read it in taskpane
+
+To quick set this manual test, just follow the instructions in [SharedApp Testing](https://docs.microsoft.com/en-us/office/dev/add-ins/tutorials/share-data-and-events-between-custom-functions-and-the-task-pane-tutorial#create-custom-functions-to-get-or-store-shared-state)
 
 ### Submit a pull request to the master branch 
 
