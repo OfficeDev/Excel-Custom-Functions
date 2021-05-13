@@ -15,11 +15,11 @@ let messageId = 0;
 let connectionOpened = false;
 const limitOfReconnectTries = 25;
 
-async function sleep(ms: number): Promise<any> {
+async function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<any> {
+async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<WebSocket | undefined> {
     return new Promise((resolve) => {
         console.log("Attempting to connect to websocket...");
         const ws = new WebSocket(url);
@@ -41,7 +41,7 @@ async function connectToWebsocket(url: string, reconnectTry: number = 1): Promis
             console.log(JSON.parse(data));
             console.log("JSON parse message error = ");
             console.log(JSON.parse(data).error);
-            assert.equal(JSON.parse(data).error, undefined);
+            assert.strictEqual(JSON.parse(data).error, undefined);
         };
         ws.onclose = async () => {
             console.log("Closing on reconnect try = " + reconnectTry);
@@ -82,7 +82,7 @@ describe("Test Excel Custom Functions", function () {
         await startDebugging(manifestPath, options);
     });
     describe("Test Debugger", function () {
-        let ws;
+        let ws: WebSocket;
         before("Open websocket connection to Debugger", async function () {
             this.timeout(limitOfReconnectTries * 10000);
             const url = 'ws://localhost:9229/runtime1';
