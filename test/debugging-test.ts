@@ -11,7 +11,6 @@ const WebSocket = require("ws");
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest-debugging.xml`);
 
-let ws;
 let messageId = 0;
 let connectionOpened = false;
 const limitOfReconnectTries = 25;
@@ -21,13 +20,14 @@ async function sleep(ms: number): Promise<any> {
 }
 
 async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<any> {
-    return new Promise(() => {
+    return new Promise((resolve) => {
         console.log("Attempting to connect to websocket...");
-        ws = new WebSocket(url);
+        const ws = new WebSocket(url);
     
         ws.onopen = () => {
             console.log('connection opened');
             connectionOpened = true;
+            return resolve(ws);
         };
         ws.onerror = (err) => {
             if(connectionOpened) {
@@ -44,25 +44,27 @@ async function connectToWebsocket(url: string, reconnectTry: number = 1): Promis
             assert.equal(JSON.parse(data).error, undefined);
         };
         ws.onclose = async () => {
+            console.log("Closing on reconnect try = " + reconnectTry);
             if(connectionOpened) {
                 console.log("Closing websocket");
-            } else {            
-                if(reconnectTry < limitOfReconnectTries) {
-                    await sleep(1000);
-                    await connectToWebsocket(url, reconnectTry+1);
-                }
+            } else if(reconnectTry < limitOfReconnectTries) {
+                await sleep(1000);
+                return resolve(await connectToWebsocket(url, reconnectTry+1));
+            } else {
+                console.log("Return reject");
+                return resolve(undefined);
             }
         };
     });
 }
 
-function sendWebsocketMessage(method : string) {
+/*function sendWebsocketMessage(method : string) {
     messageId++;
     ws.send(JSON.stringify({
         id: messageId,
         method: method
     }));
-}
+}*/
 
 describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
@@ -80,10 +82,13 @@ describe("Test Excel Custom Functions", function () {
         await startDebugging(manifestPath, options);
     });
     describe("Test Debugger", function () {
+        let ws;
         before("Open websocket connection to Debugger", async function () {
-            this.timeout(limitOfReconnectTries * 1000);
+            this.timeout(limitOfReconnectTries * 10000);
             const url = 'ws://localhost:9229/runtime1';
-            await connectToWebsocket(url);
+            ws = await connectToWebsocket(url);
+            console.log("After connecting");
+            assert.notStrictEqual(ws, undefined, "Websocket could not be open");
         }),
         it("enable debugging", async function () {
             //sendWebsocketMessage('Debugger.enable');
