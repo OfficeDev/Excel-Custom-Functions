@@ -75,22 +75,22 @@ describe("Test Excel Custom Functions", function () {
     describe("Test Debugger", function () {
         let ws: WebSocket;
         before("Open websocket connection to Debugger", async function () {
-            this.timeout(limitOfReconnectTries * 10000);
+            this.timeout(limitOfReconnectTries * 1000);
             const url = 'ws://localhost:9229/runtime1';
             ws = await connectToWebsocket(url);
             assert.notStrictEqual(ws, undefined, "Websocket could not be open");
         }),
         it("enable debugging", async function () {
             ws.send(composeWsMessage('Debugger.enable'));
-            await(sleep(1000));
+            await sleep(1000);
         });
         it("pause debugging", async function () {
             ws.send(composeWsMessage('Debugger.pause'));
-            await(sleep(1000));
+            await sleep(1000);
         });
         it("resume debugging", async function () {
             ws.send(composeWsMessage('Debugger.resume'));
-            await(sleep(1000));
+            await sleep(1000);
         });
         after("Close websocket connection", async function() {
             ws.close();
@@ -98,7 +98,6 @@ describe("Test Excel Custom Functions", function () {
     });
     after("Teardown test environment", async function () {
         this.timeout(0);
-        // Unregister the add-in
         await stopDebugging(manifestPath);
     });
 });
