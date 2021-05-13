@@ -13,7 +13,7 @@ const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest
 
 let messageId = 0;
 let connectionOpened = false;
-const limitOfReconnectTries = 25;
+const limitOfReconnectTries = 60;
 
 async function sleep(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
