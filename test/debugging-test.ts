@@ -15,8 +15,25 @@ async function sleep(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function connectToWebsocket(url: string): Promise<any> {
+    for(let i = 0; i < 1; i ++) {
+        console.log("Await i = " + i);
+        try {
+            await sleep(5000);
+            ws = new WebSocket(url);
+        } catch(err) {
+            console.log("");
+            console.log("");
+            console.log("");
+            console.log("err2 = ");
+            console.log(err);
+        }
+    }
+}
+
 let ws;
 let messageId = 0;
+let connectionOpened = false;
 function sendWebsocketMessage(method : string) {
     messageId++;
     ws.send(JSON.stringify({
@@ -38,28 +55,54 @@ describe("Test Excel Custom Functions", function () {
             devServerPort: devServerPort, 
             enableDebugging: true // Put true here, false just for testing the tester
         };
-        await startDebugging(manifestPath, options);
+        //await startDebugging(manifestPath, options);
     });
     describe("Test Debugger", function () {
         before("Open websocket connection to Debugger", async function () {
-            this.timeout(12000);
-            await sleep(10000);
+            this.timeout(25000);
+            //await sleep(20000);
+            //await sleep(10000);
             const url = 'ws://localhost:9229/runtime1';
             ws = new WebSocket(url);
-            await sleep(1000);
+            //await sleep(1000);
 
-            let websocketOpened = false;
-            for(let i = 0; i < 10 && !websocketOpened; i ++) {
-                await(sleep(1000));
-            }
+            //await connectToWebsocket(url);
+            //await sleep(12000);
 
-            ws.on('error', (err) => {
-                assert.fail(`Connection could not be established. ${err}`);
-            });
+            ws.onopen = () => {
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log('connected opened');
+            };
+            ws.onerror = (err) => {
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("err = ");
+                console.log(err);
+                if (ws.readyState !== WebSocket.OPEN) {
+                    ws = new WebSocket(url);
+                }
+                else {
+                    assert.fail(`Websocket error: ${err.message}`);
+                }
+            };
 
-            ws.on('message', (data) => {
+            ws.onmessage = (data) => {
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("Message = " + data);
                 assert.equal(JSON.parse(data).error, undefined);
-            });
+            };
+            while(ws.readyState !== WebSocket.OPEN) {
+                console.log("Sleeping for 1 second zzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+                await sleep(1000);
+            }
         }),
         it("enable debugging", function () {
             sendWebsocketMessage('Debugger.enable');

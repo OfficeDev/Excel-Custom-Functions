@@ -15,7 +15,7 @@ const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
 const testServer = new officeAddinTestServer.TestServer(port);
 let testValues: any = [];
 
-describe("Test Excel Custom Functions", function () {
+/*describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
         this.timeout(0);
         // Start test server and ping to ensure it's started
@@ -73,4 +73,4 @@ describe("Test Excel Custom Functions", function () {
         // Unregister the add-in
         await stopDebugging(manifestPath);
     });
-});
+});*/
