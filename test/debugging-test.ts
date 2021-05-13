@@ -14,12 +14,13 @@ const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest
 let ws;
 let messageId = 0;
 let connectionOpened = false;
+const limitOfReconnectTries = 25;
 
 async function sleep(ms: number): Promise<any> {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function connectToWebsocket(url: string): Promise<any> {
+async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<any> {
     return new Promise(() => {
         console.log("Attempting to connect to websocket...");
         ws = new WebSocket(url);
@@ -45,9 +46,11 @@ async function connectToWebsocket(url: string): Promise<any> {
         ws.onclose = async () => {
             if(connectionOpened) {
                 console.log("Closing websocket");
-            } else {
-                await sleep(1000);
-                await connectToWebsocket(url);
+            } else {            
+                if(reconnectTry < limitOfReconnectTries) {
+                    await sleep(1000);
+                    await connectToWebsocket(url, reconnectTry+1);
+                }
             }
         };
     });
@@ -67,18 +70,18 @@ describe("Test Excel Custom Functions", function () {
         // Call startDebugging to start dev-server and sideload
         const devServerCmd = `npm run dev-server -- --config ./test/webpack-debugging.config.js`;
         const devServerPort = parseNumber(3001);
-        const options = { 
-            appType: AppType.Desktop, 
-            app: toOfficeApp(host), 
-            devServerCommandLine: devServerCmd, 
-            devServerPort: devServerPort, 
-            enableDebugging: true // Put true here, false just for testing the tester
+        const options = {
+            appType: AppType.Desktop,
+            app: toOfficeApp(host),
+            devServerCommandLine: devServerCmd,
+            devServerPort: devServerPort,
+            enableDebugging: true
         };
         await startDebugging(manifestPath, options);
     });
     describe("Test Debugger", function () {
         before("Open websocket connection to Debugger", async function () {
-            this.timeout(25000);
+            this.timeout(limitOfReconnectTries * 1000);
             const url = 'ws://localhost:9229/runtime1';
             await connectToWebsocket(url);
         }),
