@@ -85,7 +85,7 @@ describe("Test Excel Custom Functions", function () {
             await(sleep(1000));
         });
         it("pause debugging", async function () {
-            ws.send(composeWsMessage('Debugger.pausea'));
+            ws.send(composeWsMessage('Debugger.pause'));
             await(sleep(1000));
         });
         it("resume debugging", async function () {
