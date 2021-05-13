@@ -20,31 +20,37 @@ async function sleep(ms: number): Promise<any> {
 }
 
 async function connectToWebsocket(url: string): Promise<any> {
-    console.log("Attempting to connect to websocket...");
-    ws = new WebSocket(url);
-
-    ws.onopen = () => {
-        console.log('connection opened');
-        connectionOpened = true;
-    };
-    ws.onerror = (err) => {
-        if(connectionOpened) {
-            assert.fail(`Websocket error: ${err.message}`);
-        }
-    };
-    ws.onmessage = (data) => {
-        console.log("Message = " + data);
-        console.log(data);
-        assert.equal(JSON.parse(data).error, undefined);
-    };
-    ws.onclose = async () => {
-        if(connectionOpened) {
-            console.log("Closing websocket");
-        } else {
-            await sleep(1000);
-            await connectToWebsocket(url);
-        }
-    };
+    return new Promise(() => {
+        console.log("Attempting to connect to websocket...");
+        ws = new WebSocket(url);
+    
+        ws.onopen = () => {
+            console.log('connection opened');
+            connectionOpened = true;
+        };
+        ws.onerror = (err) => {
+            if(connectionOpened) {
+                assert.fail(`Websocket error: ${err.message}`);
+            }
+        };
+        ws.onmessage = (data) => {
+            console.log("Message = ");
+            console.log(data);
+            console.log("Message JSON = ");
+            console.log(JSON.parse(data));
+            console.log("JSON parse message error = ");
+            console.log(JSON.parse(data).error);
+            assert.equal(JSON.parse(data).error, undefined);
+        };
+        ws.onclose = async () => {
+            if(connectionOpened) {
+                console.log("Closing websocket");
+            } else {
+                await sleep(1000);
+                await connectToWebsocket(url);
+            }
+        };
+    });
 }
 
 function sendWebsocketMessage(method : string) {
@@ -74,10 +80,7 @@ describe("Test Excel Custom Functions", function () {
         before("Open websocket connection to Debugger", async function () {
             this.timeout(25000);
             const url = 'ws://localhost:9229/runtime1';
-            connectToWebsocket(url);
-            while (!connectionOpened) {
-                await sleep(1000);
-            }
+            await connectToWebsocket(url);
         }),
         it("enable debugging", async function () {
             //sendWebsocketMessage('Debugger.enable');
