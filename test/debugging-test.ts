@@ -25,7 +25,7 @@ async function connectToWebsocket(url: string, reconnectTry: number = 1): Promis
         const ws = new WebSocket(url);
     
         ws.onopen = () => {
-            console.log('connection opened');
+            console.log('Connection opened');
             connectionOpened = true;
             return resolve(ws);
         };
@@ -35,7 +35,7 @@ async function connectToWebsocket(url: string, reconnectTry: number = 1): Promis
             }
         };
         ws.onmessage = (response) => {
-            assert.strictEqual(JSON.parse(response.data).error, undefined, "Message should not return error");
+            assert.strictEqual(JSON.parse(response.data).error, undefined, `Error: ${JSON.parse(response.data).error?.message}`);
         };
         ws.onclose = async () => {
             if(connectionOpened) {
@@ -85,7 +85,7 @@ describe("Test Excel Custom Functions", function () {
             await(sleep(1000));
         });
         it("pause debugging", async function () {
-            ws.send(composeWsMessage('Debugger.pause'));
+            ws.send(composeWsMessage('Debugger.pausea'));
             await(sleep(1000));
         });
         it("resume debugging", async function () {
