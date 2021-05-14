@@ -1,6 +1,5 @@
 
 import * as childProcess from "child_process";
-import find = require("find-process")
 
 export async function closeWorkbook(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
@@ -32,26 +31,12 @@ export async function closeDesktopApplication(): Promise<boolean> {
         if (process.platform == "win32") {
             const cmdLine = `tskill ${processName}`;
             appClosed = await executeCommandLine(cmdLine);
-        } else {
-            const pid = await getProcessId(processName);
-            if (pid != undefined) {
-                process.kill(pid);
-                appClosed = true;
-            } else {
-                return false;
-            }
         }
 
         return appClosed;
     } catch (err) {
         throw new Error(`Unable to kill excel process. ${err}`);
     }
-}
-
-async function getProcessId(processName: string): Promise<number|undefined> {
-    const [process] = await find('name', processName, false /* strict */)
-
-    return process ? process.pid : undefined;
 }
 
 async function executeCommandLine(cmdLine: string): Promise<boolean> {

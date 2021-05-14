@@ -45,7 +45,6 @@
     "custom-functions-metadata-plugin": "^1.0.41",
     "eslint-config-office-addins": "^1.0.23",
     "file-loader": "^4.3.0",
-    "find-process": "^1.4.4",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.5.2",
     "mocha": "^8.3.2",
