@@ -1,11 +1,9 @@
 import * as assert from "assert";
-import * as fs from "fs";
 import { after, before, describe, it } from "mocha";
 import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
-import { pingTestServer } from "office-addin-test-helpers";
-import * as officeAddinTestServer from "office-addin-test-server";
+import { closeDesktopApplication, sleep, closeWorkbook } from './src/test-helpers';
 import * as path from "path";
 const WebSocket = require("ws");
 const host: string = "excel";
@@ -14,10 +12,6 @@ const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest
 let messageId = 0;
 let connectionOpened = false;
 const limitOfReconnectTries = 60;
-
-async function sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<WebSocket | undefined> {
     return new Promise((resolve) => {
@@ -98,6 +92,11 @@ describe("Test Excel Custom Functions", function () {
     });
     after("Teardown test environment", async function () {
         this.timeout(0);
+        // Close excel
+        const applicationClosed = await closeDesktopApplication();
+        assert.strictEqual(applicationClosed, true);
+
+        // Unregister the add-in
         await stopDebugging(manifestPath);
     });
 });

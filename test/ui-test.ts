@@ -5,6 +5,7 @@ import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
 import { pingTestServer } from "office-addin-test-helpers";
+import { closeDesktopApplication } from './src/test-helpers';
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 const host: string = "excel";
@@ -15,7 +16,7 @@ const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
 const testServer = new officeAddinTestServer.TestServer(port);
 let testValues: any = [];
 
-/*describe("Test Excel Custom Functions", function () {
+describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
         this.timeout(0);
         // Start test server and ping to ensure it's started
@@ -70,7 +71,11 @@ let testValues: any = [];
         const stopTestServer = await testServer.stopTestServer();
         assert.equal(stopTestServer, true);
 
+        // Close excel
+        const applicationClosed = await closeDesktopApplication();
+        assert.strictEqual(applicationClosed, true);
+
         // Unregister the add-in
         await stopDebugging(manifestPath);
     });
-});*/
+});

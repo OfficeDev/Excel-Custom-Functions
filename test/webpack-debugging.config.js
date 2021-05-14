@@ -10,6 +10,7 @@ module.exports = async (env, options) => {
     const dev = options.mode === "development";
     const config = {
         devtool: "source-map",
+        target: "node",
         entry: {
             commands: path.resolve(__dirname, './../src/commands/commands.ts'),
             functions: path.resolve(__dirname, './../src/functions/functions.ts'),
