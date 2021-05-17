@@ -7,7 +7,7 @@ import { closeDesktopApplication, sleep, closeWorkbook } from './src/test-helper
 import * as path from "path";
 const WebSocket = require("ws");
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest-debugging.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest-debugging.xml`);
 
 let messageId = 0;
 let connectionOpened = false;
@@ -55,7 +55,7 @@ describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
         this.timeout(0);
         // Call startDebugging to start dev-server and sideload
-        const devServerCmd = `npm run dev-server -- --config ./test/webpack-debugging.config.js`;
+        const devServerCmd = `npm run dev-server -- --config ./test/configs/webpack-debugging.config.js`;
         const devServerPort = parseNumber(3001);
         const options = {
             appType: AppType.Desktop,

@@ -9,7 +9,7 @@ import { closeDesktopApplication } from './src/test-helpers';
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/manifests/test-manifest.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest.xml`);
 const port: number = 4201;
 const testDataFile: string = `${process.cwd()}/test/src/test-data.json`;
 const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
@@ -26,7 +26,7 @@ describe("Test Excel Custom Functions", function () {
         assert.equal(serverResponse["status"], 200);
 
         // Call startDebugging to start dev-server and sideload
-        const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
+        const devServerCmd = `npm run dev-server -- --config ./test/configs/webpack.config.js`;
         const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
         const options = { 
             appType: AppType.Desktop, 
