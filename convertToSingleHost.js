@@ -76,7 +76,7 @@ async function updatePackageJsonForSingleHost(host) {
   let content = JSON.parse(data);
 
   // update 'config' section in package.json to use selected host
-  content.config["app-to-debug"] = host;
+  content.config["app_to_debug"] = host;
 
   // remove 'engines' section
   delete content.engines;
