@@ -72,7 +72,7 @@ describe("Test Excel Custom Functions", function () {
             this.timeout(limitOfReconnectTries * 1000);
             const url = 'ws://localhost:9229/runtime1';
             ws = await connectToWebsocket(url);
-            assert.notStrictEqual(ws, undefined, "Websocket could not be open");
+            assert.notStrictEqual(ws, undefined, "Unable to connect to the websocket.");
         }),
         it("enable debugging", async function () {
             ws.send(composeWsMessage('Debugger.enable'));
