@@ -6,7 +6,7 @@ import { toOfficeApp } from "office-addin-manifest";
 import { closeDesktopApplication } from './src/test-helpers';
 import { connectToWebsocket, enableDebugging, pauseDebugging, resumeDebugging } from './src/websocket-utils';
 import * as path from "path";
-2const host: string = "excel";
+const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest-debugging.xml`);
 
 describe("Test Excel Custom Functions", function () {
