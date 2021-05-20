@@ -8,6 +8,7 @@ const webpack = require("webpack");
 
 module.exports = async (env, options) => {
     const dev = options.mode === "development";
+    const debuggingTest = options.testType === "debugger";
     const config = {
         devtool: "source-map",
         entry: {
@@ -81,7 +82,7 @@ module.exports = async (env, options) => {
                 "Access-Control-Allow-Origin": "*"
             },
             https: (options.https !== undefined) ? options.https : await devCerts.getHttpsServerOptions(),
-            port: process.env.npm_package_config_dev_server_port || 3000
+            port: debuggingTest ? 3001 : (process.env.npm_package_config_dev_server_port || 3000)
         }
     };
 

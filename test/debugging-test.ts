@@ -13,7 +13,7 @@ describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
         this.timeout(0);
         // Call startDebugging to start dev-server and sideload
-        const devServerCmd = `npm run dev-server -- --config ./test/configs/webpack-debugging.config.js`;
+        const devServerCmd = `npm run dev-server -- --config ./test/configs/webpack.config.js --testType debugger`;
         const devServerPort = parseNumber(3001);
         const options = {
             appType: AppType.Desktop,
