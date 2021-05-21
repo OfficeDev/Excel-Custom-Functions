@@ -7,7 +7,7 @@ import { closeDesktopApplication } from './src/test-helpers';
 import { connectToWebsocket, enableDebugging, pauseDebugging, resumeDebugging } from './src/debugger-websocket';
 import * as path from "path";
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest-debugging.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest-debugging.xml`);
 
 describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {

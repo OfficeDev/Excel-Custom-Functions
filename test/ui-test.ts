@@ -9,7 +9,7 @@ import { closeDesktopApplication } from './src/test-helpers';
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const port: number = 4201;
 const testDataFile: string = `${process.cwd()}/test/src/test-data.json`;
 const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
@@ -20,7 +20,7 @@ describe("Test Excel Custom Functions", function () {
     before(`Setup test environment and sideload ${host}`, async function () {
         this.timeout(0);
         // Start test server and ping to ensure it's started
-        const testServerStarted = await testServer.startTestServer(true); // mochaTest
+        const testServerStarted = await testServer.startTestServer(true /* mochaTest */);
         const serverResponse = await pingTestServer(port);
         assert.equal(testServerStarted, true);
         assert.equal(serverResponse["status"], 200);
