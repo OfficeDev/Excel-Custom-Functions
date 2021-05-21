@@ -4,7 +4,7 @@ import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
 import { closeDesktopApplication } from './src/test-helpers';
-import { connectToWebsocket, enableDebugging, pauseDebugging, resumeDebugging } from './src/websocket-utils';
+import { connectToWebsocket, enableDebugging, pauseDebugging, resumeDebugging } from './src/debugger-websocket';
 import * as path from "path";
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/configs/test-manifest-debugging.xml`);
