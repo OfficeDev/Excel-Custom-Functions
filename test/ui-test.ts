@@ -5,6 +5,7 @@ import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
 import { pingTestServer } from "office-addin-test-helpers";
+import { closeDesktopApplication } from './src/test-helpers';
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 const host: string = "excel";
@@ -35,7 +36,7 @@ describe("Test Excel Custom Functions", function () {
             enableDebugging: false
         };
         await startDebugging(manifestPath, options);
-    }),
+    });
     describe("Get test results for custom functions and validate results", function () {
         it("should get results from the taskpane application", async function () {
             this.timeout(0);
@@ -69,6 +70,10 @@ describe("Test Excel Custom Functions", function () {
         // Stop the test server
         const stopTestServer = await testServer.stopTestServer();
         assert.equal(stopTestServer, true);
+
+        // Close excel
+        const applicationClosed = await closeDesktopApplication();
+        assert.strictEqual(applicationClosed, true);
 
         // Unregister the add-in
         await stopDebugging(manifestPath);
