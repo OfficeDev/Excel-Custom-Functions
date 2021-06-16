@@ -29,7 +29,6 @@
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.13.16",
     "@babel/polyfill": "^7.12.1",
