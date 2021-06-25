@@ -3,11 +3,12 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
 
-/* global require, module, process */
+/* global require, module, process, __dirname */
 
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
@@ -49,6 +50,10 @@ module.exports = async (env, options) => {
         },
       ],
     },
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
+    },
     plugins: [
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: dev ? [] : ["**/*"],
@@ -68,23 +73,25 @@ module.exports = async (env, options) => {
         template: "./src/taskpane/taskpane.html",
         chunks: ["polyfill", "taskpane"],
       }),
-      new CopyWebpackPlugin([
-        {
-          to: "taskpane.css",
-          from: "./src/taskpane/taskpane.css",
-        },
-        {
-          to: "[name]." + buildType + ".[ext]",
-          from: "manifest*.xml",
-          transform(content) {
-            if (dev) {
-              return content;
-            } else {
-              return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
-            }
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "./src/taskpane/taskpane.css",
+            to: "taskpane.css",
           },
-        },
-      ]),
+          {
+            from: "manifest*.xml",
+            to: "[name]." + buildType + ".[ext]",
+            transform(content) {
+              if (dev) {
+                return content;
+              } else {
+                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+              }
+            },
+          },
+        ],
+      }),
       new HtmlWebpackPlugin({
         filename: "commands.html",
         template: "./src/commands/commands.html",
