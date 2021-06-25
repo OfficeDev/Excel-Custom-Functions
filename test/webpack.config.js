@@ -20,9 +20,9 @@ module.exports = async (env, options) => {
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
-    },
-    node: {
-      child_process: "empty",
+      fallback: {
+        child_process: path.resolve(__dirname, "./../node_modules/child_process/package.json"),
+      },
     },
     module: {
       rules: [
@@ -49,7 +49,7 @@ module.exports = async (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, "dist"),
-      publicPath: "",
+      publicPath: "/",
     },
     plugins: [
       new CleanWebpackPlugin({
