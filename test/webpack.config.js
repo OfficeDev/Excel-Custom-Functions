@@ -50,7 +50,10 @@ module.exports = async (env, options) => {
         },
         {
           test: /\.(png|jpg|jpeg|gif)$/,
-          use: "file-loader",
+          loader: "file-loader",
+          options: {
+            esModule: false,
+          },
         },
       ],
     },
