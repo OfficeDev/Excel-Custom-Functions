@@ -4,7 +4,6 @@ const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -48,15 +47,10 @@ module.exports = async (env, options) => {
           test: /\.(png|jpg|jpeg|gif)$/,
           loader: "file-loader",
           options: {
-            esModule: false,
             name: "[path][name].[ext]",
           },
         },
       ],
-    },
-    output: {
-      path: path.resolve(__dirname, "dist"),
-      publicPath: "",
     },
     plugins: [
       new CleanWebpackPlugin(),

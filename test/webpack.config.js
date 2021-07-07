@@ -16,15 +16,13 @@ module.exports = async (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
-      publicPath: "",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
-      fallback: {
-        child_process: false,
-        fs: false,
-        os: false,
-      },
+    },
+    node: {
+      child_process: "empty",
+      fs: "empty",
     },
     module: {
       rules: [
@@ -50,10 +48,7 @@ module.exports = async (env, options) => {
         },
         {
           test: /\.(png|jpg|jpeg|gif)$/,
-          loader: "file-loader",
-          options: {
-            esModule: false,
-          },
+          use: "file-loader",
         },
       ],
     },
