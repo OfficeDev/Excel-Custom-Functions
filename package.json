@@ -48,7 +48,6 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.4.1",
-    "eslint": "^7.29.0",
     "eslint-plugin-office-addins": "^0.3.0",
     "file-loader": "^4.2.0",
     "find-process": "^1.4.4",
