@@ -23,7 +23,6 @@
     "dev-server": "webpack-dev-server --mode development",
     "lint": "office-addin-lint check",
     "lint:fix": "office-addin-lint fix",
-    "lint:test": "office-addin-lint check --test",
     "prettier": "office-addin-lint prettier",
     "start": "office-addin-debugging start manifest.xml",
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
