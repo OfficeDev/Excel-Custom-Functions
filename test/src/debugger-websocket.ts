@@ -1,15 +1,35 @@
 import * as assert from "assert";
 import { sleep } from './test-helpers';
 const WebSocket = require("ws");
+const request = require('request');
 
 let connectionOpened = false;
 let messageId = 0;
 const limitOfReconnectTries = 60;
+let wsUrl: string | undefined;
 
-export async function connectToWebsocket(url: string, reconnectTry: number = 1): Promise<WebSocket | undefined> {
+function findUrl(): void {
+    let jsonUrl = "http://localhost:9229/json";
+    let options = {json: true};
+
+    request(jsonUrl, options, (error, res, body) => {
+        if (!error && res.statusCode == 200) {
+            wsUrl = body[0].webSocketDebuggerUrl;
+        };
+    });
+}
+
+export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebSocket | undefined> {
+    while(!wsUrl && reconnectTry < limitOfReconnectTries) {
+        console.log("Attaching debugger...");
+        findUrl();
+        reconnectTry ++;
+        await sleep(1000);
+    }
+
     return new Promise((resolve) => {
         console.log("Connecting to websocket...");
-        const ws = new WebSocket(url);
+        const ws = new WebSocket(wsUrl);
     
         ws.onopen = () => {
             console.log('Connection opened');
@@ -29,7 +49,7 @@ export async function connectToWebsocket(url: string, reconnectTry: number = 1):
                 console.log("Closing websocket");
             } else if(reconnectTry < limitOfReconnectTries) {
                 await sleep(1000);
-                return resolve(await connectToWebsocket(url, reconnectTry+1));
+                return resolve(await connectToWebsocket(reconnectTry+1));
             } else {
                 return resolve(undefined);
             }
