@@ -28,8 +28,7 @@ describe("Test Excel Custom Functions", function () {
         let ws: WebSocket;
         before("Open websocket connection to Debugger", async function () {
             this.timeout(60 * 1000);
-            const url = 'ws://localhost:9229/runtime1';
-            ws = await connectToWebsocket(url);
+            ws = await connectToWebsocket();
             assert.notStrictEqual(ws, undefined, "Unable to connect to the websocket.");
         }),
         it("enable debugging", async function () {
@@ -37,9 +36,6 @@ describe("Test Excel Custom Functions", function () {
         });
         it("pause debugging", async function () {
             await pauseDebugging(ws);
-        });
-        it("resume debugging", async function () {
-            await resumeDebugging(ws);
         });
         after("Close websocket connection", async function() {
             ws.close();
