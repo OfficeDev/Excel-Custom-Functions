@@ -15,7 +15,7 @@ async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<s
   const range: Excel.Range = context.workbook.getSelectedRange();
 
   range.load("address");
-  //await context.sync();
+  await context.sync();
 
   return range.address;
 }
