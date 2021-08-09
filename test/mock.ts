@@ -31,7 +31,10 @@ describe(`Test Task Pane Project mocking`, function () {
       address: "C2",
     });
     sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
+    const mockContext = sinon.mock(context);
+    mockContext.expects("sync").once();
 
     assert.strictEqual(await getSelectedRangeAddress(context), "C2");
+    mockContext.verify();
   });
 });
