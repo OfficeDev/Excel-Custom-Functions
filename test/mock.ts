@@ -19,7 +19,7 @@ async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<s
 // eslint-disable-next-line no-undef
 describe(`Test Task Pane Project mocking`, function () {
   // eslint-disable-next-line no-undef
-  it("Validate mock, async function()", async function () {
+  it("Validate mock", async function () {
     const context: Excel.RequestContext = new Excel.RequestContext();
     const range: Excel.Range = context.workbook.getSelectedRange();
 
