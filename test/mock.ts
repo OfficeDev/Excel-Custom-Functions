@@ -1,11 +1,7 @@
 /// <reference path="../node_modules/@types/office-js/index.d.ts" />
 
-import * as sinon from 'sinon';
-import { Office, Excel, OfficeExtension } from '@microsoft/office-js/dist/excel.js';
-// eslint-disable-next-line no-undef
-global.Excel = Excel;
-// eslint-disable-next-line no-undef
-global.OfficeExtension = OfficeExtension;
+import * as sinon from "sinon";
+import { Excel, OfficeExtension } from "@microsoft/office-js/dist/excel.js";
 
 OfficeExtension.TestUtility.setMock(true);
 
@@ -23,7 +19,7 @@ async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<s
 // eslint-disable-next-line no-undef
 describe(`Test Task Pane Project mocking`, function () {
   // eslint-disable-next-line no-undef
-  it("Validate mockt, async function()", async function () {
+  it("Validate mock, async function()", async function () {
     const context: Excel.RequestContext = new Excel.RequestContext();
     const range: Excel.Range = context.workbook.getSelectedRange();
 
