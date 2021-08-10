@@ -1,0 +1,7 @@
+steps:
+- task: Npm@1
+  displayName: 'npm lint'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run lint'
