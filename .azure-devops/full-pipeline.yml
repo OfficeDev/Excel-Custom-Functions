@@ -3,13 +3,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 jobs:
-  job: Windows Server 2019
-  pool:
-    name: OETest-OfficeClientApps
-  steps:
-    template: ./install.yml
-    template: ./lint.yml
-    template: ./build.yml
-    template: ./devcerts.yml
-    template: ./edgewebview.yml
-    template: ./test.yml
+  - job: Windows Server 2019
+    pool:
+      name: OETest-OfficeClientApps
+    steps:
+      - template: ./install.yml
+      - template: ./lint.yml
+      - template: ./build.yml
+      - template: ./devcerts.yml
+      - template: ./edgewebview.yml
+      - template: ./test.yml
