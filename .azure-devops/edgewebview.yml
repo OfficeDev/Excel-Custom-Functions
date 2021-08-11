@@ -3,7 +3,7 @@ steps:
     echo Install Office-AddinDev-Certs at machine level
     npx office-addin-dev-certs install --machine
     
-    displayName: 'Install add-in dev cert'
+  displayName: 'Install add-in dev cert'
 
   - script: |
     echo Enable EdgeWebView Loopback
@@ -22,4 +22,4 @@ steps:
     reg add %PATH2% /f /v Moniker /t REG_SZ /d "123"
     reg add %PATH2% /f /v ParentMoniker /t REG_SZ /d "microsoft.win32webviewhost_cw5n1h2txyewy"
 
-    displayName: 'Enable Edge WebView'
+  displayName: 'Enable Edge WebView'
