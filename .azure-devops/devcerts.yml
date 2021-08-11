@@ -1,5 +1,5 @@
 steps:
-  script: |
+  - script: |
    echo Install Office-AddinDev-Certs at machine level
    npx office-addin-dev-certs install --machine
   
