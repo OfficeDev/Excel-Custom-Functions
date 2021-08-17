@@ -61,13 +61,13 @@ module.exports = async (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: "./test/src/test-taskpane.html",
+        template: path.resolve(__dirname, "./src/test-taskpane.html"),
         chunks: ["polyfill", "test"],
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "./src/taskpane/taskpane.css",
+            from: path.resolve(__dirname, "./../src/taskpane/taskpane.css"),
             to: "taskpane.css",
           },
         ],

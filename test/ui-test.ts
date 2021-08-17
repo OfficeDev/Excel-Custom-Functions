@@ -60,11 +60,8 @@ hosts.forEach(function(host) {
       const stopTestServer = await testServer.stopTestServer();
       assert.strictEqual(stopTestServer, true);
 
-      // Close desktop application for all apps but Excel, which has it's own closeWorkbook API
-      if (host != "Excel") {
-        const applicationClosed = await testHelpers.closeDesktopApplication(host);
-        assert.strictEqual(applicationClosed, true);
-      }
+      const applicationClosed = await testHelpers.closeDesktopApplication(host);
+      assert.strictEqual(applicationClosed, true);
     });
   });
 });
