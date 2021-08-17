@@ -19,6 +19,7 @@ module.exports = async (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
+      sourceMapFilename: "[name].js.map",
       publicPath: "/",
     },
     resolve: {
