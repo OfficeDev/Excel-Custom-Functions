@@ -1,6 +1,6 @@
 import * as sinon from "sinon";
 import { Excel, OfficeExtension } from "@microsoft/office-js/dist/excel.js";
-import { run } from "../src/test-file";
+import { getSelectedRangeAddressOtherFile } from "../src/test-file";
 
 OfficeExtension.TestUtility.setMock(true);
 
@@ -22,7 +22,7 @@ describe(`Test Task Pane Project mocking`, function () {
   before("Setup global variable", function () {
     global.Excel = Excel;
   });
-  it("Validate mock within same file", async function () {
+  it("Validate mock within same file using enlistment excel", async function () {
     const context: Excel.RequestContext = new Excel.RequestContext();
     const range: Excel.Range = context.workbook.getSelectedRange();
 
@@ -38,9 +38,18 @@ describe(`Test Task Pane Project mocking`, function () {
     assert(contextSyncSpy.calledOnce);
     assert(loadSpy.withArgs("address").calledOnce);
   });
-  it("Validate mock within different file", async function () {
-    const runSpy = sinon.spy(Excel, "run");
-    await run();
-    assert(runSpy.calledOnce);
+  it("Validate mock within different file using enlistment excel", async function () {
+    const context: Excel.RequestContext = new Excel.RequestContext();
+    const range: Excel.Range = context.workbook.getSelectedRange();
+    range.setMockData({
+      address: "C2",
+    });
+    sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
+    const contextSyncSpy = sinon.spy(context, "sync");
+    const loadSpy = sinon.spy(range, "load");
+
+    assert.strictEqual(await getSelectedRangeAddressOtherFile(context), "C2");
+    assert(contextSyncSpy.calledOnce);
+    assert(loadSpy.withArgs("address").calledOnce);
   });
 });
