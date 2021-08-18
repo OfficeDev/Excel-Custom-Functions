@@ -1,7 +1,6 @@
-/// <reference path="../node_modules/@types/office-js/index.d.ts" />
-
 import * as sinon from "sinon";
 import { Excel, OfficeExtension } from "@microsoft/office-js/dist/excel.js";
+import { run } from "../src/test-file";
 
 OfficeExtension.TestUtility.setMock(true);
 
@@ -16,10 +15,14 @@ async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<s
   return range.address;
 }
 
+/* global before, it, global */
+
 // eslint-disable-next-line no-undef
 describe(`Test Task Pane Project mocking`, function () {
-  // eslint-disable-next-line no-undef
-  it("Validate mock", async function () {
+  before("Setup global variable", function () {
+    global.Excel = Excel;
+  });
+  it("Validate mock within same file", async function () {
     const context: Excel.RequestContext = new Excel.RequestContext();
     const range: Excel.Range = context.workbook.getSelectedRange();
 
@@ -34,5 +37,10 @@ describe(`Test Task Pane Project mocking`, function () {
     assert.strictEqual(await getSelectedRangeAddress(context), "C2");
     assert(contextSyncSpy.calledOnce);
     assert(loadSpy.withArgs("address").calledOnce);
+  });
+  it("Validate mock within different file", async function () {
+    const runSpy = sinon.spy(Excel, "run");
+    await run();
+    assert(runSpy.calledOnce);
   });
 });
