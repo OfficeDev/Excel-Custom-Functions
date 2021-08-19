@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = async (env, options) => {
   // const dev = options.mode === "development";
@@ -19,7 +20,6 @@ module.exports = async (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
-      sourceMapFilename: "[name].js.map",
       publicPath: "/",
     },
     resolve: {
@@ -27,7 +27,7 @@ module.exports = async (env, options) => {
       fallback: {
         child_process: false,
         fs: false,
-        os: false,
+        os: require.resolve("os-browserify/browser"),
       },
     },
     module: {
@@ -53,12 +53,15 @@ module.exports = async (env, options) => {
           use: "html-loader",
         },
         {
-          test: /\.(png|jpg|jpeg|gif)$/,
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
           type: "asset/resource",
         },
       ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+      }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
