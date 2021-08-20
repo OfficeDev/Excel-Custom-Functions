@@ -17,7 +17,7 @@ async function getSelectedRangeAddress(context: RequestContext): Promise<string>
 
 let context: RequestContext;
 
-describe(`Test Task Pane Project mocking`, function () {
+describe(`Test Task Pane Project mocking with type information`, function () {
   beforeEach(`Creating context mock`, function () {
     context = {
       workbook: {
