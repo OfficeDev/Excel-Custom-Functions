@@ -1,11 +1,10 @@
-// /// <reference path="../node_modules/@types/office-js/index.d.ts" />
-
-// import { Excel } from "@microsoft/office-js/dist/index-test";
-
 // import * as sinon from "sinon";
-// import { run } from "../src/test-file";
-
 // import * as assert from "assert";
+// // /// <reference path="./index-test.ts" /> 
+// import Excel from "./index-test"
+// // import * as Excel from "../node_modules/@microsoft/office-js/dist/excel-15.js";
+
+// console.log("Excel");
 
 // let testvar: Excel.RangeAreas;
 
@@ -31,3 +30,20 @@
 //     assert(runSpy.calledOnce);
 //   });
 // });
+
+// // class C {
+// //   constructor() {}
+// //   method() {}
+// // }
+// // interface i {
+// //   method: () => void;
+// // }
+
+// // function fc(_p: C) {}
+
+// // function fi(_p: i) {}
+
+// // const v = { method: () => {} };
+
+// // fc(v);
+// // fi({ method: () => {} });
