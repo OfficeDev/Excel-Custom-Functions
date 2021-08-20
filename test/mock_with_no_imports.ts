@@ -7,16 +7,25 @@ import { getSelectedRangeAddressOtherFile } from "../src/test-file";
 
 let context;
 
+class RangeMock {
+  constructor(address: string) {
+    this.loaded = false;
+    this.address = "error, address was not loaded";
+    this.addressBeforeLoad = address;
+  }
+  load() {
+    this.address = this.addressBeforeLoad;
+  }
+  address: string;
+  addressBeforeLoad: string;
+  loaded: boolean;
+}
+
 describe(`Test Task Pane Project mocking without imports`, function () {
   beforeEach(`Creating context mock`, function () {
     context = {
       workbook: {
-        getSelectedRange: () => {
-          return {
-            address: "C2",
-            load: () => {},
-          };
-        }
+        getSelectedRange: () => new RangeMock("C2"),
       },
       sync: async () => {},
     };
