@@ -13,6 +13,7 @@ module.exports = async (env, options) => {
   const dev = options.mode === "development";
   const buildType = dev ? "dev" : "prod";
   const config = {
+    target: "web",
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
@@ -22,7 +23,7 @@ module.exports = async (env, options) => {
     output: {
       path: path.resolve(__dirname, "dist"),
       sourceMapFilename: "[name].js.map",
-      publicPath: "/",
+      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
@@ -50,7 +51,7 @@ module.exports = async (env, options) => {
           use: "html-loader",
         },
         {
-          test: /\.(png|jpg|jpeg|gif)$/,
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
           type: "asset/resource",
         },
       ],

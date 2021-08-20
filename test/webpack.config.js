@@ -10,6 +10,7 @@ const webpack = require("webpack");
 module.exports = async (env, options) => {
   // const dev = options.mode === "development";
   const config = {
+    target: "web",
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
@@ -17,7 +18,8 @@ module.exports = async (env, options) => {
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
-      publicPath: "/",
+      sourceMapFilename: "[name].js.map",
+      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
