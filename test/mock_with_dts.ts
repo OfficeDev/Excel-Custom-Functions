@@ -1,49 +1,46 @@
-// import * as sinon from "sinon";
-// import * as assert from "assert";
-// // /// <reference path="./index-test.ts" /> 
-// import Excel from "./index-test"
-// // import * as Excel from "../node_modules/@microsoft/office-js/dist/excel-15.js";
+import * as sinon from "sinon";
+import * as assert from "assert";
 
-// console.log("Excel");
+import { Range, RequestContext } from "../src/batch-interfaces";
+import { getSelectedRangeAddressOtherFile } from "../src/test-file";
 
-// let testvar: Excel.RangeAreas;
+/* global beforeEach, describe, Excel, it */
 
-// async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<string> {
-//   const range: Excel.Range = context.workbook.getSelectedRange();
+async function getSelectedRangeAddress(context: RequestContext): Promise<string> {
+  const range: Range = context.workbook.getSelectedRange();
 
-//   range.load("address");
-//   await context.sync();
+  range.load("address");
+  await context.sync();
 
-//   return range.address;
-// }
+  return range.address;
+}
 
-// /* global before, it, global */
+let context: RequestContext;
 
-// // eslint-disable-next-line no-undef
-// describe(`Test Task Pane Project mocking`, function () {
-//   before("Setup global variable", function () {
-//     global.Excel = Excel;
-//   });
-//   it("Validate mock using .d.ts file", async function () {
-//     const runSpy = sinon.spy(Excel, "run");
-//     await run();
-//     assert(runSpy.calledOnce);
-//   });
-// });
+describe(`Test Task Pane Project mocking`, function () {
+  beforeEach(`Creating context mock`, function () {
+    context = {
+      workbook: {
+        getSelectedRange: () => {
+          return {
+            address: "C2",
+            load: () => {},
+          } as Range;
+        }
+      },
+      sync: async () => {},
+    };
+  });
+  it("Validate mock using .d.ts file", async function () {
+    const contextSyncSpy = sinon.spy(context, "sync");
 
-// // class C {
-// //   constructor() {}
-// //   method() {}
-// // }
-// // interface i {
-// //   method: () => void;
-// // }
+    assert.strictEqual(await getSelectedRangeAddress(context), "C2");
+    assert(contextSyncSpy.calledOnce);
+  });
+  it("Validate mock using .d.ts file for a function in another file", async function () {
+    const contextSyncSpy = sinon.spy(context, "sync");
 
-// // function fc(_p: C) {}
-
-// // function fi(_p: i) {}
-
-// // const v = { method: () => {} };
-
-// // fc(v);
-// // fi({ method: () => {} });
+    assert.strictEqual(await getSelectedRangeAddressOtherFile(context as unknown as Excel.RequestContext), "C2");
+    assert(contextSyncSpy.calledOnce);
+  });
+});
