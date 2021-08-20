@@ -1,9 +1,8 @@
-import * as sinon from "sinon";
 import * as assert from "assert";
 
 import { getSelectedRangeAddressOtherFile } from "../src/test-file";
 
-/* global beforeEach, describe, it */
+/* global describe, it */
 
 class RangeMock {
   constructor(address: string) {
@@ -48,16 +47,9 @@ class ContextMock {
   workbook: WorkbookMock;
 }
 
-let context;
-
 describe(`Test Task Pane Project mocking without imports`, function () {
-  beforeEach(`Creating context mock`, function () {
-    context = new ContextMock("C2");
-  });
   it("Validate mock without imports for a function in another file", async function () {
-    const contextSyncSpy = sinon.spy(context, "sync");
-
+    const context = new ContextMock("C2") as any;
     assert.strictEqual(await getSelectedRangeAddressOtherFile(context), "C2");
-    assert(contextSyncSpy.calledOnce);
   });
 });
