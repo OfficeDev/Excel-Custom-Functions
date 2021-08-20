@@ -1,5 +1,4 @@
 import * as assert from "assert";
-import * as mocha from "mocha";
 import { parseNumber } from "office-addin-cli";
 import { AppType, startDebugging, stopDebugging } from "office-addin-debugging";
 import { toOfficeApp } from "office-addin-manifest";
@@ -8,18 +7,18 @@ import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 import * as testHelpers from "./src/test-helpers";
 
-/* global process */
+/* global process, describe, before, it, after */
 
 const hosts = ["Excel", "PowerPoint", "Word"];
 const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
 const testServerPort: number = 4201;
 
-hosts.forEach(function(host) {
+hosts.forEach(function (host) {
   const testServer = new officeAddinTestServer.TestServer(testServerPort);
   let testValues: any = [];
 
-  describe(`Test ${host} Task Pane Project`, function() {
-    before(`Setup test environment and sideload ${host}`, async function() {
+  describe(`Test ${host} Task Pane Project`, function () {
+    before(`Setup test environment and sideload ${host}`, async function () {
       this.timeout(0);
       // Start test server and ping to ensure it's started
       const testServerStarted = await testServer.startTestServer(true /* mochaTest */);
@@ -35,26 +34,26 @@ hosts.forEach(function(host) {
         appType: AppType.Desktop,
         devServerCommandLine: devServerCmd,
         devServerPort: devServerPort,
-        enableDebugging: false
+        enableDebugging: false,
       });
     }),
-      describe(`Get test results for ${host} taskpane project`, function() {
-        it("Validate expected result count", async function() {
+      describe(`Get test results for ${host} taskpane project`, function () {
+        it("Validate expected result count", async function () {
           this.timeout(0);
           testValues = await testServer.getTestResults();
           assert.strictEqual(testValues.length > 0, true);
         });
-        it("Validate expected result name", async function() {
+        it("Validate expected result name", async function () {
           assert.strictEqual(
             testValues[0].resultName,
             host.toLowerCase() === "excel" ? "fill-color" : "output-message"
           );
         });
-        it("Validate expected result", async function() {
+        it("Validate expected result", async function () {
           assert.strictEqual(testValues[0].resultValue, testValues[0].expectedValue);
         });
       });
-    after(`Teardown test environment and shutdown ${host}`, async function() {
+    after(`Teardown test environment and shutdown ${host}`, async function () {
       this.timeout(0);
       // Stop the test server
       const stopTestServer = await testServer.stopTestServer();
@@ -66,6 +65,6 @@ hosts.forEach(function(host) {
   });
 });
 
-after(`Unregister the add-in`, async function() {
+after(`Unregister the add-in`, async function () {
   return stopDebugging(manifestPath);
 });
