@@ -5,8 +5,6 @@ import { getSelectedRangeAddressOtherFile } from "../src/test-file";
 
 /* global beforeEach, describe, it */
 
-let context;
-
 class RangeMock {
   constructor(address: string) {
     this.loaded = false;
@@ -14,21 +12,47 @@ class RangeMock {
     this.addressBeforeLoad = address;
   }
   load() {
-    this.address = this.addressBeforeLoad;
+    this.loaded = true;
+    this.address = "error, context.sync was not called";
+  }
+  sync() {
+    if (this.loaded) {
+      this.address = this.addressBeforeLoad;
+    }
   }
   address: string;
   addressBeforeLoad: string;
   loaded: boolean;
 }
 
+class WorkbookMock {
+  constructor(address: string) {
+    this.range = new RangeMock(address);
+  }
+  getSelectedRange(): RangeMock {
+    return this.range;
+  }
+  sync(): void {
+    this.range.sync();
+  }
+  range: RangeMock;
+}
+
+class ContextMock {
+  constructor(address: string) {
+    this.workbook = new WorkbookMock(address);
+  }
+  async sync(): Promise<void> {
+    this.workbook.sync();
+  }
+  workbook: WorkbookMock;
+}
+
+let context;
+
 describe(`Test Task Pane Project mocking without imports`, function () {
   beforeEach(`Creating context mock`, function () {
-    context = {
-      workbook: {
-        getSelectedRange: () => new RangeMock("C2"),
-      },
-      sync: async () => {},
-    };
+    context = new ContextMock("C2");
   });
   it("Validate mock without imports for a function in another file", async function () {
     const contextSyncSpy = sinon.spy(context, "sync");
