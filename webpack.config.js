@@ -4,7 +4,6 @@ const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
 
 const urlDev = "https://localhost:3000/";
 const urlProd = "https://www.contoso.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
@@ -17,11 +16,10 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      taskpane: path.resolve(__dirname, "./src/taskpane/taskpane.ts"),
-      commands: path.resolve(__dirname, "./src/commands/commands.ts"),
+      taskpane: "./src/taskpane/taskpane.ts",
+      commands: "./src/commands/commands.ts",
     },
     output: {
-      path: path.resolve(__dirname, "dist"),
       sourceMapFilename: "[name].js.map",
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
     },
@@ -60,13 +58,13 @@ module.exports = async (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: path.resolve(__dirname, "./src/taskpane/taskpane.html"),
+        template: "./src/taskpane/taskpane.html",
         chunks: ["polyfill", "taskpane"],
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, "./src/taskpane/taskpane.css"),
+            from: "./src/taskpane/taskpane.css",
             to: "taskpane.css",
           },
           {
@@ -84,7 +82,7 @@ module.exports = async (env, options) => {
       }),
       new HtmlWebpackPlugin({
         filename: "commands.html",
-        template: path.resolve(__dirname, "./src/commands/commands.html"),
+        template: "./src/commands/commands.html",
         chunks: ["polyfill", "commands"],
       }),
     ],

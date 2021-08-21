@@ -14,7 +14,7 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      test: path.resolve(__dirname, "./src/test-taskpane.ts"),
+      test: "./test/src/test-taskpane.ts",
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
@@ -64,20 +64,20 @@ module.exports = async (env, options) => {
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: path.resolve(__dirname, "./src/test-taskpane.html"),
+        template: "./test/src/test-taskpane.html",
         chunks: ["polyfill", "test"],
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, "./../src/taskpane/taskpane.css"),
+            from: "./src/taskpane/taskpane.css",
             to: "taskpane.css",
           },
         ],
       }),
     ],
     devServer: {
-      contentBase: path.join(__dirname, "testBuild"),
+      contentBase: "testBuild",
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
