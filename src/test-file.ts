@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+/* global console Excel, console */
+
 export async function getSelectedRangeAddressOtherFile(context: Excel.RequestContext): Promise<string> {
   const range: Excel.Range = context.workbook.getSelectedRange();
 
