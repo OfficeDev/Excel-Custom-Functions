@@ -63,9 +63,9 @@ class ContextMock {
 }
 
 class ExcelMock {
-  async run(batch): Promise<void> {
+  async run(callback): Promise<void> {
     const context = new ContextMock("G5");
-    await batch(context);
+    await callback(context);
   }
 }
 
