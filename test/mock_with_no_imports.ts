@@ -1,6 +1,5 @@
 import * as assert from "assert";
 
-
 import { ContextMock, ExcelMock } from "./mock_utils";
 import { getSelectedRangeAddressOtherFile, run } from "../src/test-file";
 
