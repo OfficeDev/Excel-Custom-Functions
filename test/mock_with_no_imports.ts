@@ -13,5 +13,6 @@ describe(`Test Task Pane Project mocking without imports`, function () {
   it("run", async function () {
     global.Excel = new ExcelMock() as any;
     await run();
+    assert.strictEqual((global.Excel as any).context.workbook.range.format.fill.color, "yellow");
   });
 });

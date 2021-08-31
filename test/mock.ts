@@ -31,12 +31,7 @@ describe(`Test Task Pane Project mocking`, function () {
     });
     sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
 
-    const contextSyncSpy = sinon.spy(context, "sync");
-    const loadSpy = sinon.spy(range, "load");
-
     assert.strictEqual(await getSelectedRangeAddress(context), "C2");
-    assert(contextSyncSpy.calledOnce);
-    assert(loadSpy.withArgs("address").calledOnce);
   });
   it("Validate mock within different file using enlistment excel", async function () {
     const context: Excel.RequestContext = new Excel.RequestContext();
@@ -45,11 +40,7 @@ describe(`Test Task Pane Project mocking`, function () {
       address: "C2",
     });
     sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
-    const contextSyncSpy = sinon.spy(context, "sync");
-    const loadSpy = sinon.spy(range, "load");
 
     assert.strictEqual(await getSelectedRangeAddressOtherFile(context), "C2");
-    assert(contextSyncSpy.calledOnce);
-    assert(loadSpy.withArgs("address").calledOnce);
   });
 });
