@@ -8,17 +8,13 @@ import { getSelectedRangeAddress, run } from "../src/test-file";
 
 describe(`Test Task Pane Project mocking without imports`, function () {
   it("getSelectedRangeAddress", async function () {
-    // const context = new ContextMock() as any;
-    // context.workbook.range.setMock("address", "C2");
     const context = new OfficeJSMock("context") as any;
+
     context.addMockObject("workbook");
+    context.workbook.addMockObject("range");    
+    context.workbook.addMockFunction("getSelectedRange", () => context.workbook.range);
 
-    context.workbook.addMockObject("range");
-    
-    context.workbook.addMockFunction("getSelectedRange");
-    sinon.stub(context.workbook, "getSelectedRange").callsFake(() => context.workbook.range);
-
-    context.workbook.range.setMock("address", "C3");
+    context.workbook.range.setMock("address", "C2");
     assert.strictEqual(await getSelectedRangeAddress(context), "C2");
   });
   // it("run", async function () {

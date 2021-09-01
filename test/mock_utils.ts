@@ -34,8 +34,8 @@ export class OfficeJSMock {
     }
   }
 
-  addMockFunction(methodName: string) {
-    this[methodName] = function () {}
+  addMockFunction(methodName: string, functionality?: Function) {
+    this[methodName] = functionality ? functionality : function () {}
   }
 
   addMockObject(objectName: string) {
