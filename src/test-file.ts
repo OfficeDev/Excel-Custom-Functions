@@ -5,7 +5,7 @@
 
 /* global console Excel, console */
 
-export async function getSelectedRangeAddressOtherFile(context: Excel.RequestContext): Promise<string> {
+export async function getSelectedRangeAddress(context: Excel.RequestContext): Promise<string> {
   const range: Excel.Range = context.workbook.getSelectedRange();
 
   range.load("address");

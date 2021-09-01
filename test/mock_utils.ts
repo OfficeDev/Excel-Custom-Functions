@@ -1,7 +1,7 @@
 export class FillMock {
-    color: string;
-  }
-  
+  color: string;
+}
+
 class FormatMock {
   constructor() {
     this.fill = new FillMock();
@@ -9,31 +9,65 @@ class FormatMock {
   fill: FillMock;
 }
 
-export class RangeMock {
-  constructor(address: string) {
+class Property {
+  constructor(name: string) {
     this.loaded = false;
-    this.address = "error, address was not loaded";
-    this.addressBeforeLoad = address;
-    this.format = new FormatMock();
+    this.name = name;
+    this.value = `Error, ${name} was not loaded`;
   }
+
   load() {
     this.loaded = true;
-    this.address = "error, context.sync was not called";
+    this.value = `Error, context.sync() was not called`;
   }
+
   sync() {
     if (this.loaded) {
-      this.address = this.addressBeforeLoad;
+      this.value = this.valueBeforeLoaded;
     }
   }
-  address: string;
-  addressBeforeLoad: string;
+
+  setMock(value: string) {
+    this.valueBeforeLoaded = value;
+  }
+
   loaded: boolean;
+  name: string;
+  value: string;
+  valueBeforeLoaded: string;
+}
+
+export class RangeMock {
+  constructor() {
+    this.format = new FormatMock();
+    this.properties = new Map<string, Property>();
+  }
+  load(propertyName: string) {
+    if (this.properties.has(propertyName)) {
+      this.properties.get(propertyName).load();
+      this[propertyName] = this.properties.get(propertyName).value;
+    }
+  }
+  sync() {
+    this.properties.forEach((property: Property, key: string) => {
+      property.sync();
+      this[key] = this.properties.get(key).value;
+    });
+  }
+  setMock(propertyName: string, value: string) { // Also add runtime properties
+    if (!this.properties.has(propertyName)) {
+      this.properties.set(propertyName, new Property(propertyName));
+      this.properties.get(propertyName).setMock(value);
+      this[propertyName] = this.properties.get(propertyName).value;
+    }
+  }
   format: FormatMock;
+  properties: Map<string, Property>;
 }
 
 export class WorkbookMock {
-  constructor(address: string) {
-    this.range = new RangeMock(address);
+  constructor() {
+    this.range = new RangeMock();
   }
   getSelectedRange(): RangeMock {
     return this.range;
@@ -45,8 +79,8 @@ export class WorkbookMock {
 }
 
 export class ContextMock {
-  constructor(address: string) {
-    this.workbook = new WorkbookMock(address);
+  constructor() {
+    this.workbook = new WorkbookMock();
   }
   async sync(): Promise<void> {
     this.workbook.sync();
@@ -56,7 +90,7 @@ export class ContextMock {
 
 export class ExcelMock {
   async run(callback): Promise<void> {
-    this.context = new ContextMock("G5");
+    this.context = new ContextMock();
     await callback(this.context);
   }
   context: ContextMock;

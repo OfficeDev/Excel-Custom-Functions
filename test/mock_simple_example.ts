@@ -1,6 +1,6 @@
 import * as assert from "assert";
 
-import { getSelectedRangeAddressOtherFile } from "../src/test-file";
+import { getSelectedRangeAddress } from "../src/test-file";
 
 /* global describe, before, global, it */
 
@@ -25,6 +25,6 @@ describe(`Test Task Pane Project mocking without imports simple`, function () {
     };
   });
   it("getSelectedRangeAddressOtherFile", async function () {
-    assert.strictEqual(await getSelectedRangeAddressOtherFile(context), "C2");
+    assert.strictEqual(await getSelectedRangeAddress(context), "C2");
   });
 });
