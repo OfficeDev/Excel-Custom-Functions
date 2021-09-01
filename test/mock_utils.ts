@@ -1,28 +1,26 @@
 export class OfficeJSMock {
   constructor(name?: string, isObject?: boolean) {
-    this.properties = new Map<string, OfficeJSMock>();
-  
-    this.loaded = false;
-    this.name = name;
-    this.value = `Error, ${name} was not loaded`;
-
-    this.isObject = isObject;
+    this._properties = new Map<string, OfficeJSMock>();
+    this._loaded = false;
+    this._name = name;
+    this._value = `Error, ${name} was not loaded`;
+    this._isObject = isObject;
   }
   load(propertyName?: string) {
-    if (this.properties.has(propertyName)) {
-      this.properties.get(propertyName).load();
+    if (this._properties.has(propertyName)) {
+      this._properties.get(propertyName).load();
       this._assignValue(propertyName);
     }
-    this.loaded = true;
-    this.value = `Error, context.sync() was not called`;
+    this._loaded = true;
+    this._value = `Error, context.sync() was not called`;
   }
   sync() {
-    this.properties.forEach((property: OfficeJSMock, key: string) => {
+    this._properties.forEach((property: OfficeJSMock, key: string) => {
       property.sync();
       this._assignValue(key);
     });
-    if (this.loaded) {
-      this.value = this.valueBeforeLoaded;
+    if (this._loaded) {
+      this._value = this._valueBeforeLoaded;
     }
   }
 
@@ -31,34 +29,34 @@ export class OfficeJSMock {
   }
 
   addMockObject(objectName: string) {
-    this.properties.set(objectName, new OfficeJSMock(objectName, true));
-    this[objectName] = this.properties.get(objectName);
+    this._properties.set(objectName, new OfficeJSMock(objectName, true));
+    this[objectName] = this._properties.get(objectName);
   }
 
   setMock(propertyName: string, value: string) {
-    if (!this.properties.has(propertyName)) {
-        this.properties.set(propertyName, new OfficeJSMock(propertyName, false));
-        this.properties.get(propertyName)._setValue(value);
-        this[propertyName] = this.properties.get(propertyName).value;
+    if (!this._properties.has(propertyName)) {
+        this._properties.set(propertyName, new OfficeJSMock(propertyName, false));
+        this._properties.get(propertyName)._setValue(value);
+        this[propertyName] = this._properties.get(propertyName)._value;
     }
   }
 
   _assignValue(propertyName: string) {
-    if (this.properties.get(propertyName).isObject) {
-      this[propertyName] = this.properties.get(propertyName);
+    if (this._properties.get(propertyName)._isObject) {
+      this[propertyName] = this._properties.get(propertyName);
     } else {
-      this[propertyName] = this.properties.get(propertyName).value;
+      this[propertyName] = this._properties.get(propertyName)._value;
     }
   }
 
   _setValue(value: string) {
-    this.valueBeforeLoaded = value;
+    this._valueBeforeLoaded = value;
   }
 
-  properties: Map<string, OfficeJSMock>;
-  loaded: boolean;
-  name: string;
-  value: string;
-  valueBeforeLoaded: string;
-  isObject: boolean;
+  _properties: Map<string, OfficeJSMock>;
+  _loaded: boolean;
+  _name: string;
+  _value: string;
+  _valueBeforeLoaded: string;
+  _isObject: boolean;
 }

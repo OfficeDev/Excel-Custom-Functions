@@ -1,6 +1,4 @@
 import * as assert from "assert";
-import * as sinon from "sinon";
-
 import { OfficeJSMock } from "./mock_utils";
 import { getSelectedRangeAddress, run } from "../src/test-file";
 
@@ -13,12 +11,12 @@ describe(`Test Task Pane Project mocking without imports`, function () {
     contextMock.addMockObject("workbook");
     contextMock.workbook.addMockObject("range");    
     contextMock.workbook.addMockFunction("getSelectedRange", () => contextMock.workbook.range);
-
     contextMock.workbook.range.setMock("address", "C2");
+
     assert.strictEqual(await getSelectedRangeAddress(contextMock), "C2");
   });
   it("run", async function () {
-    const excelMock = new OfficeJSMock("context") as any;
+    const excelMock = new OfficeJSMock("excel") as any;
 
     excelMock.addMockObject("context");
     excelMock.context.addMockObject("workbook");
@@ -27,13 +25,13 @@ describe(`Test Task Pane Project mocking without imports`, function () {
     excelMock.context.workbook.range.setMock("address", "G4");
     excelMock.context.workbook.range.addMockObject("format");
     excelMock.context.workbook.range.format.addMockObject("fill");
-  
     excelMock.addMockFunction("run", async function(callback) {
       await callback(excelMock.context);
     });
+  
     global.Excel = excelMock;
+  
     await run();
-
-    assert.strictEqual((global.Excel as any).context.workbook.range.format.fill.color, "yellow");
+    assert.strictEqual(excelMock.context.workbook.range.format.fill.color, "yellow");
   });
 });
