@@ -4,8 +4,8 @@ import { run } from "../src/test-file";
 
 /* global describe, global, it */
 
-describe(`Test Task Pane Project mocking without imports`, function () {
-  it("run", async function () {
+describe(`Run`, function () {
+  it("Basic Test", async function () {
     const excelMock = new OfficeJSMock("excel") as any;
 
     excelMock.addMockObject("context");

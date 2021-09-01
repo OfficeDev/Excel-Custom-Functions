@@ -4,8 +4,8 @@ import { getSelectedRangeAddress } from "../src/test-file";
 
 /* global describe, global, it */
 
-describe(`Test Task Pane Project mocking without imports`, function () {
-  it("getSelectedRangeAddress", async function () {
+describe(`getSelectedRangeAddress`, function () {
+  it("Basic test", async function () {
     const contextMock = new OfficeJSMock("context") as any;
 
     contextMock.addMockObject("workbook");
