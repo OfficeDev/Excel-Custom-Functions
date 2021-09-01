@@ -6,23 +6,6 @@ export class OfficeJSMock {
     this._value = `Error, ${name} was not loaded`;
     this._isObject = isObject;
   }
-  load(propertyName?: string) {
-    if (this._properties.has(propertyName)) {
-      this._properties.get(propertyName).load();
-      this._assignValue(propertyName);
-    }
-    this._loaded = true;
-    this._value = `Error, context.sync() was not called`;
-  }
-  sync() {
-    this._properties.forEach((property: OfficeJSMock, key: string) => {
-      property.sync();
-      this._assignValue(key);
-    });
-    if (this._loaded) {
-      this._value = this._valueBeforeLoaded;
-    }
-  }
 
   addMockFunction(methodName: string, functionality?: Function) {
     this[methodName] = functionality ? functionality : function () {}
@@ -33,11 +16,41 @@ export class OfficeJSMock {
     this[objectName] = this._properties.get(objectName);
   }
 
+  load(propertyName?: string) {
+    if (this._properties.has(propertyName)) {
+      this._properties.get(propertyName).load();
+      this._assignValue(propertyName);
+    }
+    this._loaded = true;
+    this._value = `Error, context.sync() was not called`;
+  }
+
+  populate(json) {
+    Object.keys(json).forEach((property: string) => {
+      if (typeof json[property] === "object") {
+        this.addMockObject(property);
+        this[property].populate(json[property]);
+      } else {
+        this.setMock(property, json[property]);
+      }
+    })
+  }
+
   setMock(propertyName: string, value: string) {
     if (!this._properties.has(propertyName)) {
         this._properties.set(propertyName, new OfficeJSMock(propertyName, false));
         this._properties.get(propertyName)._setValue(value);
         this[propertyName] = this._properties.get(propertyName)._value;
+    }
+  }
+
+  sync() {
+    this._properties.forEach((property: OfficeJSMock, key: string) => {
+      property.sync();
+      this._assignValue(key);
+    });
+    if (this._loaded) {
+      this._value = this._valueBeforeLoaded;
     }
   }
 

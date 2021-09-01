@@ -5,7 +5,7 @@ import { run } from "../src/test-file";
 /* global describe, global, it */
 
 describe(`Run`, function () {
-  it("Basic Test", async function () {
+  it("Basic test", async function () {
     const excelMock = new OfficeJSMock("excel") as any;
 
     excelMock.addMockObject("context");

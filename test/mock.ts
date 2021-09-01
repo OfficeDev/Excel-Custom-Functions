@@ -19,7 +19,7 @@
 //     range.setMockData({
 //       address: "C2",
 //     });
-//     sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
+    // sinon.stub(context.workbook, "getSelectedRange").callsFake(() => range);
 
 //     assert.strictEqual(await getSelectedRangeAddress(context), "C2");
 //   });
