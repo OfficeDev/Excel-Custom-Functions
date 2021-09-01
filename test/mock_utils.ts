@@ -1,12 +1,27 @@
-export class FillMock {
-  color: string;
-}
-
-class FormatMock {
+class OfficeJSMock {
   constructor() {
-    this.fill = new FillMock();
+    this.properties = new Map<string, Property>();
   }
-  fill: FillMock;
+  load(propertyName: string) {
+    if (this.properties.has(propertyName)) {
+      this.properties.get(propertyName).load();
+      this[propertyName] = this.properties.get(propertyName).value;
+    }
+  }
+  sync() {
+    this.properties.forEach((property: Property, key: string) => {
+      property.sync();
+      this[key] = this.properties.get(key).value;
+    });
+  }
+  setMock(propertyName: string, value: string) { // Also add runtime properties
+    if (!this.properties.has(propertyName)) {
+      this.properties.set(propertyName, new Property(propertyName));
+      this.properties.get(propertyName).setMock(value);
+      this[propertyName] = this.properties.get(propertyName).value;
+    }
+  }
+  properties: Map<string, Property>;
 }
 
 class Property {
@@ -37,32 +52,31 @@ class Property {
   valueBeforeLoaded: string;
 }
 
-export class RangeMock {
+
+export class RangeMock extends OfficeJSMock {
+
+}
+
+
+export class FillMock {
+  color: string;
+}
+
+class FormatMock {
   constructor() {
-    this.format = new FormatMock();
-    this.properties = new Map<string, Property>();
+    this.fill = new FillMock();
   }
-  load(propertyName: string) {
-    if (this.properties.has(propertyName)) {
-      this.properties.get(propertyName).load();
-      this[propertyName] = this.properties.get(propertyName).value;
-    }
-  }
-  sync() {
-    this.properties.forEach((property: Property, key: string) => {
-      property.sync();
-      this[key] = this.properties.get(key).value;
-    });
-  }
-  setMock(propertyName: string, value: string) { // Also add runtime properties
-    if (!this.properties.has(propertyName)) {
-      this.properties.set(propertyName, new Property(propertyName));
-      this.properties.get(propertyName).setMock(value);
-      this[propertyName] = this.properties.get(propertyName).value;
-    }
-  }
-  format: FormatMock;
-  properties: Map<string, Property>;
+  fill: FillMock;
+}
+
+
+
+
+
+
+
+class Range2 extends RangeMock {
+
 }
 
 export class WorkbookMock {
