@@ -7,10 +7,6 @@ jobs:
     pool:
       name: OETest-OfficeClientApps
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '14.x'
-          checkLatest: true
       - template: ./install.yml
       - template: ./lint.yml
       - template: ./build.yml
