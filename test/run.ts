@@ -6,7 +6,7 @@ const JsonData = require("./run.json");
 /* global describe, global, it */
 
 describe(`Run`, function () {
-  it("JSON", async function () {
+  it("Using json", async function () {
     const excelMock = new OfficeJSMock("excel") as any;
     excelMock.populate(JsonData);
 
