@@ -1,0 +1,13 @@
+{
+    "context": {
+        "workbook": {
+            "range": {
+                "address": "G4",
+                "format": {
+                    "fill": {
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,6 @@
 import * as assert from "assert";
-import * as sinon from "sinon";
 import { OfficeJSMock } from "./mock_utils";
 import { getSelectedRangeAddress } from "../src/test-file";
-
 const JsonData = require("./getSelectedRangeAddress.json");
 
 /* global describe, global, it */
