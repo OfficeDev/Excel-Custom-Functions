@@ -18,7 +18,6 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "build-dev": "webpack --mode development && echo . && echo . && echo . && echo Please use 'build:dev' instead of 'build-dev'.",
     "convert-to-single-host": "node convertToSingleHost.js",
     "dev-server": "webpack serve --mode development",
     "lint": "office-addin-lint check",
