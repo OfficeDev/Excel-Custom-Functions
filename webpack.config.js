@@ -89,7 +89,7 @@ module.exports = async (env, options) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      https: options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
+      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
       port: process.env.npm_package_config_dev_server_port || 3000,
     },
   };
