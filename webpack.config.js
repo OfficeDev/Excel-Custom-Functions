@@ -18,6 +18,10 @@ module.exports = async (env, options) => {
       taskpane: "./src/taskpane/taskpane.ts",
       commands: "./src/commands/commands.ts",
     },
+    output: {
+      sourceMapFilename: "[name].js.map",
+      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
+    },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
     },
@@ -44,11 +48,8 @@ module.exports = async (env, options) => {
           use: "html-loader",
         },
         {
-          test: /\.(png|jpg|jpeg|gif)$/,
-          loader: "file-loader",
-          options: {
-            name: "[path][name].[ext]",
-          },
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
+          type: "asset/resource",
         },
       ],
     },
@@ -88,7 +89,7 @@ module.exports = async (env, options) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      https: options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
+      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
       port: process.env.npm_package_config_dev_server_port || 3000,
     },
   };
