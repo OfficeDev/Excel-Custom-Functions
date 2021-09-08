@@ -7,6 +7,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
+async function getHttpsOptions() {
+  const httpsOptions = await devCerts.getHttpsServerOptions();
+  return { cacert: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
+}
+
 module.exports = async (env, options) => {
   // const dev = options.mode === "development";
   const config = {
@@ -76,11 +81,13 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
-      contentBase: "testBuild",
+      static: {
+        directory: "testBuild",
+      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
+      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       port: process.env.npm_package_config_dev_server_port || 3000,
     },
   };
