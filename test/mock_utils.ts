@@ -33,14 +33,14 @@ export class OfficeJSMock {
       } else {
         this.setMock(property, json[property]);
       }
-    })
+    });
   }
 
-  setMock(propertyName: string, value: string) {
+  setMock(propertyName: string, value: unknown) {
     if (!this._properties.has(propertyName)) {
-        this._properties.set(propertyName, new OfficeJSMock(propertyName, false));
-        this._properties.get(propertyName)._setValue(value);
-        this[propertyName] = this._properties.get(propertyName)._value;
+      this._properties.set(propertyName, new OfficeJSMock(propertyName, false));
+      this._properties.get(propertyName)._setValue(value);
+      this[propertyName] = this._properties.get(propertyName)._value;
     }
   }
 
@@ -62,14 +62,14 @@ export class OfficeJSMock {
     }
   }
 
-  _setValue(value: string) {
+  _setValue(value: unknown) {
     this._valueBeforeLoaded = value;
   }
 
   _properties: Map<string, OfficeJSMock>;
   _loaded: boolean;
   _name: string;
-  _value: string;
-  _valueBeforeLoaded: string;
+  _value: unknown;
+  _valueBeforeLoaded: unknown;
   _isObject: boolean;
 }
