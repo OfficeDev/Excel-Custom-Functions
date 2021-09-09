@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { OfficeJSMock } from "./mock_utils";
+import { OfficeJSMock } from "office-addin-unit-test";
 import { getSelectedRangeAddress } from "../src/test-file";
 const JsonData = require("./getSelectedRangeAddress.json");
 
