@@ -3,7 +3,7 @@ import { OfficeJSMock } from "./mock_utils";
 import { run } from "../src/test-file";
 const JsonData = require("./run.json");
 
-/* global describe, global, it */
+/* global describe, global, it, require */
 
 describe(`Run`, function () {
   it("Using json", async function () {
