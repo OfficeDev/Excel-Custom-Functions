@@ -10,13 +10,12 @@ describe(`Run`, function () {
     const excelMock = new OfficeJSMock("excel") as any;
     excelMock.populate(JsonData);
 
-    excelMock.context.workbook.addMockFunction("getSelectedRange", () => excelMock.context.workbook.range);
-    excelMock.addMockFunction("run", async function(callback) {
+    excelMock.addMockFunction("run", async function (callback) {
       await callback(excelMock.context);
     });
-  
+
     global.Excel = excelMock;
-  
+
     await run();
     assert.strictEqual(excelMock.context.workbook.range.format.fill.color, "yellow");
   });
@@ -30,12 +29,12 @@ describe(`Run`, function () {
     excelMock.context.workbook.range.setMock("address", "G4");
     excelMock.context.workbook.range.addMockObject("format");
     excelMock.context.workbook.range.format.addMockObject("fill");
-    excelMock.addMockFunction("run", async function(callback) {
+    excelMock.addMockFunction("run", async function (callback) {
       await callback(excelMock.context);
     });
-  
+
     global.Excel = excelMock;
-  
+
     await run();
     assert.strictEqual(excelMock.context.workbook.range.format.fill.color, "yellow");
   });

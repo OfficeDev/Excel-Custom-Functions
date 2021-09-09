@@ -8,7 +8,7 @@ export class OfficeJSMock {
   }
 
   addMockFunction(methodName: string, functionality?: Function) {
-    this[methodName] = functionality ? functionality : function () {}
+    this[methodName] = functionality ? functionality : function () {};
   }
 
   addMockObject(objectName: string) {
@@ -30,6 +30,8 @@ export class OfficeJSMock {
       if (typeof json[property] === "object") {
         this.addMockObject(property);
         this[property].populate(json[property]);
+      } else if (typeof json[property] === "string" && json[property].startsWith("()=>")) {
+        this.addMockFunction(property, () => this[json[property].slice(4)]);
       } else {
         this.setMock(property, json[property]);
       }

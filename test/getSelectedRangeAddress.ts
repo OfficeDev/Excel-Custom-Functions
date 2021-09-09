@@ -10,8 +10,6 @@ describe(`getSelectedRangeAddress`, function () {
     const contextMock = new OfficeJSMock("context") as any;
 
     contextMock.populate(JsonData);
-    contextMock.workbook.addMockFunction("getSelectedRange", () => contextMock.workbook.range);
-
     assert.strictEqual(await getSelectedRangeAddress(contextMock), "C2");
   });
   it("Basic test", async function () {
@@ -23,4 +21,5 @@ describe(`getSelectedRangeAddress`, function () {
     contextMock.workbook.range.setMock("address", "C2");
 
     assert.strictEqual(await getSelectedRangeAddress(contextMock), "C2");
-  });});
+  });
+});
