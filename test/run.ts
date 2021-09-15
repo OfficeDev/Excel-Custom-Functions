@@ -1,9 +1,23 @@
 import * as assert from "assert";
 import { OfficeJSMock } from "office-addin-unit-test";
-import { run } from "../src/test-file";
-const JsonData = require("./run.json");
+import { run } from "../src/src-file";
+const JsonData = {
+  context: {
+    workbook: {
+      range: {
+        address: "G4",
+        format: {
+          fill: {},
+        },
+      },
+      getSelectedRange: function () {
+        return this.range;
+      },
+    },
+  },
+};
 
-/* global describe, global, it, require */
+/* global describe, global, it */
 
 describe(`Run`, function () {
   it("Using json", async function () {

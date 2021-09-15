@@ -1,8 +1,0 @@
-{
-    "workbook": {
-        "range": {
-            "address": "C2"
-        },
-        "getSelectedRange": "()=>range"
-    }
-}
