@@ -18,9 +18,6 @@ const JsonData = {
 describe(`getSelectedRangeAddress`, function () {
   it("Using json", async function () {
     const contextMock = new OfficeJSMock(JsonData) as any;
-
-    contextMock.workbook.range.address = "C3";
-
     assert.strictEqual(await getSelectedRangeAddress(contextMock), "C2");
   });
 });
