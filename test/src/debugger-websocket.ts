@@ -10,13 +10,13 @@ const limitOfReconnectTries = 60;
 let wsUrl: string | undefined;
 
 function findUrl(): void {
-  let jsonUrl = "http://localhost:9223/json";
+  let jsonUrl = "http://localhost:9229/json";
   let options = { json: true };
 
   request(jsonUrl, options, (error, res, body) => {
     if (!error && res.statusCode == 200) {
       wsUrl = body[0].webSocketDebuggerUrl;
-    };
+    }
   });
 }
 
