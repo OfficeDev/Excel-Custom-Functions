@@ -9,8 +9,7 @@ let messageId = 0;
 const limitOfReconnectTries = 60;
 let wsUrl: string | undefined;
 
-function findUrl(): void {
-  let jsonUrl = "http://localhost:9229/json";
+function findUrl(jsonUrl: string): void {
   let options = { json: true };
 
   request(jsonUrl, options, (error, res, body) => {
@@ -21,9 +20,12 @@ function findUrl(): void {
 }
 
 export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebSocket | undefined> {
+  // different JS engins used in office use different ports.  Allow for either one
+  let jsonUrl = reconnectTry % 2 == 0 ? "http://localhost:9223/json" : "http://localhost:9229/json";
+
   while (!wsUrl && reconnectTry < limitOfReconnectTries) {
     console.log("Attaching debugger...");
-    findUrl();
+    findUrl(jsonUrl);
     reconnectTry++;
     await sleep(1000);
   }

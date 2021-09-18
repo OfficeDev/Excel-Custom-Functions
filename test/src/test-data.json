@@ -6,7 +6,11 @@
         },
         "CLOCK": {
             "formula": "=CONTOSO.CLOCK()",
-            "result": "GMT",
+            "result": {
+                "amString": "AM",
+                "pmString": "PM",
+                "timeZoneString": "GMT"
+            },
             "streaming": true
         },
         "INCREMENT": {

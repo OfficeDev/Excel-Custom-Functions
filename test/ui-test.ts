@@ -51,14 +51,18 @@ describe("Test Excel Custom Functions", function () {
     it("CLOCK function should return expected value", async function () {
       // Check that captured values are different to ensure the function is streaming
       assert.notStrictEqual(testValues[1].Value, testValues[2].Value);
-      // Check if the returned string contains 'AM' or 'PM', indicating it's a time-stamp
+      // Check if the returned string contains 'AM', 'PM', or 'GMT', indicating it's a time-stamp
       assert.strictEqual(
-        testValues[1].Value.includes(testJsonData.functions.CLOCK.result),
+        testValues[1].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
+          testValues[1].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
+          testValues[1].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
         true,
         "Found timestamp indicator string in first value '" + testValues[1].Value + "'"
       );
       assert.strictEqual(
-        testValues[2].Value.includes(testJsonData.functions.CLOCK.result),
+        testValues[2].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
+          testValues[2].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
+          testValues[2].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
         true,
         "Found timestamp indicator string in second value '" + testValues[2].Value + "'"
       );
