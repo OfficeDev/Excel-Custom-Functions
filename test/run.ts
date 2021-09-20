@@ -1,7 +1,8 @@
 import * as assert from "assert";
-import { OfficeJSMock } from "office-addin-unit-test";
+import { OfficeMockObject } from "office-addin-mock";
 import { run } from "../src/src-file";
-const JsonData = {
+
+const MockData = {
   context: {
     workbook: {
       range: {
@@ -21,7 +22,7 @@ const JsonData = {
 
 describe(`Run`, function () {
   it("Using json", async function () {
-    const excelMock = new OfficeJSMock(JsonData) as any;
+    const excelMock = new OfficeMockObject(MockData) as any;
     excelMock.addMockFunction("run", async function (callback) {
       await callback(excelMock.context);
     });
