@@ -1,8 +1,9 @@
 steps:
-- task: Npm@1
-  displayName: 'npm test'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run test'
-
+  - script: |
+    echo Running Tests
+    
+    npm run test
+    
+    echo Done running tests
+    
+  displayName: 'Run Tests'
