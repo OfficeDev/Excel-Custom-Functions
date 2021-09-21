@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 
 const devCerts = require("office-addin-dev-certs");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -24,8 +23,8 @@ module.exports = async (env, options) => {
       commands: "./src/commands/commands.ts",
     },
     output: {
-      sourceMapFilename: "[name].js.map",
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
+      clean: true,
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
@@ -59,7 +58,6 @@ module.exports = async (env, options) => {
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
@@ -67,10 +65,6 @@ module.exports = async (env, options) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          {
-            from: "./src/taskpane/taskpane.css",
-            to: "taskpane.css",
-          },
           {
             from: "manifest*.xml",
             to: "[name]." + buildType + "[ext]",
