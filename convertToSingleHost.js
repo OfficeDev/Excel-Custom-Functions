@@ -1,8 +1,17 @@
+/* global require, process, console */
+
 const fs = require("fs");
 const path = require("path");
 const util = require("util");
-const testPackages = ["@types/mocha", "@types/node", "current-processes", "mocha", "office-addin-test-helpers",
-    "office-addin-test-server", "ts-node"];
+const testPackages = [
+  "@types/mocha",
+  "@types/node",
+  "current-processes",
+  "mocha",
+  "office-addin-test-helpers",
+  "office-addin-test-server",
+  "ts-node",
+];
 const readFileAsync = util.promisify(fs.readFile);
 const unlinkFileAsync = util.promisify(fs.unlink);
 const writeFileAsync = util.promisify(fs.writeFile);
