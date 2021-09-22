@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
+
 const devCerts = require("office-addin-dev-certs");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -7,21 +9,32 @@ const path = require("path");
 
 /* global require, module, process, __dirname */
 
+async function getHttpsOptions() {
+  const httpsOptions = await devCerts.getHttpsServerOptions();
+  return { cacert: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
+}
+
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
-  const debuggingTest = options.testType === "debugger";
+  const debuggingTest = env.testType === "debugger";
   const config = {
     devtool: "source-map",
     entry: {
-      commands: path.resolve(__dirname, "./../src/commands/commands.ts"),
-      functions: path.resolve(__dirname, "./../src/functions/functions.ts"),
-      polyfill: "@babel/polyfill",
-      taskpane: path.resolve(__dirname, "./src/test-taskpane.ts"),
+      polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
+      commands: "./src/commands/commands.ts",
+      functions: "./src/functions/functions.ts",
+      taskpane: "./test/src/test-taskpane.ts",
+    },
+    output: {
+      path: path.resolve(__dirname, "testBuild"),
+      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
       fallback: {
         child_process: path.resolve(__dirname, "./../node_modules/child_process/package.json"),
+        fs: false,
+        os: require.resolve("os-browserify/browser"),
       },
     },
     module: {
@@ -29,7 +42,12 @@ module.exports = async (env, options) => {
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: "babel-loader",
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-typescript"],
+            },
+          },
         },
         {
           test: /\.tsx?$/,
@@ -42,14 +60,13 @@ module.exports = async (env, options) => {
           use: "html-loader",
         },
         {
-          test: /\.(png|jpg|jpeg|gif)$/,
-          use: "file-loader",
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
+          loader: "file-loader",
+          options: {
+            name: "[path][name].[ext]",
+          },
         },
       ],
-    },
-    output: {
-      path: path.resolve(__dirname, "dist"),
-      publicPath: "/",
     },
     plugins: [
       new CleanWebpackPlugin({
@@ -58,37 +75,38 @@ module.exports = async (env, options) => {
       }),
       new CustomFunctionsMetadataPlugin({
         output: "functions.json",
-        input: path.resolve(__dirname, "./../src/functions/functions.ts"),
+        input: "./src/functions/functions.ts",
       }),
       new HtmlWebpackPlugin({
         filename: "functions.html",
-        template: path.resolve(__dirname, "./../src/functions/functions.html"),
+        template: "./src/functions/functions.html",
         chunks: ["polyfill", "functions"],
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: path.resolve(__dirname, "./src/test-taskpane.html"),
+        template: "./test/src/test-taskpane.html",
         chunks: ["polyfill", "taskpane"],
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: path.resolve(__dirname, "./../src/taskpane/taskpane.css"),
+            from: "./src/taskpane/taskpane.css",
             to: "taskpane.css",
           },
         ],
       }),
       new HtmlWebpackPlugin({
         filename: "commands.html",
-        template: path.resolve(__dirname, "./src/test-commands.html"),
+        template: "./test/src/test-commands.html",
         chunks: ["polyfill", "commands"],
       }),
     ],
     devServer: {
+      static: [__dirname + "\\.."],
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      https: options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
+      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       port: debuggingTest ? 3001 : process.env.npm_package_config_dev_server_port || 3000,
     },
   };

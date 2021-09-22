@@ -2,13 +2,14 @@
     "functions": {
         "ADD": {
             "formula": "=CONTOSO.ADD(5,2)",
-            "result": "7"
+            "result": 7
         },
         "CLOCK": {
             "formula": "=CONTOSO.CLOCK()",
             "result": {
                 "amString": "AM",
-                "pmString": "PM"
+                "pmString": "PM",
+                "timeZoneString": "GMT"
             },
             "streaming": true
         },
