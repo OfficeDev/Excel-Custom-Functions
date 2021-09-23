@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 
 const devCerts = require("office-addin-dev-certs");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -29,6 +28,7 @@ module.exports = async (env, options) => {
     },
     output: {
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
+      clean: true,
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
@@ -57,18 +57,11 @@ module.exports = async (env, options) => {
         },
         {
           test: /\.(png|jpg|jpeg|gif|ico)$/,
-          loader: "file-loader",
-          options: {
-            name: "[path][name].[ext]",
-          },
+          type: "asset/resource",
         },
       ],
     },
     plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: dev ? [] : ["**/*"],
-        cleanAfterEveryBuildPatterns: dev ? ["!**/*"] : [],
-      }),
       new CustomFunctionsMetadataPlugin({
         output: "functions.json",
         input: "./src/functions/functions.ts",
@@ -85,10 +78,6 @@ module.exports = async (env, options) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          {
-            from: "./src/taskpane/taskpane.css",
-            to: "taskpane.css",
-          },
           {
             from: "manifest*.xml",
             to: "[name]." + buildType + "[ext]",
