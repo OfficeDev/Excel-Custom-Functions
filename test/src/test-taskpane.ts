@@ -1,5 +1,6 @@
 import * as functionsJsonData from './test-data.json';
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";    
+import { closeWorkbook, sleep } from './test-helpers';
 const customFunctionsData = (<any>functionsJsonData).functions; 
 const port: number = 4201;
 let testValues = [];
@@ -34,20 +35,6 @@ async function runCfTests(platform: string): Promise<void> {
     });
 }
 
-async function closeWorkbook(): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-        try {
-            await Excel.run(async context => {                
-                // @ts-ignore
-                context.workbook.close(Excel.CloseBehavior.skipSave);
-                resolve();
-            });
-        } catch {
-            reject();
-        }   
-     });
-}
-
 export async function readCFData(cfName: string, readCount: number, platform: string): Promise<boolean> {
     return new Promise<boolean>(async (resolve, reject) => {
         await Excel.run(async context => {
@@ -79,8 +66,4 @@ function addTestResult(resultName: string, resultValue: any) {
     data[nameKey] = resultName;
     data[valueKey] = resultValue;
     testValues.push(data);
-}
-
-async function sleep(ms: number): Promise<any> {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
