@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 jobs:
-  - job: Windows 10 Latest
+  - job: Windows_10_Latest
     pool:
       name: OE-OfficeClientApps
     steps:
@@ -23,4 +23,3 @@ jobs:
       - template: ./build.yml
       - template: ./test.yml
       - template: ./cleanup.yml
-      
