@@ -28,9 +28,9 @@
     "start:desktop:outlook": "office-addin-debugging start manifest.outlook.xml desktop --app outlook",
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
-    "test": "npm run test-unit && npm run test-end-to-end",
-    "test-end-to-end": "mocha -r ts-node/register test/end-to-end/*.ts",
-    "test-unit": "mocha -r ts-node/register test/unit/*.ts",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:e2e": "mocha -r ts-node/register test/end-to-end/*.ts",
+    "test:unit": "mocha -r ts-node/register test/unit/*.ts",
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
   },

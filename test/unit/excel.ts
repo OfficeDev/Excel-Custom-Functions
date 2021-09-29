@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "./src/src-file";
+import { run } from "../../src/taskpane/excel";
 
 const MockData = {
   context: {
@@ -20,8 +20,8 @@ const MockData = {
 
 /* global describe, global, it */
 
-describe(`Run`, function () {
-  it("Using json", async function () {
+describe(`Excel`, function () {
+  it("Run", async function () {
     const excelMock = new OfficeMockObject(MockData) as any;
     excelMock.addMockFunction("run", async function (callback) {
       await callback(excelMock.context);
