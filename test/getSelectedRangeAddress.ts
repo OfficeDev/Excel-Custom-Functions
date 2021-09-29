@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { getSelectedRangeAddress } from "../src/src-file";
+import { getSelectedRangeAddress } from "./src/src-file";
 
 const MockData = {
   workbook: {

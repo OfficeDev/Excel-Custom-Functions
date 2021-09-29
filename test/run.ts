@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../src/src-file";
+import { run } from "./src/src-file";
 
 const MockData = {
   context: {
