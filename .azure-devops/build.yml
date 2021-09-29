@@ -1,7 +1,6 @@
 steps:
 - task: Npm@1
-  displayName: 'npm build'
+  displayName: 'Build'
   inputs:
     command: custom
-    verbose: false
     customCommand: 'run build'
