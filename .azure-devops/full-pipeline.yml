@@ -13,6 +13,8 @@ jobs:
       - template: ./devcerts.yml
       - template: ./edgewebview.yml
       - template: ./test.yml
+        parameters:
+          webView: "edge-chromium"
 
   - job: WebView_EdgeLegacy
     pool:
