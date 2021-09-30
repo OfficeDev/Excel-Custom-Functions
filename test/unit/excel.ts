@@ -2,7 +2,9 @@ import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
 import { run } from "../../src/taskpane/excel";
 
-const MockData = {
+/* global describe, global, it */
+
+const ExcelMockData = {
   context: {
     workbook: {
       range: {
@@ -18,11 +20,9 @@ const MockData = {
   },
 };
 
-/* global describe, global, it */
-
 describe(`Excel`, function () {
   it("Run", async function () {
-    const excelMock = new OfficeMockObject(MockData) as any;
+    const excelMock = new OfficeMockObject(ExcelMockData) as any;
     excelMock.addMockFunction("run", async function (callback) {
       await callback(excelMock.context);
     });
