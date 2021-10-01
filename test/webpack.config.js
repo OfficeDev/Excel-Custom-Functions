@@ -13,6 +13,7 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
   // const dev = options.mode === "development";
   const config = {
+    target: ["web", "es5"], // IE webview requires es5 syntax
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
