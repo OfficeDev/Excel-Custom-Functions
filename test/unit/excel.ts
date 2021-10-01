@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../../src/taskpane/excel";
+import { run, runOnReady } from "../../src/taskpane/excel";
 
 /* global describe, global, it */
 
@@ -31,5 +31,9 @@ describe(`Excel`, function () {
     await run();
 
     assert.strictEqual(excelMock.context.workbook.range.format.fill.color, "yellow");
+  });
+  it("runOnReady", async function () {
+    // Test code for the runOnReady function
+    runOnReady();
   });
 });

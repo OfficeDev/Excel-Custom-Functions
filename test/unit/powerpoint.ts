@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../../src/taskpane/powerpoint";
+import { run, runOnReady } from "../../src/taskpane/powerpoint";
 
 /* global describe, global, it */
 
@@ -26,5 +26,9 @@ describe(`PowerPoint`, function () {
     await run();
 
     assert.strictEqual(officeMock.context.document.data, "Hello World!");
+  });
+  it("runOnReady", async function () {
+    // Test code for the runOnReady function
+    runOnReady();
   });
 });

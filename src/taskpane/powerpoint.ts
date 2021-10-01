@@ -5,6 +5,10 @@
 
 /* global Office */
 
+export function runOnReady(): void {
+  // Put here your addin code that will run when the Office documents starts.
+}
+
 export async function run() {
   /**
    * Insert your PowerPoint code here

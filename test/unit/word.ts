@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../../src/taskpane/word";
+import { run, runOnReady } from "../../src/taskpane/word";
 
 /* global describe, global, it, Word */
 
@@ -36,5 +36,9 @@ describe(`Word`, function () {
     await run();
 
     assert.strictEqual(wordMock.context.document.body.paragraph.font.color, "blue");
+  });
+  it("runOnReady", async function () {
+    // Test code for the runOnReady function
+    runOnReady();
   });
 });

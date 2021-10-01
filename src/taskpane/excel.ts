@@ -5,6 +5,10 @@
 
 /* global console, Excel */
 
+export function runOnReady(): void {
+  // Put here your addin code that will run when the Office documents starts.
+}
+
 export async function run() {
   try {
     await Excel.run(async (context) => {

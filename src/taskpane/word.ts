@@ -5,6 +5,10 @@
 
 /* global Word */
 
+export function runOnReady(): void {
+  // Put here your addin code that will run when the Office documents starts.
+}
+
 export async function run() {
   return Word.run(async (context) => {
     /**

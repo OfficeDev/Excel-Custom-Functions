@@ -5,7 +5,7 @@ import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
 
-import { run } from "./word";
+import { run, runOnReady } from "./word";
 
 /* global document, Office */
 
@@ -14,5 +14,6 @@ Office.onReady((info) => {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
     document.getElementById("run").onclick = run;
+    runOnReady();
   }
 });
