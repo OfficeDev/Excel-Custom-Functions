@@ -1,7 +1,6 @@
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../../src/taskpane/powerpoint";
 
-/* global expect, global, test */
+/* global expect, global, jest, require, test */
 
 const PowerPointMockData = {
   context: {
@@ -18,6 +17,15 @@ const PowerPointMockData = {
 };
 
 test(`PowerPoint`, async function () {
+  jest.resetModules(); // to make sure that require will return a new module instance
+  jest.mock("./../../src/taskpane/office", () => ({
+    onReady: async function () {},
+    CoercionType: {
+      Text: "1",
+    },
+  }));
+  const { run } = require("../../src/taskpane/powerpoint");
+
   const officeMock = new OfficeMockObject(PowerPointMockData) as any;
   global.Office = officeMock;
 

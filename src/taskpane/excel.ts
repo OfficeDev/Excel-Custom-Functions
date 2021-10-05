@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global console, document, Excel, Office */
+/* global console, document, Excel, module, require */
 
 // images references in the manifest
 import "../../assets/icon-16.png";
@@ -11,6 +11,8 @@ import "../../assets/icon-32.png";
 import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
+
+const Office = require("./office");
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Excel) {
@@ -20,7 +22,7 @@ Office.onReady((info) => {
   }
 });
 
-export async function run() {
+async function run() {
   try {
     await Excel.run(async (context) => {
       /**
@@ -41,3 +43,5 @@ export async function run() {
     console.error(error);
   }
 }
+
+module.exports = { run };

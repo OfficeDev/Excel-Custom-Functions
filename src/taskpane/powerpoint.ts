@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+/* global document, module, require */
+
 // images references in the manifest
 import "../../assets/icon-16.png";
 import "../../assets/icon-32.png";
@@ -10,7 +12,7 @@ import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
 
-/* global document, Office */
+const Office = require("./office");
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.PowerPoint) {
@@ -20,12 +22,14 @@ Office.onReady((info) => {
   }
 });
 
-export async function run() {
+async function run() {
   /**
    * Insert your PowerPoint code here
    */
-  const options: Office.SetSelectedDataOptions = { coercionType: Office.CoercionType.Text };
+  const options = { coercionType: Office.CoercionType.Text };
 
   await Office.context.document.setSelectedDataAsync(" ", options);
   await Office.context.document.setSelectedDataAsync("Hello World!", options);
 }
+
+module.exports = { run };

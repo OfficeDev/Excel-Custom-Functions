@@ -3,6 +3,8 @@
  * See LICENSE in the project root for license information.
  */
 
+/* global document, module, require, Word */
+
 // images references in the manifest
 import "../../assets/icon-16.png";
 import "../../assets/icon-32.png";
@@ -10,7 +12,7 @@ import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
 
-/* global document, Office, Word */
+const Office = require("./office");
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
@@ -20,7 +22,7 @@ Office.onReady((info) => {
   }
 });
 
-export async function run() {
+async function run() {
   return Word.run(async (context) => {
     /**
      * Insert your Word code here
@@ -35,3 +37,5 @@ export async function run() {
     await context.sync();
   });
 }
+
+module.exports = { run };

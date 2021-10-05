@@ -1,7 +1,6 @@
 import { OfficeMockObject } from "office-addin-mock";
-import { run } from "../../src/taskpane/excel";
 
-/* global expect, global, test */
+/* global expect, global, jest, require, test */
 
 const ExcelMockData = {
   context: {
@@ -20,6 +19,10 @@ const ExcelMockData = {
 };
 
 test(`Excel`, async function () {
+  jest.resetModules(); // to make sure that require will return a new module instance
+  jest.mock("./../../src/taskpane/office", () => ({ onReady: async function () {} }));
+  const { run } = require("../../src/taskpane/excel");
+
   const excelMock = new OfficeMockObject(ExcelMockData) as any;
   excelMock.addMockFunction("run", async function (callback) {
     await callback(excelMock.context);
