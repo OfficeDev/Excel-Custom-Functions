@@ -1,6 +1,6 @@
-import "./excel-start";
-import "./onenote-start";
-import "./outlook-start";
-import "./powerpoint-start";
-import "./project-start";
-import "./word-start";
+import "./excel";
+import "./onenote";
+import "./outlook";
+import "./powerpoint";
+import "./project";
+import "./word";
