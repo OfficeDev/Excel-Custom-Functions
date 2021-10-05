@@ -1,8 +1,7 @@
-import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run, runOnReady } from "../../src/taskpane/word";
+import { run } from "../../src/taskpane/word";
 
-/* global describe, global, it, Word */
+/* global expect, global, Word, test */
 
 const WordMockData = {
   context: {
@@ -25,20 +24,14 @@ const WordMockData = {
   },
 };
 
-describe(`Word`, function () {
-  it("Run", async function () {
-    const wordMock = new OfficeMockObject(WordMockData) as any;
-    wordMock.addMockFunction("run", async function (callback) {
-      await callback(wordMock.context);
-    });
-    global.Word = wordMock;
-
-    await run();
-
-    assert.strictEqual(wordMock.context.document.body.paragraph.font.color, "blue");
+test(`Word`, async function () {
+  const wordMock = new OfficeMockObject(WordMockData) as any;
+  wordMock.addMockFunction("run", async function (callback) {
+    await callback(wordMock.context);
   });
-  it("runOnReady", async function () {
-    // Test code for the runOnReady function
-    runOnReady();
-  });
+  global.Word = wordMock;
+
+  await run();
+
+  expect(wordMock.context.document.body.paragraph.font.color).toBe("blue");
 });

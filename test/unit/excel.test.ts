@@ -1,8 +1,7 @@
-import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run, runOnReady } from "../../src/taskpane/excel";
+import { run } from "../../src/taskpane/excel";
 
-/* global describe, global, it */
+/* global expect, global, test */
 
 const ExcelMockData = {
   context: {
@@ -20,20 +19,14 @@ const ExcelMockData = {
   },
 };
 
-describe(`Excel`, function () {
-  it("Run", async function () {
-    const excelMock = new OfficeMockObject(ExcelMockData) as any;
-    excelMock.addMockFunction("run", async function (callback) {
-      await callback(excelMock.context);
-    });
-    global.Excel = excelMock;
-
-    await run();
-
-    assert.strictEqual(excelMock.context.workbook.range.format.fill.color, "yellow");
+test(`Excel`, async function () {
+  const excelMock = new OfficeMockObject(ExcelMockData) as any;
+  excelMock.addMockFunction("run", async function (callback) {
+    await callback(excelMock.context);
   });
-  it("runOnReady", async function () {
-    // Test code for the runOnReady function
-    runOnReady();
-  });
+  global.Excel = excelMock;
+
+  await run();
+
+  expect(excelMock.context.workbook.range.format.fill.color).toBe("yellow");
 });

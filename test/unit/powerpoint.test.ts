@@ -1,8 +1,7 @@
-import * as assert from "assert";
 import { OfficeMockObject } from "office-addin-mock";
-import { run, runOnReady } from "../../src/taskpane/powerpoint";
+import { run } from "../../src/taskpane/powerpoint";
 
-/* global describe, global, it */
+/* global expect, global, test */
 
 const PowerPointMockData = {
   context: {
@@ -18,17 +17,11 @@ const PowerPointMockData = {
   },
 };
 
-describe(`PowerPoint`, function () {
-  it("Run", async function () {
-    const officeMock = new OfficeMockObject(PowerPointMockData) as any;
-    global.Office = officeMock;
+test(`PowerPoint`, async function () {
+  const officeMock = new OfficeMockObject(PowerPointMockData) as any;
+  global.Office = officeMock;
 
-    await run();
+  await run();
 
-    assert.strictEqual(officeMock.context.document.data, "Hello World!");
-  });
-  it("runOnReady", async function () {
-    // Test code for the runOnReady function
-    runOnReady();
-  });
+  expect(officeMock.context.document.data).toBe("Hello World!");
 });
