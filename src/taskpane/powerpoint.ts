@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global document, module, require */
+/* global document, module, require, Office */
 
 // images references in the manifest
 import "../../assets/icon-16.png";
@@ -26,7 +26,7 @@ async function run() {
   /**
    * Insert your PowerPoint code here
    */
-  const options = { coercionType: Office.CoercionType.Text };
+  const options: Office.SetSelectedDataOptions = { coercionType: Office.CoercionType.Text };
 
   await Office.context.document.setSelectedDataAsync(" ", options);
   await Office.context.document.setSelectedDataAsync("Hello World!", options);
