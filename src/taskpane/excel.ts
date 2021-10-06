@@ -22,7 +22,7 @@ Office.onReady((info) => {
   }
 });
 
-async function run() {
+export async function run() {
   try {
     await Excel.run(async (context) => {
       /**

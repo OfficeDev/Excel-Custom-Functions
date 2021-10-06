@@ -22,7 +22,7 @@ Office.onReady((info) => {
   }
 });
 
-async function run() {
+export async function run() {
   /**
    * Insert your PowerPoint code here
    */

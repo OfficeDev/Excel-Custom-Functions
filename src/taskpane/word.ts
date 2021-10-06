@@ -22,7 +22,7 @@ Office.onReady((info) => {
   }
 });
 
-async function run() {
+export async function run() {
   return Word.run(async (context) => {
     /**
      * Insert your Word code here
