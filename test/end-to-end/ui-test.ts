@@ -10,7 +10,7 @@ import * as testHelpers from "./src/test-helpers";
 /* global process, describe, before, it, after */
 
 const hosts = ["Excel", "PowerPoint", "Word"];
-const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const testServerPort: number = 4201;
 
 hosts.forEach(function (host) {
@@ -27,7 +27,7 @@ hosts.forEach(function (host) {
       assert.strictEqual(serverResponse["status"], 200);
 
       // Call startDebugging to start dev-server and sideload
-      const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js `;
+      const devServerCmd = `npm run dev-server -- --config ./test/end-to-end/webpack.config.js `;
       const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
       await startDebugging(manifestPath, {
         app: toOfficeApp(host),

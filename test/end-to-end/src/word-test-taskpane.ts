@@ -1,5 +1,5 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
-import { run } from "../../src/taskpane/word";
+import { run } from "../../../src/taskpane/word";
 import * as testHelpers from "./test-helpers";
 
 /* global Office, Word */

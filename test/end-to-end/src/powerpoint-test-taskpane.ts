@@ -1,5 +1,5 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
-import { run } from "../../src/taskpane/powerpoint";
+import { run } from "../../../src/taskpane/powerpoint";
 import * as testHelpers from "./test-helpers";
 
 /* global Office, Promise */

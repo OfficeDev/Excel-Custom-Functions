@@ -1,5 +1,5 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
-import { run } from "../../src/taskpane/excel";
+import { run } from "../../../src/taskpane/excel";
 import * as testHelpers from "./test-helpers";
 
 /* global Excel, Office */
