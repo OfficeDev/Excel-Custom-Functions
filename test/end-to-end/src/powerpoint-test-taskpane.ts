@@ -4,7 +4,6 @@ import * as testHelpers from "./test-helpers";
 
 /* global Office, Promise */
 
-
 const port: number = 4201;
 let testValues: any = [];
 

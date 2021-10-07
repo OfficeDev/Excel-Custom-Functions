@@ -3,14 +3,14 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global document, require, Office */
-
 // images references in the manifest
 import "../../assets/icon-16.png";
 import "../../assets/icon-32.png";
 import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
+
+/* global document, require, Office */
 
 const Office = require("./office");
 
