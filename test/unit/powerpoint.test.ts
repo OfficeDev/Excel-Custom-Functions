@@ -18,7 +18,7 @@ const PowerPointMockData = {
 
 test(`PowerPoint`, async function () {
   jest.resetModules(); // to make sure that require will return a new module instance
-  const officeMock = new OfficeMockObject(PowerPointMockData) as any;
+  const officeMock: OfficeMockObject = new OfficeMockObject(PowerPointMockData);
   officeMock.addMockFunction("onReady");
   jest.mock("./../../src/taskpane/office", () => officeMock);
 

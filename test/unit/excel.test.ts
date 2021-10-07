@@ -23,11 +23,11 @@ test(`Excel`, async function () {
   jest.mock("./../../src/taskpane/office", () => ({ onReady: async function () {} }));
   const { run } = require("../../src/taskpane/excel");
 
-  const excelMock = new OfficeMockObject(ExcelMockData) as any;
+  const excelMock: OfficeMockObject = new OfficeMockObject(ExcelMockData);
   excelMock.addMockFunction("run", async function (callback) {
     await callback(excelMock.context);
   });
-  global.Excel = excelMock;
+  global.Excel = excelMock as any;
 
   await run();
 

@@ -28,11 +28,11 @@ test(`Word`, async function () {
   jest.mock("./../../src/taskpane/office", () => ({ onReady: async function () {} }));
   const { run } = require("../../src/taskpane/word");
 
-  const wordMock = new OfficeMockObject(WordMockData) as any;
+  const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
   wordMock.addMockFunction("run", async function (callback) {
     await callback(wordMock.context);
   });
-  global.Word = wordMock;
+  global.Word = wordMock as any;
 
   await run();
 
