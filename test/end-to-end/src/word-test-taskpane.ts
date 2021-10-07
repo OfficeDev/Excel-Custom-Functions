@@ -1,9 +1,9 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import * as testHelpers from "./test-helpers";
 
-/* global Office, require, Word */
+/* global Office, Word */
 
-const { run } = require("../../../src/taskpane/word");
+import { run } from "../../../src/taskpane/word";
 
 const port: number = 4201;
 let testValues: any = [];

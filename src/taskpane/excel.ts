@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global console, document, Excel, module, require */
+/* global console, document, Excel, require */
 
 // images references in the manifest
 import "../../assets/icon-16.png";
@@ -43,5 +43,3 @@ export async function run() {
     console.error(error);
   }
 }
-
-module.exports = { run };

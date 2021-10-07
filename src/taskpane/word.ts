@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global document, module, require, Word */
+/* global document, require, Word */
 
 // images references in the manifest
 import "../../assets/icon-16.png";
@@ -37,5 +37,3 @@ export async function run() {
     await context.sync();
   });
 }
-
-module.exports = { run };

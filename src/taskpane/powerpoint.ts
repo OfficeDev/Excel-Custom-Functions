@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global document, module, require, Office */
+/* global document, require, Office */
 
 // images references in the manifest
 import "../../assets/icon-16.png";
@@ -31,5 +31,3 @@ export async function run() {
   await Office.context.document.setSelectedDataAsync(" ", options);
   await Office.context.document.setSelectedDataAsync("Hello World!", options);
 }
-
-module.exports = { run };
