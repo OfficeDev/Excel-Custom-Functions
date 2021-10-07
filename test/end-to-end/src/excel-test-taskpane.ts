@@ -1,9 +1,9 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
+import { run } from "../../../src/taskpane/excel";
 import * as testHelpers from "./test-helpers";
 
 /* global Excel, Office */
 
-import { run } from "../../../src/taskpane/excel";
 
 const port: number = 4201;
 let testValues: any = [];

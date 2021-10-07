@@ -1,9 +1,9 @@
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
+import { run } from "../../../src/taskpane/powerpoint";
 import * as testHelpers from "./test-helpers";
 
 /* global Office, Promise */
 
-import { run } from "../../../src/taskpane/powerpoint";
 
 const port: number = 4201;
 let testValues: any = [];
