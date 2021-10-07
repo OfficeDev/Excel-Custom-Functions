@@ -7,12 +7,16 @@ const hosts = ["excel", "onenote", "outlook", "powerpoint", "project", "word"];
 const path = require("path");
 const util = require("util");
 const testPackages = [
+  "@types/jest",
   "@types/mocha",
   "@types/node",
   "current-processes",
+  "jest",
+  "jest-transform-stub",
   "mocha",
   "office-addin-test-helpers",
   "office-addin-test-server",
+  "ts-jest",
   "ts-node",
 ];
 const readFileAsync = util.promisify(fs.readFile);
@@ -163,6 +167,7 @@ async function deleteSupportFiles() {
   await unlinkFileAsync("README.md");
   await unlinkFileAsync("./convertToSingleHost.js");
   await unlinkFileAsync(".npmrc");
+  await unlinkFileAsync("jest.config.js");
 }
 
 /**
