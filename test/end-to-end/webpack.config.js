@@ -16,7 +16,7 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      test: "./test/src/test-taskpane.ts",
+      test: "./test/end-to-end/src/test-taskpane.ts",
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
@@ -68,7 +68,7 @@ module.exports = async (env, options) => {
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: "./test/src/test-taskpane.html",
+        template: "./test/end-to-end/src/test-taskpane.html",
         chunks: ["polyfill", "test"],
       }),
     ],
