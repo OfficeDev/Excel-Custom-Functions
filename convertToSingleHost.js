@@ -80,6 +80,9 @@ async function convertProjectToSingleHost(host) {
   // delete the .github folder
   deleteFolder(path.resolve(`./.github`));
 
+  // delete CI/CD pipeline files
+  deleteFolder(path.resolve(`./.azure-devops`));
+
   // delete repo support files
   await deleteSupportFiles();
 }
