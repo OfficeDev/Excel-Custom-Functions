@@ -2,7 +2,7 @@ import * as assert from "assert";
 import "mocha";
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global global, it, require */
+/* global describe, global, it, require */
 
 const ExcelMockData = {
   context: {
@@ -27,7 +27,6 @@ const OfficeMockData = {
   onReady: async function () {},
 };
 
-// eslint-disable-next-line no-undef
 describe("Excel", function () {
   it("Run", async function () {
     const excelMock: OfficeMockObject = new OfficeMockObject(ExcelMockData); // Mocking the host specific namespace

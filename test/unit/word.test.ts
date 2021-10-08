@@ -2,7 +2,7 @@ import * as assert from "assert";
 import "mocha";
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global global, it, require, Word */
+/* global describe, global, it, require, Word */
 
 const WordMockData = {
   context: {
@@ -32,7 +32,6 @@ const OfficeMockData = {
   onReady: async function () {},
 };
 
-// eslint-disable-next-line no-undef
 describe("Word", function () {
   it("Run", async function () {
     const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData); // Mocking the host specific namespace

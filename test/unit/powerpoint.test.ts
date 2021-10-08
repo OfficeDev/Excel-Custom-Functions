@@ -2,7 +2,7 @@ import * as assert from "assert";
 import "mocha";
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global global, it, require */
+/* global describe, global, it, require */
 
 const PowerPointMockData = {
   context: {
@@ -19,7 +19,6 @@ const PowerPointMockData = {
   onReady: async function () {},
 };
 
-// eslint-disable-next-line no-undef
 describe("PowerPoint", function () {
   it("Run", async function () {
     const officeMock: OfficeMockObject = new OfficeMockObject(PowerPointMockData); // Mocking the common office-js namespace
