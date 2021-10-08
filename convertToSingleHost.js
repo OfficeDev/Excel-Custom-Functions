@@ -11,6 +11,7 @@ const testPackages = [
   "@types/node",
   "current-processes",
   "mocha",
+  "office-addin-mock",
   "office-addin-test-helpers",
   "office-addin-test-server",
   "ts-node",
