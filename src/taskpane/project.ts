@@ -10,6 +10,7 @@ import icon32 from "../../assets/icon-32.png";
 import icon64 from "../../assets/icon-64.png";
 import icon80 from "../../assets/icon-80.png";
 import icon128 from "../../assets/icon-128.png";
+/* eslint-enable no-unused-vars */
 
 /* global console, document, Office */
 
