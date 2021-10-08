@@ -10,9 +10,7 @@ import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
 
-/* global document, require, Office */
-
-const Office = require("./office");
+/* global document, Office */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.PowerPoint) {

@@ -1,6 +1,13 @@
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global expect, global, jest, require, Word, test */
+/* global expect, global, jest, Word, test */
+
+namespace Office {
+  export function onReady() {}
+}
+(global as any).Office = Office;
+
+import { run } from "../../src/taskpane/word";
 
 const WordMockData = {
   context: {
@@ -25,8 +32,6 @@ const WordMockData = {
 
 test(`Word`, async function () {
   jest.resetModules(); // to make sure that require will return a new module instance
-  jest.mock("./../../src/taskpane/office", () => ({ onReady: async function () {} }));
-  const { run } = require("../../src/taskpane/word");
 
   const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
   wordMock.addMockFunction("run", async function (callback) {

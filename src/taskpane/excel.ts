@@ -10,9 +10,7 @@ import "../../assets/icon-64.png";
 import "../../assets/icon-80.png";
 import "../../assets/icon-128.png";
 
-/* global console, document, Excel, require */
-
-const Office = require("./office");
+/* global console, document, Excel, Office */
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Excel) {
