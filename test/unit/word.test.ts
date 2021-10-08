@@ -1,13 +1,6 @@
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global expect, global, jest, Word, test */
-
-namespace Office {
-  export function onReady() {}
-}
-(global as any).Office = Office;
-
-import { run } from "../../src/taskpane/word";
+/* global expect, global, require, Word, test */
 
 const WordMockData = {
   context: {
@@ -28,17 +21,21 @@ const WordMockData = {
   InsertLocation: {
     end: "End",
   },
+  run: async function (callback) {
+    await callback(this.context);
+  },
+};
+
+const OfficeMockData = {
+  onReady: async function () {},
 };
 
 test(`Word`, async function () {
-  jest.resetModules(); // to make sure that require will return a new module instance
-
   const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
-  wordMock.addMockFunction("run", async function (callback) {
-    await callback(wordMock.context);
-  });
   global.Word = wordMock as any;
+  global.Office = new OfficeMockObject(OfficeMockData) as any;
 
+  const { run } = require("../../src/taskpane/word");
   await run();
 
   expect(wordMock.context.document.body.paragraph.font.color).toBe("blue");
