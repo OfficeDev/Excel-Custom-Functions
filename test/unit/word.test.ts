@@ -35,9 +35,9 @@ const OfficeMockData = {
 // eslint-disable-next-line no-undef
 describe("Word", function () {
   it("Run", async function () {
-    const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
+    const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData); // Mocking the host specific namespace
     global.Word = wordMock as any;
-    global.Office = new OfficeMockObject(OfficeMockData) as any;
+    global.Office = new OfficeMockObject(OfficeMockData) as any; // Mocking the common office-js namespace
 
     const { run } = require("../../src/taskpane/word");
     await run();

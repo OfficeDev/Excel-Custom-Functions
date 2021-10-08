@@ -22,7 +22,7 @@ const PowerPointMockData = {
 // eslint-disable-next-line no-undef
 describe("PowerPoint", function () {
   it("Run", async function () {
-    const officeMock: OfficeMockObject = new OfficeMockObject(PowerPointMockData);
+    const officeMock: OfficeMockObject = new OfficeMockObject(PowerPointMockData); // Mocking the common office-js namespace
     global.Office = officeMock as any;
 
     const { run } = require("../../src/taskpane/powerpoint");

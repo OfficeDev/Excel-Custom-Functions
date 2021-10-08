@@ -30,9 +30,9 @@ const OfficeMockData = {
 // eslint-disable-next-line no-undef
 describe("Excel", function () {
   it("Run", async function () {
-    const excelMock: OfficeMockObject = new OfficeMockObject(ExcelMockData);
+    const excelMock: OfficeMockObject = new OfficeMockObject(ExcelMockData); // Mocking the host specific namespace
     global.Excel = excelMock as any;
-    global.Office = new OfficeMockObject(OfficeMockData) as any;
+    global.Office = new OfficeMockObject(OfficeMockData) as any; // Mocking the common office-js namespace
 
     const { run } = require("../../src/taskpane/excel");
     await run();
