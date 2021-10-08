@@ -1,6 +1,8 @@
+import * as assert from "assert";
+import "mocha";
 import { OfficeMockObject } from "office-addin-mock";
 
-/* global expect, global, require, Word, test */
+/* global global, it, require, Word */
 
 const WordMockData = {
   context: {
@@ -30,13 +32,16 @@ const OfficeMockData = {
   onReady: async function () {},
 };
 
-test(`Word`, async function () {
-  const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
-  global.Word = wordMock as any;
-  global.Office = new OfficeMockObject(OfficeMockData) as any;
+// eslint-disable-next-line no-undef
+describe("Word", function () {
+  it("Run", async function () {
+    const wordMock: OfficeMockObject = new OfficeMockObject(WordMockData);
+    global.Word = wordMock as any;
+    global.Office = new OfficeMockObject(OfficeMockData) as any;
 
-  const { run } = require("../../src/taskpane/word");
-  await run();
+    const { run } = require("../../src/taskpane/word");
+    await run();
 
-  expect(wordMock.context.document.body.paragraph.font.color).toBe("blue");
+    assert.strictEqual(wordMock.context.document.body.paragraph.font.color, "blue");
+  });
 });
