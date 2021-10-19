@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Tests",
+      "name": "Debug UI Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",
@@ -15,10 +15,31 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/test",
+        "${workspaceFolder}/test/end-to-end",
         "-r",
         "ts-node/register",
-        "${workspaceFolder}/test/*.ts"
+        "${workspaceFolder}/test/end-to-end/*.ts"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "runtimeArgs": [
+        "--preserve-symlinks"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Unit Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-u",
+        "bdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/test/unit",
+        "-r",
+        "ts-node/register",
+        "${workspaceFolder}/test/unit/*.test.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "runtimeArgs": [
