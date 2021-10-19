@@ -23,7 +23,7 @@ Please describe the behavior you were expecting
 
 # Current behavior
 
-Please provide information about the failure. What is the current behavior? If it is not a bug, please add it to [UserVoice](https://officespdev.uservoice.com/forums/224641-feature-requests-and-feedback/category/164751-office-developer-tools), so that it gets added to our feature roadmap.
+Please provide information about the failure. What is the current behavior? If it is not a bug, please submit your idea to the [Microsoft Tech Community Ideas forum](https://techcommunity.microsoft.com/t5/microsoft-365-developer-platform/idb-p/Microsoft365DeveloperPlatform), so that it gets added to our feature roadmap.
 
 
 ## Steps to Reproduce
