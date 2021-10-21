@@ -8,6 +8,7 @@ const testPackages = [
   "@types/node",
   "current-processes",
   "mocha",
+  "office-addin-mock",
   "office-addin-test-helpers",
   "office-addin-test-server",
   "ts-node",
@@ -22,6 +23,9 @@ async function removeTestInfraStructure() {
     // delete the .github folder
     deleteFolder(path.resolve(`./.github`));
     
+    // delete CI/CD pipeline files
+    deleteFolder(path.resolve(`./.azure-devops`));
+
     await updatePackageJsonFile();
     await updateLaunchJsonFile();
     // delete this script

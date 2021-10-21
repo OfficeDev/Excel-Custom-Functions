@@ -20,7 +20,7 @@ module.exports = async (env, options) => {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       commands: "./src/commands/commands.ts",
       functions: "./src/functions/functions.ts",
-      taskpane: "./test/src/test-taskpane.ts",
+      taskpane: "./test/end-to-end/src/test-taskpane.ts",
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
@@ -30,7 +30,7 @@ module.exports = async (env, options) => {
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
       fallback: {
-        child_process: path.resolve(__dirname, "./../node_modules/child_process/package.json"),
+        child_process: path.resolve(__dirname, "./../../node_modules/child_process/package.json"),
         fs: false,
         os: require.resolve("os-browserify/browser"),
       },
@@ -78,17 +78,17 @@ module.exports = async (env, options) => {
       }),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-        template: "./test/src/test-taskpane.html",
+        template: "./test/end-to-end/src/test-taskpane.html",
         chunks: ["polyfill", "taskpane"],
       }),
       new HtmlWebpackPlugin({
         filename: "commands.html",
-        template: "./test/src/test-commands.html",
+        template: "./test/end-to-end/src/test-commands.html",
         chunks: ["polyfill", "commands"],
       }),
     ],
     devServer: {
-      static: [__dirname + "\\.."],
+      static: ["./"],
       headers: {
         "Access-Control-Allow-Origin": "*",
       },

@@ -18,5 +18,8 @@
     "dist",
     "lib",
     "lib-amd"
-  ]
+  ],
+  "ts-node": { 
+    "files": true 
+  }
 }

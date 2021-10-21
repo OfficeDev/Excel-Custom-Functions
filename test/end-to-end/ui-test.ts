@@ -10,9 +10,9 @@ import * as path from "path";
 
 /* global process, describe, before, it, after */
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const port: number = 4201;
-const testDataFile: string = `${process.cwd()}/test/src/test-data.json`;
+const testDataFile: string = `${process.cwd()}/test/end-to-end/src/test-data.json`;
 const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
 const testServer = new officeAddinTestServer.TestServer(port);
 let testValues: any = [];
@@ -27,7 +27,7 @@ describe("Test Excel Custom Functions", function () {
     assert.strictEqual(testServerStarted, true);
 
     // Call startDebugging to start dev-server and sideload
-    const devServerCmd = `npm run dev-server -- --config ./test/webpack.config.js`;
+    const devServerCmd = `npm run dev-server -- --config ./test/end-to-end/webpack.config.js`;
     const devServerPort = parseNumber(process.env.npm_package_config_dev_server_port || 3000);
     const options = {
       appType: AppType.Desktop,

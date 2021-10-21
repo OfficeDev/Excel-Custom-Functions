@@ -7,13 +7,13 @@ import * as path from "path";
 
 /* global process, describe, before, it, after */
 const host: string = "excel";
-const manifestPath = path.resolve(`${process.cwd()}/test/test-manifest-debugging.xml`);
+const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest-debugging.xml`);
 
 describe("Test Excel Custom Functions", function () {
   before(`Setup test environment and sideload ${host}`, async function () {
     this.timeout(0);
     // Call startDebugging to start dev-server and sideload
-    const devServerCmd: string = `npm run dev-server -- --config ./test/webpack.config.js --env testType=debugger`;
+    const devServerCmd: string = `npm run dev-server -- --config ./test/end-to-end/webpack.config.js --env testType=debugger`;
     const devServerPort: number = 3001;
     const options = {
       appType: AppType.Desktop,
