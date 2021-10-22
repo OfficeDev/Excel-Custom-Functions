@@ -50,5 +50,5 @@ jobs:
       - template: ./install.yml
       - template: ./lint.yml
       - template: ./build.yml
-      - template: ./test.yml
+#      - template: ./test.yml
       - template: ./cleanup.yml
