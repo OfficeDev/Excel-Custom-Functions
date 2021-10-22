@@ -70,7 +70,7 @@ module.exports = async (env, options) => {
         patterns: [
           {
             from: "assets/icon-*",
-            to: "assets/[name][ext][query]"
+            to: "assets/[name][ext][query]",
           },
           {
             from: "manifest*.xml",
