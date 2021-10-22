@@ -3,6 +3,7 @@
 const devCerts = require("office-addin-dev-certs");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 /* global require, module, process, __dirname */
@@ -85,6 +86,14 @@ module.exports = async (env, options) => {
         filename: "commands.html",
         template: "./test/end-to-end/src/test-commands.html",
         chunks: ["polyfill", "commands"],
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "assets/icon-*",
+            to: "assets/[name][ext][query]",
+          },
+        ],
       }),
     ],
     devServer: {

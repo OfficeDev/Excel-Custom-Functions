@@ -82,6 +82,10 @@ module.exports = async (env, options) => {
       new CopyWebpackPlugin({
         patterns: [
           {
+            from: "assets/icon-*",
+            to: "assets/[name][ext][query]",
+          },
+          {
             from: "manifest*.xml",
             to: "[name]." + buildType + "[ext]",
             transform(content) {
