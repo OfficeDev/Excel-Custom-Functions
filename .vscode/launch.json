@@ -5,9 +5,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug UI Tests",
       "type": "node",
       "request": "launch",
-      "name": "Debug UI Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",
@@ -26,9 +26,9 @@
       ]
     },
     {
+      "name": "Debug Unit Tests",
       "type": "node",
       "request": "launch",
-      "name": "Debug Unit Tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
       "args": [
         "-u",

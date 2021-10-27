@@ -137,8 +137,8 @@ async function updateLaunchJsonFile() {
   // remove 'Debug Tests' configuration from launch.json
   const launchJson = `.vscode/launch.json`;
   const launchJsonContent = await readFileAsync(launchJson, "utf8");
-  const regex = /"configurations": \[\r?\n(.*{(.*\r?\n)*?.*"name": "Debug Tests",\r?\n(.*\r?\n)*?.*},)/gm;
-  const updatedContent = launchJsonContent.replace(regex, `"configurations": [`);
+  const regex = /(.+{\r?\n.*"name": "Debug (?:UI|Unit) Tests",\r?\n(?:.*\r?\n)*?.*},.*\r?\n)/gm;
+  const updatedContent = launchJsonContent.replace(regex, "");
   await writeFileAsync(launchJson, updatedContent);
 }
 
