@@ -1,5 +1,5 @@
 import * as childProcess from "child_process";
-import find from "find-process";
+import { findProcess } from "./find-process-by-name";
 
 /* global Excel, process, Promise, setTimeout */
 
@@ -66,7 +66,7 @@ export async function sleep(ms: number): Promise<any> {
 }
 
 async function getProcessId(processName: string): Promise<number | undefined> {
-  const [process] = await find("name", processName, false /* strict */);
+  const [process] = await findProcess(processName);
 
   return process ? process.pid : undefined;
 }
