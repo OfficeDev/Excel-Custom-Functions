@@ -29,19 +29,18 @@ jobs:
         parameters:
           webView: "edge-legacy"
 
-  # Need to fix tests (use of find-process module) to be able to support IE 11 webview
-  # - job: WebView_IE
-  #   pool:
-  #     name: OE-OfficeClientApps
-  #   steps:
-  #     - template: ./install.yml
-  #     - template: ./lint.yml
-  #     - template: ./build.yml
-  #     - template: ./devcerts.yml
-  #     - template: ./edgewebview.yml
-  #     - template: ./test.yml
-  #       parameters:
-  #         webView: "ie"
+  - job: WebView_IE
+    pool:
+      name: OE-OfficeClientApps
+    steps:
+      - template: ./install.yml
+      - template: ./lint.yml
+      - template: ./build.yml
+      - template: ./devcerts.yml
+      - template: ./edgewebview.yml
+      - template: ./test.yml
+        parameters:
+          webView: "ie"
 
   - job: Mac
     pool:
