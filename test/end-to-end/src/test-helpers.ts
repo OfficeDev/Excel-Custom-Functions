@@ -1,5 +1,4 @@
 import * as childProcess from "child_process";
-import { findProcess } from "./find-process-by-name";
 
 /* global Excel, process, Promise, setTimeout */
 
@@ -29,21 +28,14 @@ export async function closeDesktopApplication(application: string): Promise<bool
   }
 
   try {
-    let appClosed: boolean = false;
+    let cmdLine: string;
     if (process.platform == "win32") {
-      const cmdLine = `tskill ${processName}`;
-      appClosed = await executeCommandLine(cmdLine);
+      cmdLine = `tskill ${processName}`;
     } else {
-      const pid = await getProcessId(processName);
-      if (pid != undefined) {
-        process.kill(pid);
-        appClosed = true;
-      } else {
-        return false;
-      }
+      cmdLine = `pkill ${processName}`;
     }
 
-    return appClosed;
+    return await executeCommandLine(cmdLine);
   } catch (err) {
     throw new Error(`Unable to kill ${application} process. ${err}`);
   }
@@ -63,12 +55,6 @@ export function addTestResult(testValues: any[], resultName: string, resultValue
 
 export async function sleep(ms: number): Promise<any> {
   return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function getProcessId(processName: string): Promise<number | undefined> {
-  const [process] = await findProcess(processName);
-
-  return process ? process.pid : undefined;
 }
 
 async function executeCommandLine(cmdLine: string): Promise<boolean> {
