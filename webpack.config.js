@@ -17,7 +17,6 @@ async function getHttpsOptions() {
 
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
-  const buildType = dev ? "dev" : "prod";
   const config = {
     devtool: "source-map",
     entry: {
@@ -87,7 +86,7 @@ module.exports = async (env, options) => {
           },
           {
             from: "manifest*.xml",
-            to: "[name]." + buildType + "[ext]",
+            to: "[name]" + "[ext]",
             transform(content) {
               if (dev) {
                 return content;
