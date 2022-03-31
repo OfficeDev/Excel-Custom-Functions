@@ -59,7 +59,7 @@
         <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3001/dist/functions.js"/>
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3001/dist/functions.json"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3001/taskpane.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3001/dist/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="Functions.Namespace" DefaultValue="CONTOSO"/>

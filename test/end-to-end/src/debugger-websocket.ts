@@ -24,14 +24,14 @@ export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebS
   let jsonUrl = reconnectTry % 2 == 0 ? "http://localhost:9223/json" : "http://localhost:9229/json";
 
   while (!wsUrl && reconnectTry < limitOfReconnectTries) {
-    console.log("Attaching debugger...");
+    console.log(`Attaching debugger to '${jsonUrl}'...`);
     findUrl(jsonUrl);
     reconnectTry++;
     await sleep(1000);
   }
 
   return new Promise((resolve) => {
-    console.log("Connecting to websocket...");
+    console.log(`Connecting to websocket '${wsUrl}'...`);
     const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
