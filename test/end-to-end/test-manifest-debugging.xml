@@ -7,7 +7,7 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Excel Custom Functions"/>
+  <DisplayName DefaultValue="Excel Custom Functions Shared Runtime"/>
   <Description DefaultValue="Write your own Excel functions in TypeScript."/>
   <IconUrl DefaultValue="https://localhost:3001/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3001/assets/icon-64.png"/>
@@ -20,7 +20,7 @@
   </Hosts>
   <Requirements>
     <Sets DefaultMinVersion="1.1">
-      <Set Name="CustomFunctionsRuntime" MinVersion="1.1"/>
+      <Set Name="SharedRuntime" MinVersion="1.1"/>
     </Sets>
   </Requirements>
   <DefaultSettings>
@@ -30,13 +30,16 @@
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Hosts>
       <Host xsi:type="Workbook">
+        <Runtimes>
+          <Runtime resid="Taskpane.Url" lifetime="long" />
+        </Runtimes>
         <AllFormFactors>
           <ExtensionPoint xsi:type="CustomFunctions">
             <Script>
               <SourceLocation resid="Functions.Script.Url"/>
             </Script>
             <Page>
-              <SourceLocation resid="Functions.Page.Url"/>
+              <SourceLocation resid="Taskpane.Url"/>
             </Page>
             <Metadata>
               <SourceLocation resid="Functions.Metadata.Url"/>
@@ -91,9 +94,7 @@
       <bt:Urls>
         <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3001/dist/functions.js"/>
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3001/dist/functions.json"/>
-        <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3001/dist/functions.html"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
-        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3001/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3001/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
