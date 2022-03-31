@@ -96,7 +96,6 @@
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3001/dist/functions.json"/>
         <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3001/dist/functions.html"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
-        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3001/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3001/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
