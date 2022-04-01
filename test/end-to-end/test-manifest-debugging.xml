@@ -31,7 +31,7 @@
     <Hosts>
       <Host xsi:type="Workbook">
         <Runtimes>
-          <Runtime resid="Taskpane.Url" lifetime="long" />
+          <Runtime resid="Testing.Url" lifetime="long" />
         </Runtimes>
         <AllFormFactors>
           <ExtensionPoint xsi:type="CustomFunctions">
@@ -53,7 +53,7 @@
             <Description resid="GetStarted.Description"/>
             <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
           </GetStarted>
-          <FunctionFile resid="Taskpane.Url" />
+          <FunctionFile resid="Testing.Url" />
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="CommandsGroup">
@@ -76,7 +76,7 @@
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url" />
+                    <SourceLocation resid="Testing.Url" />
                   </Action>
                 </Control>
               </Group>
