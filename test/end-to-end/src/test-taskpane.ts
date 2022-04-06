@@ -2,12 +2,12 @@ import * as functionsJsonData from "./test-data.json";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import { closeWorkbook, sleep } from "./test-helpers";
 
-/* global Office, document, Excel, run */
+/* global Office, document, Excel, run, console */
 const customFunctionsData = (<any>functionsJsonData).functions;
 const port: number = 4201;
 let testValues = [];
 
-Office.initialize = async () => {
+Office.onReady(async () => {
   document.getElementById("sideload-msg").style.display = "none";
   document.getElementById("app-body").style.display = "flex";
   document.getElementById("run").onclick = run;
@@ -18,7 +18,7 @@ Office.initialize = async () => {
     await sendTestResults(testValues, port);
     await closeWorkbook();
   }
-};
+});
 
 async function runCfTests(): Promise<void> {
   // Exercise custom functions
