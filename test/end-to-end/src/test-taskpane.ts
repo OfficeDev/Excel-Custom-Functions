@@ -13,12 +13,12 @@ Office.onReady(async () => {
   document.getElementById("run").onclick = run;
 
   var testServerResponse: object;
-  for (let attempt: number = 0; attempt < 3; attempt++) {
+  for (let attempt: number = 0; attempt < 6; attempt++) {
     testServerResponse = await pingTestServer(port);
     if (testServerResponse["status"] === 200) {
       break;
     }
-    await sleep(1000);
+    await sleep(5000);
   }
 
   if (testServerResponse["status"] === 200) {
