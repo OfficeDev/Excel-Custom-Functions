@@ -2,7 +2,7 @@ import * as functionsJsonData from "./test-data.json";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import { closeWorkbook, sleep } from "./test-helpers";
 
-/* global Office, document, Excel, run */
+/* global Office, document, Excel, run, console */
 const customFunctionsData = (<any>functionsJsonData).functions;
 const port: number = 4201;
 let testValues = [];
@@ -37,49 +37,48 @@ async function runCfTests(): Promise<void> {
   });
 }
 
-export async function readCFData(cfName: string, readCount: number): Promise<boolean> {
-  return new Promise<boolean>(async (resolve, reject) => {
-    await Excel.run(async (context) => {
-      // if this is a streaming function, we want to capture two values so we can
-      // validate the function is indeed streaming
-      for (let i = 0; i < readCount; i++) {
-        try {
-          const range = context.workbook.getSelectedRange();
-          range.load("values");
-          await context.sync();
+// export async function readCFData(cfName: string, readCount: number): Promise<boolean> {
+//   return new Promise<boolean>(async (resolve, reject) => {
+//     await Excel.run(async (context) => {
+//       // if this is a streaming function, we want to capture two values so we can
+//       // validate the function is indeed streaming
+//       for (let i = 0; i < readCount; i++) {
+//         try {
+//           const range = context.workbook.getSelectedRange();
+//           range.load("values");
+//           await context.sync();
 
-          await sleep(5000);
+//           await sleep(5000);
 
-          addTestResult(cfName, range.values[0][0]);
-          resolve(true);
-        } catch {
-          reject(false);
-        }
-      }
-    });
-  });
-}
-
-// export async function readCFData(cfName: string, readCount: number): Promise<void> {
-//   await Excel.run(async (context) => {
-//     // if this is a streaming function, we want to capture two values so we can
-//     // validate the function is indeed streaming
-//     for (let i = 0; i < readCount; i++) {
-//       try {
-//         const range = context.workbook.getSelectedRange();
-//         range.load("values");
-//         await context.sync();
-
-//         await sleep(5000);
-
-//         addTestResult(cfName, range.values[0][0]);
-//         Promise.resolve();
-//       } catch {
-//         Promise.reject();
+//           addTestResult(cfName, range.values[0][0]);
+//           resolve(true);
+//         } catch {
+//           reject(false);
+//         }
 //       }
-//     }
+//     });
 //   });
 // }
+
+export async function readCFData(cfName: string, readCount: number): Promise<void> {
+  await Excel.run(async (context) => {
+    // if this is a streaming function, we want to capture two values so we can
+    // validate the function is indeed streaming
+    for (let i = 0; i < readCount; i++) {
+      try {
+        const range = context.workbook.getSelectedRange();
+        range.load("values");
+        await context.sync();
+
+        await sleep(5000);
+
+        addTestResult(cfName, range.values[0][0]);
+      } catch (err: any) {
+        addTestResult(cfName, `Error getting value: ${err}`);
+      }
+    }
+  });
+}
 
 function addTestResult(resultName: string, resultValue: any) {
   var data = {};
