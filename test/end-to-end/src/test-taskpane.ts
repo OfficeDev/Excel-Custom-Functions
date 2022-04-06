@@ -42,7 +42,7 @@ export async function readCFData(cfName: string, readCount: number): Promise<voi
     // if this is a streaming function, we want to capture two values so we can
     // validate the function is indeed streaming
     for (let i = 0; i < readCount; i++) {
-      try {
+      // try {
         const range = context.workbook.getSelectedRange();
         range.load("values");
         await context.sync();
@@ -50,10 +50,10 @@ export async function readCFData(cfName: string, readCount: number): Promise<voi
         await sleep(5000);
 
         addTestResult(cfName, range.values[0][0]);
-        Promise.resolve();
-      } catch {
-        Promise.reject();
-      }
+      //   Promise.resolve();
+      // } catch {
+      //   Promise.reject();
+      // }
     }
   });
 }
