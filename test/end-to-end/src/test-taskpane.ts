@@ -12,15 +12,7 @@ Office.onReady(async () => {
   document.getElementById("app-body").style.display = "flex";
   document.getElementById("run").onclick = run;
 
-  var testServerResponse: object;
-  for (let attempt: number = 0; attempt < 6; attempt++) {
-    testServerResponse = await pingTestServer(port);
-    if (testServerResponse["status"] === 200) {
-      break;
-    }
-    await sleep(5000);
-  }
-
+  var testServerResponse: object = await pingTestServer(port);
   if (testServerResponse["status"] === 200) {
     await runCfTests();
     await sendTestResults(testValues, port);
