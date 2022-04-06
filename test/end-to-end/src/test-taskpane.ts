@@ -74,7 +74,7 @@ export async function readCFData(cfName: string, readCount: number): Promise<voi
 
         addTestResult(cfName, range.values[0][0]);
       } catch (err: any) {
-        addTestResult(cfName, `Error getting value: ${err}`);
+        console.log(`Error trying to get function value: ${err}`);
       }
     }
   });
