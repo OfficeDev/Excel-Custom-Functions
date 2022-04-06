@@ -2,7 +2,7 @@ import * as functionsJsonData from "./test-data.json";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import { closeWorkbook, sleep } from "./test-helpers";
 
-/* global Office, document, Excel, run, console */
+/* global Office, document, Excel, run */
 const customFunctionsData = (<any>functionsJsonData).functions;
 const port: number = 4201;
 let testValues = [];
@@ -12,7 +12,15 @@ Office.onReady(async () => {
   document.getElementById("app-body").style.display = "flex";
   document.getElementById("run").onclick = run;
 
-  const testServerResponse: object = await pingTestServer(port);
+  var testServerResponse: object;
+  for (let attempt: number = 0; attempt < 3; attempt++) {
+    testServerResponse = await pingTestServer(port);
+    if (testServerResponse["status"] === 200) {
+      break;
+    }
+    await sleep(1000);
+  }
+
   if (testServerResponse["status"] === 200) {
     await runCfTests();
     await sendTestResults(testValues, port);
