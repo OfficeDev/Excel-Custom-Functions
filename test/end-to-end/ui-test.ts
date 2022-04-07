@@ -8,7 +8,7 @@ import { closeDesktopApplication } from "./src/test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 
-/* global process, describe, before, it, after */
+/* global process, describe, before, it, after, require, setTimeout, clearTimeout */
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const port: number = 4201;
@@ -41,9 +41,18 @@ describe("Test Excel Custom Functions", function () {
   describe("Get test results for custom functions and validate results", function () {
     it("should get results from the taskpane application", async function () {
       this.timeout(0);
+
+      // After 10 min take a screenshot to look for problems.
+      function getScreenShot() {
+        const screenshot = require("screenshot-desktop");
+        screenshot({ filename: "screen.jpg" });
+      }
+      let id = setTimeout(getScreenShot, 600000);
+
       // Expecting six result values
       testValues = await testServer.getTestResults();
       assert.strictEqual(testValues.length, 6);
+      clearTimeout(id);
     });
     it("ADD function should return expected value", async function () {
       assert.strictEqual(testJsonData.functions.ADD.result, testValues[0].Value);
