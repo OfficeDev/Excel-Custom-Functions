@@ -40,7 +40,7 @@ describe("Test Excel Custom Functions", function () {
   });
   describe("Get test results for custom functions and validate results", function () {
     it("should get results from the taskpane application", async function () {
-      this.timeout(0);
+      this.timeout(900000); // timeout after 15 min
 
       // After 10 min take a screenshot to look for problems.
       function getScreenShot() {
