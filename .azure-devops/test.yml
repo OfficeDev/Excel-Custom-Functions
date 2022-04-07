@@ -18,12 +18,12 @@ steps:
         echo Done running tests
     displayName: 'Run Tests'
 
+  - publish: $(System.DefaultWorkingDirectory)/screen.jpg
+    condition: failed()
+    artifact: FailureScreenshot
+
   - task: PublishTestResults@2
     condition: succeededOrFailed()
     inputs:
       testRunner: JUnit
       testResultsFiles: '**/test-results.xml'
-
-  - publish: $(System.DefaultWorkingDirectory)/screen.jpg
-    condition: failed()
-    artifact: FailureScreenshot
