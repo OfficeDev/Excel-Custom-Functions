@@ -13,7 +13,7 @@ steps:
         call npx office-addin-dev-settings webview test/end-to-end/test-manifest.xml ${{ parameters.webView }}
         
         echo Running Tests
-        npm run test:unit -- --reporter mocha-junit-reporter
+        echo npm run test:unit -- --reporter mocha-junit-reporter
         npm run test:e2e -- --reporter mocha-junit-reporter
             
         echo Done running tests
@@ -30,7 +30,3 @@ steps:
     inputs:
       targetPath: $(System.DefaultWorkingDirectory)/screen.jpg
       artifactName: Screenshot
-
-  - task: DownloadPipelineArtifact@2
-    inputs:
-      artifact: Screenshot
