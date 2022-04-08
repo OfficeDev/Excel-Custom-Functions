@@ -7,8 +7,9 @@ import { pingTestServer } from "office-addin-test-helpers";
 import { closeDesktopApplication } from "./src/test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
+const screenshot = require("screenshot-desktop");
 
-/* global process, describe, before, it, after, require, setTimeout, clearTimeout */
+/* global process, describe, before, it, after, require, setInterval, clearInterval */
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const port: number = 4201;
@@ -43,16 +44,17 @@ describe("Test Excel Custom Functions", function () {
       this.timeout(600000); // timeout after 15 min
 
       // After 10 min take a screenshot to look for problems.
+      let shotCount = 0;
       function getScreenShot() {
-        const screenshot = require("screenshot-desktop");
-        screenshot({ filename: "screen.jpg" });
+        shotCount++;
+        screenshot({ filename: `screen-${shotCount}.jpg` });
       }
-      let id = setTimeout(getScreenShot, 60000);
+      let interval = setInterval(getScreenShot, 10000);
 
       // Expecting six result values
       testValues = await testServer.getTestResults();
       assert.strictEqual(testValues.length, 6);
-      clearTimeout(id);
+      clearInterval(interval);
     });
     it("ADD function should return expected value", async function () {
       assert.strictEqual(testJsonData.functions.ADD.result, testValues[0].Value);

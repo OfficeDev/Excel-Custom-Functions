@@ -28,5 +28,5 @@ steps:
   - task: PublishPipelineArtifact@1
     condition: succeededOrFailed()
     inputs:
-      targetPath: $(System.DefaultWorkingDirectory)/screen.jpg
-      artifactName: Screenshot-$(Agent.JobName)-$(System.JobName)-$(System.JobAttempt)
+      targetPath: $(System.DefaultWorkingDirectory)/screen*.jpg
+      artifactName: Screenshot-$(Agent.JobName)-$(System.JobAttempt)
