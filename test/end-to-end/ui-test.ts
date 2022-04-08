@@ -47,7 +47,7 @@ describe("Test Excel Custom Functions", function () {
         const screenshot = require("screenshot-desktop");
         screenshot({ filename: "screen.jpg" });
       }
-      let id = setTimeout(getScreenShot, 600000);
+      let id = setTimeout(getScreenShot, 90000);
 
       // Expecting six result values
       testValues = await testServer.getTestResults();
