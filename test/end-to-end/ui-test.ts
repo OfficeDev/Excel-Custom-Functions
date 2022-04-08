@@ -7,7 +7,6 @@ import { pingTestServer } from "office-addin-test-helpers";
 import { closeDesktopApplication } from "./src/test-helpers";
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
-const screenshot = require("screenshot-desktop");
 
 /* global process, describe, before, it, after, require, setInterval, clearInterval */
 const host: string = "excel";
@@ -47,6 +46,7 @@ describe("Test Excel Custom Functions", function () {
       let shotCount = 0;
       function getScreenShot() {
         shotCount++;
+        const screenshot = require("screenshot-desktop");
         screenshot({ filename: `screen-${shotCount}.jpg` });
       }
       let interval = setInterval(getScreenShot, 10000);
