@@ -26,6 +26,7 @@ steps:
       testResultsFiles: '**/test-results.xml'
 
   - task: PublishPipelineArtifact@1
+    condition: succeededOrFailed()
     inputs:
       targetPath: $(System.DefaultWorkingDirectory)/screen.jpg
-      artifactName: Screenshot_$(Agent.JobName)
+      artifactName: Screenshot-$(Agent.JobName)-$(System.JobName)-$(System.JobAttempt)

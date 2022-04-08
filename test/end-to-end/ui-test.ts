@@ -40,14 +40,14 @@ describe("Test Excel Custom Functions", function () {
   });
   describe("Get test results for custom functions and validate results", function () {
     it("should get results from the taskpane application", async function () {
-      this.timeout(900000); // timeout after 15 min
+      this.timeout(600000); // timeout after 15 min
 
       // After 10 min take a screenshot to look for problems.
       function getScreenShot() {
         const screenshot = require("screenshot-desktop");
         screenshot({ filename: "screen.jpg" });
       }
-      let id = setTimeout(getScreenShot, 90000);
+      let id = setTimeout(getScreenShot, 60000);
 
       // Expecting six result values
       testValues = await testServer.getTestResults();
