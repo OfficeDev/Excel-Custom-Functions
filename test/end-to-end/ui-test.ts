@@ -56,6 +56,12 @@ describe("Test Excel Custom Functions", function () {
         setTimeout(getScreenShot, 40000),
         setTimeout(getScreenShot, 50000),
         setTimeout(getScreenShot, 60000),
+        setTimeout(getScreenShot, 70000),
+        setTimeout(getScreenShot, 80000),
+        setTimeout(getScreenShot, 90000),
+        setTimeout(getScreenShot, 1000000),
+        setTimeout(getScreenShot, 1100000),
+        setTimeout(getScreenShot, 1200000),
       ];
 
       // Expecting six result values
