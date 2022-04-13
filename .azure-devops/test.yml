@@ -25,14 +25,14 @@ steps:
       testRunner: JUnit
       testResultsFiles: '**/test-results.xml'
 
-  - task: CopyFiles@2
-    condition: succeededOrFailed()
-    displayName: 'Copy Screenshots'
-    inputs:
-      contents: 'screen*.jpg'
-      targetFolder: '$(Build.ArtifactStagingDirectory)/screenshots'
-  - task: PublishPipelineArtifact@1
-    condition: succeededOrFailed()
-    inputs:
-      targetPath: $(Build.ArtifactStagingDirectory)/screenshots
-      artifactName: Screenshot-$(Agent.JobName)-$(System.JobAttempt)
+  # - task: CopyFiles@2
+  #   condition: succeededOrFailed()
+  #   displayName: 'Copy Screenshots'
+  #   inputs:
+  #     contents: 'screen*.jpg'
+  #     targetFolder: '$(Build.ArtifactStagingDirectory)/screenshots'
+  # - task: PublishPipelineArtifact@1
+  #   condition: succeededOrFailed()
+  #   inputs:
+  #     targetPath: $(Build.ArtifactStagingDirectory)/screenshots
+  #     artifactName: Screenshot-$(Agent.JobName)-$(System.JobAttempt)
