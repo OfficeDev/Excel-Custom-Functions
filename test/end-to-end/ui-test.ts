@@ -44,33 +44,33 @@ describe("Test Excel Custom Functions", function () {
       this.timeout(600000); // timeout after 15 min
 
       // After 10 min take a screenshot to look for problems.
-      let screenshotCount = 0;
-      function getScreenShot() {
-        screenshotCount++;
-        screenshot({ filename: `screen-${screenshotCount}.jpg` });
-      }
-      let screenshotList = [
-        setTimeout(getScreenShot, 10000),
-        setTimeout(getScreenShot, 20000),
-        setTimeout(getScreenShot, 30000),
-        setTimeout(getScreenShot, 40000),
-        setTimeout(getScreenShot, 50000),
-        setTimeout(getScreenShot, 60000),
-        setTimeout(getScreenShot, 70000),
-        setTimeout(getScreenShot, 80000),
-        setTimeout(getScreenShot, 90000),
-        setTimeout(getScreenShot, 1000000),
-        setTimeout(getScreenShot, 1100000),
-        setTimeout(getScreenShot, 1200000),
-      ];
+      // let screenshotCount = 0;
+      // function getScreenShot() {
+      //   screenshotCount++;
+      //   screenshot({ filename: `screen-${screenshotCount}.jpg` });
+      // }
+      // let screenshotList = [
+      //   setTimeout(getScreenShot, 10000),
+      //   setTimeout(getScreenShot, 20000),
+      //   setTimeout(getScreenShot, 30000),
+      //   setTimeout(getScreenShot, 40000),
+      //   setTimeout(getScreenShot, 50000),
+      //   setTimeout(getScreenShot, 60000),
+      //   setTimeout(getScreenShot, 70000),
+      //   setTimeout(getScreenShot, 80000),
+      //   setTimeout(getScreenShot, 90000),
+      //   setTimeout(getScreenShot, 100000),
+      //   setTimeout(getScreenShot, 110000),
+      //   setTimeout(getScreenShot, 120000),
+      // ];
 
       // Expecting six result values
       testValues = await testServer.getTestResults();
       assert.strictEqual(testValues.length, 6);
 
-      screenshotList.forEach((item) => {
-        clearTimeout(item);
-      });
+      // screenshotList.forEach((item) => {
+      //   clearTimeout(item);
+      // });
     });
     it("ADD function should return expected value", async function () {
       assert.strictEqual(testJsonData.functions.ADD.result, testValues[0].Value);
