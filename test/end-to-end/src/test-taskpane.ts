@@ -24,20 +24,24 @@ async function runCfTests(): Promise<void> {
   // Exercise custom functions
   await Excel.run(async (context) => {
     for (let key in customFunctionsData) {
-      const formula: string = customFunctionsData[key].formula;
-      const range = context.workbook.getSelectedRange();
-      range.formulas = [[formula]];
-      await context.sync();
+      try {
+        const formula: string = customFunctionsData[key].formula;
+        const range = context.workbook.getSelectedRange();
+        range.formulas = [[formula]];
+        await context.sync();
 
-      let sheet = context.workbook.worksheets.getActiveWorksheet();
-      let rangeTest = sheet.getRange("B1");
-      rangeTest.values = [["Set Formula"]];
-      await context.sync();
+        let sheet = context.workbook.worksheets.getActiveWorksheet();
+        let rangeTest = sheet.getRange("B1");
+        rangeTest.values = [["Set Formula"]];
+        await context.sync();
 
-      await sleep(5000);
+        await sleep(5000);
 
-      // Check to if this is a streaming function
-      await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1);
+        // Check to if this is a streaming function
+        await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1);
+      } catch {
+        addTestResult(key, "Exception thrown");
+      }
     }
   });
 }
