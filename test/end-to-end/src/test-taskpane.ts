@@ -2,7 +2,7 @@ import * as functionsJsonData from "./test-data.json";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import { closeWorkbook, sleep } from "./test-helpers";
 
-/* global Office, document, Excel, run */
+/* global Office, document, Excel, run, alert */
 const customFunctionsData = (<any>functionsJsonData).functions;
 const port: number = 4201;
 let testValues = [];
@@ -111,6 +111,8 @@ export async function readCFData(cfName: string, readCount: number): Promise<voi
       await context.sync();
 
       await sleep(5000);
+
+      alert(`Retrieved field data: ${range.values[0][0]}`);
 
       addTestResult(cfName, range.values[0][0]);
     }

@@ -50,11 +50,11 @@ describe("Test Excel Custom Functions", function () {
         screenshot({ filename: `screen-${screenshotCount}.jpg` });
       }
       let screenshotList = [
-        setTimeout(getScreenShot, 10000),
-        setTimeout(getScreenShot, 20000),
-        setTimeout(getScreenShot, 30000),
-        setTimeout(getScreenShot, 40000),
-        setTimeout(getScreenShot, 50000),
+        // setTimeout(getScreenShot, 10000),
+        // setTimeout(getScreenShot, 20000),
+        // setTimeout(getScreenShot, 30000),
+        // setTimeout(getScreenShot, 40000),
+        // setTimeout(getScreenShot, 50000),
         setTimeout(getScreenShot, 60000),
         setTimeout(getScreenShot, 70000),
         setTimeout(getScreenShot, 80000),
