@@ -27,6 +27,11 @@ async function runCfTests(): Promise<void> {
       const formula: string = customFunctionsData[key].formula;
       const range = context.workbook.getSelectedRange();
       range.formulas = [[formula]];
+
+      let sheet = context.workbook.worksheets.getActiveWorksheet();
+      let rangeTest = sheet.getRange("B1");
+      rangeTest.values = [["Set Formula"]];
+
       await context.sync();
 
       await sleep(5000);
@@ -108,11 +113,14 @@ export async function readCFData(cfName: string, readCount: number): Promise<voi
     for (let i = 0; i < readCount; i++) {
       const range = context.workbook.getSelectedRange();
       range.load("values");
+
+      let sheet = context.workbook.worksheets.getActiveWorksheet();
+      let rangeTest = sheet.getRange("B1");
+      rangeTest.values = [["Read Value"]];
+
       await context.sync();
 
       await sleep(5000);
-
-      alert(`Retrieved field data: ${range.values[0][0]}`);
 
       addTestResult(cfName, range.values[0][0]);
     }
