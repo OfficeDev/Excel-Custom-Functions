@@ -14,7 +14,10 @@ Office.onReady(async () => {
 
   const testServerResponse: object = await pingTestServer(port);
   if (testServerResponse["status"] === 200) {
-    addTestResult("ADD", "Nothing");
+    await new Promise<void>(() => {
+      addTestResult("ADD", "Nothing");
+      Promise.resolve();
+    });
     //await runCfTests();
     await sendTestResults(testValues, port);
     await closeWorkbook();
