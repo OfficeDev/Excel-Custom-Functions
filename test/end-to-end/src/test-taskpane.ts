@@ -24,6 +24,7 @@ async function runCfTests(): Promise<void> {
   // Exercise custom functions
   return new Promise<void>(() => {
     addTestResult("ADD", "Nothing");
+    Promise.resolve();
   });
   // return Excel.run(async (context) => {
     // for (let key in customFunctionsData) {
