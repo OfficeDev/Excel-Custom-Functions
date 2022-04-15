@@ -14,11 +14,7 @@ Office.onReady(async () => {
 
   const testServerResponse: object = await pingTestServer(port);
   if (testServerResponse["status"] === 200) {
-    await new Promise<void>(() => {
-      addTestResult("ADD", "Nothing");
-      Promise.resolve();
-    });
-    //await runCfTests();
+    await runCfTests();
     await sendTestResults(testValues, port);
     await closeWorkbook();
   }
@@ -26,10 +22,7 @@ Office.onReady(async () => {
 
 async function runCfTests(): Promise<void> {
   // Exercise custom functions
-  return new Promise<void>(() => {
-    addTestResult("ADD", "Nothing");
-    Promise.resolve();
-  });
+  addTestResult("ADD", "Nothing");
   // return Excel.run(async (context) => {
     // for (let key in customFunctionsData) {
     //   try {
