@@ -22,7 +22,10 @@ Office.onReady(async () => {
 
 async function runCfTests(): Promise<void> {
   // Exercise custom functions
-  await Excel.run(async (context) => {
+  return new Promise<void>(() => {
+    addTestResult("ADD", "Nothing");
+  });
+  // return Excel.run(async (context) => {
     // for (let key in customFunctionsData) {
     //   try {
     //     const formula: string = customFunctionsData[key].formula;
@@ -36,7 +39,7 @@ async function runCfTests(): Promise<void> {
         // await context.sync();
 
         // await sleep(5000);
-        addTestResult("ADD", "Nothing");
+        // addTestResult("ADD", "Nothing");
 
         // // Check to if this is a streaming function
         // await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1);
@@ -44,7 +47,7 @@ async function runCfTests(): Promise<void> {
       //   addTestResult(key, "Exception thrown");
       // }
     //}
-  });
+  // });
 }
 
 // export async function readCFData(cfName: string, readCount: number): Promise<void> {
