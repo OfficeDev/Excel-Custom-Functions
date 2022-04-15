@@ -28,7 +28,7 @@ async function runCfTests(): Promise<void> {
         const formula: string = customFunctionsData[key].formula;
         const range = context.workbook.getSelectedRange();
         range.formulas = [[formula]];
-        await context.sync();
+        //await context.sync();
 
         // let sheet = context.workbook.worksheets.getActiveWorksheet();
         // let rangeTest = sheet.getRange("B1");
