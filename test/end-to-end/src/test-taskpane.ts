@@ -26,8 +26,8 @@ async function runCfTests(): Promise<void> {
     for (let key in customFunctionsData) {
       try {
         const formula: string = customFunctionsData[key].formula;
-        const range = context.workbook.getSelectedRange();
-        range.formulas = [[formula]];
+        // const range = context.workbook.getSelectedRange();
+        // range.formulas = [[formula]];
         //await context.sync();
 
         // let sheet = context.workbook.worksheets.getActiveWorksheet();
@@ -36,7 +36,7 @@ async function runCfTests(): Promise<void> {
         // await context.sync();
 
         // await sleep(5000);
-        addTestResult(key, "Formula Added");
+        addTestResult(key, formula);
 
         // // Check to if this is a streaming function
         // await readCFData(key, customFunctionsData[key].streaming != undefined ? 2 : 1);
