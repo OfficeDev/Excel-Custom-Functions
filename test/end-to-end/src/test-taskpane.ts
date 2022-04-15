@@ -14,7 +14,7 @@ Office.onReady(async () => {
 
   const testServerResponse: object = await pingTestServer(port);
   if (testServerResponse["status"] === 200) {
-    await new Promise<void>(() => {
+    Excel.run(async (context) => {
       addTestResult("ADD", "Nothing");
       Promise.resolve();
     });
