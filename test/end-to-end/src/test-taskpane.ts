@@ -14,7 +14,9 @@ Office.onReady(async () => {
 
   const testServerResponse: object = await pingTestServer(port);
   if (testServerResponse["status"] === 200) {
-    await runCfTests();
+    await runCfTests().catch((err) => {
+      addTestResult("ADD", err.message);
+    });
     await sendTestResults(testValues, port);
     await closeWorkbook();
   }
@@ -22,8 +24,8 @@ Office.onReady(async () => {
 
 async function runCfTests(): Promise<void> {
   // Exercise custom functions
-  addTestResult("ADD", "Nothing");
-  // return Excel.run(async (context) => {
+  await Excel.run(async (context) => {
+    addTestResult("ADD", "Nothing");
     // for (let key in customFunctionsData) {
     //   try {
     //     const formula: string = customFunctionsData[key].formula;
@@ -45,7 +47,7 @@ async function runCfTests(): Promise<void> {
       //   addTestResult(key, "Exception thrown");
       // }
     //}
-  // });
+  });
 }
 
 // export async function readCFData(cfName: string, readCount: number): Promise<void> {
