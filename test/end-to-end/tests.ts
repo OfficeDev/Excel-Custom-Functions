@@ -9,7 +9,7 @@ import { connectToWebsocket, enableDebugging, pauseDebugging } from "./src/debug
 import * as officeAddinTestServer from "office-addin-test-server";
 import * as path from "path";
 
-/* global process, describe, before, it, after */
+/* global process, describe, before, it, after, console */
 const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const port: number = 4201;
@@ -43,41 +43,42 @@ describe("Test Excel Custom Functions", function () {
     describe("Get test results for custom functions and validate results", function () {
       it("should get results from the taskpane application", async function () {
         this.timeout(0);
-        // Expecting six result values
+        // Expecting six result values + user agent
         testValues = await testServer.getTestResults();
-        assert.strictEqual(testValues.length, 6);
+        console.log(`User Agent: ${testValues[0].Value}`);
+        assert.strictEqual(testValues.length, 7);
       });
       it("ADD function should return expected value", async function () {
-        assert.strictEqual(testJsonData.functions.ADD.result, testValues[0].Value);
+        assert.strictEqual(testJsonData.functions.ADD.result, testValues[1].Value);
       });
       it("CLOCK function should return expected value", async function () {
         // Check that captured values are different to ensure the function is streaming
-        assert.notStrictEqual(testValues[1].Value, testValues[2].Value);
+        assert.notStrictEqual(testValues[2].Value, testValues[3].Value);
         // Check if the returned string contains 'AM', 'PM', or 'GMT', indicating it's a time-stamp
-        assert.strictEqual(
-          testValues[1].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
-          testValues[1].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
-          testValues[1].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
-          true,
-          "Found timestamp indicator string in first value '" + testValues[1].Value + "'"
-        );
         assert.strictEqual(
           testValues[2].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
           testValues[2].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
           testValues[2].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
           true,
-          "Found timestamp indicator string in second value '" + testValues[2].Value + "'"
+          "Found timestamp indicator string in first value '" + testValues[2].Value + "'"
+        );
+        assert.strictEqual(
+          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
+          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
+          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
+          true,
+          "Found timestamp indicator string in second value '" + testValues[3].Value + "'"
         );
       });
       it("INCREMENT function should return expected value", async function () {
         // Check that captured values are different to ensure the function is streaming
         assert.notStrictEqual(testValues[3].Value, testValues[4].Value);
         // Check to see that both captured streaming values are divisible by 4
-        assert.strictEqual(0, testValues[3].Value % testJsonData.functions.INCREMENT.result);
         assert.strictEqual(0, testValues[4].Value % testJsonData.functions.INCREMENT.result);
+        assert.strictEqual(0, testValues[5].Value % testJsonData.functions.INCREMENT.result);
       });
       it("LOG function should return expected value", async function () {
-        assert.strictEqual(testJsonData.functions.LOG.result, testValues[5].Value);
+        assert.strictEqual(testJsonData.functions.LOG.result, testValues[6].Value);
       });
     });
     after("Teardown test environment", async function () {
