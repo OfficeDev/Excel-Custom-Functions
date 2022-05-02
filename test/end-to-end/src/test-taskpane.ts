@@ -27,6 +27,7 @@ async function runCfTests(): Promise<void> {
   // await Excel.run(async (context) => {
   await new Promise<void>(async () => {
     addTestResult("ADD", "Nothing . . .");
+    Promise.resolve();
     // for (let key in customFunctionsData) {
     //   try {
     //     const formula: string = customFunctionsData[key].formula;
