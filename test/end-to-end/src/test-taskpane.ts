@@ -25,7 +25,7 @@ Office.onReady(async () => {
 async function runCfTests(): Promise<void> {
   // Exercise custom functions
   // await Excel.run(async (context) => {
-  await new Promise<void>(async () => {
+  return new Promise<void>(async () => {
     addTestResult("ADD", "Nothing . . .");
     Promise.resolve();
     // for (let key in customFunctionsData) {
