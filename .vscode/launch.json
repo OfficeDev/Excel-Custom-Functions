@@ -54,9 +54,7 @@
       "timeout": 600000,
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug",
-      "resolveSourceMapLocations": [
-        "${env:LOCALAPPDATA}/Microsoft/Office/16.0/Wef/**/*.js"
-      ]
+      "resolveSourceMapLocations": null
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
