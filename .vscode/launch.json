@@ -53,7 +53,8 @@
       "port": 9229,
       "timeout": 600000,
       "preLaunchTask": "Debug: Excel Desktop",
-      "postDebugTask": "Stop Debug"
+      "postDebugTask": "Stop Debug",
+      "resolveSourceMapLocations": null
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
