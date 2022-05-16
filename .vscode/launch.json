@@ -51,7 +51,6 @@
       "type": "node",
       "request": "attach",
       "port": 9229,
-      "protocol": "inspector",
       "timeout": 600000,
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug",
