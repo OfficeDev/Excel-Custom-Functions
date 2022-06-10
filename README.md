@@ -26,11 +26,11 @@ Get a free sandbox, tools, and other resources you need to build solutions for t
 * [Custom functions overview](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-overview)
 * [Custom functions best practices](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
 * [Custom functions runtime](https://docs.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime)
-* [Office add-in documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
-* More Office Add-in samples at [OfficeDev on Github](https://github.com/officedev)
+* [Office Add-ins documentation](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins)
+* More Office Add-ins samples at [OfficeDev on Github](https://github.com/officedev)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Copyright
 
-Copyright (c) 2017 Microsoft Corporation. All rights reserved.
+Copyright (c) 2019 Microsoft Corporation. All rights reserved.

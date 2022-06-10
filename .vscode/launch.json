@@ -47,20 +47,10 @@
       ]
     },
     {
-      "name": "Excel Desktop (Custom Functions)",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "protocol": "inspector",
-      "timeout": 600000,
-      "preLaunchTask": "Debug: Excel Desktop",
-      "postDebugTask": "Stop Debug"
-    },
-    {
       "name": "Excel Desktop (Edge Chromium)",
-      "type": "edge",
+      "type": "pwa-msedge",
       "request": "attach",
-      "useWebView": "advanced",
+      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
@@ -72,7 +62,7 @@
       "type": "office-addin",
       "request": "attach",
       "url": "https://localhost:3000/taskpane.html?_host_Info=Excel$Win32$16.01$en-US$$$$0",
-      "port": 9229,
+      "port": 9222,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Excel Desktop",
