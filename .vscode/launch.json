@@ -47,16 +47,6 @@
       ]
     },
     {
-      "name": "Excel Desktop (Custom Functions)",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "timeout": 600000,
-      "preLaunchTask": "Debug: Excel Desktop",
-      "postDebugTask": "Stop Debug",
-      "resolveSourceMapLocations": null
-    },
-    {
       "name": "Excel Desktop (Edge Chromium)",
       "type": "pwa-msedge",
       "request": "attach",
