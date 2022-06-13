@@ -27,6 +27,7 @@ export async function closeDesktopApplication(application: string): Promise<bool
       throw new Error(`${application} is not a valid Office desktop application.`);
   }
 
+  await sleep(3000); // wait for host to settle
   try {
     let cmdLine: string;
     if (process.platform == "win32") {
