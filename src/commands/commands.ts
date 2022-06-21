@@ -28,18 +28,7 @@ function action(event: Office.AddinCommands.Event) {
   event.completed();
 }
 
-export function btnShowTaskpane(event: Office.AddinCommands.Event) {
-  if (g.isTaskPaneVisible) {
-    Office.addin.hide();
-    g.isTaskPaneVisible = false;
-  } else {
-    Office.addin.showAsTaskpane();
-    g.isTaskPaneVisible = true;
-  }
-  event.completed();
-}
-
-export function getGlobal() {
+function getGlobal() {
   return typeof self !== "undefined"
     ? self
     : typeof window !== "undefined"
@@ -53,5 +42,3 @@ const g = getGlobal() as any;
 
 // The add-in command functions need to be available in global scope
 g.action = action;
-g.btnshowtaskpane = btnShowTaskpane;
-g.isTaskPaneVisible = false;

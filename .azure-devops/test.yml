@@ -7,7 +7,6 @@ steps:
   - task: CmdLine@2
     inputs:
       script: |
-        
         echo Setting WebView Type: ${{ parameters.webView }}
         call npx office-addin-dev-settings webview manifest.xml ${{ parameters.webView }}
         call npx office-addin-dev-settings webview test/end-to-end/test-manifest.xml ${{ parameters.webView }}
