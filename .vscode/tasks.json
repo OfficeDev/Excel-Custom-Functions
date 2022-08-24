@@ -57,10 +57,7 @@
         "clear": true,
         "panel": "dedicated"
       },
-      "problemMatcher": [],
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
+      "problemMatcher": []
     },
     {
       "label": "Install",
