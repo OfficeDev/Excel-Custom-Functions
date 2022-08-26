@@ -26,7 +26,6 @@ module.exports = async (env, options) => {
       commands: "./src/commands/commands.ts",
     },
     output: {
-      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
       clean: true,
     },
     resolve: {
