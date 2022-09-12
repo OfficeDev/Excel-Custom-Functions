@@ -21,9 +21,7 @@
         "${workspaceFolder}/test/end-to-end/*.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "runtimeArgs": [
-        "--preserve-symlinks"
-      ]
+      "runtimeArgs": ["--preserve-symlinks"]
     },
     {
       "name": "Debug Unit Tests",
@@ -42,15 +40,12 @@
         "${workspaceFolder}/test/unit/*.test.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "runtimeArgs": [
-        "--preserve-symlinks"
-      ]
+      "runtimeArgs": ["--preserve-symlinks"]
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
       "type": "msedge",
       "request": "attach",
-      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
@@ -72,7 +67,6 @@
       "name": "Outlook Desktop (Edge Chromium)",
       "type": "msedge",
       "request": "attach",
-      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
@@ -94,7 +88,6 @@
       "name": "PowerPoint Desktop (Edge Chromium)",
       "type": "msedge",
       "request": "attach",
-      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
@@ -116,7 +109,6 @@
       "name": "Word Desktop (Edge Chromium)",
       "type": "msedge",
       "request": "attach",
-      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
