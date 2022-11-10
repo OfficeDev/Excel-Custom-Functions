@@ -20,12 +20,11 @@ module.exports = async (env, options) => {
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       commands: "./src/commands/commands.ts",
-      functions: "./src/functions/functions.ts",
       taskpane: "./test/end-to-end/src/test-taskpane.ts",
+      functions: "./src/functions/functions.ts",
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
-      devtoolModuleFilenameTemplate: "webpack:///[resource-path]?[loaders]",
       clean: true,
     },
     resolve: {
@@ -87,7 +86,10 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
-      static: ["./"],
+      static: {
+        directory: path.resolve("./", "dist"),
+        publicPath: "/public",
+      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
