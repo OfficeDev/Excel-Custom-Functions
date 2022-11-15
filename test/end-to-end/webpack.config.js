@@ -30,7 +30,7 @@ module.exports = async (env, options) => {
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
       fallback: {
-        child_process: path.resolve(__dirname, "./../../node_modules/child_process/package.json"),
+        child_process: false,
         fs: false,
         os: require.resolve("os-browserify/browser"),
       },
