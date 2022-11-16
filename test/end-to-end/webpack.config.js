@@ -107,7 +107,7 @@ module.exports = async (env, options) => {
         type: "https",
         options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       },
-      port: process.env.npm_package_config_dev_server_port || 3000,
+      port: debuggingTest ? 3001 : process.env.npm_package_config_dev_server_port || 3000,
     },
   };
 
