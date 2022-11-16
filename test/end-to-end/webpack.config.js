@@ -10,7 +10,7 @@ const path = require("path");
 
 async function getHttpsOptions() {
   const httpsOptions = await devCerts.getHttpsServerOptions();
-  return { cacert: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
+  return { ca: httpsOptions.ca, key: httpsOptions.key, cert: httpsOptions.cert };
 }
 
 module.exports = async (env, options) => {
@@ -30,7 +30,7 @@ module.exports = async (env, options) => {
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"],
       fallback: {
-        child_process: path.resolve(__dirname, "./../../node_modules/child_process/package.json"),
+        child_process: false,
         fs: false,
         os: require.resolve("os-browserify/browser"),
       },
@@ -103,7 +103,10 @@ module.exports = async (env, options) => {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      https: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
+      server: {
+        type: "https",
+        options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
+      },
       port: debuggingTest ? 3001 : process.env.npm_package_config_dev_server_port || 3000,
     },
   };
