@@ -89,9 +89,9 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3001/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3001/dist/functions.js"/>
-        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3001/dist/functions.json"/>
-        <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3001/dist/functions.html"/>
+        <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3001/public/functions.js"/>
+        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3001/public/functions.json"/>
+        <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3001/public/functions.html"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3001/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3001/taskpane.html"/>

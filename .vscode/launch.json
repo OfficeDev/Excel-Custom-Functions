@@ -21,9 +21,7 @@
         "${workspaceFolder}/test/end-to-end/*.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "runtimeArgs": [
-        "--preserve-symlinks"
-      ]
+      "runtimeArgs": ["--preserve-symlinks"]
     },
     {
       "name": "Debug Unit Tests",
@@ -42,9 +40,7 @@
         "${workspaceFolder}/test/unit/*.test.ts"
       ],
       "internalConsoleOptions": "openOnSessionStart",
-      "runtimeArgs": [
-        "--preserve-symlinks"
-      ]
+      "runtimeArgs": ["--preserve-symlinks"]
     },
     {
       "name": "Excel Desktop (Custom Functions)",
@@ -58,9 +54,8 @@
     },
     {
       "name": "Excel Desktop (Edge Chromium)",
-      "type": "pwa-msedge",
+      "type": "msedge",
       "request": "attach",
-      "useWebView": true,
       "port": 9229,
       "timeout": 600000,
       "webRoot": "${workspaceRoot}",
@@ -91,7 +86,7 @@
     },
     {
       "name": "Office Online (Edge Chromium)",
-      "type": "pwa-msedge",
+      "type": "msedge",
       "request": "launch",
       "port": 9222,
       // To debug your Add-in:
