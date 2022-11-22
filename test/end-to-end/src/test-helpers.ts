@@ -3,6 +3,7 @@ import * as childProcess from "child_process";
 /* global process, Excel, setTimeout */
 
 export async function closeWorkbook(): Promise<void> {
+  await sleep(3000); // wait for host to settle
   try {
     await Excel.run(async (context) => {
       // @ts-ignore
