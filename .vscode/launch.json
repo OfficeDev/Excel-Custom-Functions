@@ -46,7 +46,7 @@
       "name": "Excel Desktop (Custom Functions)",
       "type": "node",
       "request": "attach",
-      "port": 9229,
+      "port": 9223,
       "timeout": 600000,
       "preLaunchTask": "Debug: Excel Desktop",
       "postDebugTask": "Stop Debug",
