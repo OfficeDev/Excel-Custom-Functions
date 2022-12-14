@@ -39,7 +39,7 @@
               <SourceLocation resid="Functions.Script.Url" />
             </Script>
             <Page>
-              <SourceLocation resid="Functions.Page.Url"/>
+              <SourceLocation resid="Taskpane.Url"/>
             </Page>
             <Metadata>
               <SourceLocation resid="Functions.Metadata.Url" />
