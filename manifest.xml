@@ -39,7 +39,7 @@
               <SourceLocation resid="Functions.Script.Url" />
             </Script>
             <Page>
-              <SourceLocation resid="Functions.Page.Url"/>
+              <SourceLocation resid="Taskpane.Url"/>
             </Page>
             <Metadata>
               <SourceLocation resid="Functions.Metadata.Url" />
@@ -94,7 +94,6 @@
       <bt:Urls>
         <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3000/public/functions.js" />
         <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3000/public/functions.json" />
-        <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
