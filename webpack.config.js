@@ -86,7 +86,7 @@ module.exports = async (env, options) => {
               if (dev) {
                 return content;
               } else {
-                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+                return content.toString().replace(new RegExp(urlDev + "(?:public/)?", "g"), urlProd);
               }
             },
           },
