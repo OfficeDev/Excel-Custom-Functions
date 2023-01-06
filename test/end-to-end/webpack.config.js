@@ -17,7 +17,7 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      test: "./test/end-to-end/src/test-taskpane.ts",
+      test: ["./test/end-to-end/src/test-taskpane.ts", "./test/end-to-end/src/test-taskpane.html"],
     },
     output: {
       path: path.resolve(__dirname, "testBuild"),
