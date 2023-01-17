@@ -21,7 +21,7 @@ function findUrl(jsonUrl: string): void {
 
 export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebSocket | undefined> {
   // different JS engins used in office use different ports.  Allow for either one
-  let jsonUrl = reconnectTry % 2 == 0 ? "http://localhost:9223/json" : "http://localhost:9229/json";
+  let jsonUrl = reconnectTry % 2 == 0 ? "http://127.0.0.1:9223/json" : "http://127.0.0.1:9229/json";
 
   while (!wsUrl && reconnectTry < limitOfReconnectTries) {
     console.log("Attaching debugger...");
