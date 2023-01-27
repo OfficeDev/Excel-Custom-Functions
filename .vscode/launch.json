@@ -125,21 +125,6 @@
       "webRoot": "${workspaceRoot}",
       "preLaunchTask": "Debug: Word Desktop",
       "postDebugTask": "Stop Debug"
-    },
-    {
-      "name": "Office Online (Chrome)",
-      "type": "chrome",
-      "request": "launch",
-      "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "Debug: Web"
-    },
-    {
-      "name": "Office Online (Edge Chromium)",
-      "type": "msedge",
-      "request": "launch",
-      "port": 9222,
-      "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "Debug: Web"
     }
   ]
 }
