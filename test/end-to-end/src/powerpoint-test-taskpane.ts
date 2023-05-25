@@ -31,6 +31,7 @@ async function getSelectedText(): Promise<string> {
 export async function runTest(): Promise<void> {
   // Execute taskpane code
   await run();
+  await testHelpers.sleep(2000);
 
   // get selected text
   const selectedText = await getSelectedText();
