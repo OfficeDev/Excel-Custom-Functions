@@ -30,17 +30,17 @@ async function removeTestInfraStructure() {
   await updateLaunchJsonFile();
   // delete this script
   await unlinkFileAsync("./convertToSingleHost.js");
+  await deleteSupportFiles();
 }
 
 async function updatePackageJsonFile() {
-  // update package.json to reflect selected host
   const packageJson = `./package.json`;
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // remove scripts that are unrelated to the selected host
+  // remove scripts that are unrelated to testing or this file
   Object.keys(content.scripts).forEach(function (key) {
-    if (key === "convert-to-single-host" || key === "test") {
+    if (key === "convert-to-single-host" || key.includes("test")) {
       delete content.scripts[key];
     }
   });
@@ -68,7 +68,7 @@ async function updateLaunchJsonFile() {
 function deleteFolder(folder) {
   try {
     if (fs.existsSync(folder)) {
-      fs.readdirSync(folder).forEach(function (file, index) {
+      fs.readdirSync(folder).forEach(function (file) {
         const curPath = `${folder}/${file}`;
 
         if (fs.lstatSync(curPath).isDirectory()) {
@@ -84,8 +84,17 @@ function deleteFolder(folder) {
   }
 }
 
+async function deleteSupportFiles() {
+  await unlinkFileAsync("CONTRIBUTING.md");
+  await unlinkFileAsync("LICENSE");
+  await unlinkFileAsync("README.md");
+  await unlinkFileAsync("SECURITY.md");
+  await unlinkFileAsync(".npmrc");
+  await unlinkFileAsync("package-lock.json");
+}
+
 /**
- * Remove test infrastructure from project.
+ * Remove test infrastructure and repo support files from project.
  */
 removeTestInfraStructure().catch((err) => {
   console.error(`Error: ${err instanceof Error ? err.message : err}`);
