@@ -3,7 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 
-/* global global, Office, self, window */
+/* global Office */
 
 Office.onReady(() => {
   // If needed, Office.js is ready to be called.
