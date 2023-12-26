@@ -40,9 +40,9 @@ module.exports = async (env, options) => {
           },
         },
         {
-          test: /\.tsx?$/,
+          test: /\.html$/,
           exclude: /node_modules/,
-          use: "ts-loader",
+          use: "html-loader",
         },
         {
           test: /\.(png|jpg|jpeg|gif|ico)$/,
