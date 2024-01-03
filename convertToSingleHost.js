@@ -95,7 +95,7 @@ async function updatePackageJsonForSingleHost(host) {
     }
   });
   
-  // Write updated json to file
+  // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
 
@@ -137,19 +137,14 @@ async function deleteSupportFiles() {
   await unlinkFileAsync("package-lock.json");
 }
 
-async function deleteUnifiedManifestRelatedFiles() {
+async function deleteJSONManifestRelatedFiles() {
   await unlinkFileAsync("manifest.json");
-  await unlinkFileAsync("unified-manifest-webpack.config.js");
   await unlinkFileAsync("assets/color.png");
   await unlinkFileAsync("assets/outline.png");
-  await unlinkFileAsync(".vscode/unified-manifest-launch.json");
-  await unlinkFileAsync(".vscode/unified-manifest-tasks.json");
 }
 
 async function deleteXMLManifestRelatedFiles() {
   await unlinkFileAsync("webpack.config.js");
-  await unlinkFileAsync(".vscode/launch.json");
-  await unlinkFileAsync(".vscode/tasks.json");
   await unlinkFileAsync("manifest.xml");
 }
 
@@ -158,15 +153,15 @@ async function updatePackageJsonForXMLManifest() {
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // Remove scripts that are only used with unified manifest
+  // Remove scripts that are only used with JSON manifest
   delete content.scripts["signin"];
   delete content.scripts["signout"];
   
-  // Write updated json to file
+  // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
 
-async function updatePackageJsonForUnifiedManifest() {
+async function updatePackageJsonForJSONManifest() {
   const packageJson = `./package.json`;
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
@@ -183,26 +178,59 @@ async function updatePackageJsonForUnifiedManifest() {
   content.scripts.stop = "office-addin-debugging stop manifest.json";
   content.scripts.validate = "office-addin-manifest validate manifest.json";
   
-  // Write updated json to file
+  // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
 
-async function renameManifestTypeSpecificFiles() {
-  const webpackConfigContent = await readFileAsync(`./unified-manifest-webpack.config.js`, "utf8");
-  await writeFileAsync(`./webpack.config.js`, webpackConfigContent);
-  await unlinkFileAsync("unified-manifest-webpack.config.js");
-  const launchJsonContent = await readFileAsync(`./.vscode/unified-manifest-launch.json`, "utf8");
-  await writeFileAsync(`./.vscode/launch.json`, launchJsonContent);
-  await unlinkFileAsync(".vscode/unified-manifest-launch.json");
-  const tasksJsonContent = await readFileAsync(`./.vscode/unified-manifest-tasks.json`, "utf8");
-  await writeFileAsync(`./.vscode/tasks.json`, tasksJsonContent);
-  await unlinkFileAsync(".vscode/unified-manifest-tasks.json");
+async function updateTasksJsonFileForJSONManifest() {
+  const tasksJson = `.vscode/tasks.json`;
+  const data = await readFileAsync(tasksJson, "utf8");
+  let content = JSON.parse(data);
+
+  content.tasks.forEach(function (task) {
+    if (task.label.startsWith("Build")) {
+      task.dependsOn = [ "Install" ];
+    };
+    if (task.label === "Debug: Outlook Desktop") {
+      task.script = "start";
+      task.dependsOn = [ "Check OS", "Install" ];
+    }
+  });
+  
+  const checkOSTask =  {
+    label: "Check OS",
+    type: "shell",
+    windows: {
+      command: "echo 'Sideloading in Outlook on Windows is supported'"
+    },
+    linux: {
+      command: "echo 'Sideloading on Linux is not supported' && exit 1"
+    },
+    osx: {
+      command: "echo 'Sideloading in Outlook on Mac is not supported' && exit 1"
+    },
+    presentation: {
+      clear: true,
+      panel: "dedicated"
+    }
+  };
+
+  content.tasks.push(checkOSTask);
+  await writeFileAsync(tasksJson, JSON.stringify(content, null, 2));
 }
 
-async function modifyProjectForUnifiedManifest() {
-  await updatePackageJsonForUnifiedManifest();
+async function updateWebpackConfigForJSONManifest() {
+  const webPack = `webpack.config.js`;
+  const webPackContent = await readFileAsync(webPack, "utf8");
+  const updatedContent = webPackContent.replace(".xml", ".json");
+  await writeFileAsync(webPack, updatedContent);
+}
+
+async function modifyProjectForJSONManifest() {
+  await updatePackageJsonForJSONManifest();
+  await updateWebpackConfigForJSONManifest();
+  await updateTasksJsonFileForJSONManifest();
   await deleteXMLManifestRelatedFiles();
-  await renameManifestTypeSpecificFiles();
 }
 
 /**
@@ -214,12 +242,12 @@ modifyProjectForSingleHost(host).catch((err) => {
   process.exitCode = 1;
 });
 
-if ((host !== "outlook") || (manifestType !== "unified")) {
-  // Remove things that are only relevant to unified manifest
-  deleteUnifiedManifestRelatedFiles();
+if ((host !== "outlook") || (manifestType !== "json")) {
+  // Remove things that are only relevant to JSON manifest
+  deleteJSONManifestRelatedFiles();
   updatePackageJsonForXMLManifest();
 } else {
-    modifyProjectForUnifiedManifest().catch((err) => {
+  modifyProjectForJSONManifest().catch((err) => {
     console.error(`Error: ${err instanceof Error ? err.message : err}`);
     process.exitCode = 1;
   });
