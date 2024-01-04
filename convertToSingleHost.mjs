@@ -1,11 +1,14 @@
 /* global require, process, console */
 
-const fs = require("fs");
+import fs from "fs";
 const host = process.argv[2];
 const manifestType = process.argv[3];
+const projectName = process.argv[4];
+const appId = process.argv[5];
 const hosts = ["excel", "onenote", "outlook", "powerpoint", "project", "word"];
-const path = require("path");
-const util = require("util");
+import path from "path" ;
+import util from "util";
+import { OfficeAddinManifest } from "office-addin-manifest";
 const testPackages = [
   "@types/mocha",
   "@types/node",
@@ -132,7 +135,7 @@ async function deleteSupportFiles() {
   await unlinkFileAsync("LICENSE");
   await unlinkFileAsync("README.md");
   await unlinkFileAsync("SECURITY.md");
-  await unlinkFileAsync("./convertToSingleHost.js");
+  await unlinkFileAsync("./convertToSingleHost.mjs");
   await unlinkFileAsync(".npmrc");
   await unlinkFileAsync("package-lock.json");
 }
@@ -238,18 +241,23 @@ async function modifyProjectForJSONManifest() {
  * @param host The host to support.
  */
 modifyProjectForSingleHost(host).catch((err) => {
-  console.error(`Error: ${err instanceof Error ? err.message : err}`);
+  console.error(`Error modifying for single host: ${err instanceof Error ? err.message : err}`);
   process.exitCode = 1;
 });
+
+let manifestPath = "manifest.xml";
 
 if ((host !== "outlook") || (manifestType !== "json")) {
   // Remove things that are only relevant to JSON manifest
   deleteJSONManifestRelatedFiles();
   updatePackageJsonForXMLManifest();
 } else {
+  manifestPath = "manifest.json";
   modifyProjectForJSONManifest().catch((err) => {
-    console.error(`Error: ${err instanceof Error ? err.message : err}`);
+    console.error(`Error modifying for JSON manifest: ${err instanceof Error ? err.message : err}`);
     process.exitCode = 1;
   });
-}
+};
+
+OfficeAddinManifest.modifyManifestFile(manifestPath, projectName, appId);
  
