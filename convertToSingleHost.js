@@ -1,14 +1,15 @@
 /* global require, process, console */
 
-import fs from "fs";
+const fs = require("fs");
+const path = require("path");
+const util = require("util");
+const manifest = require("office-addin-manifest");
+
 const host = process.argv[2];
 const manifestType = process.argv[3];
 const projectName = process.argv[4];
-const appId = process.argv[5];
+let appId = process.argv[5];
 const hosts = ["excel", "onenote", "outlook", "powerpoint", "project", "word"];
-import path from "path" ;
-import util from "util";
-import { OfficeAddinManifest } from "office-addin-manifest";
 const testPackages = [
   "@types/mocha",
   "@types/node",
@@ -135,7 +136,7 @@ async function deleteSupportFiles() {
   await unlinkFileAsync("LICENSE");
   await unlinkFileAsync("README.md");
   await unlinkFileAsync("SECURITY.md");
-  await unlinkFileAsync("./convertToSingleHost.mjs");
+  await unlinkFileAsync("./convertToSingleHost.js");
   await unlinkFileAsync(".npmrc");
   await unlinkFileAsync("package-lock.json");
 }
@@ -260,6 +261,9 @@ if ((host !== "outlook") || (manifestType !== "json")) {
 };
 
 if (projectName) {
-  OfficeAddinManifest.modifyManifestFile(manifestPath, projectName, appId);
+  if (!appId) {
+    appId = "random";
+  }
+  manifest.OfficeAddinManifest.modifyManifestFile(manifestPath, appId, projectName);
 }
  
