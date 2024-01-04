@@ -36,6 +36,16 @@
       },
       "problemMatcher": []
     },
+	{
+      "label": "Debug: Outlook Desktop",
+      "type": "npm",
+      "script": "start:desktop -- --app outlook",
+      "presentation": {
+        "clear": true,
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
     {
       "label": "Debug: PowerPoint Desktop",
       "type": "npm",
@@ -50,17 +60,6 @@
       "label": "Debug: Word Desktop",
       "type": "npm",
       "script": "start:desktop -- --app word",
-      "presentation": {
-        "clear": true,
-        "panel": "dedicated"
-      },
-      "problemMatcher": []
-    },
-
-    {
-      "label": "Debug: Outlook Desktop",
-      "type": "npm",
-      "script": "start:desktop -- --app outlook",
       "presentation": {
         "clear": true,
         "panel": "dedicated"
