@@ -36,7 +36,7 @@
       },
       "problemMatcher": []
     },
-	{
+    {
       "label": "Debug: Outlook Desktop",
       "type": "npm",
       "script": "start:desktop -- --app outlook",
