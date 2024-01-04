@@ -259,5 +259,7 @@ if ((host !== "outlook") || (manifestType !== "json")) {
   });
 };
 
-OfficeAddinManifest.modifyManifestFile(manifestPath, projectName, appId);
+if (projectName) {
+  OfficeAddinManifest.modifyManifestFile(manifestPath, projectName, appId);
+}
  
