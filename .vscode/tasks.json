@@ -1,6 +1,4 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558
-  // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
     {
@@ -34,7 +32,7 @@
       "script": "start:desktop -- --app excel",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -44,7 +42,7 @@
       "script": "start:desktop -- --app outlook",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -54,7 +52,7 @@
       "script": "start:desktop -- --app powerpoint",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -64,7 +62,7 @@
       "script": "start:desktop -- --app word",
       "presentation": {
         "clear": true,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "problemMatcher": []
     },
@@ -125,6 +123,6 @@
         "panel": "dedicated"
       },
       "problemMatcher": []
-    },
+    }
   ]
 }
