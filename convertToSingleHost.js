@@ -68,7 +68,7 @@ async function updatePackageJsonForSingleHost(host) {
   const packageJson = `./package.json`;
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
-  
+
   // Update 'config' section in package.json to use selected host
   content.config["app_to_debug"] = host;
 
@@ -77,10 +77,7 @@ async function updatePackageJsonForSingleHost(host) {
 
   // Remove scripts that are unrelated to the selected host
   Object.keys(content.scripts).forEach(function (key) {
-    if (
-      key === "convert-to-single-host" ||
-      key === "start:desktop:outlook"
-    ) {
+    if (key === "convert-to-single-host" || key === "start:desktop:outlook") {
       delete content.scripts[key];
     }
   });
@@ -98,7 +95,7 @@ async function updatePackageJsonForSingleHost(host) {
       delete content.devDependencies[key];
     }
   });
-  
+
   // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
@@ -159,7 +156,7 @@ async function updatePackageJsonForXMLManifest() {
   // Remove scripts that are only used with JSON manifest
   delete content.scripts["signin"];
   delete content.scripts["signout"];
-  
+
   // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
@@ -176,11 +173,11 @@ async function updatePackageJsonForJSONManifest() {
     }
   });
 
-  // Change manifest file name extension  
+  // Change manifest file name extension
   content.scripts.start = "office-addin-debugging start manifest.json";
   content.scripts.stop = "office-addin-debugging stop manifest.json";
   content.scripts.validate = "office-addin-manifest validate manifest.json";
-  
+
   // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
@@ -192,30 +189,30 @@ async function updateTasksJsonFileForJSONManifest() {
 
   content.tasks.forEach(function (task) {
     if (task.label.startsWith("Build")) {
-      task.dependsOn = [ "Install" ];
-    };
+      task.dependsOn = ["Install"];
+    }
     if (task.label === "Debug: Outlook Desktop") {
       task.script = "start";
-      task.dependsOn = [ "Check OS", "Install" ];
+      task.dependsOn = ["Check OS", "Install"];
     }
   });
-  
-  const checkOSTask =  {
+
+  const checkOSTask = {
     label: "Check OS",
     type: "shell",
     windows: {
-      command: "echo 'Sideloading in Outlook on Windows is supported'"
+      command: "echo 'Sideloading in Outlook on Windows is supported'",
     },
     linux: {
-      command: "echo 'Sideloading on Linux is not supported' && exit 1"
+      command: "echo 'Sideloading on Linux is not supported' && exit 1",
     },
     osx: {
-      command: "echo 'Sideloading in Outlook on Mac is not supported' && exit 1"
+      command: "echo 'Sideloading in Outlook on Mac is not supported' && exit 1",
     },
     presentation: {
       clear: true,
-      panel: "dedicated"
-    }
+      panel: "dedicated",
+    },
   };
 
   content.tasks.push(checkOSTask);
@@ -247,7 +244,7 @@ modifyProjectForSingleHost(host).catch((err) => {
 
 let manifestPath = "manifest.xml";
 
-if ((host !== "outlook") || (manifestType !== "json")) {
+if (host !== "outlook" || manifestType !== "json") {
   // Remove things that are only relevant to JSON manifest
   deleteJSONManifestRelatedFiles();
   updatePackageJsonForXMLManifest();
@@ -257,7 +254,7 @@ if ((host !== "outlook") || (manifestType !== "json")) {
     console.error(`Error modifying for JSON manifest: ${err instanceof Error ? err.message : err}`);
     process.exitCode = 1;
   });
-};
+}
 
 if (projectName) {
   if (!appId) {
@@ -274,4 +271,3 @@ if (projectName) {
     }
   });
 }
- 
