@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const util = require("util");
-const manifest = require("office-addin-manifest");
+const childProcess = require("child_process");
 
 const host = process.argv[2];
 const manifestType = process.argv[3];
@@ -263,6 +263,15 @@ if (projectName) {
   if (!appId) {
     appId = "random";
   }
-  manifest.OfficeAddinManifest.modifyManifestFile(manifestPath, appId, projectName);
+
+  // Modify the manifest to include the name and id of the project
+  const cmdLine = `npx office-addin-manifest modify ${manifestPath} -g ${appId} -d ${projectName}`;
+  childProcess.exec(cmdLine, (error, stdout) => {
+    if (error) {
+      Promise.reject(stdout);
+    } else {
+      Promise.resolve();
+    }
+  });
 }
  
