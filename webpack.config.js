@@ -86,7 +86,7 @@ module.exports = async (env, options) => {
               if (dev) {
                 return content;
               } else {
-                return content.toString().replace(new RegExp(urlDev + "(?:public/)?", "g"), urlProd);
+                return content.toString().replace(urlDev, urlProd);
               }
             },
           },
@@ -94,10 +94,6 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
-      static: {
-        directory: path.join(__dirname, "dist"),
-        publicPath: "/public",
-      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
