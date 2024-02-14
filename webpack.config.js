@@ -64,14 +64,9 @@ module.exports = async (env, options) => {
         input: "./src/functions/functions.ts",
       }),
       new HtmlWebpackPlugin({
-        filename: "functions.html",
-        template: "./src/functions/functions.html",
-        chunks: ["polyfill", "functions"],
-      }),
-      new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./src/taskpane/taskpane.html",
-        chunks: ["polyfill", "taskpane"],
+        chunks: ["polyfill", "taskpane", "functions", "commands"],
       }),
       new CopyWebpackPlugin({
         patterns: [
@@ -86,23 +81,14 @@ module.exports = async (env, options) => {
               if (dev) {
                 return content;
               } else {
-                return content.toString().replace(new RegExp(urlDev + "(?:public/)?", "g"), urlProd);
+                return content.toString().replace(urlDev, urlProd);
               }
             },
           },
         ],
       }),
-      new HtmlWebpackPlugin({
-        filename: "commands.html",
-        template: "./src/commands/commands.html",
-        chunks: ["polyfill", "commands"],
-      }),
     ],
     devServer: {
-      static: {
-        directory: path.join(__dirname, "dist"),
-        publicPath: "/public",
-      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
