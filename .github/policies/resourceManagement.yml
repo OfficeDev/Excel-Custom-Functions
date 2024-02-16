@@ -1,0 +1,90 @@
+id: 
+name: GitOps.PullRequestIssueManagement
+description: GitOps.PullRequestIssueManagement primitive
+owner: 
+resource: repository
+disabled: false
+where: 
+configuration:
+  resourceManagementConfiguration:
+    scheduledSearches:
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 3
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: 'Needs: author feedback'
+      - noActivitySince:
+          days: 4
+      - isNotLabeledWith:
+          label: 'Status: no recent activity'
+      actions:
+      - addLabel:
+          label: 'Status: no recent activity'
+      - addReply:
+          reply: This issue has been automatically marked as stale because it is marked as needing author feedback but has not had any activity for **4 days**. It will be closed if no further activity occurs **within 3 days of this comment**. Thank you for your interest in Office Add-ins!
+    - description: 
+      frequencies:
+      - hourly:
+          hour: 3
+      filters:
+      - isIssue
+      - isOpen
+      - hasLabel:
+          label: 'Needs: author feedback'
+      - hasLabel:
+          label: 'Status: no recent activity'
+      - noActivitySince:
+          days: 3
+      actions:
+      - addReply:
+          reply: This issue has been closed due to inactivity. Please comment if you still need assistance and we'll re-open the issue.
+      - closeIssue
+    eventResponderTasks:
+    - if:
+      - payloadType: Issues
+      - isAction:
+          action: Opened
+      - not: isAssignedToSomeone
+      then:
+      - addLabel:
+          label: 'Needs: triage :mag:'
+      description: 
+    - if:
+      - payloadType: Issues
+      - not:
+          isAction:
+            action: Closed
+      - hasLabel:
+          label: 'Status: no recent activity'
+      then:
+      - removeLabel:
+          label: 'Status: no recent activity'
+      description: 
+    - if:
+      - payloadType: Issue_Comment
+      - hasLabel:
+          label: 'Status: no recent activity'
+      then:
+      - removeLabel:
+          label: 'Status: no recent activity'
+      description: 
+    - if:
+      - payloadType: Issue_Comment
+      - isAction:
+          action: Created
+      - isActivitySender:
+          issueAuthor: True
+      - hasLabel:
+          label: 'Needs: author feedback'
+      then:
+      - addLabel:
+          label: 'Needs: attention :wave:'
+      - removeLabel:
+          label: 'Needs: author feedback'
+      description: 
+onFailure: 
+onSuccess: 

@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=16 <21",
+    "node": ">=16 <19",
     "npm": ">=7 <11"
   },
   "scripts": {
@@ -19,6 +19,8 @@
     "lint:fix": "office-addin-lint fix",
     "prestart": "npm run build",
     "prettier": "office-addin-lint prettier",
+    "signin": "office-addin-dev-settings m365-account login",
+    "signout": "office-addin-dev-settings m365-account logout",
     "start": "office-addin-debugging start manifest.xml",
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
     "start:web": "office-addin-debugging start manifest.xml web",
@@ -52,9 +54,9 @@
     "mocha": "^10.1.0",
     "office-addin-cli": "^1.5.5",
     "office-addin-debugging": "^5.0.12",
-    "office-addin-dev-certs": "^1.11.3",
+    "office-addin-dev-certs": "^1.11.4",
     "office-addin-lint": "^2.2.5",
-    "office-addin-manifest": "^1.12.3",
+    "office-addin-manifest": "^1.12.4",
     "office-addin-mock": "^2.3.9",
     "office-addin-prettier-config": "^1.2.0",
     "office-addin-test-helpers": "^1.4.5",
