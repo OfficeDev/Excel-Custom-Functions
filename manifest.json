@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
     "id": "f2b103f1-1ab1-4e1b-8f0b-072aa3d4e19d",
     "manifestVersion": "devPreview",
     "version": "1.0.0",
@@ -97,9 +97,9 @@
                     "id": "msgReadGroup",
                     "label": "Contoso Add-in",
                     "icons": [
-                      { "size": 16, "file": "https://localhost:3000/assets/icon-16.png" },
-                      { "size": 32, "file": "https://localhost:3000/assets/icon-32.png" },
-                      { "size": 80, "file": "https://localhost:3000/assets/icon-80.png" }
+                      { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                      { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                      { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
                     ],
                     "controls": [
                       {
@@ -107,9 +107,9 @@
                         "type": "button",
                         "label": "Show Taskpane",
                         "icons": [
-                          { "size": 16, "file": "https://localhost:3000/assets/icon-16.png" },
-                          { "size": 32, "file": "https://localhost:3000/assets/icon-32.png" },
-                          { "size": 80, "file": "https://localhost:3000/assets/icon-80.png" }
+                          { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                          { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                          { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
                         ],
                         "supertip": {
                           "title": "Show Taskpane",
@@ -122,9 +122,9 @@
                         "type": "button",
                         "label": "Perform an action",
                         "icons": [
-                          { "size": 16, "file": "https://localhost:3000/assets/icon-16.png" },
-                          { "size": 32, "file": "https://localhost:3000/assets/icon-32.png" },
-                          { "size": 80, "file": "https://localhost:3000/assets/icon-80.png" }
+                          { "size": 16, "url": "https://localhost:3000/assets/icon-16.png" },
+                          { "size": 32, "url": "https://localhost:3000/assets/icon-32.png" },
+                          { "size": 80, "url": "https://localhost:3000/assets/icon-80.png" }
                         ],
                         "supertip": {
                           "title": "Perform an action",
