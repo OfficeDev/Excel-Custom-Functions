@@ -153,10 +153,6 @@ async function updatePackageJsonForXMLManifest() {
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // Remove scripts that are only used with JSON manifest
-  delete content.scripts["signin"];
-  delete content.scripts["signout"];
-
   // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
