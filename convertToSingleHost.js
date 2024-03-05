@@ -153,10 +153,6 @@ async function updatePackageJsonForXMLManifest() {
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // Remove scripts that are only used with JSON manifest
-  delete content.scripts["signin"];
-  delete content.scripts["signout"];
-
   // Write updated JSON to file
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
@@ -265,9 +261,10 @@ if (projectName) {
   const cmdLine = `npx office-addin-manifest modify ${manifestPath} -g ${appId} -d ${projectName}`;
   childProcess.exec(cmdLine, (error, stdout) => {
     if (error) {
-      Promise.reject(stdout);
+      console.error(`Error updating the manifest: ${error}`);
+      process.exitCode = 1;
     } else {
-      Promise.resolve();
+      console.log(stdout);
     }
   });
 }
