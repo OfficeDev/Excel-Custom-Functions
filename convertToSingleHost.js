@@ -261,9 +261,10 @@ if (projectName) {
   const cmdLine = `npx office-addin-manifest modify ${manifestPath} -g ${appId} -d ${projectName}`;
   childProcess.exec(cmdLine, (error, stdout) => {
     if (error) {
-      Promise.reject(stdout);
+      console.error(`Error updating the manifest: ${error}`);
+      process.exitCode = 1;
     } else {
-      Promise.resolve();
+      console.log(stdout);
     }
   });
 }
