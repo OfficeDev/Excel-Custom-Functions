@@ -92,8 +92,8 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3000/public/functions.js" />
-        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3000/public/functions.json" />
+        <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3000/functions.js" />
+        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3000/functions.json" />
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
       </bt:Urls>
