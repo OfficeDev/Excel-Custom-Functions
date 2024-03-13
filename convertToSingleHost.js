@@ -66,9 +66,11 @@ async function updateLaunchJsonFile() {
   // Remove 'Debug Tests' configuration from launch.json
   const launchJson = `.vscode/launch.json`;
   const launchJsonContent = await readFileAsync(launchJson, "utf8");
-  const regex = /(.+{\r?\n.*"name": "Debug (?:UI|Unit) Tests",\r?\n(?:.*\r?\n)*?.*},.*\r?\n)/gm;
-  const updatedContent = launchJsonContent.replace(regex, "");
-  await writeFileAsync(launchJson, updatedContent);
+  let content = JSON.parse(launchJsonContent);
+  content.configurations = content.configurations.filter(function (config) {
+    return config.name.startsWith("Excel");
+  });
+  await writeFileAsync(launchJson, JSON.stringify(content, null, 2));
 }
 
 function deleteFolder(folder) {
