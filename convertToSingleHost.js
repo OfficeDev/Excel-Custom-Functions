@@ -32,7 +32,7 @@ async function modifyProjectForSingleHost(host) {
   }
   await convertProjectToSingleHost(host);
   await updatePackageJsonForSingleHost(host);
-  await updateLaunchJsonFile();
+  await updateLaunchJsonFile(host);
 }
 
 async function convertProjectToSingleHost(host) {
@@ -100,13 +100,34 @@ async function updatePackageJsonForSingleHost(host) {
   await writeFileAsync(packageJson, JSON.stringify(content, null, 2));
 }
 
-async function updateLaunchJsonFile() {
+async function updateLaunchJsonFile(host) {
   // Remove 'Debug Tests' configuration from launch.json
   const launchJson = `.vscode/launch.json`;
   const launchJsonContent = await readFileAsync(launchJson, "utf8");
-  const regex = /(.+{\r?\n.*"name": "Debug (?:UI|Unit) Tests",\r?\n(?:.*\r?\n)*?.*},.*\r?\n)/gm;
-  const updatedContent = launchJsonContent.replace(regex, "");
-  await writeFileAsync(launchJson, updatedContent);
+  let content = JSON.parse(launchJsonContent);
+  content.configurations = content.configurations.filter(function (config) {
+    return config.name.startsWith(getHostName(host));
+  });
+  await writeFileAsync(launchJson, JSON.stringify(content, null, 2));
+}
+
+function getHostName(host) {
+  switch (host) {
+    case "excel":
+      return "Excel";
+    case "onenote":
+      return "OneNote";
+    case "outlook":
+      return "Outlook";
+    case "powerpoint":
+      return "PowerPoint";
+    case "project":
+      return "Project";
+    case "word":
+      return "Word";
+    default:
+      throw new Error(`'${host}' is not a supported host.`);
+  }
 }
 
 function deleteFolder(folder) {
