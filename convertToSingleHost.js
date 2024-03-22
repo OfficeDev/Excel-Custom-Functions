@@ -33,7 +33,7 @@ async function removeTestInfraStructure() {
   deleteFolder(path.resolve(`./.azure-devops`));
 
   await updatePackageJsonFile();
-  await updateLaunchJsonFile();
+  await updateLaunchJsonFile("excel");
   // delete this script
   await unlinkFileAsync("./convertToSingleHost.js");
   await deleteSupportFiles();
