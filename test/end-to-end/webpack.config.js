@@ -72,19 +72,9 @@ module.exports = async (env, options) => {
         input: "./src/functions/functions.ts",
       }),
       new HtmlWebpackPlugin({
-        filename: "functions.html",
-        template: "./src/functions/functions.html",
-        chunks: ["polyfill", "functions"],
-      }),
-      new HtmlWebpackPlugin({
         filename: "taskpane.html",
         template: "./test/end-to-end/src/test-taskpane.html",
-        chunks: ["polyfill", "taskpane"],
-      }),
-      new HtmlWebpackPlugin({
-        filename: "commands.html",
-        template: "./test/end-to-end/src/test-commands.html",
-        chunks: ["polyfill", "commands"],
+        chunks: ["polyfill", "taskpane", "functions", "commands"],
       }),
       new CopyWebpackPlugin({
         patterns: [
@@ -96,10 +86,6 @@ module.exports = async (env, options) => {
       }),
     ],
     devServer: {
-      static: {
-        directory: path.resolve("./", "dist"),
-        publicPath: "/public",
-      },
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
