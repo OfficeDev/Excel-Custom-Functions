@@ -26,7 +26,7 @@ You might also qualify for a free developer subscription that's renewable for 90
 - [Custom functions best practices](https://learn.microsoft.com/office/dev/add-ins/excel/custom-functions-best-practices)
 - [Custom functions runtime](https://learn.microsoft.com/office/dev/add-ins/excel/custom-functions-runtime)
 - [Office Add-ins documentation](https://learn.microsoft.com/office/dev/add-ins/overview/office-add-ins)
-- More Office Add-ins samples at [OfficeDev on Github](https://github.com/officedev)
+- [Office Add-ins samples](https://github.com/OfficeDev/Office-Add-in-samples)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
