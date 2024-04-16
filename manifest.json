@@ -1,7 +1,7 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
     "id": "f2b103f1-1ab1-4e1b-8f0b-072aa3d4e19d",
-    "manifestVersion": "devPreview",
+    "manifestVersion": "1.17",
     "version": "1.0.0",
     "name": {
       "short": "Contoso Task Pane Add-in",
