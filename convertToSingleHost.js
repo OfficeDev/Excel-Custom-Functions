@@ -1,4 +1,4 @@
-// NOTE: This script is generally in sync with other tempalte repos (with minor differences) even though this template doesn't support different hosts.
+// NOTE: This script is generally in sync with other template repos (with minor differences) even though this template doesn't support different hosts.
 // It's easier to maintain the script in one place and copy it over to other repos than to maintain multiple versions of the script.
 
 /* global require, process, console */
