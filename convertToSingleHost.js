@@ -1,3 +1,6 @@
+// NOTE: This script is generally in sync with other template repos (with minor differences) even though this template doesn't support different hosts.
+// It's easier to maintain the script in one place and copy it over to other repos than to maintain multiple versions of the script.
+
 /* global require, process, console */
 
 const fs = require("fs");
@@ -5,13 +8,14 @@ const path = require("path");
 const util = require("util");
 const childProcess = require("child_process");
 
-const manifestType = process.argv[2];
-const projectName = process.argv[3];
-let appId = process.argv[4];
+const host = process.argv[2];
+const manifestType = process.argv[3];
+const projectName = process.argv[4];
+let appId = process.argv[5];
+const hosts = ["excel"];
 const testPackages = [
   "@types/mocha",
   "@types/node",
-  "current-processes",
   "mocha",
   "office-addin-mock",
   "office-addin-test-helpers",
@@ -22,7 +26,35 @@ const readFileAsync = util.promisify(fs.readFile);
 const unlinkFileAsync = util.promisify(fs.unlink);
 const writeFileAsync = util.promisify(fs.writeFile);
 
-async function removeTestInfraStructure() {
+async function modifyProjectForSingleHost(host) {
+  if (!host) {
+    throw new Error("The host was not provided.");
+  }
+  if (!hosts.includes(host)) {
+    throw new Error(`'${host}' is not a supported host.`);
+  }
+  await convertProjectToSingleHost(host);
+  await updatePackageJsonForSingleHost(host);
+  await updateLaunchJsonFile(host);
+}
+
+async function convertProjectToSingleHost(host) {
+  // NOTE: This template only supports Excel, so we don't need to deal with host specific files.
+
+  // Copy host-specific manifest over manifest.xml
+  // const manifestContent = await readFileAsync(`./manifest.${host}.xml`, "utf8");
+  // await writeFileAsync(`./manifest.xml`, manifestContent);
+
+  // Copy over host-specific taskpane code to taskpane.ts
+  // const srcContent = await readFileAsync(`./src/taskpane/${host}.ts`, "utf8");
+  // await writeFileAsync(`./src/taskpane/taskpane.ts`, srcContent);
+
+  // Delete all host-specific files
+  // hosts.forEach(async function (host) {
+  //   await unlinkFileAsync(`./manifest.${host}.xml`);
+  //   await unlinkFileAsync(`./src/taskpane/${host}.ts`);
+  // });
+
   // Delete test folder
   deleteFolder(path.resolve(`./test`));
 
@@ -32,21 +64,33 @@ async function removeTestInfraStructure() {
   // Delete CI/CD pipeline files
   deleteFolder(path.resolve(`./.azure-devops`));
 
-  await updatePackageJsonFile();
-  await updateLaunchJsonFile("excel");
-  // delete this script
-  await unlinkFileAsync("./convertToSingleHost.js");
+  // Delete repo support files
   await deleteSupportFiles();
 }
 
-async function updatePackageJsonFile() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function updatePackageJsonForSingleHost(host) {
+  // Update package.json to reflect selected host
   const packageJson = `./package.json`;
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // remove scripts that are unrelated to testing or this file
+  // Update 'config' section in package.json to use selected host
+  //content.config["app_to_debug"] = host;
+
+  // Remove 'engines' section
+  delete content.engines;
+
+  // Remove scripts that are unrelated to the selected host
   Object.keys(content.scripts).forEach(function (key) {
-    if (key === "convert-to-single-host" || key.includes("test")) {
+    if (key === "convert-to-single-host") {
+      delete content.scripts[key];
+    }
+  });
+
+  // Remove test-related scripts
+  Object.keys(content.scripts).forEach(function (key) {
+    if (key.includes("test")) {
       delete content.scripts[key];
     }
   });
@@ -116,6 +160,7 @@ async function deleteSupportFiles() {
   await unlinkFileAsync("LICENSE");
   await unlinkFileAsync("README.md");
   await unlinkFileAsync("SECURITY.md");
+  await unlinkFileAsync("./convertToSingleHost.js");
   await unlinkFileAsync(".npmrc");
   await unlinkFileAsync("package-lock.json");
 }
@@ -211,12 +256,12 @@ async function modifyProjectForJSONManifest() {
   await deleteXMLManifestRelatedFiles();
 }
 
-
 /**
- * Remove test infrastructure and repo support files from project.
+ * Modify the project so that it only supports a single host.
+ * @param host The host to support.
  */
-removeTestInfraStructure().catch((err) => {
-  console.error(`Error: ${err instanceof Error ? err.message : err}`);
+modifyProjectForSingleHost(host).catch((err) => {
+  console.error(`Error modifying for single host: ${err instanceof Error ? err.message : err}`);
   process.exitCode = 1;
 });
 
