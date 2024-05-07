@@ -26,7 +26,7 @@
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
     "test": "npm run test:unit && npm run test:e2e",
-    "test:e2e": "mocha -r ts-node/register test/end-to-end/*.ts",
+    "test:e2e": "mocha -r ts-node/register test/end-to-end/tests.ts",
     "test:unit": "mocha -r ts-node/register test/unit/*.test.ts",
     "validate": "office-addin-manifest validate manifest.xml",
     "watch": "webpack --mode development --watch"
