@@ -19,7 +19,7 @@ export async function run() {
    */
 
   const item = Office.context.mailbox.item;
-  let insertAt = document.getElementById("item-subject")
+  let insertAt = document.getElementById("item-subject");
   let label = document.createElement("b").appendChild(document.createTextNode("Subject: "));
   insertAt.appendChild(label);
   insertAt.appendChild(document.createElement("br"));
