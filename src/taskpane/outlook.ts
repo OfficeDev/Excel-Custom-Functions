@@ -19,5 +19,9 @@ export async function run() {
    */
 
   const item = Office.context.mailbox.item;
-  document.getElementById("item-subject").innerHTML = "<b>Subject:</b> <br/>" + item.subject;
+  let subjectElement = document.getElementById("item-subject");
+  if (subjectElement) {
+    subjectElement.innerHTML = ""; // Clear the existing content
+    subjectElement.insertAdjacentHTML("beforeend", `<b>Subject:</b> <br/>${item.subject}`);
+  }
 }
