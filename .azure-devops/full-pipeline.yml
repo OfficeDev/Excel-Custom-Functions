@@ -7,8 +7,6 @@ resources:
 extends:
   template: /v1/Office.Unofficial.PipelineTemplate.yml@CustomPipelineTemplates
   parameters:
-    pool:
-      name: OE-OfficeClientApps
     sdl:
       eslint:
         configuration: required
@@ -18,6 +16,8 @@ extends:
     - stage: stage
       jobs:
       - job: Windows_10_Latest
+        pool:
+          name: OE-OfficeClientApps
         steps:
         - template: /.azure-devops/install.yml@self
         - template: /.azure-devops/lint.yml@self
@@ -28,6 +28,8 @@ extends:
           parameters:
             webView: "edge-chromium"
       - job: WebView_EdgeLegacy
+        pool:
+          name: OE-OfficeClientApps
         steps:
         - template: /.azure-devops/install.yml@self
         - template: /.azure-devops/lint.yml@self
@@ -38,6 +40,8 @@ extends:
           parameters:
             webView: "edge-legacy"
       - job: WebView_IE
+        pool:
+          name: OE-OfficeClientApps
         steps:
         - template: /.azure-devops/install.yml@self
         - template: /.azure-devops/lint.yml@self
@@ -48,6 +52,8 @@ extends:
           parameters:
             webView: "ie"
       - job: Mac
+        pool:
+          name: OPX Mac Dogfood Pool
         steps:
         - template: /.azure-devops/install.yml@self
         - template: /.azure-devops/lint.yml@self
