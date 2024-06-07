@@ -19,9 +19,10 @@ export async function run() {
    */
 
   const item = Office.context.mailbox.item;
-  let subjectElement = document.getElementById("item-subject");
-  if (subjectElement) {
-    subjectElement.innerHTML = ""; // Clear the existing content
-    subjectElement.insertAdjacentHTML("beforeend", `<b>Subject:</b> <br/>${item.subject}`);
-  }
+  let insertAt = document.getElementById("item-subject")
+  let label = document.createElement("b").appendChild(document.createTextNode("Subject: "));
+  insertAt.appendChild(label);
+  insertAt.appendChild(document.createElement("br"));
+  insertAt.appendChild(document.createTextNode(item.subject));
+  insertAt.appendChild(document.createElement("br"));
 }
