@@ -7,12 +7,24 @@ const fs = require("fs");
 const path = require("path");
 const util = require("util");
 const childProcess = require("child_process");
+const hosts = ["excel"];
+
+if (process.argv.length <= 2) {
+  const hostList = hosts.map((host) => `'${host}'`).join(", ");
+  console.log("SYNTAX: convertToSingleHost.js <host> <manifestType> <projectName> <appId>");
+  console.log();
+  console.log(`  host (required): Specifies which Office app will host the add-in: ${hostList}`);
+  console.log(`  manifestType: Specify the type of manifest to use: 'xml' or 'json'.  Defaults to 'xml'`);
+  console.log(`  projectName: The name of the project (use quotes when there are spaces in the name). Defaults to 'My Office Add-in'`);
+  console.log(`  appId: The id of the project or 'random' to generate one.  Defaults to 'random'`);
+  console.log();
+  process.exit(1);
+}
 
 const host = process.argv[2];
 const manifestType = process.argv[3];
 const projectName = process.argv[4];
 let appId = process.argv[5];
-const hosts = ["excel"];
 const testPackages = [
   "@types/mocha",
   "@types/node",
