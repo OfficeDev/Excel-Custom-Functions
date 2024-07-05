@@ -47,12 +47,3 @@ extends:
         - template: /.azure-devops/test.yml@self
           parameters:
             webView: "ie"
-      - job: Mac
-        pool:
-          name: OPX Mac Dogfood Pool
-        steps:
-        - template: /.azure-devops/install.yml@self
-        - template: /.azure-devops/lint.yml@self
-        - template: /.azure-devops/build.yml@self
-        - template: /.azure-devops/test.yml@self
-        - template: /.azure-devops/cleanup.yml@self
