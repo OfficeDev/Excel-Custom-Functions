@@ -6,7 +6,8 @@
   "recommendations": [
     "ms-edgedevtools.vscode-edge-devtools",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "msoffice.microsoft-office-add-in-debugger"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
