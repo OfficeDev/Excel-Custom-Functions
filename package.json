@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.23.3",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.11.25",
@@ -66,7 +67,6 @@
     "os-browserify": "^0.3.0",
     "process": "^0.11.10",
     "source-map-loader": "^5.0.0",
-    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2",
     "webpack": "^5.94.0",

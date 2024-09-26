@@ -44,11 +44,6 @@ module.exports = async (env, options) => {
           },
         },
         {
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
-          use: "ts-loader",
-        },
-        {
           test: /\.html$/,
           exclude: /node_modules/,
           use: "html-loader",
