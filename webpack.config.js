@@ -33,10 +33,7 @@ module.exports = async (env, options) => {
           test: /\.ts$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-typescript"],
-            },
+            loader: "babel-loader"
           },
         },
         {
