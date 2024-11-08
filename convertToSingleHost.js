@@ -89,7 +89,7 @@ async function updatePackageJsonForSingleHost(host) {
 
   // Remove scripts that are unrelated to the selected host
   Object.keys(content.scripts).forEach(function (key) {
-    if (key === "convert-to-single-host" || key === "start:desktop:outlook") {
+    if (key === "convert-to-single-host") {
       delete content.scripts[key];
     }
   });
@@ -194,13 +194,6 @@ async function updatePackageJsonForJSONManifest() {
   const packageJson = `./package.json`;
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
-
-  // Remove special start scripts
-  Object.keys(content.scripts).forEach(function (key) {
-    if (key.includes("start:")) {
-      delete content.scripts[key];
-    }
-  });
 
   // Change manifest file name extension
   content.scripts.start = "office-addin-debugging start manifest.json";
