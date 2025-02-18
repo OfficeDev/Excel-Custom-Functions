@@ -27,13 +27,18 @@ export async function run() {
 
         // Set the field value. If the call is successful, set the next field.
         for (let index = 0; index < targetFields.length; index++) {
-          Office.context.document.setTaskFieldAsync(taskGuid, targetFields[index], fieldValues[index], (result) => {
-            if (result.status === Office.AsyncResultStatus.Succeeded) {
-              index++;
-            } else {
-              console.log(result.error);
+          Office.context.document.setTaskFieldAsync(
+            taskGuid,
+            targetFields[index],
+            fieldValues[index],
+            (result) => {
+              if (result.status === Office.AsyncResultStatus.Succeeded) {
+                index++;
+              } else {
+                console.log(result.error);
+              }
             }
-          });
+          );
         }
       } else {
         console.log(result.error);
