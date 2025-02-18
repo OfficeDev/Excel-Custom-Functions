@@ -52,7 +52,7 @@
     "file-loader": "^6.2.0",
     "html-loader": "^5.0.0",
     "html-webpack-plugin": "^5.6.0",
-    "mocha": "^10.3.0",
+    "mocha": "^10.8.2",
     "office-addin-cli": "^1.6.5",
     "office-addin-debugging": "^5.1.6",
     "office-addin-dev-certs": "^1.13.5",
