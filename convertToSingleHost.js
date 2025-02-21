@@ -201,13 +201,6 @@ async function updatePackageJsonForJSONManifest() {
   const data = await readFileAsync(packageJson, "utf8");
   let content = JSON.parse(data);
 
-  // Remove special start scripts
-  Object.keys(content.scripts).forEach(function (key) {
-    if (key.includes("start:")) {
-      delete content.scripts[key];
-    }
-  });
-
   // Change manifest file name extension
   content.scripts.start = "office-addin-debugging start manifest.json";
   content.scripts.stop = "office-addin-debugging stop manifest.json";

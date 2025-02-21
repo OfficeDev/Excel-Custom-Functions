@@ -41,7 +41,10 @@ export function currentTime(): string {
  * @param incrementBy Amount to increment
  * @param invocation Custom function handler
  */
-export function increment(incrementBy: number, invocation: CustomFunctions.StreamingInvocation<number>): void {
+export function increment(
+  incrementBy: number,
+  invocation: CustomFunctions.StreamingInvocation<number>
+): void {
   let result = 0;
   const timer = setInterval(() => {
     result += incrementBy;

@@ -78,8 +78,7 @@
             "actions": [
               {
                 "id": "action",
-                "type": "executeFunction",
-                "displayName": "action"
+                "type": "executeFunction"
               }
             ]
           }
