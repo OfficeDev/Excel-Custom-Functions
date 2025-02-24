@@ -32,8 +32,9 @@
       "command": "npm",
       "args": [
         "run",
-        "start:desktop",
+        "start",
         "--",
+        "desktop",
         "--app",
         "excel"
       ],
