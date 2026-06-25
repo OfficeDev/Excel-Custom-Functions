@@ -17,7 +17,7 @@ extends:
     stages:
     - stage: stage
       jobs:
-      - job: Windows_10_Latest
+      - job: Windows_Latest
         steps:
         - template: /.azure-devops/install.yml@self
         - template: /.azure-devops/lint.yml@self
@@ -27,24 +27,3 @@ extends:
         - template: /.azure-devops/test.yml@self
           parameters:
             webView: "edge-chromium"
-      - job: WebView_EdgeLegacy
-        steps:
-        - template: /.azure-devops/install.yml@self
-        - template: /.azure-devops/lint.yml@self
-        - template: /.azure-devops/build.yml@self
-        - template: /.azure-devops/devcerts.yml@self
-        - template: /.azure-devops/edgewebview.yml@self
-        - template: /.azure-devops/test.yml@self
-          parameters:
-            webView: "edge-legacy"
-  # Need to determin why the IE test doesn't pass in the lab
-      # - job: WebView_IE
-      #   steps:
-      #   - template: /.azure-devops/install.yml@self
-      #   - template: /.azure-devops/lint.yml@self
-      #   - template: /.azure-devops/build.yml@self
-      #   - template: /.azure-devops/devcerts.yml@self
-      #   - template: /.azure-devops/edgewebview.yml@self
-      #   - template: /.azure-devops/test.yml@self
-      #     parameters:
-      #       webView: "ie"

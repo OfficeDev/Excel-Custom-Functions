@@ -1,4 +1,4 @@
-import * as functionsJsonData from "./test-data.json";
+import functionsJsonData from "./test-data.json";
 import { pingTestServer, sendTestResults } from "office-addin-test-helpers";
 import { closeWorkbook, sleep } from "./test-helpers";
 
