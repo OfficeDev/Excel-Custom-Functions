@@ -14,6 +14,7 @@ const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const manifestPathDebugging = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest-debugging.xml`);
 const port: number = 4201;
+const testResultsTimeout: number = 120000;
 const testDataFile: string = `${process.cwd()}/test/end-to-end/src/test-data.json`;
 const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
 const testServer = new officeAddinTestServer.TestServer(port);
@@ -43,10 +44,35 @@ describe("Test Excel Custom Functions", function () {
     });
     describe("Get test results for custom functions and validate results", function () {
       it("should get results from the taskpane application", async function () {
-        this.timeout(0);
+        this.timeout(testResultsTimeout + 10000);
         // Expecting six result values + user agent
-        testValues = await testServer.getTestResults();
+        let timeoutId: ReturnType<typeof setTimeout>;
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(
+            () =>
+              reject(
+                new Error(
+                  `Timed out after ${testResultsTimeout / 1000}s waiting for test results. The Excel taskpane likely failed to initialize or encountered an unhandled error.`
+                )
+              ),
+            testResultsTimeout
+          );
+        });
+
+        try {
+          testValues = await Promise.race([testServer.getTestResults(), timeoutPromise]);
+        } finally {
+          clearTimeout(timeoutId);
+        }
+
+        const errorResult = testValues.find((value: any) => value.resultName === "test-error");
+        if (errorResult) {
+          assert.fail(`Taskpane reported error: ${errorResult.resultValue}`);
+        }
+
+        testValues = testValues.filter((value: any) => value.resultName !== "test-error");
         console.log(`User Agent: ${testValues[0].Value}`);
+        assert.strictEqual(testValues.length > 0, true, "No test results received from Excel add-in");
         assert.strictEqual(testValues.length, 7);
       });
       it("ADD function should return expected value", async function () {
