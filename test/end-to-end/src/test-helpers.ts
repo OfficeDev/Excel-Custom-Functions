@@ -5,7 +5,7 @@ import * as childProcess from "child_process";
 export async function closeWorkbook(): Promise<void> {
   await sleep(3000); // wait for host to settle
   try {
-    await Excel.run(async (context) => {
+    await Excel.run(async (context: Excel.RequestContext) => {
       // @ts-ignore
       context.workbook.close(Excel.CloseBehavior.skipSave);
       Promise.resolve();
@@ -16,11 +16,11 @@ export async function closeWorkbook(): Promise<void> {
 }
 
 export function addTestResult(testValues: any[], resultName: string, resultValue: any, expectedValue: any) {
-  var data = {};
-  data["expectedValue"] = expectedValue;
-  data["resultName"] = resultName;
-  data["resultValue"] = resultValue;
-  testValues.push(data);
+  testValues.push({
+    expectedValue,
+    resultName,
+    resultValue,
+  });
 }
 
 export function addErrorResult(testValues: any[], errorMessage: string) {

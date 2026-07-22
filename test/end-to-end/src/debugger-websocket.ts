@@ -12,7 +12,7 @@ let wsUrl: string | undefined;
 function findUrl(jsonUrl: string): void {
   let options = { json: true };
 
-  request(jsonUrl, options, (error, res, body) => {
+  request(jsonUrl, options, (error: any, res: any, body: any) => {
     if (!error && res.statusCode == 200) {
       wsUrl = body[0].webSocketDebuggerUrl;
     }
@@ -39,12 +39,12 @@ export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebS
       connectionOpened = true;
       return resolve(ws);
     };
-    ws.onerror = (err) => {
+    ws.onerror = (err: any) => {
       if (connectionOpened) {
         assert.fail(`Websocket error: ${err.message}`);
       }
     };
-    ws.onmessage = (response) => {
+    ws.onmessage = (response: any) => {
       assert.strictEqual(
         JSON.parse(response.data).error,
         undefined,

@@ -5,11 +5,19 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
+    "moduleResolution": "bundler",
     "noEmitOnError": true,
     "outDir": "lib",
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "strict": true,
     "target": "es6",
+    "types": [
+      "custom-functions-runtime",
+      "mocha",
+      "node",
+      "office-js",
+      "office-runtime"
+    ],
     "lib": [
       "es2015",
       "dom"

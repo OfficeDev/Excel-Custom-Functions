@@ -46,7 +46,7 @@ describe("Test Excel Custom Functions", function () {
       it("should get results from the taskpane application", async function () {
         this.timeout(testResultsTimeout + 10000);
         // Expecting six result values + user agent
-        let timeoutId: ReturnType<typeof setTimeout>;
+        let timeoutId!: ReturnType<typeof setTimeout>;
         const timeoutPromise = new Promise<never>((_, reject) => {
           timeoutId = setTimeout(
             () =>
@@ -138,20 +138,24 @@ describe("Test Excel Custom Functions", function () {
       await startDebugging(manifestPathDebugging, options);
     });
     describe("Test Debugger", function () {
-      let ws: WebSocket;
+      let ws: WebSocket | undefined;
       before("Open websocket connection to Debugger", async function () {
         this.timeout(60 * 1000);
         ws = await connectToWebsocket();
         assert.notStrictEqual(ws, undefined, "Unable to connect to the websocket.");
       });
       it("enable debugging", async function () {
+        assert.ok(ws, "Websocket is not connected.");
         await enableDebugging(ws);
       });
       it("pause debugging", async function () {
+        assert.ok(ws, "Websocket is not connected.");
         await pauseDebugging(ws);
       });
       after("Close websocket connection", async function () {
-        ws.close();
+        if (ws) {
+          ws.close();
+        }
       });
     });
     after("Teardown test environment", async function () {
