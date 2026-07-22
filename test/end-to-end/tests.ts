@@ -71,8 +71,8 @@ describe("Test Excel Custom Functions", function () {
         }
 
         testValues = testValues.filter((value: any) => value.resultName !== "test-error");
+        assert.ok(testValues.length > 0, "No test results received from Excel add-in");
         console.log(`User Agent: ${testValues[0].Value}`);
-        assert.strictEqual(testValues.length > 0, true, "No test results received from Excel add-in");
         assert.strictEqual(testValues.length, 7);
       });
       it("ADD function should return expected value", async function () {
