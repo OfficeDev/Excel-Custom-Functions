@@ -5,7 +5,7 @@ import * as childProcess from "child_process";
 export async function closeWorkbook(): Promise<void> {
   await sleep(3000); // wait for host to settle
   try {
-    await Excel.run(async (context) => {
+    await Excel.run(async (context: Excel.RequestContext) => {
       // @ts-ignore
       context.workbook.close(Excel.CloseBehavior.skipSave);
       Promise.resolve();
@@ -16,11 +16,59 @@ export async function closeWorkbook(): Promise<void> {
 }
 
 export function addTestResult(testValues: any[], resultName: string, resultValue: any, expectedValue: any) {
-  var data = {};
-  data["expectedValue"] = expectedValue;
-  data["resultName"] = resultName;
-  data["resultValue"] = resultValue;
-  testValues.push(data);
+  testValues.push({
+    expectedValue,
+    resultName,
+    resultValue,
+  });
+}
+
+export function addErrorResult(testValues: any[], errorMessage: string) {
+  testValues.push({
+    expectedValue: "no-error",
+    resultName: "test-error",
+    resultValue: errorMessage,
+  });
+}
+
+export function formatError(err: any): string {
+  if (!err) {
+    return "Unknown error (null/undefined)";
+  }
+
+  const parts: string[] = [];
+
+  if (err.message) {
+    parts.push(`Message: ${err.message}`);
+  } else {
+    parts.push(`${err}`);
+  }
+
+  if (err.code) {
+    parts.push(`Code: ${err.code}`);
+  }
+
+  if (err.debugInfo) {
+    if (err.debugInfo.code) {
+      parts.push(`DebugCode: ${err.debugInfo.code}`);
+    }
+    if (err.debugInfo.message) {
+      parts.push(`DebugMessage: ${err.debugInfo.message}`);
+    }
+    if (err.debugInfo.errorLocation) {
+      parts.push(`Location: ${err.debugInfo.errorLocation}`);
+    }
+    if (err.debugInfo.innerError) {
+      const inner = err.debugInfo.innerError;
+      parts.push(`InnerError: ${inner.code || ""} ${inner.message || JSON.stringify(inner)}`);
+    }
+  }
+
+  if (err.stack) {
+    parts.push(`Stack: ${err.stack}`);
+  }
+
+  return parts.join(" | ");
 }
 
 export async function closeDesktopApplication(): Promise<boolean> {
