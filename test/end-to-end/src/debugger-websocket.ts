@@ -1,7 +1,6 @@
 import * as assert from "assert";
 import { sleep } from "./test-helpers";
 const WebSocket = require("ws");
-const request = require("request");
 
 /* global require, console */
 let connectionOpened = false;
@@ -9,14 +8,18 @@ let messageId = 0;
 const limitOfReconnectTries = 60;
 let wsUrl: string | undefined;
 
-function findUrl(jsonUrl: string): void {
-  let options = { json: true };
-
-  request(jsonUrl, options, (error: any, res: any, body: any) => {
-    if (!error && res.statusCode == 200) {
-      wsUrl = body[0].webSocketDebuggerUrl;
+async function findUrl(jsonUrl: string): Promise<void> {
+  try {
+    const response = await fetch(jsonUrl);
+    if (!response.ok) {
+      return;
     }
-  });
+
+    const body = await response.json();
+    wsUrl = body?.[0]?.webSocketDebuggerUrl;
+  } catch {
+    // Debugger endpoint may not be ready yet. Retry loop handles this.
+  }
 }
 
 export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebSocket | undefined> {
@@ -25,7 +28,7 @@ export async function connectToWebsocket(reconnectTry: number = 1): Promise<WebS
 
   while (!wsUrl && reconnectTry < limitOfReconnectTries) {
     console.log(`Attaching debugger to '${jsonUrl}'...`);
-    findUrl(jsonUrl);
+    await findUrl(jsonUrl);
     reconnectTry++;
     await sleep(1000);
   }
