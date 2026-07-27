@@ -10,7 +10,7 @@ let wsUrl: string | undefined;
 
 async function findUrl(jsonUrl: string): Promise<void> {
   try {
-    const response = await fetch(jsonUrl);
+    const response = await fetch(jsonUrl, { signal: AbortSignal.timeout(1000) });
     if (!response.ok) {
       return;
     }
