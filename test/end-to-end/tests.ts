@@ -14,6 +14,7 @@ const host: string = "excel";
 const manifestPath = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest.xml`);
 const manifestPathDebugging = path.resolve(`${process.cwd()}/test/end-to-end/test-manifest-debugging.xml`);
 const port: number = 4201;
+const testResultsTimeout: number = 120000;
 const testDataFile: string = `${process.cwd()}/test/end-to-end/src/test-data.json`;
 const testJsonData = JSON.parse(fs.readFileSync(testDataFile).toString());
 const testServer = new officeAddinTestServer.TestServer(port);
@@ -43,43 +44,68 @@ describe("Test Excel Custom Functions", function () {
     });
     describe("Get test results for custom functions and validate results", function () {
       it("should get results from the taskpane application", async function () {
-        this.timeout(0);
+        this.timeout(testResultsTimeout + 10000);
         // Expecting six result values + user agent
-        testValues = await testServer.getTestResults();
-        console.log(`User Agent: ${testValues[0].Value}`);
+        let timeoutId!: ReturnType<typeof setTimeout>;
+        const timeoutPromise = new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(
+            () =>
+              reject(
+                new Error(
+                  `Timed out after ${testResultsTimeout / 1000}s waiting for test results. The Excel taskpane likely failed to initialize or encountered an unhandled error.`
+                )
+              ),
+            testResultsTimeout
+          );
+        });
+
+        try {
+          testValues = await Promise.race([testServer.getTestResults(), timeoutPromise]);
+        } finally {
+          clearTimeout(timeoutId);
+        }
+
+        const errorResult = testValues.find((value: any) => value.name === "test-error");
+        if (errorResult) {
+          assert.fail(`Taskpane reported error: ${errorResult.value}`);
+        }
+
+        testValues = testValues.filter((value: any) => value.name !== "test-error");
+        assert.ok(testValues.length > 0, "No test results received from Excel add-in");
+        console.log(`User Agent: ${testValues[0].value}`);
         assert.strictEqual(testValues.length, 7);
       });
       it("ADD function should return expected value", async function () {
-        assert.strictEqual(testJsonData.functions.ADD.result, testValues[1].Value);
+        assert.strictEqual(testJsonData.functions.ADD.result, testValues[1].value);
       });
       it("CLOCK function should return expected value", async function () {
         // Check that captured values are different to ensure the function is streaming
-        assert.notStrictEqual(testValues[2].Value, testValues[3].Value);
+        assert.notStrictEqual(testValues[2].value, testValues[3].value);
         // Check if the returned string contains 'AM', 'PM', or 'GMT', indicating it's a time-stamp
         assert.strictEqual(
-          testValues[2].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
-          testValues[2].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
-          testValues[2].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
+          testValues[2].value.includes(testJsonData.functions.CLOCK.result.amString) ||
+          testValues[2].value.includes(testJsonData.functions.CLOCK.result.pmString) ||
+          testValues[2].value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
           true,
-          "Found timestamp indicator string in first value '" + testValues[2].Value + "'"
+          "Found timestamp indicator string in first value '" + testValues[2].value + "'"
         );
         assert.strictEqual(
-          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.amString) ||
-          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.pmString) ||
-          testValues[3].Value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
+          testValues[3].value.includes(testJsonData.functions.CLOCK.result.amString) ||
+          testValues[3].value.includes(testJsonData.functions.CLOCK.result.pmString) ||
+          testValues[3].value.includes(testJsonData.functions.CLOCK.result.timeZoneString),
           true,
-          "Found timestamp indicator string in second value '" + testValues[3].Value + "'"
+          "Found timestamp indicator string in second value '" + testValues[3].value + "'"
         );
       });
       it("INCREMENT function should return expected value", async function () {
         // Check that captured values are different to ensure the function is streaming
-        assert.notStrictEqual(testValues[3].Value, testValues[4].Value);
+        assert.notStrictEqual(testValues[3].value, testValues[4].value);
         // Check to see that both captured streaming values are divisible by 4
-        assert.strictEqual(0, testValues[4].Value % testJsonData.functions.INCREMENT.result);
-        assert.strictEqual(0, testValues[5].Value % testJsonData.functions.INCREMENT.result);
+        assert.strictEqual(0, testValues[4].value % testJsonData.functions.INCREMENT.result);
+        assert.strictEqual(0, testValues[5].value % testJsonData.functions.INCREMENT.result);
       });
       it("LOG function should return expected value", async function () {
-        assert.strictEqual(testJsonData.functions.LOG.result, testValues[6].Value);
+        assert.strictEqual(testJsonData.functions.LOG.result, testValues[6].value);
       });
     });
     after("Teardown test environment", async function () {
@@ -112,20 +138,24 @@ describe("Test Excel Custom Functions", function () {
       await startDebugging(manifestPathDebugging, options);
     });
     describe("Test Debugger", function () {
-      let ws: WebSocket;
+      let ws: WebSocket | undefined;
       before("Open websocket connection to Debugger", async function () {
         this.timeout(60 * 1000);
         ws = await connectToWebsocket();
         assert.notStrictEqual(ws, undefined, "Unable to connect to the websocket.");
       });
       it("enable debugging", async function () {
+        assert.ok(ws, "Websocket is not connected.");
         await enableDebugging(ws);
       });
       it("pause debugging", async function () {
+        assert.ok(ws, "Websocket is not connected.");
         await pauseDebugging(ws);
       });
       after("Close websocket connection", async function () {
-        ws.close();
+        if (ws) {
+          ws.close();
+        }
       });
     });
     after("Teardown test environment", async function () {
