@@ -116,10 +116,10 @@ export async function readCFData(readCount: number): Promise<any[]> {
   });
 }
 
-function addTestResult(resultName: string, resultValue: any) {
+function addTestResult(name: string, value: any) {
   const data = {
-    Name: resultName,
-    Value: resultValue,
+    name: name,
+    value: value,
   };
   testValues.push(data);
 }
