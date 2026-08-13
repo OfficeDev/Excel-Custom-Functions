@@ -275,43 +275,62 @@ async function modifyProjectForJSONManifest() {
   await deleteXMLManifestRelatedFiles();
 }
 
-/**
- * Modify the project so that it only supports a single host.
- * @param host The host to support.
- */
-modifyProjectForSingleHost(host).catch((err) => {
-  console.error(`Error modifying for single host: ${err instanceof Error ? err.message : err}`);
-  process.exitCode = 1;
-});
+async function main() {
 
-let manifestPath = "manifest.xml";
-
-// Uncomment when template supports JSON manifest
-// if (host !== "outlook" || manifestType !== "json") {
-  // Remove things that are only relevant to JSON manifest
-  deleteJSONManifestRelatedFiles();
-  updatePackageJsonForXMLManifest();
-// } else {
-//   manifestPath = "manifest.json";
-//   modifyProjectForJSONManifest().catch((err) => {
-//     console.error(`Error modifying for JSON manifest: ${err instanceof Error ? err.message : err}`);
-//     process.exitCode = 1;
-//   });
-// }
-
-if (projectName) {
-  if (!appId) {
-    appId = "random";
+  try {
+    /**
+     * Modify the project so that it only supports a single host.
+     * @param host The host to support.
+     */
+    await modifyProjectForSingleHost(host);
+  } catch (err) {
+    console.error(`Error modifying for single host: ${err instanceof Error ? err.message : err}`);
+    process.exitCode = 1;
+    return;
   }
 
-  // Modify the manifest to include the name and id of the project
-  const cmdLine = `npx office-addin-manifest modify ${manifestPath} -g ${appId} -d "${projectName}"`;
-  childProcess.exec(cmdLine, (error, stdout) => {
-    if (error) {
-      console.error(`Error updating the manifest: ${error}`);
-      process.exitCode = 1;
-    } else {
-      console.log(stdout);
+  let manifestPath = "manifest.xml";
+
+  // Uncomment when template supports JSON manifest
+  // if (host !== "outlook" || manifestType !== "json") {
+    // Remove things that are only relevant to JSON manifest
+    await deleteJSONManifestRelatedFiles();
+    await updatePackageJsonForXMLManifest();
+  // } else {
+  //   manifestPath = "manifest.json";
+  //   try {
+  //     await modifyProjectForJSONManifest();
+  //   } catch (err) {
+  //     console.error(`Error modifying for JSON manifest: ${err instanceof Error ? err.message : err}`);
+  //     process.exitCode = 1;
+  //     return;
+  //   }
+  // }
+
+  if (projectName) {
+    if (!appId) {
+      appId = "random";
     }
-  });
+
+    // Modify the manifest to include the name and id of the project
+    const cmdLine = `npx office-addin-manifest modify ${manifestPath} -g ${appId} -d "${projectName}"`;
+    const execEnv = { ...process.env };
+    delete execEnv.npm_config_registry;
+    await new Promise((resolve) => {
+      childProcess.exec(cmdLine, { env: execEnv }, (error, stdout) => {
+        if (error) {
+          console.error(`Error updating the manifest: ${error}`);
+          process.exitCode = 1;
+        } else {
+          console.log(stdout);
+        }
+        resolve();
+      });
+    });
+  }
 }
+
+main().catch((err) => {
+  console.error(`Unhandled error: ${err instanceof Error ? err.message : err}`);
+  process.exitCode = 1;
+});
